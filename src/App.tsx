@@ -5,16 +5,16 @@
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useInView, useSpring, useVelocity, useAnimationFrame, useMotionValue } from 'motion/react';
-import { 
-  CheckCircle2, 
-  ArrowRight, 
-  BookOpen, 
-  Clock, 
-  Gift, 
-  Users, 
-  Zap, 
-  ShieldCheck, 
-  Trophy, 
+import {
+  CheckCircle2,
+  ArrowRight,
+  BookOpen,
+  Clock,
+  Gift,
+  Users,
+  Zap,
+  ShieldCheck,
+  Trophy,
   MessageSquare,
   Play,
   Brain,
@@ -54,11 +54,11 @@ const BALLS_CONTENT = [
 
 const IrregularUnderline = ({ className = "" }: { className?: string }) => (
   <div className={`absolute -bottom-2 left-0 w-full overflow-visible pointer-events-none ${className}`}>
-    <motion.svg 
-      width="100%" 
-      height="14" 
-      viewBox="0 0 160 16" 
-      fill="none" 
+    <motion.svg
+      width="100%"
+      height="14"
+      viewBox="0 0 160 16"
+      fill="none"
       preserveAspectRatio="none"
       initial={{ pathLength: 0, opacity: 0 }}
       whileInView={{ pathLength: 1, opacity: 1 }}
@@ -66,11 +66,11 @@ const IrregularUnderline = ({ className = "" }: { className?: string }) => (
       viewport={{ once: true }}
       className="overflow-visible"
     >
-      <path 
-        d="M2 11C22 4 42 4 62 11C82 18 102 18 122 11C142 4 152 4 158 11" 
-        stroke="#be8c4a" 
-        strokeWidth="6" 
-        strokeLinecap="round" 
+      <path
+        d="M2 11C22 4 42 4 62 11C82 18 102 18 122 11C142 4 152 4 158 11"
+        stroke="#be8c4a"
+        strokeWidth="6"
+        strokeLinecap="round"
       />
     </motion.svg>
   </div>
@@ -78,7 +78,7 @@ const IrregularUnderline = ({ className = "" }: { className?: string }) => (
 
 const MagicCursor = () => {
   const [points, setPoints] = useState<{ x: number; y: number; id: number; color: string }[]>([]);
-  
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const colors = ['#4A90E2', '#be8c4a', '#f7da99', '#39618d'];
@@ -123,18 +123,18 @@ const FloatingDecor = () => {
       {decors.map((item, i) => (
         <motion.div
           key={i}
-          initial={{ 
-            top: item.top, 
+          initial={{
+            top: item.top,
             left: item.left,
             rotate: item.rotate
           }}
-          animate={{ 
+          animate={{
             y: [0, -20, 0],
             rotate: [item.rotate, item.rotate + 10, item.rotate]
           }}
-          transition={{ 
-            duration: 7 + (i % 3), 
-            repeat: Infinity, 
+          transition={{
+            duration: 7 + (i % 3),
+            repeat: Infinity,
             repeatType: "reverse",
             ease: "easeInOut"
           }}
@@ -150,7 +150,7 @@ const FloatingDecor = () => {
 const WhatsAppButton = () => {
   return (
     <motion.a
-      href="https://wa.me/7007967357" // Replace with actual number
+      href="https://bit.ly/4f1ds3Z"
       target="_blank"
       rel="noopener noreferrer"
       initial={{ scale: 0, opacity: 0 }}
@@ -158,11 +158,11 @@ const WhatsAppButton = () => {
       whileHover={{ scale: 1.1 }}
       className="fixed bottom-8 right-8 z-[100] w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-2xl transition-transform overflow-hidden"
     >
-      <img 
-        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
-        alt="WhatsApp" 
-        className="w-full h-full object-contain" 
-        referrerPolicy="no-referrer" 
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+        alt="WhatsApp"
+        className="w-full h-full object-contain"
+        referrerPolicy="no-referrer"
       />
       <motion.div
         animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
@@ -179,54 +179,54 @@ const Hero = () => {
       <FloatingDecor />
       {/* Playful Background Blobs */}
       <div className="absolute inset-0 z-0">
-        <motion.div 
-          animate={{ 
-            x: [0, 30, 0], 
+        <motion.div
+          animate={{
+            x: [0, 30, 0],
             y: [0, 40, 0],
             scale: [1, 1.1, 1],
             rotate: [0, 10, 0]
-          }} 
+          }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[10%] left-[5%] w-80 h-80 bg-primary-blue/15 blob" 
+          className="absolute top-[10%] left-[5%] w-80 h-80 bg-primary-blue/15 blob"
         />
-        <motion.div 
-          animate={{ 
-            x: [0, -40, 0], 
+        <motion.div
+          animate={{
+            x: [0, -40, 0],
             y: [0, 50, 0],
             scale: [1, 1.2, 1],
             rotate: [0, -15, 0]
-          }} 
+          }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[20%] right-[10%] w-96 h-96 bg-cream/30 blob" 
+          className="absolute bottom-[20%] right-[10%] w-96 h-96 bg-cream/30 blob"
         />
       </div>
 
       <div className="container mx-auto px-6 relative z-10 text-center">
         <RevealChild>
           <div className="flex justify-center mb-6">
-             <motion.div 
-               animate={{ 
-                 rotate: [0, 20, -20, 0], 
-                 y: [0, -15, 0],
-                 scale: [1, 1.1, 1]
-               }}
-               transition={{ duration: 4, repeat: Infinity }}
-               className="p-4 bg-white rounded-3xl shadow-2xl shadow-primary-blue/20 relative"
-             >
-                <motion.div 
-                  className="absolute -top-4 -right-4"
-                  animate={{ scale: [1, 1.3, 1] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                >
-                  <Sparkles className="text-gold" size={20} />
-                </motion.div>
-                <BookOpen className="text-primary-blue" size={32} />
-             </motion.div>
+            <motion.div
+              animate={{
+                rotate: [0, 20, -20, 0],
+                y: [0, -15, 0],
+                scale: [1, 1.1, 1]
+              }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="p-4 bg-white rounded-3xl shadow-2xl shadow-primary-blue/20 relative"
+            >
+              <motion.div
+                className="absolute -top-4 -right-4"
+                animate={{ scale: [1, 1.3, 1] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+              >
+                <Sparkles className="text-gold" size={20} />
+              </motion.div>
+              <BookOpen className="text-primary-blue" size={32} />
+            </motion.div>
           </div>
         </RevealChild>
         <RevealChild>
           <h1 className="text-4xl md:text-7xl font-bold text-dark-blue mb-6 leading-[1.1] max-w-4xl mx-auto tracking-tight font-black">
-            Ancient Wisdom for <br/> <span className="text-primary-blue inline-block">Modern Kids</span>
+            Ancient Wisdom for <br /> <span className="text-primary-blue inline-block">Modern Kids</span>
           </h1>
         </RevealChild>
 
@@ -238,16 +238,19 @@ const Hero = () => {
             </span>.
           </p>
         </RevealChild>
-        
+
         <RevealChild>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
-            <motion.button 
+            <motion.a
+              href="https://bit.ly/4f1ds3Z"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.1, rotate: -2 }}
               whileTap={{ scale: 0.9 }}
               className="px-10 py-5 bg-gold text-white rounded-3xl font-black text-xl shadow-2xl shadow-gold/30 hover:shadow-gold/50 transition-all flex items-center gap-4 group"
             >
               Start Free Trial <Play className="fill-current group-hover:scale-125 transition-transform" size={24} />
-            </motion.button>
+            </motion.a>
           </div>
         </RevealChild>
 
@@ -258,7 +261,7 @@ const Hero = () => {
             { text: "Free Gift Kit", icon: <Gift size={20} />, bg: "bg-emerald-50" }
           ].map((item, i) => (
             <RevealChild key={i}>
-              <div 
+              <div
                 className={`flex items-center gap-3 ${item.bg} px-6 py-3 rounded-2xl border-2 border-white text-dark-blue font-black text-xs shadow-lg hover:scale-105 transition-transform cursor-default uppercase tracking-tight`}
               >
                 <span className="text-primary-blue">{item.icon}</span>
@@ -279,22 +282,22 @@ const ProblemChaos = () => {
   useEffect(() => {
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     const sizeMultiplier = isMobile ? 0.65 : 1;
-    
+
     // Tighter grid to keep balls in a rectangle
     const grid = isMobile ? [
-      { x: 10, y: 10 }, 
-      { x: 55, y: 5 }, 
+      { x: 10, y: 10 },
+      { x: 55, y: 5 },
       { x: 5, y: 35 },
-      { x: 50, y: 40 }, 
-      { x: 10, y: 65 }, 
+      { x: 50, y: 40 },
+      { x: 10, y: 65 },
       { x: 60, y: 70 },
       { x: 35, y: 20 }
     ] : [
-      { x: 10, y: 10 }, 
-      { x: 40, y: 5 }, 
+      { x: 10, y: 10 },
+      { x: 40, y: 5 },
       { x: 70, y: 10 },
-      { x: 15, y: 55 }, 
-      { x: 45, y: 60 }, 
+      { x: 15, y: 55 },
+      { x: 45, y: 60 },
       { x: 75, y: 55 },
       { x: 42, y: 35 }
     ];
@@ -313,12 +316,12 @@ const ProblemChaos = () => {
   return (
     <SectionReveal id="challenges" className="relative py-8 px-6 overflow-hidden bg-white/20 backdrop-blur-sm min-h-[85vh] flex flex-col justify-center">
       <div className="container mx-auto text-center relative z-20 mb-2">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           className="text-4xl md:text-7xl font-bold text-dark-blue mb-2 tracking-tighter"
         >
-          Is Your Child Facing <br/> <motion.span 
+          Is Your Child Facing <br /> <motion.span
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ repeat: Infinity, duration: 2 }}
             className="text-primary-blue inline-block font-black"
@@ -343,17 +346,17 @@ const ProblemChaos = () => {
                 backgroundColor: ball.color,
               }}
               initial={{ scale: 0, opacity: 0, rotate: -45 }}
-              whileInView={{ 
-                scale: 1, 
+              whileInView={{
+                scale: 1,
                 opacity: 1,
                 rotate: 0,
                 transition: { delay: ball.id * 0.1, type: "spring", bounce: 0.6 }
               }}
-              animate={{ 
+              animate={{
                 x: [0, 10, -10, 0],
                 y: [0, -10, 10, 0],
               }}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.15,
                 boxShadow: "0 0 50px rgba(74, 144, 226, 0.4)",
                 zIndex: 50,
@@ -371,7 +374,7 @@ const ProblemChaos = () => {
                 <span className="font-black text-xs md:text-base leading-tight select-none uppercase tracking-tight">
                   {ball.text}
                 </span>
-                <motion.div 
+                <motion.div
                   className="mt-1"
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ repeat: Infinity, duration: 1.5 }}
@@ -404,16 +407,16 @@ const JourneySteps = () => {
             whileInView={{ scale: 1 }}
             className="w-12 h-12 bg-gold rounded-2xl flex items-center justify-center mx-auto mb-4 rotate-12"
           >
-             <Clock className="text-white" size={24} />
+            <Clock className="text-white" size={24} />
           </motion.div>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-7xl font-bold text-dark-blue mb-1"
           >
-            Inside the <motion.span 
+            Inside the <motion.span
               className="text-primary-blue relative inline-block"
-              whileInView={{ 
+              whileInView={{
                 scale: [1, 1.3, 1],
                 rotate: [0, -5, 5, 0],
                 transition: { duration: 1.2, delay: 0.2, ease: "easeInOut" }
@@ -448,18 +451,18 @@ const JourneySteps = () => {
               transition={{ duration: 4, ease: "linear", repeat: Infinity }}
             />
           </svg>
-          
+
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 relative z-10">
             {steps.map((step, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, scale: 0, y: 50 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ 
-                  delay: 0.4 + i * 0.15, 
-                  type: "spring", 
-                  stiffness: 70, 
-                  damping: 12 
+                transition={{
+                  delay: 0.4 + i * 0.15,
+                  type: "spring",
+                  stiffness: 70,
+                  damping: 12
                 }}
                 viewport={{ once: true }}
                 className="flex flex-col items-center text-center group"
@@ -468,11 +471,11 @@ const JourneySteps = () => {
                   <div className="absolute -top-4 -left-4 w-12 h-12 rounded-2xl bg-white flex items-center justify-center font-black text-xl shadow-xl text-primary-blue z-20 border-2 border-primary-blue/10">
                     {i + 1}
                   </div>
-                  <motion.div 
-                    animate={{ 
+                  <motion.div
+                    animate={{
                       rotate: [0, 10, -10, 0],
                       scale: [1, 1.1, 1]
-                    }} 
+                    }}
                     transition={{ duration: 3, repeat: Infinity }}
                   >
                     {React.cloneElement(step.icon as React.ReactElement, { size: 56 })}
@@ -491,26 +494,26 @@ const JourneySteps = () => {
 
 const WhyParents = () => {
   const cards = [
-    { 
-      title: "1-on-1 Magic", 
-      desc: "Every child is a unique star. Our mentors adapt to your child's personality, ensuring they stay engaged and happy.", 
-      icon: <Heart className="text-rose-500" />, 
+    {
+      title: "1-on-1 Magic",
+      desc: "Every child is a unique star. Our mentors adapt to your child's personality, ensuring they stay engaged and happy.",
+      icon: <Heart className="text-rose-500" />,
       bg: "bg-rose-50",
       border: "border-rose-100",
       accent: "bg-rose-500/10"
     },
-    { 
-      title: "Playful Learning", 
-      desc: "No more boring lectures. We use interactive stories and games that make your child look forward to every session.", 
-      icon: <Zap className="text-amber-500" />, 
+    {
+      title: "Playful Learning",
+      desc: "No more boring lectures. We use interactive stories and games that make your child look forward to every session.",
+      icon: <Zap className="text-amber-500" />,
       bg: "bg-amber-50",
       border: "border-amber-100",
       accent: "bg-amber-500/10"
     },
-    { 
-      title: "Family First", 
-      desc: "Parenting is busy! Our flexible booking system lets you schedule sessions around your life, not the other way around.", 
-      icon: <Clock className="text-primary-blue" />, 
+    {
+      title: "Family First",
+      desc: "Parenting is busy! Our flexible booking system lets you schedule sessions around your life, not the other way around.",
+      icon: <Clock className="text-primary-blue" />,
       bg: "bg-blue-50",
       border: "border-blue-100",
       accent: "bg-primary-blue/10"
@@ -524,7 +527,7 @@ const WhyParents = () => {
         <div className="absolute top-[10%] left-[5%] w-32 h-32 rounded-full bg-rose-200 blur-3xl" />
         <div className="absolute bottom-[10%] right-[5%] w-64 h-64 rounded-full bg-blue-200 blur-3xl" />
       </div>
-      
+
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         <div className="text-center mb-20">
           <motion.div
@@ -534,7 +537,7 @@ const WhyParents = () => {
           >
             Trusted by modern families
           </motion.div>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-7xl font-bold text-dark-blue mb-6 tracking-tight"
@@ -562,9 +565,9 @@ const WhyParents = () => {
               <p className="text-secondary-blue/70 leading-relaxed text-lg font-medium">
                 {card.desc}
               </p>
-              
+
               {/* Decorative sparkle on hover */}
-              <motion.div 
+              <motion.div
                 className="absolute top-8 right-8 text-gold opacity-0 group-hover:opacity-100 transition-opacity"
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ repeat: Infinity, duration: 2 }}
@@ -582,20 +585,20 @@ const WhyParents = () => {
 const WaveDivider = ({ flip = false, color = "fill-white/10" }: { flip?: boolean, color?: string }) => {
   return (
     <div className={`relative w-full h-24 overflow-hidden pointer-events-none ${flip ? 'rotate-180' : ''}`}>
-      <motion.svg 
-        animate={{ 
+      <motion.svg
+        animate={{
           x: [-20, 20, -20],
         }}
-        transition={{ 
-          repeat: Infinity, 
-          duration: 10, 
-          ease: "easeInOut" 
+        transition={{
+          repeat: Infinity,
+          duration: 10,
+          ease: "easeInOut"
         }}
-        className="absolute bottom-0 w-[110%] h-full left-[-5%]" 
-        preserveAspectRatio="none" 
+        className="absolute bottom-0 w-[110%] h-full left-[-5%]"
+        preserveAspectRatio="none"
         viewBox="0 0 1440 320"
       >
-        <path 
+        <path
           className={color}
           d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,149.3C672,149,768,203,864,213.3C960,224,1056,192,1152,160C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
         />
@@ -616,9 +619,9 @@ const MorphWord: React.FC<{ word: string, index: number, total: number, progress
 
   return (
     <motion.div
-      style={{ 
-        opacity, 
-        scale, 
+      style={{
+        opacity,
+        scale,
         filter: useTransform(blurValue, (v) => `blur(${v}px)`),
       }}
       className="absolute text-6xl md:text-[10rem] font-black text-primary-blue whitespace-nowrap"
@@ -631,7 +634,7 @@ const MorphWord: React.FC<{ word: string, index: number, total: number, progress
 const Outcomes = () => {
   const values = ["CONFIDENCE", "FOCUS", "EMPATHY", "RESILIENCE", "INTEGRITY"];
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   // We replace scrollYProgress with a manually driven MotionValue
   const progress = useMotionValue(0);
   const [isLocked, setIsLocked] = useState(false);
@@ -666,7 +669,7 @@ const Outcomes = () => {
 
     // Snap the container perfectly into view to prevent visual jitter
     containerRef.current.scrollIntoView({ behavior: "instant", block: "center" });
-    
+
     // Disable global body scrolling
     document.body.style.overflow = "hidden";
 
@@ -675,13 +678,13 @@ const Outcomes = () => {
     const unlockAndEscape = (direction: 'up' | 'down') => {
       setIsLocked(false);
       lockCooldown.current = true;
-      
+
       // 1-second cooldown before it can lock again to prevent getting stuck
       setTimeout(() => (lockCooldown.current = false), 1000);
 
       // Restore native scroll so window.scrollBy works smoothly
       document.body.style.overflow = "auto";
-      
+
       // Nudge the window outside the intersection threshold
       window.scrollBy({ top: direction === 'down' ? 150 : -150, behavior: "smooth" });
     };
@@ -737,14 +740,14 @@ const Outcomes = () => {
       <svg className="absolute w-0 h-0 pointer-events-none">
         <defs>
           <filter id="threshold">
-            <feColorMatrix 
-              in="SourceGraphic" 
-              type="matrix" 
+            <feColorMatrix
+              in="SourceGraphic"
+              type="matrix"
               values="1 0 0 0 0
                       0 1 0 0 0
                       0 0 1 0 0
-                      0 0 0 25 -9" 
-              result="goo" 
+                      0 0 0 25 -9"
+              result="goo"
             />
             <feComposite in="SourceGraphic" in2="goo" operator="atop" />
           </filter>
@@ -760,7 +763,7 @@ const Outcomes = () => {
           </RevealChild>
           <RevealChild>
             <h2 className="text-3xl md:text-5xl font-black text-dark-blue leading-[0.85] tracking-tighter mb-2">
-              Values That <br/>Last a <span className="text-primary-blue">Lifetime</span>
+              Values That <br />Last a <span className="text-primary-blue">Lifetime</span>
             </h2>
           </RevealChild>
           <RevealChild>
@@ -772,11 +775,11 @@ const Outcomes = () => {
 
         <div className="relative w-full h-[120px] md:h-[220px] flex items-center justify-center" style={{ filter: "url(#threshold)" }}>
           {values.map((word, i) => (
-            <MorphWord 
-              key={word} 
-              word={word} 
-              index={i} 
-              total={values.length} 
+            <MorphWord
+              key={word}
+              word={word}
+              index={i}
+              total={values.length}
               progress={progress} // Now driven by the trapped wheel events
             />
           ))}
@@ -793,7 +796,7 @@ const Curriculum = () => {
         <div className="max-w-3xl mx-auto">
           <RevealChild>
             <h2 className="text-4xl md:text-6xl font-black text-dark-blue mb-4 tracking-tighter">
-              A Journey Through <br/> <span className="text-primary-blue">7 Sacred Modules</span>
+              A Journey Through <br /> <span className="text-primary-blue">7 Sacred Modules</span>
             </h2>
           </RevealChild>
           <RevealChild>
@@ -824,7 +827,7 @@ const FinalCTA = () => {
             {/* Animated Background Graphics */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-primary-blue/5 rounded-full blur-3xl -mr-48 -mt-48" />
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-gold/5 rounded-full blur-3xl -ml-48 -mb-48" />
-            
+
             <div className="md:w-1/2 text-center md:text-left z-10">
               <RevealChild>
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#be8c4a] text-white rounded-xl text-sm font-black uppercase tracking-widest mb-8 shadow-lg">
@@ -832,13 +835,13 @@ const FinalCTA = () => {
                   TRIAL COMPLETION REWARD
                 </div>
               </RevealChild>
-              
+
               <RevealChild>
                 <h2 className="text-5xl md:text-7xl font-bold text-[#112b47] mb-8 leading-tight">
-                  The Journey <br/>Awaits!
+                  The Journey <br />Awaits!
                 </h2>
               </RevealChild>
-              
+
               <RevealChild>
                 <p className="text-xl text-[#112b47]/80 mb-12 max-w-xl font-medium leading-relaxed">
                   Book your 1:1 session today. Once finished, we'll unlock your <span className="text-[#112b47] font-black underline decoration-gold/50 decoration-4 underline-offset-4">Success Kit</span> containing all the digital goodies below!
@@ -846,21 +849,24 @@ const FinalCTA = () => {
               </RevealChild>
 
               <RevealChild>
-                <motion.button 
+                <motion.a
+                  href="https://bit.ly/4f1ds3Z"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(17, 43, 71, 0.2)" }}
                   whileTap={{ scale: 0.95 }}
                   className="px-14 py-6 bg-[#112b47] text-white rounded-3xl font-black text-2xl shadow-xl transition-all flex items-center gap-4 group mx-auto md:mx-0"
                 >
                   Book Free Trial
                   <ArrowRight size={28} className="group-hover:translate-x-1 transition-transform" />
-                </motion.button>
+                </motion.a>
               </RevealChild>
             </div>
 
             <div className="md:w-1/2 relative z-10 flex justify-center items-center h-[500px]">
               {/* Playful Gift Reveal Container */}
               <div className="relative w-full max-w-[400px] h-[400px] flex items-center justify-center">
-                
+
                 {/* Floating Reward Cards */}
                 <AnimatePresence>
                   {kitItems.map((item, i) => {
@@ -879,7 +885,7 @@ const FinalCTA = () => {
                           y: [y, y - 10, y],
                           rotate: [0, i % 2 === 0 ? 3 : -3, 0]
                         }}
-                        transition={{ 
+                        transition={{
                           delay: 0.5 + i * 0.1,
                           y: { repeat: Infinity, duration: 4 + i, ease: "easeInOut" },
                           scale: { type: "spring", stiffness: 100, damping: 10 }
@@ -906,12 +912,12 @@ const FinalCTA = () => {
                   viewport={{ once: true }}
                   className="relative z-10"
                 >
-                  <motion.div 
+                  <motion.div
                     animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
                     transition={{ repeat: Infinity, duration: 3 }}
                     className="absolute inset-0 bg-primary-blue rounded-full blur-[60px] transform -translate-y-4"
                   />
-                  
+
                   <div className="relative bg-white p-10 rounded-[48px] shadow-2xl border-4 border-gold/20 flex flex-col items-center min-w-[200px]">
                     <motion.div
                       animate={{ rotate: [0, -5, 5, 0] }}
@@ -971,13 +977,13 @@ const Footer = () => {
               Modern storytelling based on ancient wisdom, designed to empower kids for the future.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-3 gap-12">
             <div>
               <h4 className="text-white font-bold mb-4">Product</h4>
               <ul className="space-y-2 text-white/70">
-                <li><button onClick={() => document.getElementById('curriculum')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-primary-blue transition-colors">Curriculum</button></li>
-                <li><button onClick={() => document.getElementById('how-it-works')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-primary-blue transition-colors">How it works</button></li>
+                <li><button onClick={() => document.getElementById('curriculum')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-primary-blue transition-colors">Curriculum</button></li>
+                <li><button onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-primary-blue transition-colors">How it works</button></li>
               </ul>
             </div>
             <div>
@@ -989,7 +995,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/40 uppercase tracking-widest font-black">
           <div>&copy; 2026 Infineo EdTech Private Limited</div>
           <div className="flex gap-8">
@@ -1047,11 +1053,10 @@ const FAQs = () => {
             <RevealChild key={i}>
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className={`w-full text-left p-6 md:p-8 rounded-[32px] transition-all duration-500 border-2 ${
-                  openIndex === i 
-                    ? "bg-white border-primary-blue shadow-xl" 
-                    : "bg-white/50 border-white hover:border-primary-blue/30"
-                }`}
+                className={`w-full text-left p-6 md:p-8 rounded-[32px] transition-all duration-500 border-2 ${openIndex === i
+                  ? "bg-white border-primary-blue shadow-xl"
+                  : "bg-white/50 border-white hover:border-primary-blue/30"
+                  }`}
               >
                 <div className="flex justify-between items-center gap-4">
                   <span className={`text-lg md:text-xl font-black ${openIndex === i ? "text-primary-blue" : "text-dark-blue"}`}>
@@ -1093,14 +1098,15 @@ const Testimonials = () => {
       name: "Priya Sharma",
       role: "Parent of 7yo",
       desc: "My daughter used to be very shy. After just one module on Ganesha stories, she's narrated the 'Moon' story to everyone who visits us. Her confidence has soared!",
-      avatar: "https://i.pravatar.cc/150?u=priya",
+      avatar: "https://i.pravatar.cc/150?u=rajesh",
       color: "bg-blue-50"
     },
     {
       name: "Rajesh Iyer",
       role: "Parent of 9yo",
       desc: "Finding high-quality cultural education that isn't boring was a challenge. Infineo's 1:1 sessions are interactive and my son actually looks forward to them every week.",
-      avatar: "https://i.pravatar.cc/150?u=rajesh",
+      avatar: "https://i.pravatar.cc/150?u=priya",
+
       color: "bg-gold/10"
     },
     {
@@ -1108,6 +1114,7 @@ const Testimonials = () => {
       role: "Parent of 6yo",
       desc: "I was worried about screen addiction. But these 30 minutes are so productive. She learns valuable life lessons through stories that I struggled to teach her myself.",
       avatar: "https://i.pravatar.cc/150?u=anjali",
+
       color: "bg-emerald-50"
     }
   ];
@@ -1165,14 +1172,14 @@ const Testimonials = () => {
 const SectionReveal = ({ children, id, className }: { children: React.ReactNode, id?: string, className?: string }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.1 });
-  
+
   const containerVariants = {
-    hidden: { 
+    hidden: {
       opacity: 0,
       scale: 0.98,
       filter: "blur(8px)"
     },
-    visible: { 
+    visible: {
       opacity: 1,
       scale: 1,
       filter: "blur(0px)",
@@ -1201,22 +1208,22 @@ const SectionReveal = ({ children, id, className }: { children: React.ReactNode,
 
 const RevealChild = ({ children, className, ...props }: { children: React.ReactNode, className?: string, [key: string]: any }) => {
   const itemVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 30, 
+    hidden: {
+      opacity: 0,
+      y: 30,
       rotate: -1.5,
       scale: 0.95,
       filter: "blur(4px)"
     },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
+    visible: {
+      opacity: 1,
+      y: 0,
       rotate: 0,
       scale: 1,
       filter: "blur(0px)",
-      transition: { 
-        duration: 1, 
-        ease: [0.22, 1, 0.36, 1] 
+      transition: {
+        duration: 1,
+        ease: [0.22, 1, 0.36, 1]
       }
     }
   };
@@ -1276,7 +1283,7 @@ const MagicPath = () => {
           cy="0"
           r="20"
           fill="#4A90E2"
-          style={{ 
+          style={{
             offsetPath: "path('M 120,0 C 120,500 1320,500 1320,1000 S 120,1500 120,2000 S 1320,2500 1320,3000 S 120,3500 120,4000 S 1320,4500 1320,5000')",
             offsetDistance: useTransform(pathLength, [0, 1], ["0%", "100%"])
           }}
@@ -1310,33 +1317,34 @@ export default function App() {
       <MagicCursor />
       <MagicPath />
       <WhatsAppButton />
-      
+
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ${
-        isScrolled 
-          ? "bg-gradient-to-r from-white/40 via-white/60 to-white/40 backdrop-blur-2xl border-b border-white/50 shadow-[0_4px_30px_rgba(0,0,0,0.03),inset_0_1px_1px_rgba(255,255,255,0.6)] py-0 h-16" 
-          : "bg-transparent border-transparent py-4 h-20"
-      }`}>
+      <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ${isScrolled
+        ? "bg-gradient-to-r from-white/40 via-white/60 to-white/40 backdrop-blur-2xl border-b border-white/50 shadow-[0_4px_30px_rgba(0,0,0,0.03),inset_0_1px_1px_rgba(255,255,255,0.6)] py-0 h-16"
+        : "bg-transparent border-transparent py-4 h-20"
+        }`}>
         <div className="container mx-auto px-6 h-full flex items-center justify-between">
-          <div 
+          <div
             onClick={() => scrollToSection("hero")}
             className="cursor-pointer group"
           >
             <img src="logo_with_text.png" alt="Infineo Logo" className="h-10 md:h-12 w-auto" referrerPolicy="no-referrer" />
           </div>
-          
+
           <div className="hidden md:flex items-center gap-8">
-             <button onClick={() => scrollToSection("how-it-works")} className="text-sm font-bold text-secondary-blue hover:text-primary-blue transition-colors">How it works</button>
-             <button onClick={() => scrollToSection("testimonials")} className="text-sm font-bold text-secondary-blue hover:text-primary-blue transition-colors">Families</button>
-             <button onClick={() => scrollToSection("faqs")} className="text-sm font-bold text-secondary-blue hover:text-primary-blue transition-colors">FAQs</button>
-             <motion.button 
-               whileHover={{ scale: 1.05, backgroundColor: "#be8c4a" }}
-               whileTap={{ scale: 0.95 }}
-               onClick={() => scrollToSection("cta")}
-               className="px-8 py-3 bg-dark-blue text-white rounded-xl font-black text-xs uppercase tracking-widest shadow-lg shadow-dark-blue/20 transition-colors"
-             >
-               Book Trial
-             </motion.button>
+            <button onClick={() => scrollToSection("how-it-works")} className="text-sm font-bold text-secondary-blue hover:text-primary-blue transition-colors">How it works</button>
+            <button onClick={() => scrollToSection("testimonials")} className="text-sm font-bold text-secondary-blue hover:text-primary-blue transition-colors">Families</button>
+            <button onClick={() => scrollToSection("faqs")} className="text-sm font-bold text-secondary-blue hover:text-primary-blue transition-colors">FAQs</button>
+            <motion.a
+              href="https://bit.ly/4f1ds3Z"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05, backgroundColor: "#be8c4a" }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-3 bg-dark-blue text-white rounded-xl font-black text-xs uppercase tracking-widest shadow-lg shadow-dark-blue/20 transition-colors"
+            >
+              Book Trial
+            </motion.a>
           </div>
         </div>
       </nav>
@@ -1352,7 +1360,7 @@ export default function App() {
       <SectionBridge color="text-primary-blue/20" height="h-10 md:h-12" />
       <WaveDivider color="fill-white/10" />
       <WhyParents />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <Outcomes />
       <SectionBridge color="text-indigo-400/20" height="h-8 md:h-10" />
       <Curriculum />
