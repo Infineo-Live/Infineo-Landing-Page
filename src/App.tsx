@@ -150,7 +150,7 @@ const FloatingDecor = () => {
 const WhatsAppButton = () => {
   return (
     <motion.a
-      href="https://wa.me/yournumber" // Replace with actual number
+      href="https://wa.me/7007967357" // Replace with actual number
       target="_blank"
       rel="noopener noreferrer"
       initial={{ scale: 0, opacity: 0 }}
@@ -966,7 +966,7 @@ const Footer = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start gap-12">
           <div className="flex flex-col items-start gap-8">
-            <img src="logo_with_text.png" alt="Infineo Logo" className="h-16 w-auto" referrerPolicy="no-referrer" />
+            <img src="./logo_with_text.png" alt="Infineo Logo" className="h-16 w-auto" referrerPolicy="no-referrer" />
             <p className="text-white/60 text-lg max-w-sm leading-relaxed font-medium">
               Modern storytelling based on ancient wisdom, designed to empower kids for the future.
             </p>
