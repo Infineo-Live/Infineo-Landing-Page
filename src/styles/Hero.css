@@ -1,0 +1,377 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Nunito:wght@400;600;700&display=swap');
+
+/* ─── Reset & Base ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ─── Hero Shell ────────────────────────────────────── */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 680px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* ─── Video Background ──────────────────────────────── */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* ─── Overlay ───────────────────────────────────────── */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    /* left text panel — frosted dark */
+    linear-gradient(
+      105deg,
+      rgba(10, 28, 50, 0.72) 0%,
+      rgba(10, 28, 50, 0.55) 42%,
+      rgba(10, 28, 50, 0.10) 68%,
+      transparent 100%
+    ),
+    /* subtle warm gold tint overall */
+    linear-gradient(
+      180deg,
+      rgba(212, 175, 55, 0.04) 0%,
+      transparent 60%,
+      rgba(10, 28, 50, 0.35) 100%
+    );
+}
+
+/* ─── Content ───────────────────────────────────────── */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 6vw;
+  max-width: 660px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ─── Label ─────────────────────────────────────────── */
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #D4AF37;
+  margin-bottom: 20px;
+  animation: fadeSlideUp 0.7s ease-out both;
+  animation-delay: 0.1s;
+}
+
+.hero-label-dot {
+  display: inline-block;
+  width: 28px;
+  height: 1.5px;
+  background: linear-gradient(90deg, #D4AF37, #F4E0A0);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ─── Main Heading ──────────────────────────────────── */
+.hero-heading {
+  font-family: 'Cinzel', serif;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.0;
+  margin: 0 0 28px 0;
+}
+
+.hero-heading-line1 {
+  font-size: clamp(36px, 5.5vw, 68px);
+  font-weight: 900;
+  color: #FFFFFF;
+  letter-spacing: 4px;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.3);
+  animation: fadeSlideUp 0.7s ease-out both;
+  animation-delay: 0.22s;
+}
+
+.hero-heading-line2 {
+  font-size: clamp(36px, 5.5vw, 68px);
+  font-weight: 900;
+  letter-spacing: 4px;
+  /* Gold gradient text */
+  background: linear-gradient(135deg, #D4AF37 0%, #F8E78C 50%, #C9973A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  filter: drop-shadow(0 2px 12px rgba(212,175,55,0.35));
+  animation: fadeSlideUp 0.7s ease-out both;
+  animation-delay: 0.32s;
+}
+
+/* ─── Subtitle ──────────────────────────────────────── */
+.hero-subtitle {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(14px, 1.5vw, 17px);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.75;
+  margin: 0 0 36px 0;
+  animation: fadeSlideUp 0.7s ease-out both;
+  animation-delay: 0.42s;
+}
+
+/* ─── CTA Buttons ───────────────────────────────────── */
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
+  animation: fadeSlideUp 0.7s ease-out both;
+  animation-delay: 0.52s;
+}
+
+.hero-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #0F2D3F;
+  background: linear-gradient(135deg, #D4AF37 0%, #F4E07A 50%, #C9973A 100%);
+  border: none;
+  padding: 15px 36px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow:
+    0 6px 24px rgba(212, 175, 55, 0.45),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+              box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #F4E07A 0%, #D4AF37 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+.hero-btn-primary:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 12px 32px rgba(212, 175, 55, 0.55),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.hero-btn-primary:hover::after { opacity: 1; }
+.hero-btn-primary span,
+.hero-btn-primary svg {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  padding: 14px 26px;
+  border-radius: 50px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.hero-btn-secondary:hover {
+  background: rgba(255,255,255,0.16);
+  border-color: rgba(255,255,255,0.5);
+  transform: translateY(-2px);
+}
+
+/* ─── Trust Strip ───────────────────────────────────── */
+.hero-trust {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  animation: fadeSlideUp 0.7s ease-out both;
+  animation-delay: 0.65s;
+}
+
+.hero-trust-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero-trust-num {
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #D4AF37;
+  line-height: 1;
+}
+
+.hero-trust-label {
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+
+.hero-trust-divider {
+  width: 1px;
+  height: 36px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 2px;
+}
+
+/* ─── Scroll Indicator ──────────────────────────────── */
+.hero-scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 6vw;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  animation: fadeIn 1.2s ease-out 1s both;
+}
+
+.hero-scroll-line {
+  width: 40px;
+  height: 1.5px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-scroll-line::after {
+  content: '';
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #D4AF37;
+  animation: scrollLine 2s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+
+/* ─── Keyframes ─────────────────────────────────────── */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scrollLine {
+  0%   { left: -100%; }
+  100% { left: 100%;  }
+}
+
+/* ─── Responsive ────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 0 24px;
+    max-width: 100%;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(
+      160deg,
+      rgba(10, 28, 50, 0.75) 0%,
+      rgba(10, 28, 50, 0.55) 60%,
+      rgba(10, 28, 50, 0.40) 100%
+    );
+  }
+
+  .hero-heading-line1,
+  .hero-heading-line2 {
+    font-size: clamp(32px, 9vw, 48px);
+    letter-spacing: 2px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-btn-primary,
+  .hero-btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-trust {
+    gap: 16px;
+  }
+
+  .hero-trust-num {
+    font-size: 15px;
+  }
+
+  .hero-scroll { display: none; }
+}
+
+@media (max-width: 480px) {
+  .hero-heading-line1,
+  .hero-heading-line2 {
+    font-size: clamp(28px, 10vw, 40px);
+    letter-spacing: 1.5px;
+  }
+
+  .hero-subtitle {
+    font-size: 13.5px;
+  }
+
+  .hero-trust {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .hero-trust-divider { display: none; }
+}
