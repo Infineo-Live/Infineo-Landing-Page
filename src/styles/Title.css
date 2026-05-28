@@ -181,6 +181,30 @@
   transform: translateY(0) scale(1.01);
 }
 
+/* ─── Theme Toggle Button ────────────────────────────– */
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast);
+  position: relative;
+  z-index: 2;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.15) rotate(20deg);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
 /* ─── Hamburger (mobile) ────────────────────────────── */
 .hamburger {
   display: none;

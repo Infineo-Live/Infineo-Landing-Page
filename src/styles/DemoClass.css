@@ -1,6 +1,6 @@
 .demo-class-section {
   padding: 80px 20px;
-  background: linear-gradient(135deg, rgba(15, 45, 63, 0.05), rgba(212, 175, 55, 0.05));
+  background: var(--bg-primary);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -45,7 +45,7 @@
   font-family: 'Cinzel', serif;
   font-size: 48px;
   font-weight: 700;
-  color: #0F2D3F;
+  color: var(--text-primary);
   margin-bottom: 10px;
   line-height: 1.2;
 }
@@ -53,7 +53,7 @@
 .demo-subtitle {
   font-family: 'Nunito', sans-serif;
   font-size: 24px;
-  color: #D4AF37;
+  color: var(--accent-primary);
   margin-bottom: 40px;
   font-weight: 600;
 }
@@ -107,7 +107,7 @@
 .benefit-item h4 {
   font-family: 'Cinzel', serif;
   font-size: 18px;
-  color: #0F2D3F;
+  color: var(--text-primary);
   margin-bottom: 5px;
   font-weight: 600;
 }
@@ -115,7 +115,7 @@
 .benefit-item p {
   font-family: 'Nunito', sans-serif;
   font-size: 14px;
-  color: #1B4965;
+  color: var(--text-secondary);
   line-height: 1.5;
 }
 
@@ -124,8 +124,8 @@
   gap: 30px;
   margin-top: 40px;
   padding: 30px 0;
-  border-top: 2px solid #D4AF37;
-  border-bottom: 2px solid #D4AF37;
+  border-top: 2px solid var(--accent-primary);
+  border-bottom: 2px solid var(--accent-primary);
 }
 
 .highlight {
@@ -139,7 +139,7 @@
   font-family: 'Cinzel', serif;
   font-size: 42px;
   font-weight: 700;
-  color: #D4AF37;
+  color: var(--accent-primary);
   line-height: 1;
 }
 
@@ -147,7 +147,7 @@
   display: block;
   font-family: 'Nunito', sans-serif;
   font-size: 14px;
-  color: #0F2D3F;
+  color: var(--text-secondary);
   margin-top: 8px;
   font-weight: 600;
   text-transform: uppercase;
@@ -171,17 +171,18 @@
 }
 
 .demo-form {
-  background: white;
+  background: var(--bg-card);
   padding: 40px;
   border-radius: 15px;
-  box-shadow: 0 20px 60px rgba(15, 45, 63, 0.1);
-  border-top: 5px solid #D4AF37;
+  box-shadow: var(--card-shadow);
+  border-top: 5px solid var(--accent-primary);
+  border: 1px solid var(--border-primary);
 }
 
 .demo-form h3 {
   font-family: 'Cinzel', serif;
   font-size: 28px;
-  color: #0F2D3F;
+  color: var(--text-primary);
   margin-bottom: 30px;
   text-align: center;
 }
@@ -196,32 +197,32 @@
   font-family: 'Nunito', sans-serif;
   font-size: 14px;
   font-weight: 600;
-  color: #0F2D3F;
+  color: var(--text-primary);
   margin-bottom: 8px;
 }
 
 .form-group input,
 .form-group select {
   padding: 12px 15px;
-  border: 2px solid #E0ECFF;
+  border: 2px solid var(--input-border);
   border-radius: 8px;
   font-family: 'Nunito', sans-serif;
   font-size: 14px;
-  color: #0F2D3F;
+  color: var(--text-primary);
   transition: all 0.3s ease;
-  background-color: #F9FBFF;
+  background-color: var(--input-bg);
 }
 
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #D4AF37;
-  background-color: white;
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+  border-color: var(--accent-primary);
+  background-color: var(--bg-card);
+  box-shadow: 0 0 0 3px rgba(190, 140, 74, 0.1);
 }
 
 .form-group input::placeholder {
-  color: #1B4965;
+  color: var(--text-muted);
   opacity: 0.6;
 }
 
@@ -232,7 +233,7 @@
 }
 
 .success-message {
-  background: linear-gradient(135deg, rgba(42, 157, 143, 0.1), rgba(212, 175, 55, 0.1));
+  background: linear-gradient(135deg, rgba(42, 157, 143, 0.1), rgba(190, 140, 74, 0.1));
   color: #2A9D8F;
   padding: 15px 20px;
   border-radius: 8px;
@@ -257,8 +258,8 @@
 .submit-btn {
   width: 100%;
   padding: 16px;
-  background: linear-gradient(135deg, #D4AF37, #F4D8A8);
-  color: #0F2D3F;
+  background: var(--button-gradient);
+  color: var(--text-inverse);
   border: none;
   border-radius: 8px;
   font-family: 'Cinzel', serif;
@@ -273,8 +274,8 @@
 
 .submit-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
-  background: linear-gradient(135deg, #F4D8A8, #D4AF37);
+  box-shadow: 0 10px 30px rgba(190, 140, 74, 0.3);
+  background: linear-gradient(135deg, #e7b860, #be8c4a);
 }
 
 .submit-btn:active {
@@ -284,7 +285,7 @@
 .form-note {
   font-family: 'Nunito', sans-serif;
   font-size: 12px;
-  color: #1B4965;
+  color: var(--text-muted);
   text-align: center;
   margin-top: 15px;
   opacity: 0.7;

@@ -1,0 +1,411 @@
+/* ============================================================
+   INFINEO GLOBAL THEME SYSTEM
+   Centralized color, typography, spacing, and design tokens
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Nunito:wght@300;400;500;600;700&family=Fredoka:wght@400;500;600;700&display=swap');
+
+/* ─── Base Brand Tokens ───────────────────────────────── */
+:root {
+  /* Brand Colors */
+  --color-infineo-black: #112b47;
+  --color-infineo-gold: #be8c4a;
+  --color-infineo-blue: #39618d;
+  --color-infineo-gold-light: #e7b860;
+  --color-infineo-gold-vibrant: #e4aa33;
+  --color-infineo-cream: #f7da99;
+  --color-infineo-brown-dark: #413327;
+  --color-infineo-brown: #885a2a;
+  --color-infineo-taupe: #917864;
+  --color-infineo-white: #ffffff;
+
+  /* Primary Aliases */
+  --color-primary: var(--color-infineo-gold);
+  --color-primary-light: var(--color-infineo-gold-light);
+  --color-accent: var(--color-infineo-blue);
+
+  /* ─── Typography Scale ────────────────────────────── */
+  --font-primary: 'Cinzel', serif;
+  --font-secondary: 'Nunito', sans-serif;
+  --font-decorative: 'Fredoka', sans-serif;
+
+  --font-size-xs: 11px;
+  --font-size-sm: 13px;
+  --font-size-base: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 32px;
+  --font-size-4xl: 48px;
+  --font-size-5xl: 64px;
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  /* ─── Spacing Scale ──────────────────────────────── */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+  --spacing-3xl: 48px;
+  --spacing-4xl: 64px;
+
+  /* ─── Border Radius ──────────────────────────────── */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* ─── Transitions ────────────────────────────────── */
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
+  --transition-cubic: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ─── Shadows ────────────────────────────────────── */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.25);
+
+  /* ─── Z-Index Scale ──────────────────────────────── */
+  --z-dropdown: 100;
+  --z-sticky: 500;
+  --z-fixed: 1000;
+  --z-offcanvas: 1050;
+  --z-modal-backdrop: 1100;
+  --z-modal: 1150;
+  --z-tooltip: 1200;
+  --z-notification: 1300;
+
+  /* ─── Line Heights ────────────────────────────────– */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  --line-height-loose: 2;
+
+  /* ─── Letter Spacing ──────────────────────────────– */
+  --letter-spacing-tight: -0.5px;
+  --letter-spacing-normal: 0px;
+  --letter-spacing-wide: 0.5px;
+  --letter-spacing-wider: 1px;
+  --letter-spacing-widest: 2px;
+}
+
+/* ─── DARK MODE (DEFAULT) ────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  /* Backgrounds */
+  --bg-primary: #112b47;
+  --bg-secondary: #17395c;
+  --bg-tertiary: #0d1e32;
+  --bg-card: rgba(23, 57, 92, 0.88);
+  --bg-glass: rgba(255, 255, 255, 0.05);
+  --bg-overlay: rgba(0, 0, 0, 0.4);
+
+  /* Text Colors */
+  --text-primary: #f7da99;
+  --text-secondary: #f3e4c1;
+  --text-muted: #c6b8a8;
+  --text-inverse: #112b47;
+
+  /* Accent Colors */
+  --accent-primary: #be8c4a;
+  --accent-hover: #e4aa33;
+  --accent-soft: #e7b860;
+  --accent-dark: #6b4c28;
+
+  /* Input Styles */
+  --input-bg: rgba(255, 255, 255, 0.04);
+  --input-border: rgba(231, 184, 96, 0.2);
+  --input-border-hover: rgba(231, 184, 96, 0.35);
+  --input-border-focus: rgba(231, 184, 96, 0.6);
+
+  /* Borders */
+  --border-primary: rgba(231, 184, 96, 0.25);
+  --border-secondary: rgba(231, 184, 96, 0.15);
+  --border-light: rgba(255, 255, 255, 0.08);
+
+  /* Special Effects */
+  --section-glow: radial-gradient(circle, rgba(231, 184, 96, 0.08), transparent);
+  --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  --button-gradient: linear-gradient(135deg, #be8c4a, #e7b860);
+  --gold-glow: 0 0 20px rgba(231, 184, 96, 0.3);
+
+  /* Success/Error colors */
+  --success: #2a9d8f;
+  --error: #e76f51;
+  --warning: #f4a261;
+  --info: #39618d;
+}
+
+/* ─── LIGHT MODE ──────────────────────────────────── */
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg-primary: #fffaf1;
+  --bg-secondary: #fdf6e8;
+  --bg-tertiary: #fdf1e0;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  --bg-overlay: rgba(0, 0, 0, 0.3);
+
+  /* Text Colors */
+  --text-primary: #112b47;
+  --text-secondary: #2e4d6d;
+  --text-muted: #6b7280;
+  --text-inverse: #f7da99;
+
+  /* Accent Colors */
+  --accent-primary: #be8c4a;
+  --accent-hover: #d4932e;
+  --accent-soft: #e7b860;
+  --accent-dark: #8b6a40;
+
+  /* Input Styles */
+  --input-bg: rgba(255, 255, 255, 0.95);
+  --input-border: rgba(190, 140, 74, 0.2);
+  --input-border-hover: rgba(190, 140, 74, 0.35);
+  --input-border-focus: rgba(190, 140, 74, 0.6);
+
+  /* Borders */
+  --border-primary: rgba(190, 140, 74, 0.25);
+  --border-secondary: rgba(190, 140, 74, 0.15);
+  --border-light: rgba(17, 43, 71, 0.08);
+
+  /* Special Effects */
+  --section-glow: radial-gradient(circle, rgba(190, 140, 74, 0.06), transparent);
+  --card-shadow: 0 12px 30px rgba(17, 43, 71, 0.08);
+  --button-gradient: linear-gradient(135deg, #be8c4a, #e7b860);
+  --gold-glow: 0 0 15px rgba(190, 140, 74, 0.25);
+
+  /* Success/Error colors */
+  --success: #059669;
+  --error: #dc2626;
+  --warning: #d97706;
+  --info: #3b82f6;
+}
+
+/* ─── Global Resets ──────────────────────────────────– */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-secondary);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: var(--line-height-normal);
+  transition: background-color var(--transition-base),
+              color var(--transition-base);
+  overflow-x: hidden;
+}
+
+/* ─── Typography ───────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  letter-spacing: var(--letter-spacing-wide);
+  line-height: var(--line-height-tight);
+}
+
+h1 {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-black);
+  letter-spacing: var(--letter-spacing-widest);
+}
+
+h2 {
+  font-size: var(--font-size-4xl);
+  letter-spacing: var(--letter-spacing-wider);
+}
+
+h3 {
+  font-size: var(--font-size-2xl);
+}
+
+h4 {
+  font-size: var(--font-size-xl);
+}
+
+p {
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+a {
+  color: var(--accent-primary);
+  transition: color var(--transition-fast);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* ─── Form Elements ────────────────────────────────── */
+input,
+textarea,
+select {
+  font-family: var(--font-secondary);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  transition: all var(--transition-base);
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--input-border-hover);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px rgba(190, 140, 74, 0.1);
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ─── Buttons ───────────────────────────────────────– */
+button {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border: none;
+  border-radius: var(--radius-lg);
+}
+
+/* ─── Scrollbar ──────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: var(--radius-full);
+  transition: background var(--transition-base);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hover);
+}
+
+/* ─── Animations ───────────────────────────────────– */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: var(--gold-glow);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(231, 184, 96, 0.5);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}

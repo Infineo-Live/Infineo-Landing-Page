@@ -1,8 +1,10 @@
 import { useRef, useEffect, useState } from 'react';
+import { useTheme } from '../context/ThemeContext.jsx';
 import Logo from '../assets/logo_with_text.png';
 import '../styles/Title.css';
 
 const Title = () => {
+  const { theme, toggleTheme } = useTheme();
   const navRef = useRef(null);
   const dropletRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
@@ -85,6 +87,14 @@ const Title = () => {
           <a href="#curriculum">CURRICULUM</a>
           <a href="#pricing">PRICING</a>
           <button className="login-btn">BOOK THE DEMO</button>
+          <button 
+            className="theme-toggle-btn"
+            onClick={toggleTheme}
+            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
         </nav>
 
         {/* Mobile Hamburger */}

@@ -1,302 +1,407 @@
-/* ============================================================
-   Modules Section — Premium Golden Version
-   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Nunito:wght@400;600;700;800&display=swap');
 
+/* ─── Section ────────────────────────────────────────────── */
 .modules-section {
   position: relative;
   width: 100%;
-  height: 100vh;
-  padding: 40px 30px 30px;
-  background: linear-gradient(180deg, #0f2744 0%, #0f2d3f 50%, #0a1c32 100%);
+  min-height: 100vh;
+  padding: 48px 32px 36px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  align-items: center;
+
+  background: url('../assets/module-bg.png') center/cover no-repeat;
   overflow: hidden;
-  box-sizing: border-box;
 }
 
-/* ─── Header ────────────────────────────────────────────── */
+/* Stars pseudo-layer */
+.modules-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 8%  12%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 22% 5%,  rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 45% 8%,  rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 68% 4%,  rgba(255,255,255,0.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 82% 11%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 92% 20%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 95%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 88%, rgba(255,255,255,0.3) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Header ─────────────────────────────────────────────── */
 .modules-header {
   text-align: center;
-  margin-bottom: 20px;
-  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 28px;
+}
+
+.modules-eyebrow {
+  display: inline-block;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #D4AF37;
+  border: 1px solid rgba(212,175,55,0.4);
+  border-radius: 50px;
+  padding: 4px 18px;
+  margin-bottom: 14px;
 }
 
 .modules-header h2 {
   font-family: 'Cinzel', serif;
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(36px, 5vw, 68px);
   font-weight: 900;
-  color: #ffe344;
-  margin: 0 0 6px;
-  letter-spacing: 2px;
+  color: #FFE87C;
+  margin: 0 0 10px;
+  letter-spacing: 3px;
+  text-shadow: 0 0 60px rgba(255,220,80,0.25);
 }
 
 .modules-header p {
   font-family: 'Nunito', sans-serif;
-  font-size: clamp(14px, 1.5vw, 18px);
-  color: #d4af37;
+  font-size: clamp(14px, 1.5vw, 17px);
+  color: rgba(255,255,255,0.6);
   font-weight: 600;
   margin: 0;
+  max-width: 500px;
+  line-height: 1.7;
 }
 
-/* ─── Scroll Container ──────────────────────────────────── */
-/*
- * flex: 1 so it fills whatever height remains after the header.
- * min-height: 0 is required — without it a flex child refuses to
- * shrink below its content height and the container overflows.
- */
-.modules-single-view-container {
-  flex: 1;
-  min-height: 0;
+/* ─── Game Map Wrapper ───────────────────────────────────── */
+.game-map-wrapper {
+  position: relative;
   width: 100%;
-  /* Leave right gutter for the side navigator (≈140px) */
-  max-width: calc(100% - 160px);
-  margin: 0 auto 0 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
+  max-width: 1444px;
+  aspect-ratio: 16 / 7;
+  z-index: 2;
+  margin: 0 auto;
 }
 
-.modules-single-view-container::-webkit-scrollbar {
-  display: none;
-}
-
-/* ─── Stage (one per module) ────────────────────────────── */
-.focused-module-stage {
+/* ─── Path SVG ───────────────────────────────────────────── */
+.path-svg {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  /*
-   * Fill the scroll container viewport so snap works reliably.
-   * 100% here means 100% of the scroll container's height, which
-   * is already clamped by flex: 1 / min-height: 0 above.
-   */
   height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── Level Node ─────────────────────────────────────────── */
+.level-node {
+  position: absolute;
+  transform: translate(-50%, calc(-50% + 20px)) scale(0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.level-node:active {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+/* ─── God Image (large, centered, above badge) ─────────────── */
+.level-god-img {
+  width: clamp(92px, 8.8vw, 164px);
+  height: clamp(92px, 8.8vw, 164px);
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 50%;
+  border: 2.5px solid rgba(212,175,55,0.7);
+  background: rgba(10, 20, 50, 0.5);
+  /* Tucks bottom of image slightly into the badge */
+  margin-bottom: -14px;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.7));
+  box-shadow: 0 0 0 3px rgba(212,175,55,0.15), 0 6px 20px rgba(0,0,0,0.5);
+}
+
+.level-node:hover .level-god-img {
+  transform: translateY(-6px) scale(1.08);
+  border-color: #FFE87C;
+  box-shadow: 0 0 0 4px rgba(255,232,124,0.3), 0 8px 28px rgba(0,0,0,0.6);
+}
+
+/* Placeholder circle when no god image */
+.level-god-placeholder {
+  width: clamp(64px, 7.5vw, 100px);
+  height: clamp(64px, 7.5vw, 100px);
+  border-radius: 50%;
+  border: 2.5px solid rgba(212,175,55,0.4);
+  background: rgba(10, 20, 50, 0.6);
+  margin-bottom: -14px;
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
-  transition:
-    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity   0.6s ease;
-  opacity: 0.45;
-  transform: scale(0.96);
-  padding: 12px 0;
-  box-sizing: border-box;
+  font-size: clamp(22px, 3vw, 36px);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.6));
 }
 
-.focused-module-stage.is-active {
-  opacity: 1;
-  transform: scale(1);
+.level-node:hover .level-god-placeholder {
+  transform: translateY(-6px) scale(1.08);
 }
 
-/* ─── Card ──────────────────────────────────────────────── */
-.module-presentation-card {
-  width: 95%;
-  padding: 48px 56px;
-  border-radius: 32px;
-  background: #f8f1de;
-  border-top: 7px solid #d4af37;
-  box-shadow:
-    0 24px 60px rgba(15, 45, 63, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7);
-  box-sizing: border-box;
+/* ─── Gold circle badge with level number ───────────────── */
+.level-badge {
+  position: relative;
+  z-index: 3;
+  width: clamp(38px, 4.2vw, 54px);
+  height: clamp(38px, 4.2vw, 54px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #FFE87C, #C8991A);
+  border: 3px solid #FFE87C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(13px, 1.6vw, 20px);
+  font-weight: 900;
+  color: #3a2000;
+  box-shadow: 0 0 0 4px rgba(212,175,55,0.2), 0 4px 16px rgba(0,0,0,0.5);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 
-/* ─── Layout inside card ────────────────────────────────── */
+.level-node:hover .level-badge {
+  box-shadow: 0 0 0 6px rgba(212,175,55,0.4), 0 6px 20px rgba(0,0,0,0.6);
+  transform: scale(1.08);
+}
+
+/* ─── Name tag below badge ──────────────────────────────── */
+.level-label {
+  margin-top: 8px;
+  text-align: center;
+}
+
+.level-label-name {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(10px, 1.1vw, 13px);
+  font-weight: 700;
+  color: #F5DEB3;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+  white-space: nowrap;
+  background: rgba(5,14,31,0.65);
+  padding: 3px 12px;
+  border-radius: 50px;
+  border: 1px solid rgba(212,175,55,0.3);
+}
+
+/* ─── Hover Tooltip Card ─────────────────────────────────── */
 /*
- * Single column — the JSX no longer renders .module-right-lessons,
- * so drop the two-column grid entirely.
- */
-.module-main-content {
-  display: flex;
-  align-items: center;
-  gap: 0;
-}
-
-/* Left: image + text side by side */
-.module-left-details {
-  display: flex;
-  align-items: center;
-  gap: 44px;
-  width: 100%;
-}
-
-/* ─── Image ─────────────────────────────────────────────── */
-.module-image-wrapper {
-  position: relative;
-  flex-shrink: 0;
-  width: 200px;
-  height: 200px;
-}
-
-.module-god-image {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  object-position: top center;
-  border-radius: 12px;
-  position: relative;
-  z-index: 1;
-  display: block;
-}
-
-.module-image-glow {
+  The tooltip sits ABOVE the god image. We position it absolutely
+  relative to .level-node. The level-node is a flex column, so we
+  use absolute positioning pulled up past the top of the node.
+*/
+.level-tooltip {
   position: absolute;
-  inset: -12px;
-  border-radius: 20px;
-  opacity: 0.18;
-  filter: blur(28px);
-  z-index: 0;
+  /* sits above the god image — god image is ~100px + badge ~54px = ~154px total column height above label */
+  bottom: calc(100% - 4px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px) scale(0.92);
+  background: linear-gradient(145deg, #1c3260 0%, #0c1c3a 100%);
+  border: 1.5px solid rgba(212,175,55,0.7);
+  border-radius: 14px;
+  padding: 12px 16px;
+  min-width: 150px;
+  max-width: 190px;
+  text-align: center;
+  box-shadow: 0 10px 36px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,255,255,0.04) inset;
+  z-index: 30;
+  pointer-events: none;
+
+  opacity: 0;
+  transition: opacity 0.2s ease,
+              transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Star accent below image */
-.module-image-wrapper::after {
-  content: '✦';
+/* Arrow pointing down */
+.level-tooltip::after {
+  content: '';
   position: absolute;
-  bottom: -22px;
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: #0c1c3a;
+  border-right: 1.5px solid rgba(212,175,55,0.7);
+  border-bottom: 1.5px solid rgba(212,175,55,0.7);
+}
+
+.level-node:hover .level-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.level-tooltip-name {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: #FFE87C;
+  margin: 0 0 5px;
+}
+
+.level-tooltip-sub {
+  font-family: 'Nunito', sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.65);
+  margin: 0;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* "Coming Next" badge for locked modules */
+.level-coming-next {
+  position: absolute;
+  top: -8px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 20px;
-  color: #d4af37;
-  opacity: 0.7;
-  animation: floatStar 3s ease-in-out infinite;
-  z-index: 2;
-}
-
-@keyframes floatStar {
-  0%, 100% { transform: translateX(-50%) translateY(0);    opacity: 0.7; }
-  50%       { transform: translateX(-50%) translateY(-7px); opacity: 1;   }
-}
-
-/* ─── Text Block ────────────────────────────────────────── */
-.module-text-block {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.module-title {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(32px, 3.5vw, 46px);
-  font-weight: 900;
-  color: #0f2d3f;
-  margin: 0 0 6px;
-}
-
-.module-subtitle {
+  background: rgba(212,175,55,0.15);
+  border: 1px solid rgba(212,175,55,0.5);
+  border-radius: 50px;
+  padding: 2px 10px;
   font-family: 'Nunito', sans-serif;
-  font-size: clamp(15px, 1.4vw, 18px);
-  color: #d4af37;
-  font-style: italic;
-  font-weight: 700;
-  margin: 0 0 16px;
+  font-size: 9px;
+  font-weight: 800;
+  color: #D4AF37;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  z-index: 4;
 }
 
-.module-description {
-  font-family: 'Nunito', sans-serif;
-  font-size: clamp(15px, 1.3vw, 17px);
-  color: #1b4965;
-  line-height: 1.85;
-  max-width: 600px;
-  margin: 0;
-}
-
-/* ─── Side Navigator ────────────────────────────────────── */
-.modules-side-navigator {
+/* ─── Journey End marker ─────────────────────────────────── */
+.journey-end {
   position: absolute;
-  right: 32px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  z-index: 10;
+  right: 2%;
+  bottom: 10%;
+  text-align: center;
+  z-index: 5;
 }
 
-.nav-row-item {
+.journey-end span {
+  display: block;
+  font-size: clamp(22px, 2.8vw, 38px);
+  color: #D4AF37;
+  opacity: 0.7;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.journey-end p {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(9px, 1vw, 11px);
+  color: rgba(255,255,255,0.45);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ─── Bottom Feature Pills ───────────────────────────────── */
+.modules-features {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.feature-pill {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.nav-row-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transition: background 0.3s ease, transform 0.3s ease;
-  flex-shrink: 0;
-}
-
-.nav-row-label {
-  font-family: 'Cinzel', serif;
-  font-size: 13px;
+  gap: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 50px;
+  padding: 8px 18px;
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(11px, 1.2vw, 13px);
   font-weight: 700;
-  /* Always light so it reads on the dark section background */
-  color: #f8edc8;
-  opacity: 0;
-  transform: translateX(8px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  color: rgba(255,255,255,0.7);
   white-space: nowrap;
 }
 
-.nav-row-item:hover .nav-row-label,
-.nav-row-item.active .nav-row-label {
-  opacity: 1;
-  transform: translateX(0);
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .game-map-wrapper {
+    aspect-ratio: 16 / 9;
+  }
 }
 
-.nav-row-item.active .nav-row-dot {
-  background: #d4af37;
-  transform: scale(1.6);
-  box-shadow: 0 0 8px #d4af3780;
-}
-
-/* Active label stays light — fix original dark color bug */
-.nav-row-item.active .nav-row-label {
-  color: #ffe344;
-}
-
-/* ─── Responsive ────────────────────────────────────────── */
-@media (max-width: 1100px) {
-  .modules-single-view-container {
-    max-width: 100%;
+@media (max-width: 650px) {
+  .modules-section {
+    padding: 36px 16px 28px;
   }
 
-  .modules-side-navigator {
+  .game-map-wrapper {
+    aspect-ratio: 9 / 16;
+  }
+
+  .level-node:nth-child(2)  { left: 25% !important; top: 8%  !important; }
+  .level-node:nth-child(3)  { left: 75% !important; top: 20% !important; }
+  .level-node:nth-child(4)  { left: 25% !important; top: 32% !important; }
+  .level-node:nth-child(5)  { left: 75% !important; top: 44% !important; }
+  .level-node:nth-child(6)  { left: 25% !important; top: 56% !important; }
+  .level-node:nth-child(7)  { left: 75% !important; top: 68% !important; }
+  .level-node:nth-child(8)  { left: 25% !important; top: 80% !important; }
+  .level-node:nth-child(9)  { left: 75% !important; top: 92% !important; }
+
+  .path-svg {
     display: none;
   }
 
-  .module-left-details {
-    gap: 28px;
+  .level-tooltip {
+    min-width: 120px;
+    padding: 9px 12px;
   }
 
-  .module-presentation-card {
-    padding: 36px 32px;
+  .modules-features {
+    gap: 7px;
+  }
+
+  .feature-pill {
+    padding: 6px 12px;
   }
 }
 
-@media (max-width: 768px) {
-  .module-left-details {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-  }
 
-  .module-image-wrapper,
-  .module-god-image {
-    width: 150px;
-    height: 150px;
-  }
+/* ─── Scroll-reveal animations ───────────────────────────── */
 
-  .module-presentation-card {
-    padding: 28px 22px;
-    border-radius: 22px;
-  }
+.level-node.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0) scale(1);
+}
+
+.level-node:active {
+  transform: translate(-50%, -50%) scale(0.95) !important;
+}
+
+/* Path draws in on scroll */
+.path-svg .path-line {
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 1.8s ease 0.2s;
+}
+
+.path-svg.is-visible .path-line {
+  stroke-dashoffset: 0;
 }
