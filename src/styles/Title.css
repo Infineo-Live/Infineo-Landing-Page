@@ -277,3 +277,35 @@
   .logo  { height: 46px; }
   .mobile-menu { top: 68px; }
 }
+
+/* ─── Floating Bubbles ──────────────────────────────── */
+.bubble-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-bubble {
+  position: absolute;
+  bottom: -80px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 35%,
+    rgba(212, 175, 55, 0.55),
+    rgba(212, 175, 55, 0.08) 60%,
+    transparent 100%
+  );
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  animation: bubbleRise linear forwards;
+  backdrop-filter: blur(2px);
+}
+
+@keyframes bubbleRise {
+  0%   { transform: translateY(0)      translateX(0)    scale(1);    opacity: inherit; }
+  25%  { transform: translateY(-25vh)  translateX(18px)  scale(1.04); }
+  50%  { transform: translateY(-50vh)  translateX(-14px) scale(0.97); }
+  75%  { transform: translateY(-75vh)  translateX(20px)  scale(1.02); }
+  100% { transform: translateY(-110vh) translateX(-10px) scale(0.9);  opacity: 0; }
+}

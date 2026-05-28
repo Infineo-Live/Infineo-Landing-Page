@@ -1,132 +1,254 @@
 import { useState, useEffect, useRef } from 'react';
 import '../styles/Impact.css';
+import sadChild from '../assets/distressed-child.png';
+import neoMascot from '../assets/website-neo.png';
+import happyChild from '../assets/child-after.png';
 
-const Impact = () => {
+function orbitalBubbles(items, radiusPx, startAngle = -90) {
+  return items.map((item, i) => {
+    const angle = ((360 / items.length) * i + startAngle) * (Math.PI / 180);
+    return {
+      ...item,
+      x: Math.cos(angle) * radiusPx,
+      y: Math.sin(angle) * radiusPx,
+    };
+  });
+}
+
+const PROBLEMS = orbitalBubbles(
+  [
+    { label: 'Screen Addiction', icon: '📱', color: '#FF6B6B' },
+    { label: 'Distracted Mind', icon: '🌪️', color: '#FF8C42' },
+    { label: 'Lack of Values',  icon: '❌', color: '#E05C5C' },
+    { label: 'Stress & Anxiety',icon: '😰', color: '#C94040' },
+    { label: 'Lost Identity',   icon: '🫥', color: '#FF7070' },
+    { label: 'Poor Focus',      icon: '🙈', color: '#E07070' },
+  ],
+  190
+);
+
+const INFINEO = orbitalBubbles(
+  [
+    { label: 'Live Storytelling', icon: '📖', color: '#D4AF37' },
+    { label: '1-on-1 Sessions',   icon: '🎭', color: '#C9973A' },
+    { label: 'Indian Mythology',  icon: '🏛️', color: '#E8C84A' },
+    { label: 'Life Lessons',      icon: '💡', color: '#D4AF37' },
+    { label: 'Expert Guides',     icon: '🧙', color: '#C9973A' },
+    { label: '30-Min Magic',      icon: '⏳', color: '#E8C84A' },
+  ],
+  190
+);
+
+const RESULTS = orbitalBubbles(
+  [
+    { label: 'Deep Focus',       icon: '🎯', color: '#4ADE80' },
+    { label: 'Strong Values',    icon: '🌟', color: '#34D399' },
+    { label: 'Calm & Peaceful',  icon: '🧘', color: '#6EE7B7' },
+    { label: 'Inspired Daily',   icon: '🚀', color: '#4ADE80' },
+    { label: 'Kind & Empathetic',icon: '💚', color: '#34D399' },
+    { label: 'Self-Confident',   icon: '🦁', color: '#6EE7B7' },
+  ],
+  190
+);
+
+const PHASES = [
+  {
+    key: 'problem',
+    centerImage: sadChild,
+    centerLabel: 'Your Child',
+    centerBg: 'rgba(255,107,107,0.12)',
+    centerBorder: '#FF6B6B',
+    title: 'The Problem',
+    sub: 'What your child faces today',
+    titleColor: '#FF6B6B',
+    bubbles: PROBLEMS,
+    orbitColor: 'rgba(255,107,107,0.15)',
+  },
+  {
+    key: 'infineo',
+    centerImage: neoMascot,
+    centerLabel: 'Neo',
+    centerBg: 'rgba(212,175,55,0.12)',
+    centerBorder: '#D4AF37',
+    title: 'The Infineo Way',
+    sub: 'One 30-minute session at a time',
+    titleColor: '#D4AF37',
+    bubbles: INFINEO,
+    orbitColor: 'rgba(212,175,55,0.15)',
+  },
+  {
+    key: 'results',
+    centerImage: happyChild,
+    centerLabel: 'Transformed',
+    centerBg: 'rgba(74,222,128,0.12)',
+    centerBorder: '#4ADE80',
+    title: 'The Results',
+    sub: 'A child raised with wisdom & purpose',
+    titleColor: '#4ADE80',
+    bubbles: RESULTS,
+    orbitColor: 'rgba(74,222,128,0.15)',
+  },
+];
+
+export default function Impact() {
   const sectionRef = useRef(null);
-  // phase: 0 = before, 1 = journey, 2 = after, 3 = benefits
-  const [phase, setPhase] = useState(0);
-  const [phaseProgress, setPhaseProgress] = useState(0); // 0–1 within current phase
+  const [phase, setPhase]     = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [entered, setEntered] = useState(false);
 
   useEffect(() => {
-  const handleScroll = () => {
-    const section = sectionRef.current;
-    if (!section) return;
+    const handleScroll = () => {
+      const section = sectionRef.current;
+      if (!section) return;
+      const sectionTop    = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const scrollY       = window.scrollY;
+      const vh            = window.innerHeight;
 
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.offsetHeight;
-    const scrollY = window.scrollY;
-    const vh = window.innerHeight;
-    console.log({ sectionTop, sectionHeight, scrollY, vh }); // ADD THIS
-    // Progress: 0 when section top hits viewport top, 1 when section bottom leaves
-    const progress = Math.max(0, Math.min(1,
-      (scrollY - sectionTop) / (sectionHeight - vh)
-    ));
-    console.log('progress:', progress, 'phase:', phase); // AND THIS
+      const raw   = (scrollY - sectionTop) / (sectionHeight - vh);
+      const total = Math.max(0, Math.min(1, raw));
 
-    if (progress < 0.33) {
-      setPhase(0);
-      setPhaseProgress(progress / 0.33);
-    } else if (progress < 0.66) {
-      setPhase(1);
-      setPhaseProgress((progress - 0.33) / 0.33);
-    } else {
-      setPhase(2);
-      setPhaseProgress((progress - 0.66) / 0.34);
-    }
-  };
+      setEntered(total > 0);
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll();
-  return () => window.removeEventListener('scroll', handleScroll);
-}, []);
+      const phaseCount = PHASES.length;
+      const sliceSize  = 1 / phaseCount;
+      const phaseIdx   = Math.min(phaseCount - 1, Math.floor(total / sliceSize));
+      const phaseRaw   = (total - phaseIdx * sliceSize) / sliceSize;
 
-  // Visibility helpers
-  const beforeVisible  = phase === 0;
-  const journeyVisible = phase === 1;
-  const afterVisible   = phase === 2;
+      setPhase(phaseIdx);
+      setProgress(Math.max(0, Math.min(1, phaseRaw)));
+    };
 
-  // Transition: fade out at end of its phase, fade in at start
-  const beforeOpacity  = beforeVisible  ? (phaseProgress > 0.75 ? 1 - (phaseProgress - 0.75) / 0.25 : 1) : 0;
-  const journeyOpacity = journeyVisible ? (phaseProgress > 0.75 ? 1 - (phaseProgress - 0.75) / 0.25 : Math.min(1, phaseProgress / 0.2)) : 0;
-  const afterOpacity   = afterVisible   ? Math.min(1, phaseProgress / 0.2) : 0;
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const beforeY  = beforeVisible  ? `${phaseProgress > 0.75 ? -(phaseProgress - 0.75) / 0.25 * 40 : 0}px` : '-40px';
-  const journeyY = journeyVisible ? `${phaseProgress < 0.2 ? (1 - phaseProgress / 0.2) * 30 : phaseProgress > 0.75 ? -(phaseProgress - 0.75) / 0.25 * 30 : 0}px` : '30px';
-  const afterY   = afterVisible   ? `${(1 - Math.min(1, phaseProgress / 0.2)) * 40}px` : '40px';
+  const current = PHASES[phase];
+
+  const panelOpacity = entered
+    ? progress < 0.08
+      ? progress / 0.08
+      : progress > 0.88
+        ? 1 - (progress - 0.88) / 0.12
+        : 1
+    : 1;
 
   return (
     <section className="impact-section" id="impact-section" ref={sectionRef}>
-      {/* Sticky viewport */}
       <div className="impact-sticky">
+        <div
+          className="impact-atmosphere"
+          style={{
+            background: `radial-gradient(circle 50% at 50% 50%, ${current.orbitColor}, transparent 70%)`,
+          }}
+        />
 
-        {/* Progress dots */}
+        {/* Phase navigation dots */}
         <div className="impact-progress">
-          <div className={`progress-dot ${phase >= 0 ? 'active' : ''}`} />
-          <div className="progress-line" style={{ background: phase >= 1 ? '#D4AF37' : 'rgba(255,255,255,0.2)' }} />
-          <div className={`progress-dot ${phase >= 1 ? 'active' : ''}`} />
-          <div className="progress-line" style={{ background: phase >= 2 ? '#D4AF37' : 'rgba(255,255,255,0.2)' }} />
-          <div className={`progress-dot ${phase >= 2 ? 'active' : ''}`} />
+          {PHASES.map((p, i) => (
+            <div key={p.key} className="progress-track">
+              <div
+                className={`progress-dot ${phase === i ? 'active' : phase > i ? 'done' : ''}`}
+                style={
+                  phase === i
+                    ? { borderColor: current.titleColor, background: current.titleColor }
+                    : {}
+                }
+              />
+              {i < PHASES.length - 1 && (
+                <div
+                  className="progress-line"
+                  style={{
+                    background: phase > i ? current.titleColor : 'rgba(255,255,255,0.1)',
+                  }}
+                />
+              )}
+            </div>
+          ))}
         </div>
 
-        {/* ── BEFORE ── */}
-        <div
-          className="impact-panel before-panel"
-          style={{ opacity: beforeOpacity, transform: `translateY(${beforeY})`, pointerEvents: beforeVisible ? 'all' : 'none' }}
-        >
-          <div className="panel-badge before-badge">BEFORE INFINEO</div>
-          <div className="panel-emoji">😟</div>
-          <h3 className="panel-title">Your Child Right Now</h3>
-          <ul className="impact-list">
-            <li className="impact-list-item bad"><span className="list-icon">✗</span>Distracted &amp; Unfocused</li>
-            <li className="impact-list-item bad"><span className="list-icon">✗</span>Screen Addiction</li>
-            <li className="impact-list-item bad"><span className="list-icon">✗</span>Lack of Values</li>
-            <li className="impact-list-item bad"><span className="list-icon">✗</span>Stress &amp; Anxiety</li>
-            <li className="impact-list-item bad"><span className="list-icon">✗</span>Lost in Modern Life</li>
-          </ul>
-          <div className="panel-scroll-hint">Scroll to see the transformation ↓</div>
+        {/* Header */}
+        <div className="impact-header" style={{ opacity: panelOpacity }}>
+          <h2 className="impact-title" style={{ color: current.titleColor }}>
+            {current.title}
+          </h2>
+          <p className="impact-sub">{current.sub}</p>
         </div>
 
-        {/* ── JOURNEY ── */}
-        <div
-          className="impact-panel journey-panel"
-          style={{ opacity: journeyOpacity, transform: `translateY(${journeyY})`, pointerEvents: journeyVisible ? 'all' : 'none' }}
-        >
-          <div className="journey-sparkles">
-            <span>✨</span><span>⭐</span><span>✨</span>
+        {/* Orbital stage */}
+        <div className="orbital-stage" style={{ opacity: panelOpacity }}>
+          <div
+            className="orbit-ring"
+            style={{ borderColor: current.orbitColor }}
+          />
+
+          <div
+            className="orbit-center"
+            style={{
+              background:  current.centerBg,
+              borderColor: current.centerBorder,
+              boxShadow: `0 0 50px ${current.centerBorder}25, inset 0 0 20px ${current.centerBorder}15`,
+            }}
+          >
+            <img
+              src={current.centerImage}
+              alt={current.centerLabel}
+              className="orbit-center-img"
+            />
+            <span
+              className="orbit-center-label"
+              style={{ color: current.centerBorder }}
+            >
+              {current.centerLabel}
+            </span>
           </div>
-          <div className="journey-orb" />
-          <h2 className="journey-title">30-Minute Magical Journey</h2>
-          <p className="journey-sub">With Infineo's 1-on-1 Storytelling Sessions</p>
-          <div className="journey-features">
-            <div className="journey-feat"><span>📖</span>Live storytelling</div>
-            <div className="journey-feat"><span>🎭</span>Interactive roleplay</div>
-            <div className="journey-feat"><span>🏛️</span>Indian mythology</div>
-            <div className="journey-feat"><span>💡</span>Life lessons</div>
-          </div>
-          <div className="journey-arrow">↓ See the result</div>
+
+          {current.bubbles.map((bubble, i) => (
+            <div
+              key={bubble.label}
+              className="orbit-bubble"
+              style={{
+                /* Pass coordinates as CSS custom properties so the
+                   float keyframe can compose on top cleanly */
+                '--bx': `${bubble.x}px`,
+                '--by': `${bubble.y}px`,
+                transform: `translate(calc(-50% + ${bubble.x}px), calc(-50% + ${bubble.y}px))`,
+                animationDelay: `${i * 0.06}s`,
+              }}
+            >
+              <div
+                className="bubble-inner"
+                style={{
+                  background:  `linear-gradient(135deg, rgba(20,32,54,0.75) 0%, rgba(10,18,32,0.90) 100%)`,
+                  borderColor: `${bubble.color}50`,
+                  boxShadow:   `0 4px 24px rgba(0,0,0,0.35), 0 0 12px ${bubble.color}18`,
+                }}
+              >
+                <span
+                  className="bubble-icon"
+                  style={{ textShadow: `0 0 10px ${bubble.color}50` }}
+                >
+                  {bubble.icon}
+                </span>
+                <span className="bubble-label">{bubble.label}</span>
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* ── AFTER ── */}
-        <div
-          className="impact-panel after-panel"
-          style={{ opacity: afterOpacity, transform: `translateY(${afterY})`, pointerEvents: afterVisible ? 'all' : 'none' }}
-        >
-          <div className="panel-badge after-badge">AFTER INFINEO</div>
-          <div className="panel-emoji">😊</div>
-          <h3 className="panel-title">Your Child Transformed</h3>
-          <ul className="impact-list">
-            <li className="impact-list-item good"><span className="list-icon">✓</span>Focused &amp; Engaged</li>
-            <li className="impact-list-item good"><span className="list-icon">✓</span>Mindful Living</li>
-            <li className="impact-list-item good"><span className="list-icon">✓</span>Strong Values</li>
-            <li className="impact-list-item good"><span className="list-icon">✓</span>Calm &amp; Peaceful</li>
-            <li className="impact-list-item good"><span className="list-icon">✓</span>Inspired &amp; Confident</li>
-          </ul>
-          <button className="after-cta">Book Free Trial →</button>
+        {/* CTA zone — fixed height so layout never jolts */}
+        <div className="impact-action-zone">
+          {phase === 2 && (
+            <button
+              className="impact-cta"
+              style={{ opacity: Math.min(1, progress * 4) }}
+            >
+              Book Free Trial →
+            </button>
+          )}
         </div>
-
       </div>
     </section>
   );
-};
-
-export default Impact;
+}

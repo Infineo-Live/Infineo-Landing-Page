@@ -29,6 +29,7 @@ const Title = () => {
 
     nav.addEventListener('mousemove', handleMouseMove);
     nav.addEventListener('mouseleave', handleMouseLeave);
+
     return () => {
       nav.removeEventListener('mousemove', handleMouseMove);
       nav.removeEventListener('mouseleave', handleMouseLeave);
@@ -42,40 +43,69 @@ const Title = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Floating bubbles across the page
+  // useEffect(() => {
+  //   const container = document.getElementById('bubble-container');
+  //   if (!container) return;
+
+  //   const spawn = () => {
+  //     const bubble = document.createElement('span');
+  //     bubble.className = 'hero-bubble';
+  //     const size = Math.random() * 40 + 12;
+  //     bubble.style.cssText = `
+  //       width: ${size}px;
+  //       height: ${size}px;
+  //       left: ${Math.random() * 100}%;
+  //       animation-duration: ${Math.random() * 8 + 6}s;
+  //       animation-delay: ${Math.random() * 2}s;
+  //       opacity: ${Math.random() * 0.35 + 0.08};
+  //     `;
+  //     container.appendChild(bubble);
+  //     bubble.addEventListener('animationend', () => bubble.remove());
+  //   };
+
+  //   const interval = setInterval(spawn, 600);
+  //   return () => clearInterval(interval);
+  // }, []);
+
   return (
-    <header className={`title ${scrolled ? 'title--scrolled' : ''}`}>
-      <img src={Logo} alt="Infineo Logo" className="logo" />
+    <>
+      {/* Floating bubbles layer */}
+      <div id="bubble-container" className="bubble-container" aria-hidden="true" />
 
-      {/* Desktop Nav */}
-      <nav className="title-links" ref={navRef}>
-        {/* Interactive cursor droplet */}
-        <span className="nav-droplet" ref={dropletRef} />
+      <header className={`title ${scrolled ? 'title--scrolled' : ''}`}>
+        <img src={Logo} alt="Infineo Logo" className="logo" />
 
-        <a href="#home">ABOUT</a>
-        <a href="#stories">STORIES</a>
-        <a href="#how">HOW IT WORKS</a>
-        <a href="#curriculum">CURRICULUM</a>
-        <button className="login-btn">BOOK THE DEMO</button>
-      </nav>
+        {/* Desktop Nav */}
+        <nav className="title-links" ref={navRef}>
+          <span className="nav-droplet" ref={dropletRef} />
+          <a href="#home">ABOUT</a>
+          <a href="#stories">IMPACT</a>
+          <a href="#how">NOTE TO PARENTS</a>
+          <a href="#curriculum">CURRICULUM</a>
+          <a href="#pricing">PRICING</a>
+          <button className="login-btn">BOOK THE DEMO</button>
+        </nav>
 
-      {/* Mobile Hamburger */}
-      <button
-        className={`hamburger ${menuOpen ? 'hamburger--open' : ''}`}
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Toggle menu"
-      >
-        <span /><span /><span />
-      </button>
+        {/* Mobile Hamburger */}
+        <button
+          className={`hamburger ${menuOpen ? 'hamburger--open' : ''}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span /><span /><span />
+        </button>
 
-      {/* Mobile Drawer */}
-      <div className={`mobile-menu ${menuOpen ? 'mobile-menu--open' : ''}`}>
-        <a href="#home" onClick={() => setMenuOpen(false)}>ABOUT</a>
-        <a href="#stories" onClick={() => setMenuOpen(false)}>STORIES</a>
-        <a href="#how" onClick={() => setMenuOpen(false)}>HOW IT WORKS</a>
-        <a href="#curriculum" onClick={() => setMenuOpen(false)}>CURRICULUM</a>
-        <button className="login-btn" onClick={() => setMenuOpen(false)}>BOOK THE DEMO</button>
-      </div>
-    </header>
+        {/* Mobile Drawer */}
+        <div className={`mobile-menu ${menuOpen ? 'mobile-menu--open' : ''}`}>
+          <a href="#home" onClick={() => setMenuOpen(false)}>ABOUT</a>
+          <a href="#stories" onClick={() => setMenuOpen(false)}>STORIES</a>
+          <a href="#how" onClick={() => setMenuOpen(false)}>HOW IT WORKS</a>
+          <a href="#curriculum" onClick={() => setMenuOpen(false)}>CURRICULUM</a>
+          <button className="login-btn" onClick={() => setMenuOpen(false)}>BOOK THE DEMO</button>
+        </div>
+      </header>
+    </>
   );
 };
 

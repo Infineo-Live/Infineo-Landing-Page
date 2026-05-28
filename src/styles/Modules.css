@@ -6,49 +6,51 @@
   position: relative;
   width: 100%;
   height: 100vh;
-  padding: 50px 30px;
-  background: linear-gradient(
-    180deg,
-    #d4e8f0 0%,
-    #e8f4f8 50%,
-    #f4f9fc 100%
-  );
+  padding: 40px 30px 30px;
+  background: linear-gradient(180deg, #0f2744 0%, #0f2d3f 50%, #0a1c32 100%);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   box-sizing: border-box;
 }
 
-/* Header */
+/* ─── Header ────────────────────────────────────────────── */
 .modules-header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   flex-shrink: 0;
 }
 
 .modules-header h2 {
   font-family: 'Cinzel', serif;
-  font-size: 52px;
+  font-size: clamp(32px, 4vw, 52px);
   font-weight: 900;
-  color: #0f2d3f;
-  margin: 0 0 8px;
+  color: #ffe344;
+  margin: 0 0 6px;
   letter-spacing: 2px;
 }
 
 .modules-header p {
   font-family: 'Nunito', sans-serif;
-  font-size: 18px;
+  font-size: clamp(14px, 1.5vw, 18px);
   color: #d4af37;
   font-weight: 600;
   margin: 0;
 }
 
-/* Scroll Container */
+/* ─── Scroll Container ──────────────────────────────────── */
+/*
+ * flex: 1 so it fills whatever height remains after the header.
+ * min-height: 0 is required — without it a flex child refuses to
+ * shrink below its content height and the container overflows.
+ */
 .modules-single-view-container {
   flex: 1;
+  min-height: 0;
   width: 100%;
-  max-width: 1500px;
-  margin: 0 auto;
+  /* Leave right gutter for the side navigator (≈140px) */
+  max-width: calc(100% - 160px);
+  margin: 0 auto 0 0;
   overflow-y: auto;
   overflow-x: hidden;
   scroll-snap-type: y mandatory;
@@ -60,10 +62,15 @@
   display: none;
 }
 
-/* Stage */
+/* ─── Stage (one per module) ────────────────────────────── */
 .focused-module-stage {
   width: 100%;
-  min-height: 760px;
+  /*
+   * Fill the scroll container viewport so snap works reliably.
+   * 100% here means 100% of the scroll container's height, which
+   * is already clamped by flex: 1 / min-height: 0 above.
+   */
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,9 +78,11 @@
   scroll-snap-stop: always;
   transition:
     transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.6s ease;
+    opacity   0.6s ease;
   opacity: 0.45;
-  transform: scale(0.95);
+  transform: scale(0.96);
+  padding: 12px 0;
+  box-sizing: border-box;
 }
 
 .focused-module-stage.is-active {
@@ -81,50 +90,52 @@
   transform: scale(1);
 }
 
-/* Card */
+/* ─── Card ──────────────────────────────────────────────── */
 .module-presentation-card {
   width: 95%;
-  min-height: 680px;
-  padding: 70px;
-  border-radius: 38px;
+  padding: 48px 56px;
+  border-radius: 32px;
   background: #f8f1de;
-  border-top: 8px solid #d4af37;
-
+  border-top: 7px solid #d4af37;
   box-shadow:
-    0 35px 80px rgba(15, 45, 63, 0.12),
-    inset 0 1px 0 rgba(255,255,255,0.7);
+    0 24px 60px rgba(15, 45, 63, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  box-sizing: border-box;
 }
 
-/* Layout */
+/* ─── Layout inside card ────────────────────────────────── */
+/*
+ * Single column — the JSX no longer renders .module-right-lessons,
+ * so drop the two-column grid entirely.
+ */
 .module-main-content {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 70px;
+  display: flex;
   align-items: center;
+  gap: 0;
 }
 
-/* Left */
+/* Left: image + text side by side */
 .module-left-details {
   display: flex;
   align-items: center;
-  gap: 50px;
+  gap: 44px;
+  width: 100%;
 }
 
-/* Image */
+/* ─── Image ─────────────────────────────────────────────── */
 .module-image-wrapper {
   position: relative;
   flex-shrink: 0;
-  width: 240px;
-  height: 240px;
+  width: 200px;
+  height: 200px;
 }
 
 .module-god-image {
-  width: 240px;
-  height: 240px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   object-position: top center;
-  border-radius: 50%;
-  border: 5px solid #d4af37;
+  border-radius: 12px;
   position: relative;
   z-index: 1;
   display: block;
@@ -132,14 +143,33 @@
 
 .module-image-glow {
   position: absolute;
-  inset: -15px;
-  border-radius: 50%;
-  opacity: 0.15;
-  filter: blur(30px);
+  inset: -12px;
+  border-radius: 20px;
+  opacity: 0.18;
+  filter: blur(28px);
   z-index: 0;
 }
 
-/* Text */
+/* Star accent below image */
+.module-image-wrapper::after {
+  content: '✦';
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  color: #d4af37;
+  opacity: 0.7;
+  animation: floatStar 3s ease-in-out infinite;
+  z-index: 2;
+}
+
+@keyframes floatStar {
+  0%, 100% { transform: translateX(-50%) translateY(0);    opacity: 0.7; }
+  50%       { transform: translateX(-50%) translateY(-7px); opacity: 1;   }
+}
+
+/* ─── Text Block ────────────────────────────────────────── */
 .module-text-block {
   display: flex;
   flex-direction: column;
@@ -148,97 +178,39 @@
 
 .module-title {
   font-family: 'Cinzel', serif;
-  font-size: 48px;
+  font-size: clamp(32px, 3.5vw, 46px);
   font-weight: 900;
   color: #0f2d3f;
-  margin: 0 0 8px;
+  margin: 0 0 6px;
 }
 
 .module-subtitle {
   font-family: 'Nunito', sans-serif;
-  font-size: 18px;
+  font-size: clamp(15px, 1.4vw, 18px);
   color: #d4af37;
   font-style: italic;
   font-weight: 700;
-  margin-bottom: 18px;
+  margin: 0 0 16px;
 }
 
 .module-description {
   font-family: 'Nunito', sans-serif;
-  font-size: 18px;
+  font-size: clamp(15px, 1.3vw, 17px);
   color: #1b4965;
-  line-height: 1.9;
-  max-width: 650px;
-  margin-bottom: 28px;
+  line-height: 1.85;
+  max-width: 600px;
+  margin: 0;
 }
 
-/* CTA */
-.module-cta {
-  padding: 16px 34px;
-  border: none;
-  border-radius: 14px;
-  background: #d4af37;
-  font-family: 'Cinzel', serif;
-  font-size: 14px;
-  font-weight: 700;
-  color: white;
-  cursor: pointer;
-  transition: 0.25s ease;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.module-cta:hover {
-  transform: translateY(-2px);
-}
-
-/* Lessons */
-.module-right-lessons {
-  padding: 40px;
-  min-height: 420px;
-  border-left: 5px solid #d4af37;
-  border-radius: 24px;
-  background: rgba(255,255,255,0.45);
-  backdrop-filter: blur(10px);
-}
-
-.module-right-lessons h4 {
-  font-family: 'Cinzel', serif;
-  font-size: 18px;
-  color: #0f2d3f;
-  margin-bottom: 22px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.lesson-item {
-  font-family: 'Nunito', sans-serif;
-  font-size: 17px;
-  color: #1b4965;
-  margin: 18px 0;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.lesson-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #d4af37;
-  flex-shrink: 0;
-}
-
-/* Side Navigator */
+/* ─── Side Navigator ────────────────────────────────────── */
 .modules-side-navigator {
   position: absolute;
-  right: 40px;
+  right: 32px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
   z-index: 10;
 }
 
@@ -246,28 +218,32 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 12px;
+  gap: 10px;
   background: none;
   border: none;
   cursor: pointer;
+  padding: 0;
 }
 
 .nav-row-dot {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: #cbd5e1;
-  transition: 0.3s ease;
+  background: rgba(255, 255, 255, 0.3);
+  transition: background 0.3s ease, transform 0.3s ease;
+  flex-shrink: 0;
 }
 
 .nav-row-label {
   font-family: 'Cinzel', serif;
   font-size: 13px;
   font-weight: 700;
-  color: #7a92a0;
+  /* Always light so it reads on the dark section background */
+  color: #f8edc8;
   opacity: 0;
-  transform: translateX(10px);
-  transition: 0.3s ease;
+  transform: translateX(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
 }
 
 .nav-row-item:hover .nav-row-label,
@@ -278,50 +254,49 @@
 
 .nav-row-item.active .nav-row-dot {
   background: #d4af37;
-  transform: scale(1.5);
+  transform: scale(1.6);
+  box-shadow: 0 0 8px #d4af3780;
 }
 
+/* Active label stays light — fix original dark color bug */
 .nav-row-item.active .nav-row-label {
-  color: #0f2d3f;
+  color: #ffe344;
 }
 
-/* Responsive */
+/* ─── Responsive ────────────────────────────────────────── */
 @media (max-width: 1100px) {
-  .module-main-content {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .module-left-details {
-    flex-direction: column;
-    align-items: flex-start;
+  .modules-single-view-container {
+    max-width: 100%;
   }
 
   .modules-side-navigator {
     display: none;
   }
 
-  .module-presentation-card {
-    padding: 40px;
+  .module-left-details {
+    gap: 28px;
   }
 
-  .module-title {
-    font-size: 36px;
+  .module-presentation-card {
+    padding: 36px 32px;
   }
 }
 
 @media (max-width: 768px) {
+  .module-left-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
   .module-image-wrapper,
   .module-god-image {
-    width: 160px;
-    height: 160px;
+    width: 150px;
+    height: 150px;
   }
 
-  .modules-header h2 {
-    font-size: 38px;
-  }
-
-  .module-description {
-    font-size: 16px;
+  .module-presentation-card {
+    padding: 28px 22px;
+    border-radius: 22px;
   }
 }
