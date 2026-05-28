@@ -20,6 +20,7 @@
   inset: 0;
   background: url('../assets/bg.png') no-repeat center center / cover;
   z-index: 0;
+  opacity: 0.25;
 }
 
 /* Warm dark vignette overlay — dims background, keeps image atmospheric */
@@ -27,7 +28,7 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 50% 50%, rgba(10, 20, 40, 0.35) 0%, rgba(10, 20, 40, 0.65) 100%);
+    radial-gradient(ellipse at 50% 50%, rgba(17, 43, 71, 0.5) 0%, rgba(13, 30, 50, 0.75) 100%);
   z-index: 1;
 }
 
@@ -38,21 +39,21 @@
   max-width: 1380px;
   width: 100%;
   padding: 64px 72px 56px;
-  background: rgba(255, 252, 245, 0.97);
+  background: linear-gradient(180deg, #1a3d56 0%, #0d1e32 100%);
   border-radius: 4px;
   box-shadow:
-    0 2px 0 #C9A84C,          /* thin gold top accent */
-    0 40px 80px rgba(0, 0, 0, 0.45),
-    0 8px 24px rgba(0, 0, 0, 0.25),
-    inset 0 0 0 1px rgba(201, 168, 76, 0.18);
+    0 2px 0 #be8c4a,          /* thin gold top accent */
+    0 40px 80px rgba(0, 0, 0, 0.55),
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(190, 140, 74, 0.15);
   box-sizing: border-box;
 
   /* Subtle aged-paper texture via gradient */
   background-image:
     linear-gradient(
       160deg,
-      rgba(255, 252, 245, 0.98) 0%,
-      rgba(255, 248, 230, 0.96) 100%
+      rgba(26, 61, 86, 0.98) 0%,
+      rgba(13, 30, 50, 0.96) 100%
     );
 }
 
@@ -79,7 +80,7 @@
 /* ── Heart ── */
 .letter-heart {
   font-size: 28px;
-  color: #C9A84C;
+  color: #e7b860;
   display: block;
   text-align: center;
   margin-bottom: 10px;
@@ -96,7 +97,7 @@
   font-family: 'Cinzel', serif;
   font-size: 32px;
   font-weight: 800;
-  color: #1A2840;
+  color: #e8eef7;
   text-align: center;
   margin: 0 0 32px;
   letter-spacing: 2px;

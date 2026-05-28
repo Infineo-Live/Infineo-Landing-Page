@@ -5,7 +5,7 @@ import Parents from "./components/Parents"
 import Modules from "./components/Modules"
 import DemoClass from "./components/DemoClass"
 import Pricing from "./components/Pricing"
-import FAQ from "./components/FAQ"
+import FloatingChatbot from "./components/FloatingChatbot"
 import Footer from "./components/Footer"
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
     <Modules/>
     <DemoClass/>
     <Pricing/>
-    <FAQ/>
+    <FloatingChatbot/>
     <Footer/>
     </>
   )

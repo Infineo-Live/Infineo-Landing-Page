@@ -5,7 +5,7 @@
   position: relative;
   width: 100%;
   height: 380vh;
-  background: #050a14;
+  background: #0d1e32;
 }
 
 /* ─── Sticky Viewport Container ─────────────────────── */
@@ -61,6 +61,7 @@
   letter-spacing: 4px;
   margin: 0 0 10px;
   transition: color 0.5s ease;
+  color: #e7b860;
 }
 
 .impact-sub {
@@ -97,7 +98,7 @@
   width: 380px;
   height: 380px;
   border-radius: 50%;
-  border: 1.5px dashed rgba(255, 255, 255, 0.18);
+  border: 1.5px dashed rgba(255, 255, 255, 0.15);
   animation: orbitSpin 60s linear infinite;
   transition: border-color 0.5s ease;
   pointer-events: none;
@@ -148,6 +149,7 @@
   white-space: nowrap;
   transition: color 0.5s ease;
   text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+  color: #e7b860;
 }
 
 /* ─── Orbiting Bubbles ────────────────────────────────── */
@@ -204,7 +206,7 @@
 
 .bubble-inner:hover {
   transform: scale(1.07) translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.55) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
 @keyframes bubbleFloat {
@@ -243,13 +245,13 @@
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #0b1325;
-  background: linear-gradient(135deg, #e5c158 0%, #fef093 50%, #c2912e 100%);
+  color: #112b47;
+  background: linear-gradient(135deg, #be8c4a 0%, #e7b860 50%, #e4aa33 100%);
   border: none;
   padding: 16px 44px;
   border-radius: 50px;
   cursor: pointer;
-  box-shadow: 0 8px 28px rgba(229, 193, 88, 0.32);
+  box-shadow: 0 8px 28px rgba(190, 140, 74, 0.32);
   transition:
     transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 0.3s ease,
@@ -258,7 +260,7 @@
 
 .impact-cta:hover {
   transform: translateY(-4px);
-  box-shadow: 0 14px 36px rgba(229, 193, 88, 0.48);
+  box-shadow: 0 14px 36px rgba(190, 140, 74, 0.48);
 }
 
 /* ─── Progress Dots ───────────────────────────────────── */
