@@ -322,9 +322,9 @@
   gap: 30px;
   margin-bottom: 80px;
   padding: 50px;
-  background: white;
+  background: var(--bg-card);
   border-radius: 15px;
-  box-shadow: 0 10px 40px rgba(15, 45, 63, 0.08);
+  box-shadow: 0 10px 40px rgba(190, 199, 204, 0.08);
   animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
@@ -344,7 +344,7 @@
 .info-item h4 {
   font-family: 'Cinzel', serif;
   font-size: 16px;
-  color: #0F2D3F;
+  color: var(--text-primary);
   margin-bottom: 8px;
   font-weight: 600;
 }
@@ -352,7 +352,7 @@
 .info-item p {
   font-family: 'Nunito', sans-serif;
   font-size: 13px;
-  color: #1B4965;
+  color: var(--text-secondary);
   line-height: 1.5;
   opacity: 0.8;
 }
@@ -361,7 +361,7 @@
 .pricing-cta {
   text-align: center;
   padding: 60px;
-  background: linear-gradient(135deg, rgba(15, 45, 63, 0.05), rgba(212, 175, 55, 0.08));
+  background: var(--bg-card);
   border-radius: 15px;
   animation: fadeInUp 0.8s ease-out 0.4s both;
 }
@@ -369,7 +369,7 @@
 .pricing-cta h3 {
   font-family: 'Cinzel', serif;
   font-size: 36px;
-  color: #0F2D3F;
+  color: var(--text-primary);
   margin-bottom: 10px;
   font-weight: 700;
 }
@@ -377,7 +377,7 @@
 .pricing-cta p {
   font-family: 'Nunito', sans-serif;
   font-size: 16px;
-  color: #1B4965;
+  color: var(--text-secondary);
   margin-bottom: 30px;
 }
 

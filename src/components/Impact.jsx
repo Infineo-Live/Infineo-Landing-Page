@@ -15,41 +15,32 @@ function orbitalBubbles(items, radiusPx, startAngle = -90) {
   });
 }
 
-const PROBLEMS = orbitalBubbles(
-  [
-    { label: 'Screen Addiction', icon: '📱', color: '#FF6B6B' },
-    { label: 'Distracted Mind', icon: '🌪️', color: '#FF8C42' },
-    { label: 'Lack of Values',  icon: '❌', color: '#E05C5C' },
-    { label: 'Stress & Anxiety',icon: '😰', color: '#C94040' },
-    { label: 'Lost Identity',   icon: '🫥', color: '#FF7070' },
-    { label: 'Poor Focus',      icon: '🙈', color: '#E07070' },
-  ],
-  190
-);
+const PROBLEMS = orbitalBubbles([
+  { label: 'Screen Addiction', icon: '📱', color: '#FF6B6B' },
+  { label: 'Distracted Mind', icon: '🌪️', color: '#FF8C42' },
+  { label: 'Lack of Values',  icon: '❌', color: '#E05C5C' },
+  { label: 'Stress & Anxiety',icon: '😰', color: '#C94040' },
+  { label: 'Lost Identity',   icon: '🫥', color: '#FF7070' },
+  { label: 'Poor Focus',      icon: '🙈', color: '#E07070' },
+], 190);
 
-const INFINEO = orbitalBubbles(
-  [
-    { label: 'Live Storytelling', icon: '📖', color: '#D4AF37' },
-    { label: '1-on-1 Sessions',   icon: '🎭', color: '#C9973A' },
-    { label: 'Indian Mythology',  icon: '🏛️', color: '#E8C84A' },
-    { label: 'Life Lessons',      icon: '💡', color: '#D4AF37' },
-    { label: 'Expert Guides',     icon: '🧙', color: '#C9973A' },
-    { label: '30-Min Magic',      icon: '⏳', color: '#E8C84A' },
-  ],
-  190
-);
+const INFINEO = orbitalBubbles([
+  { label: 'Live Storytelling', icon: '📖', color: '#D4AF37' },
+  { label: '1-on-1 Sessions',   icon: '🎭', color: '#C9973A' },
+  { label: 'Indian Mythology',  icon: '🏛️', color: '#E8C84A' },
+  { label: 'Life Lessons',      icon: '💡', color: '#D4AF37' },
+  { label: 'Expert Guides',     icon: '🧙', color: '#C9973A' },
+  { label: '30-Min Magic',      icon: '⏳', color: '#E8C84A' },
+], 190);
 
-const RESULTS = orbitalBubbles(
-  [
-    { label: 'Deep Focus',       icon: '🎯', color: '#4ADE80' },
-    { label: 'Strong Values',    icon: '🌟', color: '#34D399' },
-    { label: 'Calm & Peaceful',  icon: '🧘', color: '#6EE7B7' },
-    { label: 'Inspired Daily',   icon: '🚀', color: '#4ADE80' },
-    { label: 'Kind & Empathetic',icon: '💚', color: '#34D399' },
-    { label: 'Self-Confident',   icon: '🦁', color: '#6EE7B7' },
-  ],
-  190
-);
+const RESULTS = orbitalBubbles([
+  { label: 'Deep Focus',       icon: '🎯', color: '#4ADE80' },
+  { label: 'Strong Values',    icon: '🌟', color: '#34D399' },
+  { label: 'Calm & Peaceful',  icon: '🧘', color: '#6EE7B7' },
+  { label: 'Inspired Daily',   icon: '🚀', color: '#4ADE80' },
+  { label: 'Kind & Empathetic',icon: '💚', color: '#34D399' },
+  { label: 'Self-Confident',   icon: '🦁', color: '#6EE7B7' },
+], 190);
 
 const PHASES = [
   {
@@ -67,7 +58,7 @@ const PHASES = [
   {
     key: 'infineo',
     centerImage: neoMascot,
-    centerLabel: 'Neo',
+    centerLabel: 'Neo (Guru)',
     centerBg: 'rgba(212,175,55,0.12)',
     centerBorder: '#D4AF37',
     title: 'The Infineo Way',
@@ -92,9 +83,10 @@ const PHASES = [
 
 export default function Impact() {
   const sectionRef = useRef(null);
-  const [phase, setPhase]     = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [entered, setEntered] = useState(false);
+  const [phase, setPhase] = useState(0);
+  const [progress, setProgress] = useState(0); // Value from 0 to 1 inside current phase
+  const [overallProgress, setOverallProgress] = useState(0); // Value from 0 to 1 for entire section
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -107,15 +99,22 @@ export default function Impact() {
 
       const raw   = (scrollY - sectionTop) / (sectionHeight - vh);
       const total = Math.max(0, Math.min(1, raw));
-
-      setEntered(total > 0);
+      
+      setOverallProgress(total);
 
       const phaseCount = PHASES.length;
       const sliceSize  = 1 / phaseCount;
       const phaseIdx   = Math.min(phaseCount - 1, Math.floor(total / sliceSize));
       const phaseRaw   = (total - phaseIdx * sliceSize) / sliceSize;
 
-      setPhase(phaseIdx);
+      setPhase((prev) => {
+        if (prev !== phaseIdx) {
+          setIsTransitioning(true);
+          setTimeout(() => setIsTransitioning(false), 350);
+        }
+        return phaseIdx;
+      });
+      
       setProgress(Math.max(0, Math.min(1, phaseRaw)));
     };
 
@@ -125,64 +124,76 @@ export default function Impact() {
   }, []);
 
   const current = PHASES[phase];
+  const panelOpacity = progress < 0.08 ? progress / 0.08 : progress > 0.88 ? 1 - (progress - 0.88) / 0.12 : 1;
 
-  const panelOpacity = entered
-    ? progress < 0.08
-      ? progress / 0.08
-      : progress > 0.88
-        ? 1 - (progress - 0.88) / 0.12
-        : 1
-    : 1;
+  // SVG circular measurements (Radius = 190, Diameter = 380)
+  const radius = 190;
+  const circumference = 2 * Math.PI * radius; // ~1193.8
+  // Compute how much of the circular arc path needs to light up based on scrolling progress
+  const strokeDashoffset = circumference - progress * circumference;
 
   return (
-    <section className="impact-section" id="impact-section" ref={sectionRef}>
+    <section className="impact-section" ref={sectionRef} data-phase={current.key}>
       <div className="impact-sticky">
         <div
           className="impact-atmosphere"
-          style={{
-            background: `radial-gradient(circle 50% at 50% 50%, ${current.orbitColor}, transparent 70%)`,
-          }}
+          style={{ background: `radial-gradient(circle 50% at 50% 50%, ${current.orbitColor}, transparent 70%)` }}
         />
 
-        {/* Phase navigation dots */}
+        {/* Global Progress Connecting Track */}
         <div className="impact-progress">
           {PHASES.map((p, i) => (
             <div key={p.key} className="progress-track">
               <div
                 className={`progress-dot ${phase === i ? 'active' : phase > i ? 'done' : ''}`}
-                style={
-                  phase === i
-                    ? { borderColor: current.titleColor, background: current.titleColor }
-                    : {}
-                }
+                style={phase === i ? { borderColor: current.titleColor, background: current.titleColor } : {}}
               />
               {i < PHASES.length - 1 && (
                 <div
                   className="progress-line"
-                  style={{
-                    background: phase > i ? current.titleColor : 'rgba(255,255,255,0.1)',
-                  }}
+                  style={{ background: phase > i ? current.titleColor : 'rgba(255,255,255,0.1)' }}
                 />
               )}
             </div>
           ))}
         </div>
 
-        {/* Header */}
-        <div className="impact-header" style={{ opacity: panelOpacity }}>
+        {/* Header content section */}
+        <div className={`impact-header ${isTransitioning ? 'swapping' : ''}`} style={{ opacity: panelOpacity }}>
           <h2 className="impact-title" style={{ color: current.titleColor }}>
             {current.title}
           </h2>
           <p className="impact-sub">{current.sub}</p>
         </div>
 
-        {/* Orbital stage */}
-        <div className="orbital-stage" style={{ opacity: panelOpacity }}>
-          <div
-            className="orbit-ring"
-            style={{ borderColor: current.orbitColor }}
-          />
+        {/* Structural Canvas Block */}
+        <div className={`orbital-stage ${isTransitioning ? 'swapping' : ''}`} style={{ opacity: panelOpacity }}>
+          
+          {/* SVG Animated Path Layer */}
+          <svg className="orbit-svg-canvas" viewBox="0 0 500 500">
+            {/* Background Base Ring */}
+            <circle
+              cx="250"
+              cy="250"
+              r={radius}
+              className="orbit-svg-base-ring"
+              style={{ stroke: current.orbitColor }}
+            />
+            {/* Active Drawing Path */}
+            <circle
+              cx="250"
+              cy="250"
+              r={radius}
+              className="orbit-svg-active-path"
+              style={{
+                stroke: current.titleColor,
+                strokeDasharray: circumference,
+                strokeDashoffset: strokeDashoffset,
+              }}
+            />
+          </svg>
 
+          {/* Central Avatar */}
           <div
             className="orbit-center"
             style={{
@@ -191,62 +202,54 @@ export default function Impact() {
               boxShadow: `0 0 50px ${current.centerBorder}25, inset 0 0 20px ${current.centerBorder}15`,
             }}
           >
-            <img
-              src={current.centerImage}
-              alt={current.centerLabel}
-              className="orbit-center-img"
-            />
-            <span
-              className="orbit-center-label"
-              style={{ color: current.centerBorder }}
-            >
+            <img src={current.centerImage} alt={current.centerLabel} className="orbit-center-img" />
+            <span className="orbit-center-label" style={{ color: current.centerBorder }}>
               {current.centerLabel}
             </span>
           </div>
 
-          {current.bubbles.map((bubble, i) => (
-            <div
-              key={bubble.label}
-              className="orbit-bubble"
-              style={{
-                /* Pass coordinates as CSS custom properties so the
-                   float keyframe can compose on top cleanly */
-                '--bx': `${bubble.x}px`,
-                '--by': `${bubble.y}px`,
-                transform: `translate(calc(-50% + ${bubble.x}px), calc(-50% + ${bubble.y}px))`,
-                animationDelay: `${i * 0.06}s`,
-              }}
-            >
-              <div
-                className="bubble-inner"
-                style={{
-                  background:  `linear-gradient(135deg, rgba(20,32,54,0.75) 0%, rgba(10,18,32,0.90) 100%)`,
-                  borderColor: `${bubble.color}50`,
-                  boxShadow:   `0 4px 24px rgba(0,0,0,0.35), 0 0 12px ${bubble.color}18`,
-                }}
-              >
-                <span
-                  className="bubble-icon"
-                  style={{ textShadow: `0 0 10px ${bubble.color}50` }}
-                >
-                  {bubble.icon}
-                </span>
-                <span className="bubble-label">{bubble.label}</span>
-              </div>
-            </div>
-          ))}
+          {/* Context Bubble Map */}
+{/* Context Bubble Map */}
+{current.bubbles.map((bubble, i) => {
+  const fractionStep = 1 / current.bubbles.length;
+  const isBubbleActive = progress >= i * fractionStep;
+
+  return (
+    <div
+      key={bubble.label}
+      className={`orbit-bubble ${isBubbleActive ? 'revealed' : ''}`}
+      style={{
+        /* This combines the structural -50% centering shift with your 
+          calculated X/Y variables directly inside a single property
+        */
+        transform: `translate(calc(-50% + ${bubble.x}px), calc(-50% + ${bubble.y}px))`,
+      }}
+    >
+      <div
+        className="bubble-inner"
+        style={{
+          background: `linear-gradient(135deg, rgba(20,32,54,0.8) 0%, rgba(10,18,32,0.95) 100%)`,
+          borderColor: isBubbleActive ? bubble.color : 'rgba(255,255,255,0.1)',
+          boxShadow: isBubbleActive 
+            ? `0 4px 24px rgba(0,0,0,0.4), 0 0 12px ${bubble.color}25`
+            : `0 4px 12px rgba(0,0,0,0.2)`,
+        }}
+      >
+        <span className="bubble-icon" style={{ textShadow: isBubbleActive ? `0 0 10px ${bubble.color}50` : 'none' }}>
+          {bubble.icon}
+        </span>
+        <span className="bubble-label">{bubble.label}</span>
+      </div>
+    </div>
+  );
+})}
         </div>
 
-        {/* CTA zone — fixed height so layout never jolts */}
+        {/* Bottom CTA Block */}
         <div className="impact-action-zone">
-          {phase === 2 && (
-            <button
-              className="impact-cta"
-              style={{ opacity: Math.min(1, progress * 4) }}
-            >
-              Book Free Trial →
-            </button>
-          )}
+          <button className={`impact-cta ${phase === 2 ? 'visible' : ''}`}>
+            Book Free Trial →
+          </button>
         </div>
       </div>
     </section>

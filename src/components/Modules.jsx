@@ -7,15 +7,15 @@ import krishnaImg from '../assets/gods/krishna.png';
 import shivaImg from '../assets/gods/shiv.png';
 import ramImg from '../assets/gods/ram.png';
 const MODULES = [
-  { id: 1, name: 'Ganesha',     subtitle: 'The Remover of Obstacles',      image: ganeshaImg, x: 10,  y: 20,  comingSoon: false },
-  { id: 2, name: 'Hanuman',     subtitle: 'The Symbol of Strength',         image: hanumanImg, x: 32,  y: 55,  comingSoon: false },
-  { id: 3, name: 'Krishna',     subtitle: 'The Divine Teacher',             image: krishnaImg, x: 55,  y: 18,  comingSoon: false },
-  { id: 4, name: 'Ram',         subtitle: 'The Prince of Dharma',           image: ramImg,       x: 75,  y: 52,  comingSoon: false },
-  { id: 5, name: 'Shiva',       subtitle: 'The Great Protector',            image: shivaImg,   x: 90,  y: 20,  comingSoon: false },
-  { id: 6, name: 'Shakti',      subtitle: 'The Divine Feminine Power',      image: null,       x: 100,  y: 80,  comingSoon: false },
-  { id: 7, name: 'Vishnu',      subtitle: 'The Preserver of the Universe',  image: null,       x: 45,  y: 88,  comingSoon: false },
-  { id: 8, name: 'Ramayana',    subtitle: "Epic of Lord Ram's Journey",     image: null,       x: 20,  y: 82,  comingSoon: true  },
-  { id: 9, name: 'Mahabharata', subtitle: 'The Epic of Duty & Wisdom',      image: null,       x: 2,  y: 78,  comingSoon: true  },
+  { id: 1, name: 'Ganesha', subtitle: 'The Remover of Obstacles', image: ganeshaImg, x: 0, y: 20, comingSoon: false },
+  { id: 2, name: 'Hanuman', subtitle: 'The Symbol of Strength', image: hanumanImg, x: 24, y: 50, comingSoon: false },
+  { id: 3, name: 'Krishna', subtitle: 'The Divine Teacher', image: krishnaImg, x: 50, y: 22, comingSoon: false },
+  { id: 4, name: 'Ram', subtitle: 'The Prince of Dharma', image: ramImg, x: 65, y: 36, comingSoon: false },
+  { id: 5, name: 'Shiva', subtitle: 'The Great Protector', image: shivaImg, x: 100, y: 40, comingSoon: false },
+  { id: 6, name: 'Shakti', subtitle: 'The Divine Feminine Power', image: null, x: 90, y: 80, comingSoon: false },
+  { id: 7, name: 'Vishnu', subtitle: 'The Preserver of the Universe', image: null, x: 44, y: 89, comingSoon: false },
+  { id: 8, name: 'Ramayana', subtitle: "Epic of Lord Ram's Journey", image: null, x: 10, y: 82, comingSoon: true },
+  { id: 9, name: 'Mahabharata', subtitle: 'The Epic of Duty & Wisdom', image: null, x: -2, y: 80, comingSoon: true },
 ];
 
 function buildPath(modules) {

@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Nunito:wght@400;600;700;800&display=swap');
+
+/* ─── Section ────────────────────────────────────────── */
 .faq-section {
   padding: 80px 20px;
-  background: linear-gradient(180deg, #FAFBFC 0%, #F9FBFF 100%);
+  background: var(--bg-primary);
   min-height: 100vh;
 }
 
@@ -9,7 +12,7 @@
   margin: 0 auto;
 }
 
-/* Header */
+/* ─── Header ─────────────────────────────────────────── */
 .faq-header {
   text-align: center;
   margin-bottom: 60px;
@@ -20,7 +23,7 @@
   font-family: 'Cinzel', serif;
   font-size: 48px;
   font-weight: 700;
-  color: #0F2D3F;
+  color: var(--text-primary);
   margin-bottom: 10px;
   line-height: 1.2;
 }
@@ -28,11 +31,10 @@
 .faq-subtitle {
   font-family: 'Nunito', sans-serif;
   font-size: 18px;
-  color: #1B4965;
-  opacity: 0.8;
+  color: var(--text-secondary);
 }
 
-/* Content Layout */
+/* ─── Content Layout ─────────────────────────────────── */
 .faq-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -40,7 +42,7 @@
   align-items: start;
 }
 
-/* Accordion Side */
+/* ─── Accordion Side ─────────────────────────────────── */
 .faq-accordion-side {
   animation: slideInLeft 0.8s ease-out;
 }
@@ -52,23 +54,23 @@
 }
 
 .accordion-item {
-  background: white;
-  border-radius: 12px;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(15, 45, 63, 0.08);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-secondary);
   transition: all 0.3s ease;
-  border: 2px solid transparent;
 }
 
 .accordion-item:hover {
-  box-shadow: 0 8px 25px rgba(15, 45, 63, 0.12);
-  border-color: rgba(212, 175, 55, 0.2);
+  border-color: var(--border-primary);
+  box-shadow: var(--card-shadow), var(--gold-glow);
 }
 
 .accordion-header {
   width: 100%;
   padding: 20px;
-  background: linear-gradient(135deg, #FAFBFC 0%, #F9FBFF 100%);
+  background: var(--bg-card);
   border: none;
   cursor: pointer;
   display: flex;
@@ -79,17 +81,17 @@
 }
 
 .accordion-header:hover {
-  background: linear-gradient(135deg, #F5F8FC 0%, #F3F7FF 100%);
+  background: var(--bg-secondary);
 }
 
 .accordion-header.active {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(27, 73, 101, 0.05));
-  border-bottom: 2px solid #D4AF37;
+  background: var(--bg-secondary);
+  border-bottom: 2px solid var(--accent-primary);
 }
 
 .accordion-question {
   font-weight: 600;
-  color: #0F2D3F;
+  color: var(--text-primary);
   text-align: left;
   font-size: 15px;
   line-height: 1.5;
@@ -97,7 +99,7 @@
 
 .accordion-icon {
   font-size: 24px;
-  color: #D4AF37;
+  color: var(--accent-primary);
   font-weight: 300;
   min-width: 30px;
   text-align: center;
@@ -105,59 +107,53 @@
 }
 
 .accordion-header.active .accordion-icon {
-  color: #0F2D3F;
+  color: var(--text-primary);
 }
 
 .accordion-content {
   padding: 20px;
-  background: white;
-  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-secondary);
   animation: slideDown 0.3s ease-out;
 }
 
 .accordion-content p {
   font-family: 'Nunito', sans-serif;
   font-size: 14px;
-  color: #1B4965;
+  color: var(--text-secondary);
   line-height: 1.7;
   margin: 0;
 }
 
 @keyframes slideDown {
-  from {
-    opacity: 0;
-    max-height: 0;
-  }
-  to {
-    opacity: 1;
-    max-height: 500px;
-  }
+  from { opacity: 0; max-height: 0; }
+  to   { opacity: 1; max-height: 500px; }
 }
 
-/* Chatbot Side */
+/* ─── Chatbot ─────────────────────────────────────────── */
 .neo-chatbot {
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 10px 40px rgba(15, 45, 63, 0.1);
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 700px;
   animation: slideInRight 0.8s ease-out;
-  border: 2px solid transparent;
+  border: 1px solid var(--border-secondary);
   transition: all 0.3s ease;
 }
 
 .neo-chatbot:hover {
-  border-color: rgba(212, 175, 55, 0.3);
-  box-shadow: 0 15px 50px rgba(15, 45, 63, 0.15);
+  border-color: var(--border-primary);
+  box-shadow: var(--card-shadow), var(--gold-glow);
 }
 
-/* Chatbot Header */
+/* ─── Chatbot Header ─────────────────────────────────── */
 .chatbot-header {
   padding: 20px;
-  background: linear-gradient(135deg, #0F2D3F 0%, #1B4965 100%);
-  color: white;
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-primary);
   display: flex;
   align-items: center;
   gap: 15px;
@@ -173,17 +169,17 @@
   font-size: 20px;
   font-weight: 700;
   margin: 0;
-  color: #D4AF37;
+  color: var(--accent-soft);
 }
 
 .chatbot-title p {
   font-family: 'Nunito', sans-serif;
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-muted);
   margin: 5px 0 0 0;
 }
 
-/* Messages Container */
+/* ─── Messages ───────────────────────────────────────── */
 .messages-container {
   flex: 1;
   overflow-y: auto;
@@ -191,7 +187,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  background: linear-gradient(to bottom, #FAFBFC, #FFFFFF);
+  background: var(--bg-primary);
 }
 
 .message {
@@ -214,40 +210,40 @@
 .message-content {
   max-width: 80%;
   padding: 12px 15px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   font-family: 'Nunito', sans-serif;
   font-size: 13px;
   line-height: 1.5;
 }
 
 .message.bot .message-content {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(27, 73, 101, 0.05));
-  color: #0F2D3F;
-  border-left: 3px solid #D4AF37;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-left: 3px solid var(--accent-primary);
 }
 
 .message.user .message-content {
-  background: linear-gradient(135deg, #0F2D3F, #1B4965);
-  color: white;
-  border-radius: 12px 0 12px 12px;
+  background: var(--button-gradient);
+  color: var(--color-infineo-black);
+  border-radius: var(--radius-md) 0 var(--radius-md) var(--radius-md);
 }
 
 .message-content p {
   margin: 0;
 }
 
-/* Quick Questions */
+/* ─── Quick Questions ────────────────────────────────── */
 .quick-questions {
   padding: 15px 20px;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(27, 73, 101, 0.05));
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-secondary);
 }
 
 .quick-label {
   font-family: 'Nunito', sans-serif;
   font-size: 12px;
   font-weight: 700;
-  color: #0F2D3F;
+  color: var(--text-muted);
   text-transform: uppercase;
   margin: 0 0 10px 0;
   letter-spacing: 0.5px;
@@ -261,29 +257,33 @@
 
 .quick-btn {
   padding: 10px 12px;
-  background: white;
-  border: 1px solid #D4AF37;
-  color: #0F2D3F;
-  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-family: 'Nunito', sans-serif;
   font-size: 12px;
   transition: all 0.3s ease;
   text-align: left;
   font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .quick-btn:hover {
-  background: linear-gradient(135deg, #D4AF37, #F4D8A8);
-  color: #0F2D3F;
+  background: var(--button-gradient);
+  color: var(--color-infineo-black);
+  border-color: transparent;
   transform: translateX(5px);
+  box-shadow: var(--gold-glow);
 }
 
-/* Input Container */
+/* ─── Input ──────────────────────────────────────────── */
 .input-container {
   padding: 15px;
-  background: linear-gradient(135deg, #FAFBFC 0%, #F9FBFF 100%);
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-secondary);
   display: flex;
   gap: 10px;
 }
@@ -291,32 +291,36 @@
 .message-input {
   flex: 1;
   padding: 12px 15px;
-  border: 2px solid #D4AF37;
-  border-radius: 8px;
+  border: 1.5px solid var(--input-border);
+  border-radius: var(--radius-sm);
   font-family: 'Nunito', sans-serif;
   font-size: 13px;
-  color: #0F2D3F;
-  background: white;
+  color: var(--text-primary);
+  background: var(--input-bg);
   transition: all 0.3s ease;
+}
+
+.message-input:hover {
+  border-color: var(--input-border-hover);
 }
 
 .message-input:focus {
   outline: none;
-  border-color: #0F2D3F;
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 4px rgba(212, 160, 85, 0.12);
 }
 
 .message-input::placeholder {
-  color: #1B4965;
-  opacity: 0.6;
+  color: var(--text-muted);
+  opacity: 1;
 }
 
 .send-btn {
   padding: 12px 24px;
-  background: linear-gradient(135deg, #D4AF37, #F4D8A8);
+  background: var(--button-gradient);
   border: none;
-  border-radius: 8px;
-  color: #0F2D3F;
+  border-radius: var(--radius-sm);
+  color: var(--color-infineo-black);
   font-family: 'Cinzel', serif;
   font-size: 13px;
   font-weight: 600;
@@ -328,87 +332,63 @@
 
 .send-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+  box-shadow: var(--gold-glow);
 }
 
 .send-btn:active {
   transform: translateY(0);
 }
 
-/* Chatbot Footer */
+/* ─── Chatbot Footer ─────────────────────────────────── */
 .chatbot-footer {
   padding: 10px 15px;
-  background: linear-gradient(135deg, rgba(42, 157, 143, 0.1), rgba(212, 175, 55, 0.08));
+  background: var(--bg-secondary);
   font-family: 'Nunito', sans-serif;
   font-size: 11px;
-  color: #1B4965;
+  color: var(--text-muted);
   margin: 0;
   text-align: center;
-  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  border-top: 1px solid var(--border-secondary);
 }
 
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-/* Scrollbar Styling */
-.messages-container::-webkit-scrollbar {
-  width: 6px;
-}
+/* ─── Scrollbar ──────────────────────────────────────── */
+.messages-container::-webkit-scrollbar { width: 6px; }
 
 .messages-container::-webkit-scrollbar-track {
   background: transparent;
 }
 
 .messages-container::-webkit-scrollbar-thumb {
-  background: #D4AF37;
-  border-radius: 3px;
+  background: var(--accent-primary);
+  border-radius: var(--radius-full);
 }
 
 .messages-container::-webkit-scrollbar-thumb:hover {
-  background: #0F2D3F;
+  background: var(--accent-hover);
 }
 
-/* Responsive Design */
+/* ─── Animations ─────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+/* ─── Responsive ─────────────────────────────────────── */
 @media (max-width: 1024px) {
   .faq-content {
     grid-template-columns: 1fr;
@@ -420,152 +400,54 @@
     min-height: 500px;
   }
 
-  .faq-title {
-    font-size: 40px;
-  }
+  .faq-title { font-size: 40px; }
 }
 
 @media (max-width: 768px) {
-  .faq-section {
-    padding: 60px 20px;
-  }
+  .faq-section { padding: 60px 20px; }
 
-  .faq-content {
-    gap: 20px;
-  }
+  .faq-content { gap: 20px; }
 
-  .faq-title {
-    font-size: 32px;
-  }
+  .faq-title    { font-size: 32px; }
+  .faq-subtitle { font-size: 16px; }
 
-  .faq-subtitle {
-    font-size: 16px;
-  }
+  .accordion-header   { padding: 16px; }
+  .accordion-question { font-size: 14px; }
+  .accordion-content p{ font-size: 13px; }
 
-  .accordion-header {
-    padding: 16px;
-  }
+  .neo-chatbot        { height: 600px; }
+  .messages-container { padding: 15px; }
 
-  .accordion-question {
-    font-size: 14px;
-  }
-
-  .accordion-content p {
-    font-size: 13px;
-  }
-
-  .neo-chatbot {
-    height: 600px;
-  }
-
-  .messages-container {
-    padding: 15px;
-  }
-
-  .message-content {
-    max-width: 90%;
-  }
+  .message-content    { max-width: 90%; }
 }
 
 @media (max-width: 480px) {
-  .faq-section {
-    padding: 40px 15px;
-  }
+  .faq-section    { padding: 40px 15px; }
+  .faq-container  { max-width: 100%; }
+  .faq-content    { grid-template-columns: 1fr; gap: 20px; }
+  .faq-title      { font-size: 24px; }
+  .faq-subtitle   { font-size: 14px; }
 
-  .faq-container {
-    max-width: 100%;
-  }
+  .accordion-item     { border-radius: var(--radius-sm); }
+  .accordion-header   { padding: 14px; }
+  .accordion-question { font-size: 13px; }
+  .accordion-icon     { font-size: 20px; }
+  .accordion-content  { padding: 15px; }
+  .accordion-content p{ font-size: 12px; }
 
-  .faq-content {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
+  .neo-chatbot        { height: 500px; border-radius: var(--radius-md); }
+  .chatbot-header     { padding: 15px; }
+  .neo-avatar         { font-size: 32px; }
+  .chatbot-title h3   { font-size: 16px; }
 
-  .faq-title {
-    font-size: 24px;
-  }
+  .messages-container { padding: 12px; gap: 10px; }
+  .message-content    { padding: 10px 12px; font-size: 12px; }
 
-  .faq-subtitle {
-    font-size: 14px;
-  }
+  .quick-questions    { padding: 12px 15px; }
+  .quick-btn          { padding: 9px 10px; font-size: 11px; }
 
-  .accordion-item {
-    border-radius: 10px;
-  }
-
-  .accordion-header {
-    padding: 14px;
-  }
-
-  .accordion-question {
-    font-size: 13px;
-  }
-
-  .accordion-icon {
-    font-size: 20px;
-  }
-
-  .accordion-content {
-    padding: 15px;
-  }
-
-  .accordion-content p {
-    font-size: 12px;
-  }
-
-  .neo-chatbot {
-    height: 500px;
-    border-radius: 12px;
-  }
-
-  .chatbot-header {
-    padding: 15px;
-  }
-
-  .neo-avatar {
-    font-size: 32px;
-  }
-
-  .chatbot-title h3 {
-    font-size: 16px;
-  }
-
-  .messages-container {
-    padding: 12px;
-    gap: 10px;
-  }
-
-  .message-content {
-    padding: 10px 12px;
-    font-size: 12px;
-  }
-
-  .quick-questions {
-    padding: 12px 15px;
-  }
-
-  .quick-btn {
-    padding: 9px 10px;
-    font-size: 11px;
-  }
-
-  .input-container {
-    gap: 8px;
-    padding: 12px;
-  }
-
-  .message-input {
-    padding: 10px 12px;
-    font-size: 12px;
-  }
-
-  .send-btn {
-    padding: 10px 16px;
-    font-size: 11px;
-  }
-
-  .chatbot-footer {
-    font-size: 10px;
-    padding: 8px 12px;
-  }
+  .input-container    { gap: 8px; padding: 12px; }
+  .message-input      { padding: 10px 12px; font-size: 12px; }
+  .send-btn           { padding: 10px 16px; font-size: 11px; }
+  .chatbot-footer     { font-size: 10px; padding: 8px 12px; }
 }
