@@ -20,14 +20,14 @@
 /* Scrolled state — subtle frosted dark bar */
 .title--scrolled {
   height: 68px;
-  background: rgba(17, 43, 71, 0.65);
+  background: rgba(var(--bg-primary-rgb, 17, 43, 71), 0.65); 
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 1px 0 rgba(190, 140, 74, 0.12),
+  box-shadow: 0 1px 0 var(--border-secondary),
               0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
-/* ─── Logo ──────────────────────────────────────────── */
+/* ─── Logo ────────*/
 .logo {
   height: 56px;
   width: auto;
@@ -53,12 +53,11 @@
   position: relative;
   overflow: hidden;                       /* clips the droplet */
   cursor: default;
-
   /* Frosted glass pill */
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-glass);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(190, 140, 74, 0.25);
+  border: 1px solid var(--border-primary);
   box-shadow:
     0 8px 32px rgba(17, 43, 71, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
@@ -102,8 +101,8 @@
 }
 
 .title-links a:hover {
-  color: #e7b860;
-  background: rgba(190, 140, 74, 0.12);
+  color: var(--accent-soft);
+  background: rgba(190, 140, 74, 0.12);                                                               
   transform: translateY(-1px);
 }
 
@@ -117,7 +116,7 @@
   width: 0;
   height: 2px;
   border-radius: 2px;
-  background: linear-gradient(90deg, #be8c4a, #e7b860);
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-soft));
   transition: width 0.3s ease;
 }
 
@@ -132,9 +131,8 @@
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #112b47;
-  background: linear-gradient(135deg, #be8c4a 0%, #e7b860 55%, #e4aa33 100%);
-  border: none;
+  color: var(--color-infineo-black); 
+  background: var(--button-gradient);   border: none;
   padding: 10px 22px;
   border-radius: 30px;
   cursor: pointer;
@@ -213,7 +211,7 @@
   gap: 5px;
   width: 40px;
   height: 40px;
-  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--border-primary);
   border: 1px solid rgba(190,140,74,0.3);
   border-radius: 10px;
   cursor: pointer;
@@ -245,10 +243,10 @@
   position: fixed;
   top: 80px;
   left: 0; right: 0;
-  background: rgba(17, 43, 71, 0.95);
+  background: var(--bg-secondary); 
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(190,140,74,0.2);
+  border-bottom: 1px solid var(--border-primary);
   flex-direction: column;
   align-items: center;
   gap: 4px;
@@ -280,7 +278,7 @@
   transition: color 0.2s ease;
 }
 
-.mobile-menu a:hover { color: #e7b860; }
+.mobile-menu a:hover { color: var(--accent-soft); }
 
 .mobile-menu .login-btn {
   margin-top: 14px;
@@ -315,13 +313,13 @@
   position: absolute;
   bottom: -80px;
   border-radius: 50%;
-  background: radial-gradient(
+   background: radial-gradient(
     circle at 35% 35%,
     rgba(190, 140, 74, 0.35),
     rgba(190, 140, 74, 0.08) 60%,
     transparent 100%
   );
-  border: 1px solid rgba(190, 140, 74, 0.2);
+  border: 1px solid var(--border-secondary);
   animation: bubbleRise linear forwards;
   backdrop-filter: blur(2px);
 }

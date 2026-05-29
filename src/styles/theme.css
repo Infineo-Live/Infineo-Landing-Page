@@ -1,6 +1,5 @@
 /* ============================================================
-   INFINEO GLOBAL THEME SYSTEM
-   Centralized color, typography, spacing, and design tokens
+   INFINEO GLOBAL THEME SYSTEM — MAGICAL EDITION
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Nunito:wght@300;400;500;600;700&family=Fredoka:wght@400;500;600;700&display=swap');
@@ -8,213 +7,256 @@
 /* ─── Base Brand Tokens ───────────────────────────────── */
 :root {
   /* Brand Colors */
-  --color-infineo-black: #112b47;
-  --color-infineo-gold: #be8c4a;
-  --color-infineo-blue: #39618d;
-  --color-infineo-gold-light: #e7b860;
-  --color-infineo-gold-vibrant: #e4aa33;
-  --color-infineo-cream: #f7da99;
-  --color-infineo-brown-dark: #413327;
-  --color-infineo-brown: #885a2a;
-  --color-infineo-taupe: #917864;
-  --color-infineo-white: #ffffff;
+  --color-infineo-black:       #0d1b2e;
+  --color-infineo-gold:        #c9944e;
+  --color-infineo-blue:        #3a6ea8;
+  --color-infineo-gold-light:  #f0c86a;
+  --color-infineo-gold-vibrant:#e8b445;
+  --color-infineo-cream:       #fef0d0;
+  --color-infineo-brown-dark:  #3d2a18;
+  --color-infineo-brown:       #8a5e30;
+  --color-infineo-taupe:       #9a8068;
+  --color-infineo-white:       #ffffff;
 
   /* Primary Aliases */
-  --color-primary: var(--color-infineo-gold);
+  --color-primary:       var(--color-infineo-gold);
   --color-primary-light: var(--color-infineo-gold-light);
-  --color-accent: var(--color-infineo-blue);
+  --color-accent:        var(--color-infineo-blue);
 
-  /* ─── Typography Scale ────────────────────────────── */
-  --font-primary: 'Cinzel', serif;
-  --font-secondary: 'Nunito', sans-serif;
+  /* ─── Typography ─────────────────────────────────── */
+  --font-primary:    'Cinzel', serif;
+  --font-secondary:  'Nunito', sans-serif;
   --font-decorative: 'Fredoka', sans-serif;
 
-  --font-size-xs: 11px;
-  --font-size-sm: 13px;
-  --font-size-base: 14px;
-  --font-size-lg: 16px;
-  --font-size-xl: 18px;
+  --font-size-xs:  11px;
+  --font-size-sm:  13px;
+  --font-size-base:14px;
+  --font-size-lg:  16px;
+  --font-size-xl:  18px;
   --font-size-2xl: 24px;
   --font-size-3xl: 32px;
   --font-size-4xl: 48px;
   --font-size-5xl: 64px;
 
-  --font-weight-light: 300;
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
+  --font-weight-light:    300;
+  --font-weight-normal:   400;
+  --font-weight-medium:   500;
   --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  --font-weight-black: 900;
+  --font-weight-bold:     700;
+  --font-weight-black:    900;
 
-  /* ─── Spacing Scale ──────────────────────────────── */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 12px;
-  --spacing-lg: 16px;
-  --spacing-xl: 24px;
+  /* ─── Spacing ────────────────────────────────────── */
+  --spacing-xs:  4px;
+  --spacing-sm:  8px;
+  --spacing-md:  12px;
+  --spacing-lg:  16px;
+  --spacing-xl:  24px;
   --spacing-2xl: 32px;
   --spacing-3xl: 48px;
   --spacing-4xl: 64px;
 
-  /* ─── Border Radius ──────────────────────────────── */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-2xl: 32px;
+  /* ─── Border Radius — extra soft & round ─────────── */
+  --radius-sm:   12px;
+  --radius-md:   18px;
+  --radius-lg:   26px;
+  --radius-xl:   36px;
+  --radius-2xl:  48px;
   --radius-full: 9999px;
 
-  /* ─── Transitions ────────────────────────────────── */
-  --transition-fast: 150ms ease;
-  --transition-base: 300ms ease;
-  --transition-slow: 500ms ease;
+  /* ─── Transitions — springy & alive ─────────────── */
+  --transition-fast:  200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-base:  400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-slow:  600ms cubic-bezier(0.34, 1.56, 0.64, 1);
   --transition-cubic: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  /* ─── Shadows ────────────────────────────────────── */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
-  --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.25);
-
-  /* ─── Z-Index Scale ──────────────────────────────── */
-  --z-dropdown: 100;
-  --z-sticky: 500;
-  --z-fixed: 1000;
-  --z-offcanvas: 1050;
+  /* ─── Z-Index ────────────────────────────────────── */
+  --z-dropdown:       100;
+  --z-sticky:         500;
+  --z-fixed:          1000;
+  --z-offcanvas:      1050;
   --z-modal-backdrop: 1100;
-  --z-modal: 1150;
-  --z-tooltip: 1200;
-  --z-notification: 1300;
+  --z-modal:          1150;
+  --z-tooltip:        1200;
+  --z-notification:   1300;
 
-  /* ─── Line Heights ────────────────────────────────– */
-  --line-height-tight: 1.2;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.75;
-  --line-height-loose: 2;
+  /* ─── Line Heights ───────────────────────────────── */
+  --line-height-tight:   1.25;
+  --line-height-normal:  1.65;
+  --line-height-relaxed: 1.90;
+  --line-height-loose:   2.10;
 
-  /* ─── Letter Spacing ──────────────────────────────– */
-  --letter-spacing-tight: -0.5px;
-  --letter-spacing-normal: 0px;
-  --letter-spacing-wide: 0.5px;
-  --letter-spacing-wider: 1px;
-  --letter-spacing-widest: 2px;
+  /* ─── Letter Spacing ─────────────────────────────── */
+  --letter-spacing-tight:   -0.5px;
+  --letter-spacing-normal:   0px;
+  --letter-spacing-wide:     0.5px;
+  --letter-spacing-wider:    1px;
+  --letter-spacing-widest:   2px;
 }
 
-/* ─── DARK MODE (DEFAULT) ────────────────────────────── */
+/* ═══════════════════════════════════════════════════════
+   DARK MODE — Enchanted Starlit Kingdom
+   Deep midnight sky, celestial golds, stardust magic
+   ═══════════════════════════════════════════════════════ */
 :root,
 [data-theme="dark"] {
-  /* Backgrounds */
-  --bg-primary: #112b47;
-  --bg-secondary: #17395c;
-  --bg-tertiary: #0d1e32;
-  --bg-card: rgba(23, 57, 92, 0.88);
-  --bg-glass: rgba(255, 255, 255, 0.05);
-  --bg-overlay: rgba(0, 0, 0, 0.4);
+  /* Backgrounds — layered cosmic night */
+  --bg-primary:   #080f1e;
+  --bg-secondary: #0d1830;
+  --bg-tertiary:  #050c18;
+  --bg-card:      rgba(12, 24, 50, 0.90);
+  --bg-glass:     rgba(255, 255, 255, 0.055);
+  --bg-overlay:   rgba(4, 8, 18, 0.60);
 
-  /* Text Colors */
-  --text-primary: #f7da99;
-  --text-secondary: #f3e4c1;
-  --text-muted: #c6b8a8;
-  --text-inverse: #112b47;
+  /* Text — warm stardust */
+  --text-primary:   #fdf0ce;
+  --text-secondary: #eeddb5;
+  --text-muted:     #a89880;
+  --text-inverse:   #0d1830;
 
-  /* Accent Colors */
-  --accent-primary: #be8c4a;
-  --accent-hover: #e4aa33;
-  --accent-soft: #e7b860;
-  --accent-dark: #6b4c28;
+  /* Accent — celestial gold */
+  --accent-primary: #d4a055;
+  --accent-hover:   #f0c050;
+  --accent-soft:    #f5d078;
+  --accent-dark:    #7a5028;
 
-  /* Input Styles */
-  --input-bg: rgba(255, 255, 255, 0.04);
-  --input-border: rgba(231, 184, 96, 0.2);
-  --input-border-hover: rgba(231, 184, 96, 0.35);
-  --input-border-focus: rgba(231, 184, 96, 0.6);
+  /* Inputs */
+  --input-bg:           rgba(255, 255, 255, 0.04);
+  --input-border:       rgba(244, 208, 120, 0.20);
+  --input-border-hover: rgba(244, 208, 120, 0.38);
+  --input-border-focus: rgba(244, 208, 120, 0.65);
 
   /* Borders */
-  --border-primary: rgba(231, 184, 96, 0.25);
-  --border-secondary: rgba(231, 184, 96, 0.15);
-  --border-light: rgba(255, 255, 255, 0.08);
+  --border-primary:   rgba(244, 208, 120, 0.20);
+  --border-secondary: rgba(244, 208, 120, 0.11);
+  --border-light:     rgba(255, 255, 255, 0.06);
 
-  /* Special Effects */
-  --section-glow: radial-gradient(circle, rgba(231, 184, 96, 0.08), transparent);
-  --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-  --button-gradient: linear-gradient(135deg, #be8c4a, #e7b860);
-  --gold-glow: 0 0 20px rgba(231, 184, 96, 0.3);
+  /* ✨ Magic Effects */
+  --section-glow:    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(212, 160, 85, 0.18), transparent);
+  --card-shadow:
+    0 2px 0 rgba(244, 208, 120, 0.14) inset,
+    0 24px 64px rgba(0, 0, 0, 0.55),
+    0 4px 16px rgba(0, 0, 0, 0.35);
+  --button-gradient: linear-gradient(135deg, #c9944e 0%, #f5d078 50%, #e8b445 100%);
+  --gold-glow:
+    0 0 12px rgba(244, 208, 120, 0.50),
+    0 0 32px rgba(244, 208, 120, 0.25),
+    0 0 72px rgba(244, 208, 120, 0.10);
 
-  /* Success/Error colors */
-  --success: #2a9d8f;
-  --error: #e76f51;
-  --warning: #f4a261;
-  --info: #39618d;
+  /* Semantic */
+  --success: #34d4b8;
+  --error:   #f07868;
+  --warning: #f5b858;
+  --info:    #58a0e8;
+
+  --module-bg: url('../assets/module-bg.png') no-repeat center center / cover;
+
+  /* ── Magical extras ─────────────────────────────── */
+  --star-color:          rgba(255, 248, 200, 0.75);
+  --nebula-teal:         rgba(60, 180, 200, 0.08);
+  --nebula-purple:       rgba(130, 80, 220, 0.07);
+  --shimmer-gradient:
+    linear-gradient(
+      105deg,
+      transparent 20%,
+      rgba(255, 240, 160, 0.18) 40%,
+      rgba(255, 240, 160, 0.28) 50%,
+      rgba(255, 240, 160, 0.18) 60%,
+      transparent 80%
+    );
 }
 
-/* ─── LIGHT MODE ──────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════
+   LIGHT MODE — Sunlit Storybook Kingdom
+   Warm parchment, honey gold, soft dawn light
+   ═══════════════════════════════════════════════════════ */
 [data-theme="light"] {
-  /* Backgrounds */
-  --bg-primary: #fffaf1;
-  --bg-secondary: #fdf6e8;
-  --bg-tertiary: #fdf1e0;
-  --bg-card: rgba(255, 255, 255, 0.9);
-  --bg-glass: rgba(255, 255, 255, 0.7);
-  --bg-overlay: rgba(0, 0, 0, 0.3);
+  /* Backgrounds — warm ivory parchment */
+  --bg-primary:   #fffdf5;
+  --bg-secondary: #fef8e8;
+  --bg-tertiary:  #fdf2d8;
+  --bg-card:      rgba(255, 253, 245, 0.97);
+  --bg-glass:     rgba(255, 248, 220, 0.78);
+  --bg-overlay:   rgba(20, 40, 70, 0.04);
 
-  /* Text Colors */
-  --text-primary: #112b47;
-  --text-secondary: #2e4d6d;
-  --text-muted: #6b7280;
-  --text-inverse: #f7da99;
+  /* Text — deep ink navy */
+  --text-primary:   #1a2e4a;
+  --text-secondary: #2c4868;
+  --text-muted:     #7a8898;
+  --text-inverse:   #fdf0ce;
 
-  /* Accent Colors */
-  --accent-primary: #be8c4a;
-  --accent-hover: #d4932e;
-  --accent-soft: #e7b860;
-  --accent-dark: #8b6a40;
+  /* Accent — warm honey gold */
+  --accent-primary: #c08040;
+  --accent-hover:   #d89828;
+  --accent-soft:    #e8b040;
+  --accent-dark:    #8a5828;
 
-  /* Input Styles */
-  --input-bg: rgba(255, 255, 255, 0.95);
-  --input-border: rgba(190, 140, 74, 0.2);
-  --input-border-hover: rgba(190, 140, 74, 0.35);
-  --input-border-focus: rgba(190, 140, 74, 0.6);
+  /* Inputs */
+  --input-bg:           rgba(255, 255, 255, 0.99);
+  --input-border:       rgba(192, 128, 64, 0.22);
+  --input-border-hover: rgba(192, 128, 64, 0.40);
+  --input-border-focus: rgba(192, 128, 64, 0.65);
 
   /* Borders */
-  --border-primary: rgba(190, 140, 74, 0.25);
-  --border-secondary: rgba(190, 140, 74, 0.15);
-  --border-light: rgba(17, 43, 71, 0.08);
+  --border-primary:   rgba(192, 128, 64, 0.22);
+  --border-secondary: rgba(192, 128, 64, 0.12);
+  --border-light:     rgba(20, 40, 70, 0.07);
 
-  /* Special Effects */
-  --section-glow: radial-gradient(circle, rgba(190, 140, 74, 0.06), transparent);
-  --card-shadow: 0 12px 30px rgba(17, 43, 71, 0.08);
-  --button-gradient: linear-gradient(135deg, #be8c4a, #e7b860);
-  --gold-glow: 0 0 15px rgba(190, 140, 74, 0.25);
+  /* ✨ Magic Effects */
+  --section-glow:    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(192, 128, 64, 0.10), transparent);
+  --card-shadow:
+    0 2px 0 rgba(192, 128, 64, 0.12) inset,
+    0 16px 48px rgba(20, 40, 70, 0.10),
+    0 4px 12px rgba(20, 40, 70, 0.06);
+  --button-gradient: linear-gradient(135deg, #c9944e 0%, #f5d078 50%, #e8b445 100%);
+  --gold-glow:
+    0 0 10px rgba(192, 128, 64, 0.40),
+    0 0 28px rgba(192, 128, 64, 0.18),
+    0 0 56px rgba(192, 128, 64, 0.08);
 
-  /* Success/Error colors */
+  /* Semantic */
   --success: #059669;
-  --error: #dc2626;
+  --error:   #dc2626;
   --warning: #d97706;
-  --info: #3b82f6;
+  --info:    #3b82f6;
+
+  --module-bg: url('../assets/module-light-bg.png') no-repeat center center / cover;
+
+  /* ── Magical extras ─────────────────────────────── */
+  --star-color:    rgba(192, 128, 64, 0.35);
+  --nebula-teal:   rgba(20, 160, 180, 0.05);
+  --nebula-purple: rgba(120, 70, 200, 0.04);
+  --shimmer-gradient:
+    linear-gradient(
+      105deg,
+      transparent 20%,
+      rgba(255, 220, 100, 0.22) 40%,
+      rgba(255, 220, 100, 0.36) 50%,
+      rgba(255, 220, 100, 0.22) 60%,
+      transparent 80%
+    );
 }
 
-/* ─── Global Resets ──────────────────────────────────– */
-* {
+/* ─── Global Resets ──────────────────────────────────── */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-secondary);
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: var(--line-height-normal);
-  transition: background-color var(--transition-base),
-              color var(--transition-base);
+  transition: background-color 0.5s ease, color 0.5s ease;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Typography ───────────────────────────────────── */
+/* ─── Typography ─────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-primary);
   font-weight: var(--font-weight-bold);
@@ -229,18 +271,9 @@ h1 {
   letter-spacing: var(--letter-spacing-widest);
 }
 
-h2 {
-  font-size: var(--font-size-4xl);
-  letter-spacing: var(--letter-spacing-wider);
-}
-
-h3 {
-  font-size: var(--font-size-2xl);
-}
-
-h4 {
-  font-size: var(--font-size-xl);
-}
+h2 { font-size: var(--font-size-4xl); letter-spacing: var(--letter-spacing-wider); }
+h3 { font-size: var(--font-size-2xl); }
+h4 { font-size: var(--font-size-xl); }
 
 p {
   color: var(--text-secondary);
@@ -253,42 +286,39 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  color: var(--accent-hover);
+a:hover { color: var(--accent-hover); }
+
+/* ─── Selection ──────────────────────────────────────── */
+::selection {
+  background: rgba(212, 160, 85, 0.30);
+  color: var(--text-primary);
 }
 
-/* ─── Form Elements ────────────────────────────────── */
-input,
-textarea,
-select {
+/* ─── Form Elements ──────────────────────────────────── */
+input, textarea, select {
   font-family: var(--font-secondary);
   background-color: var(--input-bg);
   color: var(--text-primary);
-  border: 1px solid var(--input-border);
+  border: 1.5px solid var(--input-border);
   border-radius: var(--radius-md);
   padding: var(--spacing-lg);
   transition: all var(--transition-base);
 }
 
-input:hover,
-textarea:hover,
-select:hover {
+input:hover, textarea:hover, select:hover {
   border-color: var(--input-border-hover);
 }
 
-input:focus,
-textarea:focus,
-select:focus {
+input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: var(--input-border-focus);
-  box-shadow: 0 0 0 3px rgba(190, 140, 74, 0.1);
+  box-shadow: 0 0 0 4px rgba(212, 160, 85, 0.12),
+              var(--gold-glow);
 }
 
-input::placeholder {
-  color: var(--text-muted);
-}
+input::placeholder { color: var(--text-muted); }
 
-/* ─── Buttons ───────────────────────────────────────– */
+/* ─── Buttons ────────────────────────────────────────── */
 button {
   font-family: var(--font-primary);
   font-weight: var(--font-weight-bold);
@@ -300,112 +330,222 @@ button {
   border-radius: var(--radius-lg);
 }
 
-/* ─── Scrollbar ──────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
+/* ─── Scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar { width: 8px; height: 8px; }
 
 ::-webkit-scrollbar-track {
   background: var(--bg-secondary);
+  border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-primary);
+  background: var(--button-gradient);
   border-radius: var(--radius-full);
-  transition: background var(--transition-base);
+  border: 2px solid var(--bg-secondary);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-hover);
+::-webkit-scrollbar-thumb:hover { background: var(--accent-soft); }
+
+/* ─── Shadows (convenience classes) ─────────────────── */
+.shadow-sm  { box-shadow: 0 2px  12px rgba(0,0,0,0.08); }
+.shadow-md  { box-shadow: 0 6px  24px rgba(0,0,0,0.12); }
+.shadow-lg  { box-shadow: 0 12px 40px rgba(0,0,0,0.16); }
+.shadow-xl  { box-shadow: 0 20px 60px rgba(0,0,0,0.20); }
+.shadow-glow{ box-shadow: var(--gold-glow); }
+
+/* ─── Magic Card base ────────────────────────────────── */
+.magic-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: transform var(--transition-base),
+              box-shadow var(--transition-base);
+  position: relative;
+  overflow: hidden;
 }
 
-/* ─── Animations ───────────────────────────────────– */
+/* Shimmer sweep on hover */
+.magic-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--shimmer-gradient);
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.magic-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: var(--card-shadow), var(--gold-glow);
+}
+
+.magic-card:hover::after {
+  opacity: 1;
+  animation: shimmerSweep 0.7s ease forwards;
+}
+
+/* ─── Animations ─────────────────────────────────────── */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(32px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
 }
 
 @keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-32px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)     scale(1); }
 }
 
 @keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-52px) scale(0.97); }
+  to   { opacity: 1; transform: translateX(0)     scale(1); }
 }
 
 @keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(52px) scale(0.97); }
+  to   { opacity: 1; transform: translateX(0)    scale(1); }
 }
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
+/* Magical springy pop */
+@keyframes popIn {
+  0%   { transform: scale(0.80) translateY(20px); opacity: 0; }
+  55%  { transform: scale(1.06) translateY(-5px);  opacity: 1; }
+  75%  { transform: scale(0.97) translateY(2px); }
+  100% { transform: scale(1)    translateY(0); opacity: 1; }
 }
 
-@keyframes glow {
-  0%, 100% {
-    box-shadow: var(--gold-glow);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(231, 184, 96, 0.5);
-  }
+/* Fairy dust sparkle */
+@keyframes sparkle {
+  0%   { transform: scale(0) rotate(0deg);    opacity: 1; }
+  50%  { transform: scale(1.3) rotate(180deg); opacity: 0.85; }
+  100% { transform: scale(0) rotate(360deg);  opacity: 0; }
 }
 
+/* Star twinkle */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50%       { opacity: 1.0; transform: scale(1.2); }
+}
+
+/* Gentle float */
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-12px);
+  0%   { transform: translateY(0px)   rotate(0deg); }
+  33%  { transform: translateY(-12px) rotate(0.8deg); }
+  66%  { transform: translateY(-6px)  rotate(-0.5deg); }
+  100% { transform: translateY(0px)   rotate(0deg); }
+}
+
+/* Deep bounce */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0)    scale(1); }
+  40%       { transform: translateY(-14px) scale(1.04); }
+  70%       { transform: translateY(-6px)  scale(0.98); }
+}
+
+/* Gold aura pulse */
+@keyframes glow {
+  0%, 100% { box-shadow: var(--gold-glow); }
+  50%       {
+    box-shadow:
+      0 0 20px rgba(244, 208, 120, 0.70),
+      0 0 50px rgba(244, 208, 120, 0.35),
+      0 0 100px rgba(244, 208, 120, 0.15);
   }
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
+/* Shimmer sweep (for cards) */
+@keyframes shimmerSweep {
+  0%   { background-position: -200% 0; opacity: 0.6; }
+  100% { background-position:  200% 0; opacity: 0;   }
+}
+
+/* Slow background scroll (for starfields) */
+@keyframes starDrift {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
+
+/* Magic ripple */
+@keyframes ripple {
+  0%   { transform: scale(0);   opacity: 0.6; }
+  100% { transform: scale(3.5); opacity: 0;   }
+}
+
+/* Dreamy text shimmer */
+@keyframes textShimmer {
+  0%   { background-position: -400% center; }
+  100% { background-position:  400% center; }
+}
+
+/* Fairy dust trail (for particle effects) */
+@keyframes dustFall {
+  0%   { transform: translateY(-10px) translateX(0)   rotate(0deg);   opacity: 1; }
+  100% { transform: translateY(80px)  translateX(20px) rotate(360deg); opacity: 0; }
+}
+
+/* Heartbeat */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14%       { transform: scale(1.15); }
+  28%       { transform: scale(1); }
+  42%       { transform: scale(1.10); }
+  70%       { transform: scale(1); }
+}
+
+/* ─── Magic Text Shimmer utility ── */
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--accent-primary)  0%,
+    var(--accent-soft)     30%,
+    #fff8c0                50%,
+    var(--accent-soft)     70%,
+    var(--accent-primary)  100%
+  );
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShimmer 4s linear infinite;
+}
+
+/* ─── Magic Button utility ───────────────────────────── */
+.btn-magic {
+  background: var(--button-gradient);
+  color: var(--color-infineo-black);
+  border-radius: var(--radius-full);
+  box-shadow: var(--gold-glow), 0 6px 24px rgba(0,0,0,0.2);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.btn-magic::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--shimmer-gradient);
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.btn-magic:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: var(--gold-glow), 0 12px 36px rgba(0,0,0,0.28);
+}
+
+.btn-magic:hover::before {
+  opacity: 1;
+  animation: shimmerSweep 0.65s ease forwards;
 }

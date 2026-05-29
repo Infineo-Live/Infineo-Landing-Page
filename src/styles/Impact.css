@@ -5,7 +5,7 @@
   position: relative;
   width: 100%;
   height: 380vh;
-  background: #0d1e32;
+  background: var(--bg-tertiary);
 }
 
 /* ─── Sticky Viewport Container ─────────────────────── */
@@ -28,10 +28,10 @@
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(1.5px 1.5px at 15% 25%, rgba(255,255,255,0.18) 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 80% 18%, rgba(255,255,255,0.13) 0%, transparent 100%),
-    radial-gradient(2px   2px   at 50% 75%, rgba(255,255,255,0.10) 0%, transparent 100%),
-    radial-gradient(1px   1px   at 85% 65%, rgba(255,255,255,0.08) 0%, transparent 100%);
+    radial-gradient(1.5px 1.5px at 15% 25%, rgba(255, 255, 255, 0.18) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 80% 18%, rgba(255, 255, 255, 0.13) 0%, transparent 100%),
+    radial-gradient(2px 2px at 50% 75%, rgba(255, 255, 255, 0.10) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 65%, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -61,14 +61,14 @@
   letter-spacing: 4px;
   margin: 0 0 10px;
   transition: color 0.5s ease;
-  color: #e7b860;
+  color: var(--accent-soft);
 }
 
 .impact-sub {
   font-family: 'Nunito', sans-serif;
   font-size: clamp(13px, 1.4vw, 18px);
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--text-muted);
   margin: 0;
   letter-spacing: 0.4px;
 }
@@ -105,7 +105,9 @@
 }
 
 @keyframes orbitSpin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ─── Center Avatar ───────────────────────────────────── */
@@ -125,8 +127,15 @@
 }
 
 @keyframes centerPulse {
-  0%, 100% { transform: scale(1); }
-  50%       { transform: scale(1.04); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.04);
+  }
 }
 
 .orbit-center-img {
@@ -148,8 +157,8 @@
   transform: translateX(-50%);
   white-space: nowrap;
   transition: color 0.5s ease;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.9);
-  color: #e7b860;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+  color: var(--accent-soft);
 }
 
 /* ─── Orbiting Bubbles ────────────────────────────────── */
@@ -210,8 +219,13 @@
 }
 
 @keyframes bubbleFloat {
-  from { transform: translateY(0px);  }
-  to   { transform: translateY(-9px); }
+  from {
+    transform: translateY(0px);
+  }
+
+  to {
+    transform: translateY(-9px);
+  }
 }
 
 .bubble-icon {
@@ -245,8 +259,8 @@
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #112b47;
-  background: linear-gradient(135deg, #be8c4a 0%, #e7b860 50%, #e4aa33 100%);
+  color: var(--color-infineo-black);
+  background: var(--button-gradient);
   border: none;
   padding: 16px 44px;
   border-radius: 50px;
@@ -255,7 +269,7 @@
   transition:
     transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 0.3s ease,
-    opacity    0.3s ease;
+    opacity 0.3s ease;
 }
 
 .impact-cta:hover {
@@ -305,16 +319,22 @@
 
 /* Large desktops — scale up the orbital canvas */
 @media (min-width: 1200px) {
-  .orbital-stage { transform: scale(1.2); }
+  .orbital-stage {
+    transform: scale(1.2);
+  }
 }
 
 @media (min-width: 1600px) {
-  .orbital-stage { transform: scale(1.38); }
+  .orbital-stage {
+    transform: scale(1.38);
+  }
 }
 
 /* Tablets */
 @media (max-width: 900px) {
-  .orbital-stage { transform: scale(0.9); }
+  .orbital-stage {
+    transform: scale(0.9);
+  }
 }
 
 /* Mobile — aggressive downscale to keep bubbles on screen */

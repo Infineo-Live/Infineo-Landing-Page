@@ -20,15 +20,15 @@
   inset: 0;
   background: url('../assets/bg.png') no-repeat center center / cover;
   z-index: 0;
-  opacity: 0.25;
+  opacity: 1;
 }
 
 /* Warm dark vignette overlay — dims background, keeps image atmospheric */
 .parents-overlay {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse at 50% 50%, rgba(17, 43, 71, 0.5) 0%, rgba(13, 30, 50, 0.75) 100%);
+  /* background:
+    radial-gradient(ellipse at 50% 50%, rgba(17, 43, 71, 0.212) 0%, rgba(226, 240, 255, 0.75) 100%); */
   z-index: 1;
 }
 
@@ -39,22 +39,14 @@
   max-width: 1380px;
   width: 100%;
   padding: 64px 72px 56px;
-  background: linear-gradient(180deg, #1a3d56 0%, #0d1e32 100%);
+  background: var(--bg-secondary);
   border-radius: 4px;
   box-shadow:
-    0 2px 0 #be8c4a,          /* thin gold top accent */
+    0 2px 0 var(--accent-primary),
     0 40px 80px rgba(0, 0, 0, 0.55),
     0 8px 24px rgba(0, 0, 0, 0.35),
-    inset 0 0 0 1px rgba(190, 140, 74, 0.15);
+    inset 0 0 0 1px var(--border-primary);
   box-sizing: border-box;
-
-  /* Subtle aged-paper texture via gradient */
-  background-image:
-    linear-gradient(
-      160deg,
-      rgba(26, 61, 86, 0.98) 0%,
-      rgba(13, 30, 50, 0.96) 100%
-    );
 }
 
 /* Decorative open-book SVG — top right */
@@ -97,7 +89,7 @@
   font-family: 'Cinzel', serif;
   font-size: 32px;
   font-weight: 800;
-  color: #e8eef7;
+  color: var(--text-primary);
   text-align: center;
   margin: 0 0 32px;
   letter-spacing: 2px;
@@ -108,7 +100,7 @@
   font-family: 'Nunito', sans-serif;
   font-size: 24px;
   line-height: 1.4;
-  color: #2C3A5A;
+  color: var(--text-secondary); 
   font-style: italic;
   margin: 0 0 8px;
   padding: 0;
@@ -116,7 +108,7 @@
   quotes: none;
 
   /* Left border accent */
-  border-left: 2px solid rgba(201, 168, 76, 0.35);
+  border-left: 2px solid var(--border-primary);
   padding-left: 20px;
 }
 
@@ -126,7 +118,9 @@
 .letter-quote p:last-child {
   margin-bottom: 0;
 }
-
+.letter-heart {
+  color: var(--accent-soft);
+}
 /* ── Founder block ── */
 .letter-founder {
   display: flex;
@@ -141,7 +135,7 @@
   height: 64px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2.5px solid #C9A84C;
+  border: 2.5px solid var(--accent-primary);
   box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.12);
 }
 
@@ -155,14 +149,14 @@
   font-family: 'Cinzel', serif;
   font-size: 14px;
   font-weight: 700;
-  color: #1A2840;
+  color: var(--text-primary);
   letter-spacing: 1px;
 }
 
 .founder-label {
   font-family: 'Nunito', sans-serif;
   font-size: 12px;
-  color: #C9A84C;
+  color: var(--accent-primary);
   letter-spacing: 1px;
   font-weight: 600;
   text-transform: uppercase;

@@ -6,8 +6,8 @@ const Parents = () => {
       {/* Full-bleed background image */}
       <div className="parents-bg" aria-hidden="true" />
 
-      {/* Soft overlay to give depth */}
-      <div className="parents-overlay" aria-hidden="true" />
+      {/* Soft overlay to give depth
+      <div className="parents-overlay" aria-hidden="true" /> */}
 
       {/* Letter card */}
       <div className="letter-wrapper">
@@ -67,10 +67,10 @@ const Parents = () => {
         {/* Bottom gold ornament */}
         <div className="letter-ornament letter-ornament--bottom" aria-hidden="true">
           <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="0" y1="10" x2="80" y2="10" stroke="#C9A84C" strokeWidth="1" strokeOpacity="0.5" />
-            <circle cx="100" cy="10" r="6" stroke="#C9A84C" strokeWidth="1.5" fill="none" />
+            <line x1="0" y1="10" x2="80" y2="10" stroke="var(--accent-primary)" strokeWidth="1" strokeOpacity="0.5" />
+            <circle cx="100" cy="10" r="6" stroke="var(--accent-primary)" strokeWidth="1.5" fill="none" />
             <circle cx="100" cy="10" r="2" fill="#C9A84C" />
-            <line x1="120" y1="10" x2="200" y2="10" stroke="#C9A84C" strokeWidth="1" strokeOpacity="0.5" />
+            <line x1="120" y1="10" x2="200" y2="10" stroke="var(--accent-primary)" strokeWidth="1" strokeOpacity="0.5" />
           </svg>
         </div>
 
