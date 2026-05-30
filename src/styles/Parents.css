@@ -1,7 +1,4 @@
-/* ============================================================
-   Parents Section
-   ============================================================ */
-
+   /* Parents Section */
 .parents-section {
   position: relative;
   width: 100%;
@@ -14,7 +11,7 @@
   overflow: hidden;
 }
 
-/* ── Full-bleed background ── */
+/* Full-bleed background  */
 .parents-bg {
   position: absolute;
   inset: 0;
@@ -27,8 +24,6 @@
 .parents-overlay {
   position: absolute;
   inset: 0;
-  /* background:
-    radial-gradient(ellipse at 50% 50%, rgba(17, 43, 71, 0.212) 0%, rgba(226, 240, 255, 0.75) 100%); */
   z-index: 1;
 }
 
@@ -36,9 +31,9 @@
 .letter-wrapper {
   position: relative;
   z-index: 2;
-  max-width: 1380px;
+  max-width: 1280px;
   width: 100%;
-  padding: 64px 72px 56px;
+  padding: 32px 36px 18px;
   background: var(--bg-secondary);
   border-radius: 4px;
   box-shadow:
@@ -99,14 +94,13 @@
 .letter-quote {
   font-family: 'Nunito', sans-serif;
   font-size: 24px;
-  line-height: 1.4;
+  line-height: 1;
   color: var(--text-secondary); 
   font-style: italic;
   margin: 0 0 8px;
   padding: 0;
   border: none;
   quotes: none;
-
   /* Left border accent */
   border-left: 2px solid var(--border-primary);
   padding-left: 20px;
@@ -121,7 +115,7 @@
 .letter-heart {
   color: var(--accent-soft);
 }
-/* ── Founder block ── */
+/* Founder block  */
 .letter-founder {
   display: flex;
   flex-direction: column;
@@ -162,9 +156,8 @@
   text-transform: uppercase;
 }
 
-/* ============================================================
-   Responsive
-   ============================================================ */
+ /* Responsive */
+
 @media (max-width: 768px) {
   .letter-wrapper {
     padding: 48px 36px 44px;

@@ -147,21 +147,6 @@ export default function Modules() {
 
       </div>
 
-      {/* Bottom feature strip */}
-      <div className="modules-features">
-        {[
-          { icon: '📖', label: 'Engaging Stories That Inspire' },
-          { icon: '⭐', label: 'Fun Learning That Sticks' },
-          { icon: '❤️', label: 'Values That Shape Life' },
-          { icon: '✨', label: 'A Journey of Joy & Discovery' },
-        ].map(f => (
-          <div key={f.label} className="feature-pill">
-            <span>{f.icon}</span>
-            <span>{f.label}</span>
-          </div>
-        ))}
-      </div>
-
     </section>
   );
 }
