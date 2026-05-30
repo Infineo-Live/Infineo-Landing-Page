@@ -5,16 +5,16 @@
   position: relative;
   width: 100%;
   height: 380vh;
-  background: #060b13; /* Deep spiritual cosmic background */
+  background: var(--bg-primary);
   transition: background-color 0.6s ease;
 }
 
 /* Indian Divine Theme variations driven via data attributes */
 .impact-section[data-phase="infineo"] {
-  background: #0a0e1a; /* Warm twilight atmosphere */
+  background: var(--bg-secondary); /* Warm twilight atmosphere */
 }
 .impact-section[data-phase="results"] {
-  background: #040d10; /* Pure fresh vibrant emerald ashram glow */
+  background: var(--bg-tertiary); /* Pure fresh vibrant emerald ashram glow */
 }
 
 /* ─── Sticky Viewport Container ─────────────────────── */
@@ -61,13 +61,14 @@
   font-weight: 900;
   letter-spacing: 4px;
   margin: 0 0 10px;
+  color: var(--text-primary); 
 }
 
 .impact-sub {
   font-family: 'Nunito', sans-serif;
   font-size: clamp(13px, 1.4vw, 18px);
   font-weight: 600;
-  color: #a0aec0;
+  color: var(--text-muted); 
   margin: 0;
   letter-spacing: 0.4px;
 }
@@ -122,13 +123,13 @@
   width: 148px;
   height: 148px;
   border-radius: 50%;
-  border: 3px solid;
+  border: 3px solid var(--border-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   box-sizing: border-box;
-  background-color: #0d1527;
+  background-color: var(--bg-card); 
 }
 
 .orbit-center-img {
@@ -174,7 +175,7 @@
   width: 148px;
   height: 82px;
   border-radius: 14px;
-  border: 1px solid;
+  border: 1px solid var(--border-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -184,6 +185,7 @@
   -webkit-backdrop-filter: blur(12px);
   transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.2s ease;
   cursor: pointer;
+  background: var(--bg-glass);
 }
 
 .bubble-inner:hover {
@@ -200,7 +202,7 @@
   font-family: 'Nunito', sans-serif;
   font-size: 11.5px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--text-primary);
   text-align: center;
   line-height: 1.25;
   padding: 0 8px;
@@ -223,13 +225,13 @@
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #000;
-  background: linear-gradient(90deg, #d4af37, #f3e5ab);
+  color: var(--color-infineo-black);
+  background: var(--button-gradient);  
   border: none;
   padding: 16px 44px;
   border-radius: 50px;
   cursor: pointer;
-  box-shadow: 0 8px 28px rgba(190, 140, 74, 0.32);
+  box-shadow: var(--gold-glow);
   transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -256,8 +258,8 @@
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.22);
+  background: var(--text-muted);
+  border-color: var(--text-muted);
   transition: all 0.4s ease;
 }
 
