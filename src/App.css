@@ -4,3 +4,15 @@
   width: 100%;
   min-height: 100vh;
 }
+
+.journey-section {
+  padding: 80px 20px;
+  background: url('./assets/journey-bg.png') no-repeat center center / cover;
+  z-index: 5;
+  height: 100%; 
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+

@@ -8,11 +8,12 @@ import DemoClass from "./components/DemoClass"
 import Pricing from "./components/Pricing"
 import FloatingChatbot from "./components/FloatingChatbot"
 import Footer from "./components/Footer"
-
+import './App.css'
 function App() {
   return (
     <ThemeProvider>
       <Title/>
+      <div className="journey-background">
       <Hero/>
       <Impact/>
       <Parents/>
@@ -20,6 +21,7 @@ function App() {
       <DemoClass/>
       <Pricing/>
       <FloatingChatbot/>
+      </div>
       <Footer/>
     </ThemeProvider>
   )

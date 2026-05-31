@@ -5,17 +5,23 @@
   position: relative;
   width: 100%;
   height: 380vh;
-  background: var(--bg-primary);
-  transition: background-color 0.6s ease;
+  background-image: url('../assets/newbg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  /* background: var(--bg-primary); */
+  /* transition: background-color 0.6s ease; */
 }
 
 /* Indian Divine Theme variations driven via data attributes */
-.impact-section[data-phase="infineo"] {
-  background: var(--bg-secondary); /* Warm twilight atmosphere */
-}
+/* .impact-section[data-phase="infineo"] {
+  background: var(--bg-secondary); */
+  /* Warm twilight atmosphere */
+/* }
 .impact-section[data-phase="results"] {
-  background: var(--bg-tertiary); /* Pure fresh vibrant emerald ashram glow */
-}
+  background: var(--bg-tertiary); */
+  /* Pure fresh vibrant emerald ashram glow */
+/* } */
 
 /* ─── Sticky Viewport Container ─────────────────────── */
 .impact-sticky {
