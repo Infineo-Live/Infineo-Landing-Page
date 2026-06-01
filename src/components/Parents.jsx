@@ -1,10 +1,14 @@
 import '../styles/Parents.css';
+import neoMascot from '../assets/website-neo.png';
 
 const Parents = () => {
   return (
     <section className="parents-section" id="parents">
       {/* Full-bleed background image */}
       <div className="parents-bg" aria-hidden="true" />
+
+      {/* Neo Mascot — floating left bottom */}
+      <img src={neoMascot} alt="Neo mascot" className="parents-neo" />
 
       {/* Soft overlay to give depth
       <div className="parents-overlay" aria-hidden="true" /> */}

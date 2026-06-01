@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import '../styles/DemoClass.css';
+import neoMascot from '../assets/website-neo.png';
+import neo2Mascot from '../assets/neo-version/neo2.png';
 
 const REWARDS = [
   { icon: '✏️', label: 'Drawing Sheet',  color: '#5B8DEF', pos: 'top-right'    },
@@ -16,14 +18,14 @@ export default function DemoClass() {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const containerRef = useRef(null);
-  const [visible, setVisible] = useState(false);
+  const neoRef = useRef(null);
+  const neo2Ref = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          setVisible(true);
         }
       },
       { threshold: 0.1 }
@@ -31,6 +33,26 @@ export default function DemoClass() {
     if (containerRef.current) observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, []);
+
+  // ─ Scroll animation for neo2 image ─
+  useEffect(() => {
+    const handleScroll = () => {
+      if (neo2Ref.current && containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const scrollProgress = 1 - (rect.top / window.innerHeight);
+        const clampedProgress = Math.max(0, Math.min(1, scrollProgress));
+        
+        // Apply translateY and opacity based on scroll
+        neo2Ref.current.style.transform = `translateY(${-20 + clampedProgress * 20}px)`;
+        neo2Ref.current.style.opacity = Math.min(1, 0.3 + clampedProgress * 0.7);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // ─ form handlers ─
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,7 +74,7 @@ export default function DemoClass() {
       <div className="demo-ambient" />
 
       {/* ── PART 1: Trial Completion Reward ── */}
-      <div className={`reward-section ${visible ? 'in-view' : ''}`}>
+      <div className="reward-section">
         <div className="reward-left">
           <span className="demo-badge">
             <span className="badge-star">★</span> Trial Completion Reward
@@ -107,46 +129,11 @@ export default function DemoClass() {
         <div className="demo-info">
           <h2 className="demo-title">Get a FREE 30-Minute Demo Class</h2>
           <p className="demo-subtitle">Tailored to your child's learning journey</p>
-
-          <div className="demo-benefits">
-            <div className="benefit-item">
-              <span className="benefit-icon">🎯</span>
-              <div>
-                <h4>Personalized Session</h4>
-                <p>Tailored to your child's learning style and interests</p>
-              </div>
-            </div>
-            <div className="benefit-item">
-              <span className="benefit-icon">👨‍🏫</span>
-              <div>
-                <h4>Expert Guidance</h4>
-                <p>Meet our experienced instructors and understand our teaching methodology</p>
-              </div>
-            </div>
-            <div className="benefit-item">
-              <span className="benefit-icon">🏆</span>
-              <div>
-                <h4>Module Preview</h4>
-                <p>Explore one of our 7 sacred modules and see how your child learns</p>
-              </div>
-            </div>
-            <div className="benefit-item">
-              <span className="benefit-icon">💡</span>
-              <div>
-                <h4>Personal Recommendation</h4>
-                <p>Receive guidance on the best module and schedule for your child</p>
-              </div>
-            </div>
-          </div>
-
+          <img src={neo2Mascot} alt="Neo mascot 2" className="neo-demo-image" ref={neo2Ref}/>
           <div className="demo-highlights">
             <div className="highlight">
               <span className="highlight-number">30</span>
               <span className="highlight-text">Minutes</span>
-            </div>
-            <div className="highlight">
-              <span className="highlight-number">100%</span>
-              <span className="highlight-text">FREE</span>
             </div>
             <div className="highlight">
               <span className="highlight-number">1-on-1</span>
@@ -157,6 +144,9 @@ export default function DemoClass() {
 
         {/* Right side - Form */}
         <div className="demo-form-container" id="book">
+          {/* Neo mascot behind form */}
+          <img src={neoMascot} alt="Neo mascot" className="neo-form-bg" ref={neoRef} />
+          
           <form onSubmit={handleSubmit} className="demo-form">
             <h3>Book Your Demo Class</h3>
 

@@ -13,17 +13,17 @@ import './App.css'
 function App() {
   return (
     <ThemeProvider>
-      <Title/>
-      <Hero/>
+      <Title />
+      <Hero />
       <div className="journey-background">
-      <Impact/>
-      <Parents/>
-      <Modules/>
-      <DemoClass/>
-      <Pricing/>
-      <FloatingChatbot/>
+        <Impact />
+        <Parents />
+        <Modules />
+        <DemoClass />
+        <Pricing />
+        <FloatingChatbot />
       </div>
-      <Footer/>
+      <Footer />
     </ThemeProvider>
   )
 }

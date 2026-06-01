@@ -4,12 +4,39 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
+  position: relative;
 }
+
+/* Subtle overlay so text reads clearly over background (commented out)
+.pricing-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(var(--bg-primary-rgb, 17, 43, 71), 0.6);
+  pointer-events: none;
+  z-index: 0;
+}
+*/
 
 .pricing-container {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  position: relative;
+  z-index: 2; /* ensure content above overlay */
+}
+
+.pricing-container::before {
+  content: '';
+  position: absolute;
+  inset: 6% auto 6% auto;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1250px, 98%);
+  border-radius: 14px;
+  pointer-events: none;
+  z-index: 0; /* overlay sits beneath content */
+  background: linear-gradient(180deg, rgba(231,184,96,0.06), rgba(17,43,71,0.18));
 }
 
 /* Header */

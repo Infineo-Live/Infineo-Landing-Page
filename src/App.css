@@ -7,11 +7,51 @@
 
 /* App.css */
 .journey-background {
-  background-image: url('./assets/newbg.png');
+  background-image: url('./assets/newbg3.png'); /* dark-mode default */
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
   background-attachment: fixed; /* or scroll */
+}
+
+/* Light mode background override (uses newbg2.png as light-friendly image)
+   If you have `newbg3-light.png`, replace `newbg2.png` below with that filename. */
+[data-theme="light"] .journey-background {
+  background-image: url('./assets/newbg3-light.png');
+}
+
+/* Cursor sparkle styles */
+.cursor-sparkle {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  transform: scale(0.2) rotate(0deg);
+  opacity: 0.95;
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+  transition: transform 0.9s cubic-bezier(.22,.9,.43,1), opacity 0.9s ease-out;
+  z-index: 99999;
+}
+
+.cursor-sparkle--animate {
+  transform: scale(1.4) rotate(20deg) translateY(-12px);
+  opacity: 0;
+}
+
+@media (hover: none), (pointer: coarse) {
+  /* disable for touch devices */
+  .cursor-sparkle { display: none !important; }
+}
+
+/* Optional subtle trailing glow using theme variable */
+.cursor-sparkle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  opacity: 0.8;
+  filter: blur(6px);
 }
 
 

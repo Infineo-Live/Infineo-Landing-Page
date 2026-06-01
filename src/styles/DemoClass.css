@@ -11,6 +11,15 @@
   overflow: hidden;
 }
 
+/* .demo-class-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(var(--bg-primary-rgb, 17, 43, 71), 0.62);
+  pointer-events: none;
+  z-index: 0;
+} */
+
 .demo-ambient {
   position: absolute;
   width: 700px;
@@ -255,16 +264,29 @@
 .demo-container {
   position: relative;
   z-index: 2;
-  max-width: 1200px;
+  max-width: 1300px; /* allow extra room for 620px neo + form */
   margin: 0 auto;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 1fr; /* left column sizes to content (neo), right column grows */
   gap: 60px;
   align-items: center;
 }
 
-.demo-info { animation: slideInLeft 0.8s ease-out; }
+.demo-container::before {
+  content: '';
+  position: absolute;
+  inset: 6% auto 6% auto;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1250px, 98%);
+  border-radius: 14px;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(231,184,96,0.06), rgba(17,43,71,0.18));
+}
+
+.demo-info { animation: slideInLeft 0.8s ease-out; max-width: 680px; }
 
 @keyframes slideInLeft {
   from { opacity: 0; transform: translateX(-50px); }
@@ -336,6 +358,7 @@
   box-shadow: var(--card-shadow);
   border-top: 5px solid var(--accent-primary);
   border: 1px solid var(--border-primary);
+  max-width: 540px; /* keep form readable beside large mascot */
 }
 .demo-form h3 {
   font-family: 'Cinzel', serif; font-size: 28px;
@@ -363,6 +386,17 @@
 .form-group input::placeholder { color: var(--text-muted); opacity: 0.6; }
 
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+/* Neo image sizing & alignment for desktop */
+.neo-image {
+  width: 620px;
+  height: auto;
+  display: block;
+  margin: 0 auto 12px auto;
+  transform-origin: 50% 50%;
+  transition: transform 300ms cubic-bezier(.2,.9,.3,1);
+  z-index: 3; /* above content overlays */
+}
 
 .success-message {
   background: linear-gradient(135deg, rgba(42,157,143,0.1), rgba(190,140,74,0.1));
@@ -412,6 +446,7 @@
   .reward-right { height: 400px; max-width: 520px; margin: 0 auto; width: 100%; }
   .demo-title { font-size: 40px; }
   .demo-subtitle { font-size: 20px; }
+  .demo-form { max-width: 720px; }
 }
 
 @media (max-width: 768px) {
@@ -428,9 +463,12 @@
   .demo-highlights { gap: 20px; padding: 20px 0; }
   .highlight-number { font-size: 32px; }
   .highlight-text { font-size: 12px; }
-  .demo-form { padding: 30px; }
+  .demo-form { padding: 30px; max-width: 100%; }
   .demo-form h3 { font-size: 24px; }
   .form-row { grid-template-columns: 1fr; }
+
+  /* reduce neo size for smaller screens */
+  .neo-image { width: 160px; margin: 12px auto; }
 }
 
 @media (max-width: 480px) {
@@ -453,4 +491,50 @@
   .form-group input,
   .form-group select { padding: 10px 12px; font-size: 13px; }
   .submit-btn { padding: 14px; font-size: 14px; }
+}
+
+/* Neo mascot 2D scroll animation styling */
+.neo-image {
+  width: 620px;
+  height: auto;
+  align-items: center;
+  display: block;
+  margin: 18px 0 12px 0;
+  transform-origin: 50% 50%;
+  transition: transform 300ms cubic-bezier(.2,.9,.3,1);
+  z-index: 3; /* above content overlays */
+}
+
+/* Neo mascot background in form section */
+.neo-form-bg {
+  position: absolute;
+  bottom: -40px;
+  right: -60px;
+  width: 380px;
+  height: auto;
+  z-index: 1;
+  opacity: 0.15;
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+/* Neo mascot in demo info section with scroll animation */
+.neo-demo-image {
+  width: 280px;
+  height: auto;
+  margin: 30px 0 30px 0;
+  display: block;
+  opacity: 0.3;
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .neo-image {
+    width: 160px;
+  }
+  
+  .neo-demo-image {
+    width: 200px;
+  }
 }

@@ -1,14 +1,34 @@
+import { useRef, useEffect } from 'react';
 import '../styles/Hero.css';
+import neoLeft from '../assets/neo-version/neo.png';
+import neoRight from '../assets/neo-version/neo2.png';
 
 const Hero = () => {
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (heroRef.current) observer.observe(heroRef.current);
+    return () => observer.disconnect();
+  }, []);
   return (
 
-    <section className="hero" id="home">
+    <section className="hero" id="home" ref={heroRef}>
       <video className="hero-video" autoPlay muted loop playsInline>
         <source src="/bg-video2.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div className="hero-overlay" />
+
+      {/* Neo Characters — left and right edges */}
+      <img src={neoLeft} alt="Neo character rii" className="hero-neo-right" />
 
       {/* Content */}
       <div className="hero-content">
