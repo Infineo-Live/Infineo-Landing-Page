@@ -10,9 +10,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  border: 1px solid var(--border-primary);
+  border-radius: 50px;
   background: var(--module-bg);
   overflow: hidden;
+  margin: 20px 0px 20px;
 }
 
 /* Stars pseudo-layer */
@@ -76,7 +78,7 @@
   line-height: 1.7;
 }
 
-/* ─── Game Map Wrapper ───────────────────────────────────── */
+/*  Game Map Wrapper  */
 .game-map-wrapper {
   position: relative;
   width: 100%;
@@ -86,7 +88,7 @@
   margin: 0 auto;
 }
 
-/* ─── Path SVG ───────────────────────────────────────────── */
+/*  Path SVG  */
 .path-svg {
   position: absolute;
   inset: 0;
@@ -96,7 +98,7 @@
   z-index: 1;
 }
 
-/* ─── Level Node ─────────────────────────────────────────── */
+/*  Level Node  */
 .level-node {
   position: absolute;
   transform: translate(-50%, calc(-50% + 20px)) scale(0.85);
@@ -113,7 +115,7 @@
   transform: translate(-50%, -50%) scale(0.95);
 }
 
-/* ─── God Image (large, centered, above badge) ─────────────── */
+/*  God Image (large, centered, above badge)  */
 .level-god-img {
   width: clamp(92px, 8.8vw, 164px);
   height: clamp(92px, 8.8vw, 164px);
@@ -161,7 +163,7 @@
   transform: translateY(-6px) scale(1.08);
 }
 
-/* ─── Gold circle badge with level number ───────────────── */
+/*  Gold circle badge with level number  */
 .level-badge {
   position: relative;
   z-index: 3;
@@ -186,7 +188,7 @@
   transform: scale(1.08);
 }
 
-/* ─── Name tag below badge ──────────────────────────────── */
+/*  Name tag below badge  */
 .level-label {
   margin-top: 8px;
   text-align: center;
@@ -228,8 +230,7 @@
   z-index: 30;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.2s ease,
-              transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: opacity 0.2s ease,transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* Arrow pointing down */
@@ -288,7 +289,7 @@
   z-index: 4;
 }
 
-/* ─── Journey End marker ─────────────────────────────────── */
+/*  Journey End marker  */
 .journey-end {
   position: absolute;
   right: 2%;
@@ -314,7 +315,7 @@
   line-height: 1.5;
 }
 
-/* ─── Bottom Feature Pills ───────────────────────────────── */
+/*  Bottom Feature Pills  */
 .modules-features {
   position: relative;
   z-index: 2;
@@ -340,7 +341,7 @@
   white-space: nowrap;
 }
 
-/* ─── Responsive ─────────────────────────────────────────── */
+/*  Responsive  */
 @media (max-width: 900px) {
   .game-map-wrapper {
     aspect-ratio: 16 / 9;
@@ -384,7 +385,7 @@
 }
 
 
-/* ─── Scroll-reveal animations ───────────────────────────── */
+/*  Scroll-reveal animations  */
 
 .level-node.is-visible {
   opacity: 1;

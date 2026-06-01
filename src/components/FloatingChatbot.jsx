@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
+import { useTheme } from '../context/ThemeContext';
 import '../styles/FloatingChatbot.css';
 
 export default function FloatingChatbot() {
+  const { theme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
@@ -13,6 +15,7 @@ export default function FloatingChatbot() {
   const [userInput, setUserInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
 
   const faqs = [
     {
@@ -65,6 +68,13 @@ export default function FloatingChatbot() {
     scrollToBottom();
   }, [messages]);
 
+  useEffect(() => {
+    if (isOpen) {
+      // focus input when panel opens for faster interaction
+      setTimeout(() => inputRef.current?.focus(), 120);
+    }
+  }, [isOpen]);
+
   const generateBotResponse = (input) => {
     const lowerInput = input.toLowerCase();
 
@@ -116,6 +126,10 @@ export default function FloatingChatbot() {
     }, 800);
   };
 
+  // theme-aware avatar and button icon
+  const avatarIcon = theme === 'dark' ? '🌟' : '🌞';
+  const floatingIcon = theme === 'dark' ? '💬' : '🗨️';
+
   return (
     <>
       {/* Floating Button */}
@@ -123,17 +137,18 @@ export default function FloatingChatbot() {
         className="chatbot-floating-btn"
         onClick={() => setIsOpen(!isOpen)}
         title="Open Infineo Assistant"
+        aria-pressed={isOpen}
       >
-        <span className="chatbot-btn-icon">💬</span>
+        <span className="chatbot-btn-icon">{floatingIcon}</span>
       </button>
 
       {/* Chatbot Panel */}
       {isOpen && (
-        <div className="chatbot-panel">
+        <div className="chatbot-panel" role="dialog" aria-label="Infineo assistant">
           {/* Header */}
           <div className="chatbot-panel-header">
             <div className="chatbot-panel-header-content">
-              <div className="chatbot-panel-avatar">✨</div>
+              <div className="chatbot-panel-avatar">{avatarIcon}</div>
               <div>
                 <h3 className="chatbot-panel-title">Infineo Assistant</h3>
                 <p className="chatbot-panel-status">Always here to help</p>
@@ -151,8 +166,8 @@ export default function FloatingChatbot() {
           {/* Messages */}
           <div className="chatbot-messages">
             {messages.map((msg, idx) => (
-              <div key={idx} className={`chatbot-message ${msg.type}`}>
-                {msg.type === 'bot' && <span className="chatbot-message-avatar">🌟</span>}
+              <div key={idx} className={`chatbot-message ${msg.type}`} style={{ animationDelay: `${idx * 40}ms` }}>
+                {msg.type === 'bot' && <span className="chatbot-message-avatar">{avatarIcon}</span>}
                 <div className="chatbot-message-bubble">
                   {msg.hasTyped ? (
                     <p>{msg.text}</p>
@@ -167,8 +182,8 @@ export default function FloatingChatbot() {
               </div>
             ))}
             {isTyping && (
-              <div className="chatbot-message bot">
-                <span className="chatbot-message-avatar">🌟</span>
+              <div className="chatbot-message bot" style={{ animationDelay: `${messages.length * 40}ms` }}>
+                <span className="chatbot-message-avatar">{avatarIcon}</span>
                 <div className="chatbot-message-bubble typing">
                   <span></span>
                   <span></span>
@@ -200,6 +215,7 @@ export default function FloatingChatbot() {
           {/* Input */}
           <div className="chatbot-input-area">
             <input
+              ref={inputRef}
               type="text"
               placeholder="Ask me anything..."
               value={userInput}
@@ -207,6 +223,7 @@ export default function FloatingChatbot() {
               onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
               className="chatbot-input"
               disabled={isTyping}
+              aria-label="Chat message input"
             />
             <button 
               onClick={handleSendMessage}

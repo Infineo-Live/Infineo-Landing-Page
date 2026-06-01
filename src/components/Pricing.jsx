@@ -157,48 +157,6 @@ export default function Pricing() {
             </div>
           ))}
         </div>
-
-        {/* Additional Info */}
-        <div className="pricing-info">
-          <div className="info-item">
-            <span className="info-icon">📅</span>
-            <div>
-              <h4>Flexible Scheduling</h4>
-              <p>Classes available 7 days a week, morning to evening slots</p>
-            </div>
-          </div>
-
-          <div className="info-item">
-            <span className="info-icon">🔄</span>
-            <div>
-              <h4>Pause Anytime</h4>
-              <p>Life happens! You can pause your subscription for up to 2 months</p>
-            </div>
-          </div>
-
-          <div className="info-item">
-            <span className="info-icon">💰</span>
-            <div>
-              <h4>Money-Back Guarantee</h4>
-              <p>Not satisfied? Get 100% refund within first 7 days</p>
-            </div>
-          </div>
-
-          <div className="info-item">
-            <span className="info-icon">🎁</span>
-            <div>
-              <h4>Referral Rewards</h4>
-              <p>Refer a friend and get 1 free month on us!</p>
-            </div>
-          </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="pricing-cta">
-          <h3>Ready to Join Infineo?</h3>
-          <p>Start with a free 30-minute demo class and see the difference</p>
-          <button className="primary-cta-btn">Book Your Free Demo</button>
-        </div>
       </div>
     </section>
   );

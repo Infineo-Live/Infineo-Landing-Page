@@ -9,12 +9,13 @@ import Pricing from "./components/Pricing"
 import FloatingChatbot from "./components/FloatingChatbot"
 import Footer from "./components/Footer"
 import './App.css'
+
 function App() {
   return (
     <ThemeProvider>
       <Title/>
-      <div className="journey-background">
       <Hero/>
+      <div className="journey-background">
       <Impact/>
       <Parents/>
       <Modules/>

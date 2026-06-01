@@ -12,13 +12,13 @@
 }
 
 /* Full-bleed background  */
-.parents-bg {
+/* .parents-bg {
   position: absolute;
   inset: 0;
   background: url('../assets/bg.png') no-repeat center center / cover;
   z-index: 0;
   opacity: 1;
-}
+} */
 
 /* Warm dark vignette overlay — dims background, keeps image atmospheric */
 .parents-overlay {

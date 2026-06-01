@@ -84,8 +84,8 @@ const PHASES = [
 export default function Impact() {
   const sectionRef = useRef(null);
   const [phase, setPhase] = useState(0);
-  const [progress, setProgress] = useState(0); // Value from 0 to 1 inside current phase
-  const [overallProgress, setOverallProgress] = useState(0); // Value from 0 to 1 for entire section
+  const [progress, setProgress] = useState(0); 
+  const [overallProgress, setOverallProgress] = useState(0); 
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
@@ -127,7 +127,7 @@ export default function Impact() {
   const panelOpacity = progress < 0.08 ? progress / 0.08 : progress > 0.88 ? 1 - (progress - 0.88) / 0.12 : 1;
 
   // SVG circular measurements (Radius = 190, Diameter = 380)
-  const radius = 190;
+  const radius = 210;
   const circumference = 2 * Math.PI * radius; // ~1193.8
   // Compute how much of the circular arc path needs to light up based on scrolling progress
   const strokeDashoffset = circumference - progress * circumference;
@@ -209,7 +209,6 @@ export default function Impact() {
           </div>
 
           {/* Context Bubble Map */}
-          {/* Context Bubble Map */}
           {current.bubbles.map((bubble, i) => {
             const fractionStep = 1 / current.bubbles.length;
             const isBubbleActive = progress >= i * fractionStep;
@@ -220,11 +219,8 @@ export default function Impact() {
                 className={`orbit-bubble ${isBubbleActive ? 'revealed' : ''}`}
                 style={{
                   /* This combines the structural -50% centering shift with your 
-                    calculated X/Y variables directly inside a single property
-                  */
-                  transform: `translate(calc(-50% + ${bubble.x}px), calc(-50% + ${bubble.y}px))`,
-                }}
-              >
+                    calculated X/Y variables directly inside a single property */
+                  transform: `translate(calc(-50% + ${bubble.x}px), calc(-50% + ${bubble.y}px))`,}}>
                 <div
                   className="bubble-inner"
                   style={{

@@ -93,11 +93,78 @@
   --letter-spacing-widest:   2px;
 }
 
-/* ═══════════════════════════════════════════════════════
+/* 
    DARK MODE — Enchanted Starlit Kingdom
    Deep midnight sky, celestial golds, stardust magic
-   ═══════════════════════════════════════════════════════ */
+    */
 :root,
+[data-theme="light"] {
+  /* Backgrounds — warm ivory parchment */
+  --bg-primary:   #fdf6e3;
+  --bg-secondary: #f7ead0;
+  --bg-tertiary:  #f0ddb8;
+  --bg-card:      #fffef9;
+  --bg-glass:     rgba(255, 248, 225, 0.88);
+  --bg-overlay:   rgba(20, 35, 55, 0.06);
+
+  /* Text — warm ink, not cool blue */
+  --text-primary:   #2a1f0e;
+  --text-secondary: #5c4a2a;
+  --text-muted:     #9a8468;
+  --text-inverse:   #fdf6e3;
+
+  /* Accent — warm honey gold */
+  --accent-primary: #b06a20;
+  --accent-hover:   #c87e28;
+  --accent-soft:    #d4983a;
+  --accent-dark:    #7a4810;
+
+  /* Inputs */
+  --input-bg:           #ffffff;
+  --input-border:       rgba(160, 100, 40, 0.28);
+  --input-border-hover: rgba(160, 100, 40, 0.50);
+  --input-border-focus: rgba(160, 100, 40, 0.75);
+
+  /* Borders */
+  --border-primary:   rgba(160, 100, 40, 0.28);
+  --border-secondary: rgba(160, 100, 40, 0.15);
+  --border-light:     rgba(20, 35, 55, 0.08);
+
+  /* ✨ Magic Effects */
+  --section-glow: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(180, 110, 30, 0.12), transparent);
+  --card-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.90) inset,
+    0 2px 0 rgba(160, 100, 40, 0.10) inset,
+    0 8px 24px rgba(60, 35, 10, 0.10),
+    0 2px 6px  rgba(60, 35, 10, 0.07);
+  --button-gradient: linear-gradient(135deg, #b06a20 0%, #d4983a 50%, #c07828 100%);
+  --gold-glow:
+    0 0 10px rgba(180, 110, 30, 0.35),
+    0 0 28px rgba(180, 110, 30, 0.15),
+    0 0 56px rgba(180, 110, 30, 0.07);
+
+  /* Semantic */
+  --success: #1a7a58;
+  --error:   #b82020;
+  --warning: #b06010;
+  --info:    #2060b0;
+
+  --module-bg: url('../assets/module-light-bg.png') no-repeat center center / cover;
+
+  /* ── Magical extras ─────────────────────────────── */
+  --star-color:    rgba(160, 100, 40, 0.40);
+  --nebula-teal:   rgba(15, 140, 160, 0.06);
+  --nebula-purple: rgba(110, 60, 180, 0.05);
+  --shimmer-gradient:
+    linear-gradient(
+      105deg,
+      transparent 20%,
+      rgba(220, 170, 80, 0.20) 40%,
+      rgba(220, 170, 80, 0.32) 50%,
+      rgba(220, 170, 80, 0.20) 60%,
+      transparent 80%
+    );
+}
 [data-theme="dark"] {
   /* Backgrounds — layered cosmic night */
   --bg-primary:   #080f1e;
@@ -165,78 +232,12 @@
     );
 }
 
-/* ═══════════════════════════════════════════════════════
+/* 
    LIGHT MODE — Sunlit Storybook Kingdom
    Warm parchment, honey gold, soft dawn light
-   ═══════════════════════════════════════════════════════ */
-[data-theme="light"] {
-  /* Backgrounds — warm ivory parchment */
-  --bg-primary:   #fffdf5;
-  --bg-secondary: #fef8e8;
-  --bg-tertiary:  #fdf2d8;
-  --bg-card:      rgba(255, 253, 245, 0.97);
-  --bg-glass:     rgba(255, 248, 220, 0.78);
-  --bg-overlay:   rgba(20, 40, 70, 0.04);
+    */
 
-  /* Text — deep ink navy */
-  --text-primary:   #1a2e4a;
-  --text-secondary: #2c4868;
-  --text-muted:     #7a8898;
-  --text-inverse:   #fdf0ce;
-
-  /* Accent — warm honey gold */
-  --accent-primary: #c08040;
-  --accent-hover:   #d89828;
-  --accent-soft:    #e8b040;
-  --accent-dark:    #8a5828;
-
-  /* Inputs */
-  --input-bg:           rgba(255, 255, 255, 0.99);
-  --input-border:       rgba(192, 128, 64, 0.22);
-  --input-border-hover: rgba(192, 128, 64, 0.40);
-  --input-border-focus: rgba(192, 128, 64, 0.65);
-
-  /* Borders */
-  --border-primary:   rgba(192, 128, 64, 0.22);
-  --border-secondary: rgba(192, 128, 64, 0.12);
-  --border-light:     rgba(20, 40, 70, 0.07);
-
-  /* ✨ Magic Effects */
-  --section-glow:    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(192, 128, 64, 0.10), transparent);
-  --card-shadow:
-    0 2px 0 rgba(192, 128, 64, 0.12) inset,
-    0 16px 48px rgba(20, 40, 70, 0.10),
-    0 4px 12px rgba(20, 40, 70, 0.06);
-  --button-gradient: linear-gradient(135deg, #c9944e 0%, #f5d078 50%, #e8b445 100%);
-  --gold-glow:
-    0 0 10px rgba(192, 128, 64, 0.40),
-    0 0 28px rgba(192, 128, 64, 0.18),
-    0 0 56px rgba(192, 128, 64, 0.08);
-
-  /* Semantic */
-  --success: #059669;
-  --error:   #dc2626;
-  --warning: #d97706;
-  --info:    #3b82f6;
-
-  --module-bg: url('../assets/module-light-bg.png') no-repeat center center / cover;
-
-  /* ── Magical extras ─────────────────────────────── */
-  --star-color:    rgba(192, 128, 64, 0.35);
-  --nebula-teal:   rgba(20, 160, 180, 0.05);
-  --nebula-purple: rgba(120, 70, 200, 0.04);
-  --shimmer-gradient:
-    linear-gradient(
-      105deg,
-      transparent 20%,
-      rgba(255, 220, 100, 0.22) 40%,
-      rgba(255, 220, 100, 0.36) 50%,
-      rgba(255, 220, 100, 0.22) 60%,
-      transparent 80%
-    );
-}
-
-/* ─── Global Resets ──────────────────────────────────── */
+/*  Global Resets  */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -256,7 +257,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Typography ─────────────────────────────────────── */
+/*  Typography  */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-primary);
   font-weight: var(--font-weight-bold);
@@ -288,13 +289,13 @@ a {
 
 a:hover { color: var(--accent-hover); }
 
-/* ─── Selection ──────────────────────────────────────── */
+/* Selection  */
 ::selection {
   background: rgba(212, 160, 85, 0.30);
   color: var(--text-primary);
 }
 
-/* ─── Form Elements ──────────────────────────────────── */
+/*  Form Elements  */
 input, textarea, select {
   font-family: var(--font-secondary);
   background-color: var(--input-bg);
@@ -318,7 +319,7 @@ input:focus, textarea:focus, select:focus {
 
 input::placeholder { color: var(--text-muted); }
 
-/* ─── Buttons ────────────────────────────────────────── */
+/*  Buttons  */
 button {
   font-family: var(--font-primary);
   font-weight: var(--font-weight-bold);
@@ -330,7 +331,7 @@ button {
   border-radius: var(--radius-lg);
 }
 
-/* ─── Scrollbar ──────────────────────────────────────── */
+/*  Scrollbar  */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 
 ::-webkit-scrollbar-track {
@@ -346,14 +347,14 @@ button {
 
 ::-webkit-scrollbar-thumb:hover { background: var(--accent-soft); }
 
-/* ─── Shadows (convenience classes) ─────────────────── */
+/*  Shadows (convenience classes)  */
 .shadow-sm  { box-shadow: 0 2px  12px rgba(0,0,0,0.08); }
 .shadow-md  { box-shadow: 0 6px  24px rgba(0,0,0,0.12); }
 .shadow-lg  { box-shadow: 0 12px 40px rgba(0,0,0,0.16); }
 .shadow-xl  { box-shadow: 0 20px 60px rgba(0,0,0,0.20); }
 .shadow-glow{ box-shadow: var(--gold-glow); }
 
-/* ─── Magic Card base ────────────────────────────────── */
+/*  Magic Card base  */
 .magic-card {
   background: var(--bg-card);
   border: 1px solid var(--border-primary);
@@ -390,7 +391,7 @@ button {
   animation: shimmerSweep 0.7s ease forwards;
 }
 
-/* ─── Animations ─────────────────────────────────────── */
+/*  Animations  */
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
