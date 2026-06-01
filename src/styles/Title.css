@@ -547,3 +547,10 @@ html.dark .theme-toggle__container:hover .theme-toggle__sun {
     )
   );
 }
+
+.nav-theme-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+

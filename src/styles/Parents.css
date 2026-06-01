@@ -27,24 +27,6 @@
   z-index: 1;
 }
 
-/* ── Neo Mascot (Parents Section) ── */
-.parents-neo {
-  position: absolute;
-  bottom: 8%;
-  left: 3%;
-  width: 240px;
-  height: auto;
-  z-index: 1;
-  opacity: 0.7;
-  filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.3));
-  animation: parentsNeoWave 6s ease-in-out infinite;
-}
-
-@keyframes parentsNeoWave {
-  0%, 100% { transform: translateY(0) rotateZ(-2deg); }
-  50% { transform: translateY(-20px) rotateZ(2deg); }
-}
-
 /* ── Letter card ── */
 .letter-wrapper {
   position: relative;

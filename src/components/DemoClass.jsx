@@ -25,7 +25,7 @@ export default function DemoClass() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          entry.target.classList.add('in-view');
         }
       },
       { threshold: 0.1 }

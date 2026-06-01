@@ -57,6 +57,7 @@ const Title = () => {
         <img src={Logo} alt="Infineo Logo" className="logo" />
 
         {/* Desktop Nav */}
+        <div className="nav-theme-wrapper" >
         <nav className="title-links" ref={navRef}>
           <span className="nav-droplet" ref={dropletRef} />
           <a href="#home">ABOUT</a>
@@ -64,7 +65,8 @@ const Title = () => {
           <a href="#how">NOTE TO PARENTS</a>
           <a href="#curriculum">CURRICULUM</a>
           <a href="#pricing">PRICING</a>
-
+          <button className="login-btn">BOOK THE DEMO</button>
+          </nav>
           {/* Theme Toggle — wired to context */}
           <button
             className="theme-toggle"
@@ -94,9 +96,10 @@ const Title = () => {
               </div>
             </div>
           </button>
+          </div>
 
-          <button className="login-btn">BOOK THE DEMO</button>
-        </nav>
+          
+        
 
         {/* Mobile Hamburger */}
         <button
