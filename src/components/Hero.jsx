@@ -1,7 +1,12 @@
 import { useRef, useEffect } from 'react';
 import '../styles/Hero.css';
-import neoLeft from '../assets/neo-version/neo.png';
 import BroadwayText from './BroadwayText';
+
+// Import your 4 individual frames
+import neo1 from '../assets/neo-version/neo.png'; // Eyes Open (neo.png)
+import neo2 from '../assets/neo-version/blink/neo2.png'; // Half-Closed
+import neo3 from '../assets/neo-version/blink/neo3.png'; // Fully Closed
+import neo4 from '../assets/neo-version/blink/neo4.png'; // Half-Closed (return transition)
 
 const Hero = () => {
   const heroRef = useRef(null);
@@ -18,19 +23,23 @@ const Hero = () => {
     if (heroRef.current) observer.observe(heroRef.current);
     return () => observer.disconnect();
   }, []);
-  return (
 
+  return (
     <section className="hero" id="home" ref={heroRef}>
       <video className="hero-video" autoPlay muted loop playsInline>
         <source src="/bg-video2.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div className="hero-overlay" />
+      
+      {/* Container containing stacked images for the fast blinking loop */}
+      <div className="hero-neo-right">
+        <img src={neo1} className="neo-frame nf1" alt="Mascot Open" />
+        <img src={neo2} className="neo-frame nf2" alt="Mascot Half Closed" />
+        <img src={neo3} className="neo-frame nf3" alt="Mascot Closed" />
+        <img src={neo4} className="neo-frame nf4" alt="Mascot Transition" />
+      </div>
 
-      {/* Neo Characters — left and right edges */}
-      <img src={neoLeft} alt="Neo character rii" className="hero-neo-right" />
-
-      {/* Content */}
       <div className="hero-content">
         {/* Decorative top label */}
         <div className="hero-label">
