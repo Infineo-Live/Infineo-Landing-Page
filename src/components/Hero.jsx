@@ -1,7 +1,6 @@
 import { useRef, useEffect } from 'react';
 import '../styles/Hero.css';
 import neoLeft from '../assets/neo-version/neo.png';
-import neoRight from '../assets/neo-version/neo2.png';
 
 const Hero = () => {
   const heroRef = useRef(null);

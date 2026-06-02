@@ -3,6 +3,7 @@ import '../styles/Pricing.css';
 
 export default function Pricing() {
   const [billingPeriod, setBillingPeriod] = useState('monthly');
+  const [selectedPlan, setSelectedPlan] = useState(2);
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -57,7 +58,6 @@ export default function Pricing() {
         'Monthly progress report',
         'Parent webinar access'
       ],
-      highlighted: true,
       color: 'popular'
     },
     {
@@ -86,6 +86,7 @@ export default function Pricing() {
   return (
     <section className="pricing-section" ref={containerRef}>
       <div className="pricing-container">
+
         {/* Header */}
         <div className="pricing-header">
           <h2 className="pricing-title">Flexible Pricing Plans</h2>
@@ -113,10 +114,11 @@ export default function Pricing() {
           {plans.map((plan, index) => (
             <div
               key={plan.id}
-              className={`pricing-card ${plan.highlighted ? 'highlighted' : ''} ${plan.color}`}
+              className={`pricing-card ${selectedPlan === plan.id ? 'highlighted' : ''} ${plan.color}`}
               style={{ animationDelay: `${index * 0.15}s` }}
+              onClick={() => setSelectedPlan(plan.id)}
             >
-              {plan.highlighted && <div className="popular-badge">POPULAR</div>}
+              {plan.id === 2 && <div className="popular-badge">POPULAR</div>}
 
               <div className="card-header">
                 <span className="plan-icon">{plan.icon}</span>
@@ -143,7 +145,9 @@ export default function Pricing() {
                 )}
               </div>
 
-              <button className="cta-btn">Get Started</button>
+              <button className="cta-btn" onClick={(e) => e.stopPropagation()}>
+                Get Started
+              </button>
 
               <div className="features-list">
                 <p className="features-title">What's Included:</p>
@@ -157,6 +161,7 @@ export default function Pricing() {
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

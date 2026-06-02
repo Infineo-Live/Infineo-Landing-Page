@@ -1,4 +1,6 @@
 import { ThemeProvider } from "./context/ThemeContext"
+import { useEffect } from "react"
+import initCursorSparkles from "./utils/cursorSparkles"
 import Title from "./components/Title"
 import Hero from "./components/Hero"
 import Impact from "./components/Impact"
@@ -11,6 +13,14 @@ import Footer from "./components/Footer"
 import './App.css'
 
 function App() {
+  useEffect(() => {
+    const cleanup = initCursorSparkles({
+      minInterval: 60,      // was 30 — fires less often
+      extraChance: 0.12,    // was 0.32 — fewer bonus particles
+      clickBurst: 6,        // was 12 — lighter click burst
+    });
+    return cleanup;
+  }, []);
   return (
     <ThemeProvider>
       <Title />

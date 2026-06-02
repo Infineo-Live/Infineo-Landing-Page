@@ -144,11 +144,11 @@ export default function Modules() {
           </div>
         ))}
 
-        {/* Journey end marker */}
+        {/* Journey end marker
         <div className="journey-end">
           <span>∞</span>
           <p>The journey<br />never ends!</p>
-        </div>
+        </div> */}
 
       </div>
 

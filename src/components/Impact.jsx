@@ -1,252 +1,198 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import '../styles/Impact.css';
 import sadChild from '../assets/distressed-child.png';
 import neoMascot from '../assets/website-neo.png';
 import happyChild from '../assets/child-after.png';
 
-function orbitalBubbles(items, radiusPx, startAngle = -90) {
-  return items.map((item, i) => {
-    const angle = ((360 / items.length) * i + startAngle) * (Math.PI / 180);
-    return {
-      ...item,
-      x: Math.cos(angle) * radiusPx,
-      y: Math.sin(angle) * radiusPx,
-    };
-  });
-}
-
-const PROBLEMS = orbitalBubbles([
-  { label: 'Screen Addiction', icon: '📱', color: '#FF6B6B' },
-  { label: 'Distracted Mind', icon: '🌪️', color: '#FF8C42' },
-  { label: 'Lack of Values', icon: '❌', color: '#E05C5C' },
-  { label: 'Stress & Anxiety', icon: '😰', color: '#C94040' },
-  { label: 'Lost Identity', icon: '🫥', color: '#FF7070' },
-  { label: 'Poor Focus', icon: '🙈', color: '#E07070' },
-], 190);
-
-const INFINEO = orbitalBubbles([
-  { label: 'Live Storytelling', icon: '📖', color: '#D4AF37' },
-  { label: '1-on-1 Sessions', icon: '🎭', color: '#C9973A' },
-  { label: 'Indian Mythology', icon: '🏛️', color: '#E8C84A' },
-  { label: 'Life Lessons', icon: '💡', color: '#D4AF37' },
-  { label: 'Expert Guides', icon: '🧙', color: '#C9973A' },
-  { label: '30-Min Magic', icon: '⏳', color: '#E8C84A' },
-], 190);
-
-const RESULTS = orbitalBubbles([
-  { label: 'Deep Focus', icon: '🎯', color: '#4ADE80' },
-  { label: 'Strong Values', icon: '🌟', color: '#34D399' },
-  { label: 'Calm & Peaceful', icon: '🧘', color: '#6EE7B7' },
-  { label: 'Inspired Daily', icon: '🚀', color: '#4ADE80' },
-  { label: 'Kind & Empathetic', icon: '💚', color: '#34D399' },
-  { label: 'Self-Confident', icon: '🦁', color: '#6EE7B7' },
-], 190);
-
-const PHASES = [
-  {
-    key: 'problem',
-    centerImage: sadChild,
-    centerLabel: 'Your Child',
-    centerBg: 'rgba(255,107,107,0.12)',
-    centerBorder: '#FF6B6B',
-    title: 'The Problem',
-    sub: 'What your child faces today',
-    titleColor: '#FF6B6B',
-    bubbles: PROBLEMS,
-    orbitColor: 'rgba(255,107,107,0.15)',
-  },
-  {
-    key: 'infineo',
-    centerImage: neoMascot,
-    centerLabel: 'Neo (Guru)',
-    centerBg: 'rgba(212,175,55,0.12)',
-    centerBorder: '#D4AF37',
-    title: 'The Infineo Way',
-    sub: 'One 30-minute session at a time',
-    titleColor: '#D4AF37',
-    bubbles: INFINEO,
-    orbitColor: 'rgba(212,175,55,0.15)',
-  },
-  {
-    key: 'results',
-    centerImage: happyChild,
-    centerLabel: 'Transformed',
-    centerBg: 'rgba(74,222,128,0.12)',
-    centerBorder: '#4ADE80',
-    title: 'The Results',
-    sub: 'A child raised with wisdom & purpose',
-    titleColor: '#4ADE80',
-    bubbles: RESULTS,
-    orbitColor: 'rgba(74,222,128,0.15)',
-  },
+const CARDS = [
+  { id: 1, phase: 'p', side: 'L', top: 12, icon: '📱', title: 'Screen Addiction', text: 'Stuck in endless digital loops.', ac: '#FF6B6B' },
+  { id: 2, phase: 'p', side: 'R', top: 22, icon: '🌪️', title: 'Distracted Mind', text: 'Struggling to sit still and focus.', ac: '#FF8C42' },
+  { id: 3, phase: 'p', side: 'L', top: 32, icon: '😰', title: 'Stress & Anxiety', text: 'Overwhelmed by modern pressures.', ac: '#C94040' },
+  { id: 4, phase: 'i', side: 'R', top: 46, icon: '📖', title: 'Live Storytelling', text: 'Narratives that weave in morals.', ac: '#D4AF37' },
+  { id: 5, phase: 'i', side: 'L', top: 56, icon: '🏛️', title: 'Indian Mythology', text: 'Connecting children to ancient roots.', ac: '#E8C84A' },
+  { id: 6, phase: 'i', side: 'R', top: 66, icon: '🎭', title: '1-on-1 Sessions', text: 'Personalised care, every session.', ac: '#C9973A' },
+  { id: 7, phase: 'r', side: 'L', top: 75, icon: '🎯', title: 'Deep Focus', text: 'Clarity of thought and purpose.', ac: '#4ADE80' },
+  { id: 8, phase: 'r', side: 'R', top: 83, icon: '🌟', title: 'Strong Values', text: 'Kind, empathetic, self-confident.', ac: '#34D399' },
+  { id: 9, phase: 'r', side: 'L', top: 91, icon: '🚀', title: 'Inspired Daily', text: 'Ready to take on the world.', ac: '#6EE7B7' },
 ];
 
+const PHASE_AVATARS = { p: sadChild, i: neoMascot, r: happyChild };
+const PHASE_BORDERS = { p: '#FF6B6B', i: '#D4AF37', r: '#4ADE80' };
+const PHASE_SHADOWS = { p: 'rgba(255,107,107,0.5)', i: 'rgba(212,175,55,0.6)', r: 'rgba(74,222,128,0.6)' };
+const PHASE_GLOWS = {
+  p: 'radial-gradient(ellipse 55% 55% at 50% 20%, rgba(180,40,40,0.18) 0%, transparent 70%)',
+  i: 'radial-gradient(ellipse 55% 55% at 50% 55%, rgba(160,120,10,0.18) 0%, transparent 70%)',
+  r: 'radial-gradient(ellipse 55% 55% at 50% 80%, rgba(20,140,70,0.18) 0%, transparent 70%)',
+};
+
 export default function Impact() {
-  const sectionRef = useRef(null);
-  const [phase, setPhase] = useState(0);
-  const [progress, setProgress] = useState(0); 
-  const [overallProgress, setOverallProgress] = useState(0); 
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const sceneRef = useRef(null);
+  const stickyRef = useRef(null);
+  const pathRef = useRef(null);
+  const waveTrackRef = useRef(null);
+  const rafRef = useRef(null);
+
+  const [progress, setProgress] = useState(0);
+  const [charPos, setCharPos] = useState({ x: 0, y: 0 });
+  const [phase, setPhase] = useState('p');
+  const [drawnLen, setDrawnLen] = useState(0);
+  const [visibleCards, setVisibleCards] = useState(new Set());
+
+  const getWavePoint = useCallback((prog) => {
+    const path = pathRef.current;
+    const track = waveTrackRef.current;
+    const sticky = stickyRef.current;
+    if (!path || !track || !sticky) return { x: 0, y: 0 };
+
+    const totalLen = path.getTotalLength();
+    const pt = path.getPointAtLength(prog * totalLen);
+    const svgEl = path.ownerSVGElement;
+    const svgRect = svgEl.getBoundingClientRect();
+    const stickyRect = sticky.getBoundingClientRect();
+
+    const scaleX = svgRect.width / 140;
+    const scaleY = svgRect.height / 800;
+
+    return {
+      x: (svgRect.left - stickyRect.left) + pt.x * scaleX,
+      y: (svgRect.top - stickyRect.top) + pt.y * scaleY,
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      const section = sectionRef.current;
-      if (!section) return;
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      const scrollY = window.scrollY;
-      const vh = window.innerHeight;
+      if (rafRef.current) return;
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+        const scene = sceneRef.current;
+        const sticky = stickyRef.current;
+        if (!scene || !sticky) return;
+        const sceneRect = scene.getBoundingClientRect();
+        const total = scene.offsetHeight - window.innerHeight;
+        const scrolled = -sceneRect.top;
+        const prog = Math.max(0, Math.min(1, scrolled / total));
 
-      const raw = (scrollY - sectionTop) / (sectionHeight - vh);
-      const total = Math.max(0, Math.min(1, raw));
+        setProgress(prog);
 
-      setOverallProgress(total);
+        const path = pathRef.current;
+        if (path) setDrawnLen(prog * path.getTotalLength());
 
-      const phaseCount = PHASES.length;
-      const sliceSize = 1 / phaseCount;
-      const phaseIdx = Math.min(phaseCount - 1, Math.floor(total / sliceSize));
-      const phaseRaw = (total - phaseIdx * sliceSize) / sliceSize;
+        const newPhase = prog > 0.66 ? 'r' : prog > 0.33 ? 'i' : 'p';
+        setPhase(newPhase);
 
-      setPhase((prev) => {
-        if (prev !== phaseIdx) {
-          setIsTransitioning(true);
-          setTimeout(() => setIsTransitioning(false), 350);
-        }
-        return phaseIdx;
+        setCharPos(getWavePoint(prog));
+
+        const next = new Set();
+        CARDS.forEach((c) => {
+          if (prog >= (c.top / 100) * 0.85 - 0.04) next.add(c.id);
+        });
+        setVisibleCards(next);
       });
-
-      setProgress(Math.max(0, Math.min(1, phaseRaw)));
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [getWavePoint]);
 
-  const current = PHASES[phase];
-  const panelOpacity = progress < 0.08 ? progress / 0.08 : progress > 0.88 ? 1 - (progress - 0.88) / 0.12 : 1;
-
-  // SVG circular measurements (Radius = 190, Diameter = 380)
-  const radius = 210;
-  const circumference = 2 * Math.PI * radius; // ~1193.8
-  // Compute how much of the circular arc path needs to light up based on scrolling progress
-  const strokeDashoffset = circumference - progress * circumference;
+  const totalLen = pathRef.current?.getTotalLength() ?? 1000;
 
   return (
-    <section className="impact-section" ref={sectionRef} data-phase={current.key}>
-      <div className="impact-sticky">
-        <div
-          className="impact-atmosphere"
-          style={{ background: `radial-gradient(circle 50% at 50% 50%, ${current.orbitColor}, transparent 70%)` }}
-        />
+    <section className="pi-scene" ref={sceneRef}>
 
-        {/* Global Progress Connecting Track */}
-        <div className="impact-progress">
-          {PHASES.map((p, i) => (
-            <div key={p.key} className="progress-track">
-              <div
-                className={`progress-dot ${phase === i ? 'active' : phase > i ? 'done' : ''}`}
-                style={phase === i ? { borderColor: current.titleColor, background: current.titleColor } : {}}
-              />
-              {i < PHASES.length - 1 && (
-                <div
-                  className="progress-line"
-                  style={{ background: phase > i ? current.titleColor : 'rgba(255,255,255,0.1)' }}
-                />
-              )}
-            </div>
-          ))}
-        </div>
+      {/* Heading lives outside sticky so it scrolls away cleanly */}
+      <div className="pi-heading">
+        <p className="pi-heading-eyebrow">Every child deserves a guiding light</p>
+        <h2 className="pi-heading-title">
+          The Journey to <span className="pi-heading-highlight">Wisdom</span>
+        </h2>
+      </div>
 
-        {/* Header content section */}
-        <div className={`impact-header ${isTransitioning ? 'swapping' : ''}`} style={{ opacity: panelOpacity }}>
-          <h2 className="impact-title" style={{ color: current.titleColor }}>
-            {current.title}
-          </h2>
-          <p className="impact-sub">{current.sub}</p>
-        </div>
+      <div className="pi-sticky" ref={stickyRef}>
 
-        {/* Structural Canvas Block */}
-        <div className={`orbital-stage ${isTransitioning ? 'swapping' : ''}`} style={{ opacity: panelOpacity }}>
+        {/* Background glow */}
+        <div className="pi-bg-glow" style={{ background: PHASE_GLOWS[phase] }} />
 
-          {/* SVG Animated Path Layer */}
-          <svg className="orbit-svg-canvas" viewBox="0 0 500 500">
-            {/* Background Base Ring */}
-            <circle
-              cx="250"
-              cy="250"
-              r={radius}
-              className="orbit-svg-base-ring"
-              style={{ stroke: current.orbitColor }}
+        {/* Wave track */}
+        <div className="pi-wave-track" ref={waveTrackRef}>
+          <svg className="pi-wave-svg" viewBox="0 0 140 800" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="wg" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#FF6B6B" />
+                <stop offset="50%" stopColor="#D4AF37" />
+                <stop offset="100%" stopColor="#4ADE80" />
+              </linearGradient>
+            </defs>
+            {/* Dashed background path */}
+            <path
+              ref={pathRef}
+              d="M70,0 C90,80 50,150 70,240 C90,330 50,410 70,490 C90,570 50,650 70,800"
+              fill="none"
+              stroke="rgba(255,255,255,0.1)"
+              strokeWidth="3"
+              strokeDasharray="6 5"
             />
-            {/* Active Drawing Path */}
-            <circle
-              cx="250"
-              cy="250"
-              r={radius}
-              className="orbit-svg-active-path"
-              style={{
-                stroke: current.titleColor,
-                strokeDasharray: circumference,
-                strokeDashoffset: strokeDashoffset,
-              }}
+            {/* Animated fill path */}
+            <path
+              d="M70,0 C90,80 50,150 70,240 C90,330 50,410 70,490 C90,570 50,650 70,800"
+              fill="none"
+              stroke="url(#wg)"
+              strokeWidth="4"
+              strokeLinecap="round"
+              strokeDasharray={`${drawnLen} ${totalLen}`}
             />
           </svg>
 
-          {/* Central Avatar */}
+          {/* Phase labels — sit inside wave-track so they're centred on the path */}
+          <span className={`pi-phase-label lbl-p ${progress < 0.33 ? 'vis' : ''}`}>
+            The Problem
+          </span>
+          <span className={`pi-phase-label lbl-i ${progress >= 0.33 && progress < 0.66 ? 'vis' : ''}`}>
+            The Infineo Way
+          </span>
+          <span className={`pi-phase-label lbl-r ${progress >= 0.66 ? 'vis' : ''}`}>
+            The Results
+          </span>
+        </div>
+
+        {/* Character node — absolute inside sticky, coords from getWavePoint */}
+        <div
+          className={`pi-char-node ${phase === 'i' ? 'float' : ''}`}
+          style={{
+            left: charPos.x,
+            top: charPos.y,
+            borderColor: PHASE_BORDERS[phase],
+            boxShadow: `0 0 22px ${PHASE_SHADOWS[phase]}`,
+          }}
+        >
+          <img src={PHASE_AVATARS[phase]} alt="Child journey" />
+        </div>
+
+        {/* Story cards */}
+        {CARDS.map((c) => (
           <div
-            className="orbit-center"
-            style={{
-              background: current.centerBg,
-              borderColor: current.centerBorder,
-              boxShadow: `0 0 50px ${current.centerBorder}25, inset 0 0 20px ${current.centerBorder}15`,
-            }}
+            key={c.id}
+            className={`pi-card side-${c.side} ${visibleCards.has(c.id) ? 'vis' : ''}`}
+            style={{ '--ac': c.ac, top: `calc(10vh + ${c.top / 100} * 80vh)` }}
           >
-            <img src={current.centerImage} alt={current.centerLabel} className="orbit-center-img" />
-            <span className="orbit-center-label" style={{ color: current.centerBorder }}>
-              {current.centerLabel}
-            </span>
+            <div className="pi-card-top">
+              <span className="pi-card-icon">{c.icon}</span>
+              <span className="pi-card-title">{c.title}</span>
+            </div>
+            <p className="pi-card-text">{c.text}</p>
+            <div className="pi-card-dot" />
           </div>
+        ))}
 
-          {/* Context Bubble Map */}
-          {current.bubbles.map((bubble, i) => {
-            const fractionStep = 1 / current.bubbles.length;
-            const isBubbleActive = progress >= i * fractionStep;
-
-            return (
-              <div
-                key={bubble.label}
-                className={`orbit-bubble ${isBubbleActive ? 'revealed' : ''}`}
-                style={{
-                  /* This combines the structural -50% centering shift with your 
-                    calculated X/Y variables directly inside a single property */
-                  transform: `translate(calc(-50% + ${bubble.x}px), calc(-50% + ${bubble.y}px))`,}}>
-                <div
-                  className="bubble-inner"
-                  style={{
-                    background: `linear-gradient(135deg, rgba(20,32,54,0.8) 0%, rgba(10,18,32,0.95) 100%)`,
-                    borderColor: isBubbleActive ? bubble.color : 'rgba(255,255,255,0.1)',
-                    boxShadow: isBubbleActive
-                      ? `0 4px 24px rgba(0,0,0,0.4), 0 0 12px ${bubble.color}25`
-                      : `0 4px 12px rgba(0,0,0,0.2)`,
-                  }}
-                >
-                  <span className="bubble-icon" style={{ textShadow: isBubbleActive ? `0 0 10px ${bubble.color}50` : 'none' }}>
-                    {bubble.icon}
-                  </span>
-                  <span className="bubble-label">{bubble.label}</span>
-                </div>
-              </div>
-            );
-          })}
+        {/* CTA */}
+        <div className={`pi-cta-zone ${progress > 0.88 ? 'vis' : ''}`}>
+          <button className="pi-cta-btn">Book a free trial →</button>
+          <span className="pi-cta-sub">No commitment · First session is free</span>
         </div>
 
-        {/* Bottom CTA Block */}
-        <div className="impact-action-zone">
-          <button className={`impact-cta ${phase === 2 ? 'visible' : ''}`}>
-            Book Free Trial →
-          </button>
-        </div>
       </div>
     </section>
   );

@@ -1,318 +1,235 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=500;700;900&family=Nunito:wght=400;600;700;800&display=swap');
-/* Impact.css */
-/* ─── Section Shell ─────────────────────────────────── */
-.impact-section {
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Cinzel:wght@700;900&display=swap');
+
+/* ── Scene shell ── */
+.pi-scene {
   position: relative;
   width: 100%;
-  height: 380vh; 
-  /* background: var(--bg-primary); */
-  /* transition: background-color 0.6s ease; */
+  height: 470vh;
+  background: #0b1422;
+  font-family: 'Nunito', sans-serif;
+  overflow: clip;
 }
 
-/* Subtle overlay so text reads clearly over shared background (commented out)
-.impact-section::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(var(--bg-primary-rgb, 17, 43, 71), 0.6);
-  pointer-events: none;
-  z-index: 0;
-}
-*/
-
-/* Indian Divine Theme variations driven via data attributes */
-/* .impact-section[data-phase="infineo"] {
-  background: var(--bg-secondary); */
-  /* Warm twilight atmosphere */
-/* }
-.impact-section[data-phase="results"] {
-  background: var(--bg-tertiary); */
-  /* Pure fresh vibrant emerald ashram glow */
-/* } */
-
-/* ─── Sticky Viewport Container ─────────────────────── */
-.impact-sticky {
+/* ── Heading — in normal flow, scrolls away before sticky kicks in ── */
+.pi-heading {
   position: sticky;
   top: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 24px 20px;
-  box-sizing: border-box;
-  overflow: hidden;
-  z-index: 2; /* ensure content renders above overlay */
-}
-
-.impact-sticky::before {
-  content: '';
-  position: absolute;
-  top: 6%;
-  bottom: 6%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(1250px, 98%);
-  border-radius: 18px;
-  pointer-events: none;
-  z-index: 0; /* below the content (which is z-index:2) */
-  background: linear-gradient(180deg, rgba(231,184,96,0.08), rgba(17,43,71,0.28));
-}
-
-.impact-atmosphere {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  transition: background 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-  z-index: 0;
-  opacity: 0.7;
-}
-
-/* ─── Header ─────────────────────────────────────────── */
-.impact-header {
+  width: 100%;
   text-align: center;
-  position: relative;
-  z-index: 5;
-  min-height: 90px;
-  transition: opacity 0.3s ease, transform 0.35s ease, filter 0.3s ease;
+  z-index: 15;
+  padding: 5vh 0 3vh;
+  background: #0b1422;
+  pointer-events: none;
 }
 
-.impact-header.swapping {
-  opacity: 0 !important;
-  transform: translateY(-10px);
-  filter: blur(4px);
+.pi-heading-eyebrow {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(11px, 1.2vw, 14px);
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0 0 10px;
 }
 
-.impact-title {
+.pi-heading-title {
   font-family: 'Cinzel', serif;
   font-size: clamp(28px, 4vw, 52px);
   font-weight: 900;
-  letter-spacing: 4px;
-  margin: 0 0 10px;
-  color: var(--text-primary); 
-}
-
-.impact-sub {
-  font-family: 'Nunito', sans-serif;
-  font-size: clamp(13px, 1.4vw, 18px);
-  font-weight: 600;
-  color: var(--text-muted); 
+  color: #fff;
+  letter-spacing: 2px;
   margin: 0;
-  letter-spacing: 0.4px;
 }
 
-/* ─── Orbital Stage Canvas ───────────────────────────── */
-.orbital-stage {
-  position: relative;
-  width: 530px;
-  height: 530px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3;
-  transition: opacity 0.3s ease, transform 0.35s ease;
+.pi-heading-highlight {
+  color: #D4AF37;
 }
 
-.orbital-stage.swapping {
-  opacity: 0.1 !important;
-  transform: scale(0.95);
+/* ── Sticky viewport ── */
+.pi-sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* SVG Path Overlay Styles */
-.orbit-svg-canvas {
+/* ── Background glow ── */
+.pi-bg-glow {
   position: absolute;
-  width: 500px;
-  height: 500px;
+  inset: 0;
   pointer-events: none;
-  transform: rotate(-90deg); /* Adjust path start node from 3 o'clock to top center */
-  z-index: 1;
+  transition: background 1s ease;
+  z-index: 0;
 }
 
-.orbit-svg-base-ring {
-  fill: none;
-  stroke-width: 1.5;
-  stroke-dasharray: 6, 6; /* Beautiful clean fallback background dash */
-  transition: stroke 0.6s ease;
-}
-
-.orbit-svg-active-path {
-  fill: none;
-  stroke-width: 3;
-  stroke-linecap: round;
-  transition: stroke 0.6s ease;
-  filter: drop-shadow(0px 0px 4px currentColor);
-}
-
-/* ─── Center Avatar ───────────────────────────────────── */
-.orbit-center {
+/* ── Wave track (centred column) ── */
+.pi-wave-track {
   position: absolute;
-  z-index: 10;
-  width: 148px;
-  height: 148px;
-  border-radius: 50%;
-  border: 3px solid var(--border-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  box-sizing: border-box;
-  background-color: var(--bg-card); 
+  left: 50%;
+  top: 10vh;
+  height: 80vh;
+  transform: translateX(-50%);
+  width: 140px;
+  z-index: 5;
+  pointer-events: none;
 }
 
-.orbit-center-img {
+.pi-wave-svg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
 }
 
-.orbit-center-label {
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+/* ── Phase labels ── */
+.pi-phase-label {
   position: absolute;
-  bottom: -32px;
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
-}
-
-/* ─── Contextual Bubble Nodes ─────────────────────────── */
-.orbit-bubble {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 12;
-  
-  /* Start hidden & compact near path track */
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 20px;
   opacity: 0;
-  transform: scale(0.7) translate(0, 0);
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+  transition: opacity 0.4s ease;
+}
+.pi-phase-label.vis { opacity: 1; }
+
+.lbl-p { top: 2%;  background: rgba(255,107,107,0.15); color: #ff8888; border: 1px solid rgba(255,107,107,0.3); }
+.lbl-i { top: 38%; background: rgba(212,175,55,0.15);  color: #e8c84a; border: 1px solid rgba(212,175,55,0.3); }
+.lbl-r { top: 72%; background: rgba(74,222,128,0.15);  color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+
+/* ── Character node — absolute inside .pi-sticky ── */
+.pi-char-node {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  transform: translate(-50%, -50%);
+  transition: border-color 0.5s ease, box-shadow 0.5s ease;
+  will-change: left, top;
+  pointer-events: none;
+}
+.pi-char-node img {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.pi-char-node.float {
+  animation: floatPulse 2s infinite ease-in-out;
+}
+@keyframes floatPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50%       { transform: translate(-50%, -55%) scale(1.06); }
 }
 
-/* Smooth pop reveal class called sequentially by scroll calculation mapping */
-.orbit-bubble.revealed {
+/* ── Story cards ── */
+.pi-card {
+  position: absolute;
+  width: 220px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  opacity: 0;
+  transform: translateY(18px) scale(0.96);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s ease;
+  z-index: 10;
+}
+.pi-card.vis {
   opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.pi-card:hover {
+  border-color: var(--ac);
+  background: rgba(255,255,255,0.11);
+  transform: translateY(-3px) scale(1.02);
 }
 
-.bubble-inner {
-  width: 148px;
-  height: 82px;
-  border-radius: 14px;
-  border: 1px solid var(--border-primary);
+.pi-card.side-L { left: calc(50% - 110px - 165px); }
+.pi-card.side-R { left: calc(50% + 110px); }
+
+.pi-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.pi-card-icon  { font-size: 26px; line-height: 1; }
+.pi-card-title { font-size: 15px; font-weight: 800; color: #fff; }
+.pi-card-text  { font-size: 12.5px; color: rgba(180,200,220,0.85); line-height: 1.55; font-weight: 600; }
+.pi-card-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--ac);
+  position: absolute; right: 14px; top: 14px;
+  opacity: 0.7;
+}
+
+/* ── CTA ── */
+.pi-cta-zone {
+  position: absolute;
+  bottom: 5vh;
+  left: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 5px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.2s ease;
-  cursor: pointer;
-  background: var(--bg-glass);
-}
-
-.bubble-inner:hover {
-  transform: scale(1.05) translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.5) !important;
-}
-
-.bubble-icon {
-  font-size: 24px;
-  line-height: 1;
-}
-
-.bubble-label {
-  font-family: 'Nunito', sans-serif;
-  font-size: 11.5px;
-  font-weight: 700;
-  color: var(--text-primary);
-  text-align: center;
-  line-height: 1.25;
-  padding: 0 8px;
-}
-
-/* ─── Bottom CTA Zone ─────────────────────────────────── */
-.impact-action-zone {
-  min-height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.impact-cta {
+  gap: 10px;
+  z-index: 30;
   opacity: 0;
-  transform: scale(0.8) translateY(10px);
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
   pointer-events: none;
-  font-family: 'Cinzel', serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--color-infineo-black);
-  background: var(--button-gradient);  
-  border: none;
-  padding: 16px 44px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: var(--gold-glow);
-  transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-
-.impact-cta.visible {
+.pi-cta-zone.vis {
   opacity: 1;
-  transform: scale(1) translateY(0);
+  transform: translateY(0);
   pointer-events: all;
 }
-
-/* ─── Progress Dots Top Header ───────────────────────── */
-.impact-progress {
-  display: flex;
-  align-items: center;
-  z-index: 10;
-  flex-shrink: 0;
+.pi-cta-btn {
+  padding: 16px 46px;
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #0b1422;
+  background: linear-gradient(135deg, #d4af37, #f0d060);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 6px 28px rgba(212,175,55,0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pi-cta-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 36px rgba(212,175,55,0.6);
+}
+.pi-cta-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 1px;
 }
 
-.progress-track {
-  display: flex;
-  align-items: center;
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .pi-card.side-L { left: 4%; }
+  .pi-card.side-R { right: 4%; left: auto; }
+  .pi-card { width: min(200px, 42vw); }
 }
-
-.progress-dot {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: var(--text-muted);
-  border-color: var(--text-muted);
-  transition: all 0.4s ease;
-}
-
-.progress-dot.active {
-  transform: scale(1.4);
-  box-shadow: 0 0 12px currentColor;
-}
-
-.progress-dot.done {
-  background: rgba(255, 255, 255, 0.45);
-  border-color: rgba(255, 255, 255, 0.45);
-}
-
-.progress-line {
-  width: 56px;
-  height: 2px;
-  transition: background 0.5s ease;
-}
-
-/* ─── Responsive Scaling ──────────────────────────────── */
-@media (min-width: 1200px) { .orbital-stage { transform: scale(1.2); } }
-@media (min-width: 1600px) { .orbital-stage { transform: scale(1.38); } }
-@media (max-width: 900px) { .orbital-stage { transform: scale(0.9); } }
-@media (max-width: 650px) {
-  .impact-sticky { padding: 36px 12px 20px; }
-  .orbital-stage { transform: scale(0.62); margin-top: -60px; margin-bottom: -60px; }
-  .progress-line { width: 32px; }
-}
+@media (max-width: 480px) {
+  .pi-card { width: 48vw; padding: 12px 14px; }
+  .pi-card.side-L { left: 2%; }
+  .pi-card.side-R { right: 2%; left: auto; }
+} 
