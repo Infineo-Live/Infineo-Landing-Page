@@ -1,8 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 import '../styles/Impact.css';
 
-// Pixar-themed impact images
 import imgScreenAddiction from '../assets/impact/screen-addiction.png';
 import imgStoryTelling from '../assets/impact/storytelling.png';
 import imgTransformed from '../assets/impact/transformed.png';
@@ -10,229 +8,175 @@ import imgPeerPressure from '../assets/impact/peer-pressure.png';
 import imgAnxiety from '../assets/impact/anxiety.png';
 import imgEmpathy from '../assets/impact/empathy.png';
 
-// God assets for floating parallax
-import hanuman from '../assets/gods/Hanuman.png';
-import krishna from '../assets/gods/Krishna.png';
-import ganesha from '../assets/gods/Ganesha.png';
-
 const JOURNEYS = [
   {
     id: 'focus',
-    problem: {
-      emoji: '📱',
-      label: 'Screen Addiction',
-      caption: 'Endless scrolling destroys focus',
-      image: imgScreenAddiction,
-    },
-    result: {
-      emoji: '🎯',
-      label: 'Deep Focus',
-      caption: 'Sustained attention & calm reflection',
-      image: imgStoryTelling,
-    },
-    color: { problem: '#ff6b6b', result: '#4ade80' },
+    problem: { label: 'Screen Addiction', caption: 'Endless scrolling destroys focus', image: imgScreenAddiction, color: '#ff6b6b' },
+    result:  { label: 'Deep Focus',       caption: 'Sustained attention & calm reflection', image: imgStoryTelling, color: '#4ade80' },
   },
   {
     id: 'values',
-    problem: {
-      emoji: '🌪️',
-      label: 'Peer Pressure',
-      caption: 'Isolation & lost moral compass',
-      image: imgPeerPressure,
-    },
-    result: {
-      emoji: '🤝',
-      label: 'Empathy & Kindness',
-      caption: 'Confident cultural identity & values',
-      image: imgEmpathy,
-    },
-    color: { problem: '#ff9f43', result: '#38bdf8' },
+    problem: { label: 'Peer Pressure',    caption: 'Isolation & lost moral compass', image: imgPeerPressure, color: '#ff9f43' },
+    result:  { label: 'Empathy & Kindness', caption: 'Confident cultural identity & values', image: imgEmpathy, color: '#38bdf8' },
   },
   {
     id: 'resilience',
-    problem: {
-      emoji: '😰',
-      label: 'Anxiety & Fear',
-      caption: 'Academic pressure & fear of failure',
-      image: imgAnxiety,
-    },
-    result: {
-      emoji: '🚀',
-      label: 'Inner Strength',
-      caption: 'Courage, resilience & confidence',
-      image: imgTransformed,
-    },
-    color: { problem: '#a78bfa', result: '#f59e0b' },
+    problem: { label: 'Anxiety & Fear',   caption: 'Academic pressure & fear of failure', image: imgAnxiety, color: '#a78bfa' },
+    result:  { label: 'Inner Strength',   caption: 'Courage, resilience & confidence', image: imgTransformed, color: '#f59e0b' },
   },
 ];
 
-/* ── Floating God for parallax ── */
-function FloatingGod({ src, alt, className, scrollYProgress }) {
-  const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
-  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 0.6, 0.6, 0]);
-  const springY = useSpring(y, { stiffness: 50, damping: 20 });
+/* Unique shard polygon sets per card */
+const SHARD_SETS = [
+  [
+    "0,0 45,0 38,60 0,55","45,0 100,0 100,45 52,70","0,55 38,60 30,100 0,100",
+    "38,60 52,70 60,100 30,100","52,70 100,45 100,100 60,100","100,0 100,45 52,70 45,0",
+  ],
+  [
+    "0,0 50,0 42,55 0,48","50,0 100,0 100,50 58,62","0,48 42,55 35,100 0,100",
+    "42,55 58,62 65,100 35,100","58,62 100,50 100,100 65,100","0,0 42,55 0,48",
+  ],
+  [
+    "0,0 40,0 35,50 0,60","40,0 100,0 100,40 55,65","0,60 35,50 40,100 0,100",
+    "35,50 55,65 62,100 40,100","55,65 100,40 100,100 62,100","40,0 100,0 55,65 35,50",
+  ],
+];
+
+/* Shard fly-out directions */
+const SHARD_TRANSFORMS = [
+  "translate(-18px,-22px) rotate(-15deg)","translate(20px,-18px) rotate(12deg)",
+  "translate(-22px,20px) rotate(-10deg)","translate(5px,25px) rotate(8deg)",
+  "translate(22px,18px) rotate(14deg)","translate(15px,-25px) rotate(-12deg)",
+];
+
+function GlassBreakCard({ journey, index }) {
+  const ref = useRef(null);
+  const [phase, setPhase] = useState('hidden'); // hidden → enter → breaking → broken → reveal
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && phase === 'hidden') {
+          setPhase('enter');
+          setTimeout(() => setPhase('breaking'), 1200);
+          setTimeout(() => setPhase('broken'),   1900);
+          setTimeout(() => setPhase('reveal'),   2400);
+        }
+      },
+      { threshold: 0.45 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [phase]);
+
+  const shards = SHARD_SETS[index % SHARD_SETS.length];
+  const uniqueId = `clip-${journey.id}`;
 
   return (
-    <motion.img
-      src={src}
-      alt={alt}
-      className={`impact-floating-god ${className}`}
-      style={{ y: springY, opacity }}
-      aria-hidden="true"
-    />
-  );
-}
+    <div ref={ref} className={`gb-scene gb-scene--${phase}`}>
 
-/* ── Single Journey Row ── */
-function JourneyRow({ journey, index, scrollYProgress }) {
-  const rowRef = useRef(null);
-  const isInView = useInView(rowRef, { once: false, margin: '-10% 0px' });
-  const isEven = index % 2 === 0;
+      {/* ── PROBLEM CARD with glass-break shards ── */}
+      <div className="gb-problem">
+        {/* Base image (always present, hidden behind shards until broken) */}
+        <img src={journey.problem.image} alt={journey.problem.label} className="gb-img gb-img--problem" />
 
-  // Progress bar animation linked to scroll
-  const barWidth = useTransform(
-    scrollYProgress,
-    [index * 0.33, (index + 1) * 0.33],
-    ['0%', '100%']
-  );
+        {/* Crack overlay — SVG lines */}
+        <svg className="gb-cracks" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <line x1="38" y1="0"   x2="30" y2="100" stroke="rgba(255,255,255,0.9)" strokeWidth="0.4"/>
+          <line x1="38" y1="0"   x2="52" y2="70"  stroke="rgba(255,255,255,0.9)" strokeWidth="0.35"/>
+          <line x1="52" y1="70"  x2="100" y2="45" stroke="rgba(255,255,255,0.9)" strokeWidth="0.35"/>
+          <line x1="52" y1="70"  x2="60" y2="100" stroke="rgba(255,255,255,0.9)" strokeWidth="0.3"/>
+          <line x1="0"  y1="55"  x2="38" y2="60"  stroke="rgba(255,255,255,0.7)" strokeWidth="0.3"/>
+          <line x1="38" y1="60"  x2="100" y2="45" stroke="rgba(255,255,255,0.7)" strokeWidth="0.3"/>
+        </svg>
 
-  return (
-    <div
-      ref={rowRef}
-      className={`impact-journey-row ${isEven ? '' : 'impact-journey-row--reversed'}`}
-    >
-      {/* ── PROBLEM side ── */}
-      <motion.div
-        className="impact-card impact-card--problem"
-        initial={{ opacity: 0, x: isEven ? -60 : 60, scale: 0.92 }}
-        animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
-        transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
-      >
-        <div className="impact-card__image-wrap">
-          <img src={journey.problem.image} alt={journey.problem.label} className="impact-card__image" />
-          <div className="impact-card__vignette impact-card__vignette--problem" />
+        {/* Shards — each clips the image to a polygon, then flies away */}
+        {shards.map((pts, i) => (
+          <div
+            key={i}
+            className="gb-shard"
+            style={{ '--fly': SHARD_TRANSFORMS[i], '--delay': `${i * 55}ms` }}
+          >
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="gb-shard-svg">
+              <defs>
+                <clipPath id={`${uniqueId}-${i}`} clipPathUnits="objectBoundingBox">
+                  <polygon points={pts.split(' ').map(p => {
+                    const [x, y] = p.split(',');
+                    return `${x / 100},${y / 100}`;
+                  }).join(' ')} />
+                </clipPath>
+              </defs>
+            </svg>
+            <div
+              className="gb-shard-face"
+              style={{
+                backgroundImage: `url(${journey.problem.image})`,
+                clipPath: `polygon(${pts.split(' ').map(p => {
+                  const [x, y] = p.split(',');
+                  return `${x}% ${y}%`;
+                }).join(', ')})`,
+              }}
+            />
+            {/* Glass sheen on each shard */}
+            <div className="gb-shard-sheen" style={{
+              clipPath: `polygon(${pts.split(' ').map(p => {
+                const [x, y] = p.split(',');
+                return `${x}% ${y}%`;
+              }).join(', ')})`,
+            }} />
+          </div>
+        ))}
+
+        {/* Label */}
+        <div className="gb-label gb-label--problem" style={{ '--c': journey.problem.color }}>
+          <span className="gb-label-tag">The Problem</span>
+          <h3>{journey.problem.label}</h3>
+          <p>{journey.problem.caption}</p>
         </div>
-        <div className="impact-card__content">
-          <span className="impact-card__emoji">{journey.problem.emoji}</span>
-          <h3 className="impact-card__title impact-card__title--problem">{journey.problem.label}</h3>
-          <p className="impact-card__caption">{journey.problem.caption}</p>
-        </div>
-      </motion.div>
-
-      {/* ── CENTER ARROW / CONNECTOR ── */}
-      <div className="impact-connector">
-        <div className="impact-connector__track">
-          <motion.div
-            className="impact-connector__fill"
-            style={{
-              height: barWidth,
-              background: `linear-gradient(180deg, ${journey.color.problem}, var(--color-infineo-gold), ${journey.color.result})`,
-            }}
-          />
-        </div>
-        <motion.div
-          className="impact-connector__spark"
-          initial={{ scale: 0 }}
-          animate={isInView ? { scale: 1 } : {}}
-          transition={{ delay: 0.4, duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
-        >
-          ✨
-        </motion.div>
       </div>
 
-      {/* ── RESULT side ── */}
-      <motion.div
-        className="impact-card impact-card--result"
-        initial={{ opacity: 0, x: isEven ? 60 : -60, scale: 0.92 }}
-        animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
-        transition={{ duration: 0.7, delay: 0.2, ease: [0.34, 1.56, 0.64, 1] }}
-      >
-        <div className="impact-card__image-wrap">
-          <img src={journey.result.image} alt={journey.result.label} className="impact-card__image" />
-          <div className="impact-card__vignette impact-card__vignette--result" />
+      {/* ── RESULT CARD ── */}
+      <div className="gb-result">
+        <img src={journey.result.image} alt={journey.result.label} className="gb-img gb-img--result" />
+        <div className="gb-label gb-label--result" style={{ '--c': journey.result.color }}>
+          <span className="gb-label-tag">The Transformation</span>
+          <h3>{journey.result.label}</h3>
+          <p>{journey.result.caption}</p>
         </div>
-        <div className="impact-card__content">
-          <span className="impact-card__emoji">{journey.result.emoji}</span>
-          <h3 className="impact-card__title impact-card__title--result">{journey.result.label}</h3>
-          <p className="impact-card__caption">{journey.result.caption}</p>
+        {/* Radiate particles on reveal */}
+        <div className="gb-sparkles" aria-hidden="true">
+          {[...Array(8)].map((_, i) => (
+            <span key={i} className="gb-spark" style={{ '--i': i }} />
+          ))}
         </div>
-      </motion.div>
+      </div>
+
     </div>
   );
 }
 
-/* ── Main Impact Section ── */
 export default function Impact() {
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const headingRef = useRef(null);
-  const headingInView = useInView(headingRef, { once: true, margin: '-5%' });
-
   return (
-    <section className="impact-section" id="stories" ref={sectionRef}>
-      {/* Background overlay — keeps original bg visible */}
+    <section className="impact-section" id="stories">
       <div className="impact-section__overlay" />
 
-      {/* Floating parallax gods */}
-      <FloatingGod src={hanuman} alt="" className="impact-god--left" scrollYProgress={scrollYProgress} />
-      <FloatingGod src={krishna} alt="" className="impact-god--right" scrollYProgress={scrollYProgress} />
-      <FloatingGod src={ganesha} alt="" className="impact-god--center" scrollYProgress={scrollYProgress} />
-
-      {/* Floating particles */}
-      <div className="impact-particles" aria-hidden="true">
-        {[...Array(12)].map((_, i) => (
-          <span key={i} className="impact-particle" style={{
-            '--delay': `${i * 0.8}s`,
-            '--x': `${10 + Math.random() * 80}%`,
-            '--size': `${3 + Math.random() * 5}px`,
-          }} />
-        ))}
-      </div>
-
-      {/* Heading */}
-      <motion.div
-        ref={headingRef}
-        className="impact-heading"
-        initial={{ opacity: 0, y: 40 }}
-        animate={headingInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-      >
+      <div className="impact-heading">
         <span className="impact-heading__eyebrow">The Infineo Journey</span>
         <h2 className="impact-heading__title">
           Every Child's <span className="impact-heading__highlight">Transformation</span>
         </h2>
-        <p className="impact-heading__sub">
-          Scroll to see how ancient wisdom replaces modern struggles
-        </p>
-        <div className="impact-heading__scroll-hint" aria-hidden="true">
-          <span className="impact-heading__scroll-arrow">↓</span>
-        </div>
-      </motion.div>
+        <p className="impact-heading__sub">Scroll to watch ancient wisdom shatter modern struggles</p>
+      </div>
 
-      {/* Journey rows */}
       <div className="impact-journeys">
-        {JOURNEYS.map((journey, i) => (
-          <JourneyRow
-            key={journey.id}
-            journey={journey}
-            index={i}
-            scrollYProgress={scrollYProgress}
-          />
+        {JOURNEYS.map((j, i) => (
+          <GlassBreakCard key={j.id} journey={j} index={i} />
         ))}
       </div>
 
-      {/* CTA */}
-      <motion.div
-        className="impact-cta"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-10%' }}
-        transition={{ duration: 0.6 }}
-      >
+      <div className="impact-cta">
         <button className="impact-cta__btn">
           <span>Start Your Child's Journey</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -240,7 +184,7 @@ export default function Impact() {
           </svg>
         </button>
         <span className="impact-cta__note">Free demo class · No credit card</span>
-      </motion.div>
+      </div>
     </section>
   );
 }

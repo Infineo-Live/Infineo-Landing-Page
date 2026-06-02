@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Nunito:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=500;700;900&family=Nunito:wght=400;600;700;800&display=swap');
 
 /* ── Section Shell ─────────────────────────────── */
 .demo-class-section {
@@ -10,15 +10,6 @@
   gap: 80px;
   overflow: hidden;
 }
-
-/* .demo-class-section::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(var(--bg-primary-rgb, 17, 43, 71), 0.62);
-  pointer-events: none;
-  z-index: 0;
-} */
 
 .demo-ambient {
   position: absolute;
@@ -53,7 +44,7 @@
   );
 }
 
-[data-theme="light"] .reward-section{
+[data-theme="light"] .reward-section {
   background: linear-gradient(
     180deg,
     rgba(247, 234, 208, 0.25) 0%,
@@ -61,7 +52,7 @@
     rgba(247, 234, 208, 0.25) 100%
   );
 }
-/* Left */
+
 .reward-left {
   display: flex;
   flex-direction: column;
@@ -141,7 +132,6 @@
 .cta-arrow { font-size: 20px; transition: transform 0.25s ease; }
 .demo-cta:hover .cta-arrow { transform: translateX(5px); }
 
-/* Right — Gift orbital */
 .reward-right {
   position: relative;
   height: 480px;
@@ -158,7 +148,6 @@
   pointer-events: none;
 }
 
-/* Gift card */
 .gift-card {
   position: absolute;
   top: 50%; left: 50%;
@@ -205,7 +194,6 @@
   border: 1px solid rgba(231,184,96,0.35); border-radius: 20px; padding: 3px 10px;
 }
 
-/* Reward cards */
 .reward-card {
   position: absolute;
   display: flex; align-items: center; gap: 10px;
@@ -271,15 +259,17 @@
   opacity: 0.8;
 }
 
-/*    PART 2 — Demo Booking Form (original, unchanged) */
+/* ════════════════════════════════════════════════
+   PART 2 — Demo Booking Form
+════════════════════════════════════════════════ */
 .demo-container {
   position: relative;
   z-index: 2;
-  max-width: 1300px; /* allow extra room for 620px neo + form */
+  max-width: 1300px;
   margin: 0 auto;
   width: 100%;
   display: grid;
-  grid-template-columns: auto 1fr; /* left column sizes to content (neo), right column grows */
+  grid-template-columns: auto 1fr;
   gap: 60px;
   align-items: center;
   padding: 2rem;
@@ -289,8 +279,8 @@
     rgba(8, 15, 30, 0.35) 50%,
     rgba(13, 24, 48, 0.15) 100%
   );
-
 }
+
 [data-theme="light"] .demo-container {
   background: linear-gradient(
     180deg,
@@ -332,31 +322,6 @@
   margin-bottom: 40px; font-weight: 600;
 }
 
-.demo-benefits { display: flex; flex-direction: column; gap: 25px; margin-bottom: 50px; }
-
-.benefit-item { display: flex; gap: 20px; animation: slideInLeft 0.8s ease-out; }
-.benefit-item:nth-child(2) { animation-delay: 0.1s; }
-.benefit-item:nth-child(3) { animation-delay: 0.2s; }
-.benefit-item:nth-child(4) { animation-delay: 0.3s; }
-
-.benefit-icon {
-  font-size: 40px; min-width: 50px;
-  display: flex; align-items: center; justify-content: center;
-  animation: bounce 2s infinite;
-}
-.benefit-item:nth-child(2) .benefit-icon { animation-delay: 0.2s; }
-.benefit-item:nth-child(3) .benefit-icon { animation-delay: 0.4s; }
-.benefit-item:nth-child(4) .benefit-icon { animation-delay: 0.6s; }
-
-.benefit-item h4 {
-  font-family: 'Cinzel', serif; font-size: 18px;
-  color: var(--text-primary); margin-bottom: 5px; font-weight: 600;
-}
-.benefit-item p {
-  font-family: 'Nunito', sans-serif; font-size: 14px;
-  color: var(--text-secondary); line-height: 1.5;
-}
-
 .demo-highlights {
   display: flex; gap: 30px; margin-top: 40px; padding: 30px 0;
   border-top: 2px solid var(--accent-primary);
@@ -373,6 +338,153 @@
   text-transform: uppercase; letter-spacing: 1px;
 }
 
+/* ════════════════════════════════════════════════
+   NEO MASCOT — Advanced Eye Tracking Layers
+════════════════════════════════════════════════ */
+.neo-mascot-wrapper {
+  position: relative;
+  width: 280px;
+  height: auto;
+  margin: 30px auto; /* Centered in the desktop column */
+  display: block;
+  opacity: 0.3;
+  /* Keep runtime scroll transitions restricted to opacity changes to protect tracking bounds */
+  transition: opacity 0.5s ease-out;
+}
+
+.neo-eyes-underlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3; /* Placed OVER the image (z-index 2) */
+  pointer-events: none;
+}
+
+.neo-eye {
+  position: absolute;
+  width: 22px; /* Made smaller and cute */
+  height: 22px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 3.5px rgba(0, 0, 0, 0.15);
+  /* Keep hidden toggled on to anchor vectors */
+  overflow: hidden; 
+  transform: translate(-50%, -50%);
+  /* Gentle, cute blink animation cycle */
+  animation: neoBlink 4.5s ease-in-out infinite;
+}
+
+/* Base structural location metrics */
+.neo-left-eye {
+  top: 33%;   
+  left: 38.5%;
+}
+
+.neo-right-eye {
+  top: 29%;
+  left: 51%;
+}
+
+.neo-pupil {
+  position: absolute;      
+  width: 15px; /* Made smaller and cute */
+  height: 15px;
+  background: #2a1a0e;
+  border-radius: 50%;
+  will-change: transform;
+  top: 50%;                
+  left: 50%;               
+  /* CSS establishes fallback baseline centering vector */
+  transform: translate(-50%, -50%); 
+  transition: transform 0.05s ease-out; /* Smooth responsive follow */
+  flex-shrink: 0;
+}
+
+/* Amber/Orange Iris Hue Accent Ring */
+.neo-pupil::before {
+  content: '';
+  position: absolute;
+  width: 32%;
+  height: 32%;
+  background: #e7933a;
+  border-radius: 50%;
+  top: 14%;
+  left: 14%;
+  opacity: 0.85;
+}
+
+/* Specular 3D Reflection Glint Overlay with cute secondary glint */
+.neo-pupil::after {
+  content: '';
+  position: absolute;
+  width: 28%;
+  height: 28%;
+  background: #ffffff;
+  border-radius: 50%;
+  top: 12%;
+  left: 52%;
+  /* Cute secondary smaller glint */
+  box-shadow: -3px 3px 0 -0.5px rgba(255, 255, 255, 0.6);
+}
+
+/* Soft Pink blush cheeks overlaid on top of the mascot face */
+.neo-blush {
+  position: absolute;
+  width: 20px; /* Adjusted size for smaller eyes */
+  height: 10px;
+  background: rgba(255, 105, 180, 0.35); /* Cute pink blush */
+  border-radius: 50%;
+  filter: blur(2.5px);
+  z-index: 3; /* Placed over the image (z-index 2) */
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: blushPulse 4s ease-in-out infinite;
+}
+
+.neo-left-blush {
+  top: 27.5%;
+  left: 29.5%;
+}
+
+.neo-right-blush {
+  top: 25.5%;
+  left: 54.5%;
+}
+
+/* Cute organic pulsing of blush cheeks */
+@keyframes blushPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.18);
+    opacity: 1;
+  }
+}
+
+/* Cute Mascot blink animation keyframes */
+@keyframes neoBlink {
+  0%, 96%, 100% {
+    transform: translate(-50%, -50%) scaleY(1);
+  }
+  98% {
+    transform: translate(-50%, -50%) scaleY(0.05);
+  }
+}
+
+.neo-demo-image {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: block;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Form Container Styles ── */
 .demo-form-container { animation: slideInRight 0.8s ease-out; }
 @keyframes slideInRight {
   from { opacity: 0; transform: translateX(50px); }
@@ -385,7 +497,7 @@
   box-shadow: var(--card-shadow);
   border-top: 5px solid var(--accent-primary);
   border: 1px solid var(--border-primary);
-  max-width: 540px; /* keep form readable beside large mascot */
+  max-width: 540px;
 }
 .demo-form h3 {
   font-family: 'Cinzel', serif; font-size: 28px;
@@ -413,17 +525,6 @@
 .form-group input::placeholder { color: var(--text-muted); opacity: 0.6; }
 
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-
-/* Neo image sizing & alignment for desktop */
-.neo-image {
-  width: 620px;
-  height: auto;
-  display: block;
-  margin: 0 auto 12px auto;
-  transform-origin: 50% 50%;
-  transition: transform 300ms cubic-bezier(.2,.9,.3,1);
-  z-index: 3; /* above content overlays */
-}
 
 .success-message {
   background: linear-gradient(135deg, rgba(42,157,143,0.1), rgba(190,140,74,0.1));
@@ -456,17 +557,7 @@
   color: var(--text-muted); text-align: center; margin-top: 15px; opacity: 0.7;
 }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0);     }
-  50%       { transform: translateY(-10px); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-/* ── Responsive ────────────────────────────────── */
+/* ── Responsive Rules ── */
 @media (max-width: 1024px) {
   .reward-section,
   .demo-container { grid-template-columns: 1fr; gap: 40px; }
@@ -483,10 +574,6 @@
   .gift-icon { font-size: 36px; }
   .demo-title { font-size: 32px; }
   .demo-subtitle { font-size: 18px; }
-  .demo-benefits { gap: 20px; margin-bottom: 30px; }
-  .benefit-icon { font-size: 32px; min-width: 40px; }
-  .benefit-item h4 { font-size: 16px; }
-  .benefit-item p { font-size: 13px; }
   .demo-highlights { gap: 20px; padding: 20px 0; }
   .highlight-number { font-size: 32px; }
   .highlight-text { font-size: 12px; }
@@ -494,8 +581,11 @@
   .demo-form h3 { font-size: 24px; }
   .form-row { grid-template-columns: 1fr; }
 
-  /* reduce neo size for smaller screens */
-  .neo-image { width: 160px; margin: 12px auto; }
+  .neo-mascot-wrapper { width: 200px; margin: 20px auto; }
+  .neo-eye  { width: 17px; height: 17px; } /* Proportional smaller mobile eyes */
+  .neo-pupil { width: 11px; height: 11px; }
+  .neo-pupil::after { width: 3px; height: 3px; top: 1px; left: 6px; box-shadow: -2px 2px 0 -0.5px rgba(255, 255, 255, 0.6); }
+  .neo-blush { width: 14px; height: 7px; filter: blur(2px); }
 }
 
 @media (max-width: 480px) {
@@ -506,10 +596,6 @@
   .reward-label { font-size: 9px; }
   .demo-title { font-size: 24px; }
   .demo-subtitle { font-size: 16px; }
-  .demo-benefits { gap: 15px; }
-  .benefit-icon { font-size: 28px; }
-  .benefit-item h4 { font-size: 14px; }
-  .benefit-item p { font-size: 12px; }
   .demo-highlights { gap: 15px; padding: 15px 0; }
   .highlight-number { font-size: 28px; }
   .demo-form { padding: 20px; }
@@ -518,50 +604,4 @@
   .form-group input,
   .form-group select { padding: 10px 12px; font-size: 13px; }
   .submit-btn { padding: 14px; font-size: 14px; }
-}
-
-/* Neo mascot 2D scroll animation styling */
-.neo-image {
-  width: 620px;
-  height: auto;
-  align-items: center;
-  display: block;
-  margin: 18px 0 12px 0;
-  transform-origin: 50% 50%;
-  transition: transform 300ms cubic-bezier(.2,.9,.3,1);
-  z-index: 3; /* above content overlays */
-}
-
-/* Neo mascot background in form section */
-.neo-form-bg {
-  position: absolute;
-  bottom: -40px;
-  right: -60px;
-  width: 380px;
-  height: auto;
-  z-index: 1;
-  opacity: 0.15;
-  filter: blur(2px);
-  pointer-events: none;
-}
-
-/* Neo mascot in demo info section with scroll animation */
-.neo-demo-image {
-  width: 280px;
-  height: auto;
-  margin: 30px 0 30px 0;
-  display: block;
-  opacity: 0.3;
-  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
-  transform: translateY(0);
-}
-
-@media (max-width: 768px) {
-  .neo-image {
-    width: 160px;
-  }
-  
-  .neo-demo-image {
-    width: 200px;
-  }
 }
