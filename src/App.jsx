@@ -9,6 +9,7 @@ import Modules from "./components/Modules"
 import DemoClass from "./components/DemoClass"
 import Pricing from "./components/Pricing"
 import FloatingChatbot from "./components/FloatingChatbot"
+import FloatingWhatsapp from "./components/FloatingWhatsapp"
 import Footer from "./components/Footer"
 import './App.css'
 
@@ -32,6 +33,7 @@ function App() {
         <DemoClass />
         <Pricing />
         <FloatingChatbot />
+        <FloatingWhatsapp />
       </div>
       <Footer />
     </ThemeProvider>

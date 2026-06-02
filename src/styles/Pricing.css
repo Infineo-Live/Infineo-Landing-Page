@@ -24,6 +24,21 @@
   width: 100%;
   position: relative;
   z-index: 2; /* ensure content above overlay */
+  background: linear-gradient(
+    180deg,
+    rgba(13, 24, 48, 0.15) 0%,
+    rgba(8, 15, 30, 0.35) 50%,
+    rgba(13, 24, 48, 0.15) 100%
+  );
+  padding: 2rem;
+}
+[data-theme="light"] .pricing-container  {
+  background: linear-gradient(
+    180deg,
+    rgba(247, 234, 208, 0.25) 0%,
+    rgba(253, 246, 227, 0.5) 50%,
+    rgba(247, 234, 208, 0.25) 100%
+  );
 }
 
 .pricing-container::before {

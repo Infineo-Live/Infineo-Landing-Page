@@ -12,7 +12,7 @@ const REWARDS = [
 ];
 
 export default function DemoClass() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({  
     childName: '', parentName: '', email: '',
     phone: '', childAge: '', module: ''
   });

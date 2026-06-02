@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import '../styles/Hero.css';
 import neoLeft from '../assets/neo-version/neo.png';
+import BroadwayText from './BroadwayText';
 
 const Hero = () => {
   const heroRef = useRef(null);
@@ -39,8 +40,8 @@ const Hero = () => {
         </div>
 
         <h1 className="hero-heading">
-          <span className="hero-heading-line1">INSTILLING VALUES VIA STORYTELLING</span>
-          <span className="hero-heading-line2">FOR YOUR KIDS</span>
+          <BroadwayText text="INSTILLING VALUES VIA STORYTELLING" className="hero-heading-line1" tag="span" />
+          <BroadwayText text="FOR YOUR KIDS" className="hero-heading-line2" tag="span" />
         </h1>
 
         <p className="hero-subtitle">

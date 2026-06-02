@@ -352,32 +352,32 @@
   --transition-standard: 0.3s ease;
 }
 
-html.dark {
+[data-theme="dark"] {
   --bg-color: #000;
 }
 
 .theme-toggle {
-  --base-scale: 15px;
+  --base-scale: 14px;
   --toggle-width: 5.625em;
   --toggle-height: 2.5em;
   --radius-pill: 100em;
   --sun-diameter: 2.125em;
   --sun-offset: calc((var(--toggle-height) - var(--sun-diameter)) / 2);
 
-  --bg-toggle-light: #3d7eae;
-  --bg-toggle-dark: #1d1f2c;
-  --color-sun: #ecca2f;
-  --color-moon: #c4c9d1;
-  --color-crater: #959db1;
-  --color-star: #fff;
-  --color-cloud-front: #f3fdff;
-  --color-cloud-back: #aacadf;
+  /* Exquisite Celestial Colors aligning with brand style */
+  --bg-toggle-light: linear-gradient(135deg, #fdf0ce 0%, #e8b445 100%);
+  --bg-toggle-dark: linear-gradient(135deg, #050c18 0%, #1a3d56 100%);
+  --color-sun: #e8b445;
+  --color-moon: #fdf0ce;
+  --color-crater: #c9944e;
+  --color-star: rgba(255, 255, 255, 0.95);
+  --color-cloud-front: #fffef9;
+  --color-cloud-back: rgba(190, 140, 74, 0.4);
 
   --shadow-primary: rgba(0, 0, 0, 0.25);
-  --shadow-highlight: rgba(255, 255, 255, 0.94);
-  --halo-color: rgba(255, 255, 255, 0.1);
+  --shadow-highlight: rgba(255, 255, 255, 0.2);
+  --halo-color: rgba(255, 255, 255, 0.08);
   font-size: 35px;
-
 }
 
 .theme-toggle {
@@ -394,13 +394,14 @@ html.dark {
 .theme-toggle__container {
   width: var(--toggle-width);
   height: var(--toggle-height);
-  background-color: var(--bg-toggle-light);
+  background: var(--bg-toggle-light);
   border-radius: var(--radius-pill);
   cursor: pointer;
+  border: 1px solid var(--border-primary);
 
   position: relative;
 
-  transition: background-color var(--transition-standard);
+  transition: background var(--transition-standard);
 
   overflow: hidden;
 
@@ -408,7 +409,7 @@ html.dark {
 }
 
 [data-theme="dark"] .theme-toggle__container {
-  background-color: var(--bg-toggle-dark);
+  background: var(--bg-toggle-dark);
 }
 
 .theme-toggle__container::after {
@@ -532,7 +533,7 @@ html.dark {
   transition: transform var(--transition-standard);
 }
 
-html.dark .theme-toggle__container .theme-toggle__clouds {
+[data-theme="dark"] .theme-toggle__container .theme-toggle__clouds {
   transform: translateY(3em);
 }
 
@@ -540,7 +541,7 @@ html.dark .theme-toggle__container .theme-toggle__clouds {
   transform: translateX(calc(var(--sun-offset) + 0.187em));
 }
 
-html.dark .theme-toggle__container:hover .theme-toggle__sun {
+[data-theme="dark"] .theme-toggle__container:hover .theme-toggle__sun {
   transform: translateX(
     calc(
       var(--toggle-width) - var(--sun-diameter) - var(--sun-offset) - 0.187em

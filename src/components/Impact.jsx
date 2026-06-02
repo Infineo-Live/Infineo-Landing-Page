@@ -1,196 +1,259 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import '../styles/Impact.css';
 import sadChild from '../assets/distressed-child.png';
 import neoMascot from '../assets/website-neo.png';
 import happyChild from '../assets/child-after.png';
 
-const CARDS = [
-  { id: 1, phase: 'p', side: 'L', top: 12, icon: '📱', title: 'Screen Addiction', text: 'Stuck in endless digital loops.', ac: '#FF6B6B' },
-  { id: 2, phase: 'p', side: 'R', top: 22, icon: '🌪️', title: 'Distracted Mind', text: 'Struggling to sit still and focus.', ac: '#FF8C42' },
-  { id: 3, phase: 'p', side: 'L', top: 32, icon: '😰', title: 'Stress & Anxiety', text: 'Overwhelmed by modern pressures.', ac: '#C94040' },
-  { id: 4, phase: 'i', side: 'R', top: 46, icon: '📖', title: 'Live Storytelling', text: 'Narratives that weave in morals.', ac: '#D4AF37' },
-  { id: 5, phase: 'i', side: 'L', top: 56, icon: '🏛️', title: 'Indian Mythology', text: 'Connecting children to ancient roots.', ac: '#E8C84A' },
-  { id: 6, phase: 'i', side: 'R', top: 66, icon: '🎭', title: '1-on-1 Sessions', text: 'Personalised care, every session.', ac: '#C9973A' },
-  { id: 7, phase: 'r', side: 'L', top: 75, icon: '🎯', title: 'Deep Focus', text: 'Clarity of thought and purpose.', ac: '#4ADE80' },
-  { id: 8, phase: 'r', side: 'R', top: 83, icon: '🌟', title: 'Strong Values', text: 'Kind, empathetic, self-confident.', ac: '#34D399' },
-  { id: 9, phase: 'r', side: 'L', top: 91, icon: '🚀', title: 'Inspired Daily', text: 'Ready to take on the world.', ac: '#6EE7B7' },
+const TRANSITIONS = [
+  {
+    id: 1,
+    title: "Focus & Attention",
+    challenge: {
+      icon: "📱",
+      subtitle: "Screen Addiction",
+      text: "Endless scrolling and digital dopamine loops destroy focus, leaving kids restless, impatient, and easily distracted.",
+      statusText: "Restless & Distracted",
+      colorClass: "stage-challenge"
+    },
+    solution: {
+      icon: "📖",
+      subtitle: "Live Storytelling",
+      text: "Interactive 1-on-1 sessions engage kids with ancient epic sagas, training their imagination and listening skills naturally.",
+      statusText: "Active Listening",
+      colorClass: "stage-solution"
+    },
+    transformation: {
+      icon: "🎯",
+      subtitle: "Deep Concentration",
+      text: "Kids develop a sustained attention span, enabling them to read deeply, focus in classrooms, and reflect calmly.",
+      statusText: "Mindful & Focused",
+      colorClass: "stage-result"
+    }
+  },
+  {
+    id: 2,
+    title: "Values & Empathy",
+    challenge: {
+      icon: "🌪️",
+      subtitle: "Peer Influence",
+      text: "Modern school and social pressures lead kids toward emotional isolation, anxiety, and a disconnect from core moral values.",
+      statusText: "Isolated & Anxious",
+      colorClass: "stage-challenge"
+    },
+    solution: {
+      icon: "🏛️",
+      subtitle: "Epic Moral Dilemmas",
+      text: "Through the stories of Ramayana and Ganesha, kids explore ethical choices, discussing and internalizing correct values.",
+      statusText: "Exploring Values",
+      colorClass: "stage-solution"
+    },
+    transformation: {
+      icon: "🌟",
+      subtitle: "Strong Moral Compass",
+      text: "Children act with empathy, respect, and kindness, expressing confidence in their cultural identity and ancient roots.",
+      statusText: "Empathetic & Grounded",
+      colorClass: "stage-result"
+    }
+  },
+  {
+    id: 3,
+    title: "Resilience & Confidence",
+    challenge: {
+      icon: "😰",
+      subtitle: "Stress & Anxiety",
+      text: "Academic performance expectations and competitive pressure cause kids to fear failure, triggering anxiety.",
+      statusText: "Fear of Failure",
+      colorClass: "stage-challenge"
+    },
+    solution: {
+      icon: "🎭",
+      subtitle: "Brave Characters",
+      text: "Exploring heroic sagas (Hanuman, Shiva) allows kids to identify with courage, learning to voice their thoughts freely.",
+      statusText: "Building Courage",
+      colorClass: "stage-solution"
+    },
+    transformation: {
+      icon: "🚀",
+      subtitle: "Emotional Strength",
+      text: "Kids face challenges with resilience and self-confidence, communicating clearly and managing daily stress easily.",
+      statusText: "Confident & Resilient",
+      colorClass: "stage-result"
+    }
+  }
 ];
 
-const PHASE_AVATARS = { p: sadChild, i: neoMascot, r: happyChild };
-const PHASE_BORDERS = { p: '#FF6B6B', i: '#D4AF37', r: '#4ADE80' };
-const PHASE_SHADOWS = { p: 'rgba(255,107,107,0.5)', i: 'rgba(212,175,55,0.6)', r: 'rgba(74,222,128,0.6)' };
-const PHASE_GLOWS = {
-  p: 'radial-gradient(ellipse 55% 55% at 50% 20%, rgba(180,40,40,0.18) 0%, transparent 70%)',
-  i: 'radial-gradient(ellipse 55% 55% at 50% 55%, rgba(160,120,10,0.18) 0%, transparent 70%)',
-  r: 'radial-gradient(ellipse 55% 55% at 50% 80%, rgba(20,140,70,0.18) 0%, transparent 70%)',
-};
+const STAGE_METADATA = [
+  { 
+    id: 0, 
+    label: "1. Current Challenges", 
+    class: "stage-p", 
+    avatar: sadChild, 
+    badgeText: "The Struggle", 
+    desc: "Modern digital and social pressures impacting kids' daily well-being." 
+  },
+  { 
+    id: 1, 
+    label: "2. The Infineo Path", 
+    class: "stage-i", 
+    avatar: neoMascot, 
+    badgeText: "The Intervention", 
+    desc: "Interactive 1-on-1 live mentoring classes using ancient Indian epic stories." 
+  },
+  { 
+    id: 2, 
+    label: "3. Positive Outcomes", 
+    class: "stage-r", 
+    avatar: happyChild, 
+    badgeText: "The Transformation", 
+    desc: "Empowered children exhibiting deep focus, rich empathy, and high resilience." 
+  }
+];
 
 export default function Impact() {
-  const sceneRef = useRef(null);
-  const stickyRef = useRef(null);
-  const pathRef = useRef(null);
-  const waveTrackRef = useRef(null);
-  const rafRef = useRef(null);
+  const [activeStage, setActiveStage] = useState(0); // 0: Challenge, 1: Solution, 2: Result
 
-  const [progress, setProgress] = useState(0);
-  const [charPos, setCharPos] = useState({ x: 0, y: 0 });
-  const [phase, setPhase] = useState('p');
-  const [drawnLen, setDrawnLen] = useState(0);
-  const [visibleCards, setVisibleCards] = useState(new Set());
+  const getCurrentData = (pillar) => {
+    if (activeStage === 0) return pillar.challenge;
+    if (activeStage === 1) return pillar.solution;
+    return pillar.transformation;
+  };
 
-  const getWavePoint = useCallback((prog) => {
-    const path = pathRef.current;
-    const track = waveTrackRef.current;
-    const sticky = stickyRef.current;
-    if (!path || !track || !sticky) return { x: 0, y: 0 };
-
-    const totalLen = path.getTotalLength();
-    const pt = path.getPointAtLength(prog * totalLen);
-    const svgEl = path.ownerSVGElement;
-    const svgRect = svgEl.getBoundingClientRect();
-    const stickyRect = sticky.getBoundingClientRect();
-
-    const scaleX = svgRect.width / 140;
-    const scaleY = svgRect.height / 800;
-
-    return {
-      x: (svgRect.left - stickyRect.left) + pt.x * scaleX,
-      y: (svgRect.top - stickyRect.top) + pt.y * scaleY,
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (rafRef.current) return;
-      rafRef.current = requestAnimationFrame(() => {
-        rafRef.current = null;
-        const scene = sceneRef.current;
-        const sticky = stickyRef.current;
-        if (!scene || !sticky) return;
-        const sceneRect = scene.getBoundingClientRect();
-        const total = scene.offsetHeight - window.innerHeight;
-        const scrolled = -sceneRect.top;
-        const prog = Math.max(0, Math.min(1, scrolled / total));
-
-        setProgress(prog);
-
-        const path = pathRef.current;
-        if (path) setDrawnLen(prog * path.getTotalLength());
-
-        const newPhase = prog > 0.66 ? 'r' : prog > 0.33 ? 'i' : 'p';
-        setPhase(newPhase);
-
-        setCharPos(getWavePoint(prog));
-
-        const next = new Set();
-        CARDS.forEach((c) => {
-          if (prog >= (c.top / 100) * 0.85 - 0.04) next.add(c.id);
-        });
-        setVisibleCards(next);
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, [getWavePoint]);
-
-  const totalLen = pathRef.current?.getTotalLength() ?? 1000;
+  const getStageColor = () => {
+    if (activeStage === 0) return "rgba(255, 107, 107, 0.15)";
+    if (activeStage === 1) return "rgba(212, 160, 85, 0.22)";
+    return "rgba(74, 222, 128, 0.18)";
+  };
 
   return (
-    <section className="pi-scene" ref={sceneRef}>
+    <section className="pi-scene" id="stories">
+      {/* Background glass overlay */}
+      <div className="pi-scene-overlay" />
 
-      {/* Heading lives outside sticky so it scrolls away cleanly */}
+      {/* Decorative stardust floating elements */}
+      <div className="pi-stardust" aria-hidden="true" />
+
+      {/* Heading */}
       <div className="pi-heading">
-        <p className="pi-heading-eyebrow">Every child deserves a guiding light</p>
+        <p className="pi-heading-eyebrow">Interactive Transformation Journey</p>
         <h2 className="pi-heading-title">
-          The Journey to <span className="pi-heading-highlight">Wisdom</span>
+          From Challenges to <span className="pi-heading-highlight">Wisdom</span>
         </h2>
+        <p className="pi-heading-subtitle">
+          See how Infineo helps children shift from modern distractions to balanced, value-driven lives.
+        </p>
       </div>
 
-      <div className="pi-sticky" ref={stickyRef}>
-
-        {/* Background glow */}
-        <div className="pi-bg-glow" style={{ background: PHASE_GLOWS[phase] }} />
-
-        {/* Wave track */}
-        <div className="pi-wave-track" ref={waveTrackRef}>
-          <svg className="pi-wave-svg" viewBox="0 0 140 800" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="wg" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#FF6B6B" />
-                <stop offset="50%" stopColor="#D4AF37" />
-                <stop offset="100%" stopColor="#4ADE80" />
-              </linearGradient>
-            </defs>
-            {/* Dashed background path */}
-            <path
-              ref={pathRef}
-              d="M70,0 C90,80 50,150 70,240 C90,330 50,410 70,490 C90,570 50,650 70,800"
-              fill="none"
-              stroke="rgba(255,255,255,0.1)"
-              strokeWidth="3"
-              strokeDasharray="6 5"
-            />
-            {/* Animated fill path */}
-            <path
-              d="M70,0 C90,80 50,150 70,240 C90,330 50,410 70,490 C90,570 50,650 70,800"
-              fill="none"
-              stroke="url(#wg)"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeDasharray={`${drawnLen} ${totalLen}`}
-            />
-          </svg>
-
-          {/* Phase labels — sit inside wave-track so they're centred on the path */}
-          <span className={`pi-phase-label lbl-p ${progress < 0.33 ? 'vis' : ''}`}>
-            The Problem
-          </span>
-          <span className={`pi-phase-label lbl-i ${progress >= 0.33 && progress < 0.66 ? 'vis' : ''}`}>
-            The Infineo Way
-          </span>
-          <span className={`pi-phase-label lbl-r ${progress >= 0.66 ? 'vis' : ''}`}>
-            The Results
-          </span>
+      <div className="pi-interactive-container">
+        {/* Step Navigation Bar */}
+        <div className="pi-navigation-bar">
+          <div className="pi-nav-line-bg" />
+          <div 
+            className="pi-nav-line-active" 
+            style={{ 
+              width: `${(activeStage / 2) * 100}%`,
+              background: activeStage === 0 ? '#ff6b6b' : activeStage === 1 ? 'var(--color-primary)' : '#4ade80'
+            }} 
+          />
+          {STAGE_METADATA.map((stage) => (
+            <button
+              key={stage.id}
+              className={`pi-nav-btn ${activeStage === stage.id ? 'active ' + stage.class : ''}`}
+              onClick={() => setActiveStage(stage.id)}
+              aria-label={`Go to stage ${stage.label}`}
+            >
+              <span className="pi-nav-btn-dot" />
+              <span className="pi-nav-btn-label">{stage.label}</span>
+            </button>
+          ))}
         </div>
 
-        {/* Character node — absolute inside sticky, coords from getWavePoint */}
-        <div
-          className={`pi-char-node ${phase === 'i' ? 'float' : ''}`}
-          style={{
-            left: charPos.x,
-            top: charPos.y,
-            borderColor: PHASE_BORDERS[phase],
-            boxShadow: `0 0 22px ${PHASE_SHADOWS[phase]}`,
-          }}
-        >
-          <img src={PHASE_AVATARS[phase]} alt="Child journey" />
+        {/* Selected Stage Banner */}
+        <div className="pi-stage-banner">
+          <span className={`pi-stage-badge ${STAGE_METADATA[activeStage].class}`}>
+            {STAGE_METADATA[activeStage].badgeText}
+          </span>
+          <p className="pi-stage-description">
+            {STAGE_METADATA[activeStage].desc}
+          </p>
         </div>
 
-        {/* Story cards */}
-        {CARDS.map((c) => (
-          <div
-            key={c.id}
-            className={`pi-card side-${c.side} ${visibleCards.has(c.id) ? 'vis' : ''}`}
-            style={{ '--ac': c.ac, top: `calc(10vh + ${c.top / 100} * 80vh)` }}
-          >
-            <div className="pi-card-top">
-              <span className="pi-card-icon">{c.icon}</span>
-              <span className="pi-card-title">{c.title}</span>
-            </div>
-            <p className="pi-card-text">{c.text}</p>
-            <div className="pi-card-dot" />
+        {/* Dashboard Grid */}
+        <div className="pi-dashboard-grid">
+          
+          {/* Growth Cards (Columns 1, 2, 3) */}
+          <div className="pi-cards-column">
+            {TRANSITIONS.map((pillar) => {
+              const data = getCurrentData(pillar);
+              return (
+                <div key={pillar.id} className={`pi-growth-card ${data.colorClass}`}>
+                  <div className="pi-card-header">
+                    <span className="pi-card-pillar-tag">{pillar.title}</span>
+                    <span className="pi-card-status-badge">{data.statusText}</span>
+                  </div>
+
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeStage}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -15 }}
+                      transition={{ duration: 0.35, ease: "easeInOut" }}
+                      className="pi-card-body"
+                    >
+                      <div className="pi-card-icon-container">
+                        <span className="pi-card-big-icon">{data.icon}</span>
+                      </div>
+                      <h3 className="pi-card-subtitle">{data.subtitle}</h3>
+                      <p className="pi-card-desc">{data.text}</p>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              );
+            })}
           </div>
-        ))}
 
-        {/* CTA */}
-        <div className={`pi-cta-zone ${progress > 0.88 ? 'vis' : ''}`}>
-          <button className="pi-cta-btn">Book a free trial →</button>
-          <span className="pi-cta-sub">No commitment · First session is free</span>
+          {/* Central Character Transformation Display */}
+          <div className="pi-mascot-showcase">
+            <div className="pi-mascot-orbit-ring" />
+            <div className="pi-mascot-glow-sphere" style={{ background: getStageColor() }} />
+            
+            <div className="pi-mascot-frame">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStage}
+                  initial={{ opacity: 0, scale: 0.8, rotate: -8 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                  exit={{ opacity: 0, scale: 0.8, rotate: 8 }}
+                  transition={{ duration: 0.4, cubicBezier: [0.34, 1.56, 0.64, 1] }}
+                  className="pi-mascot-wrapper"
+                >
+                  <img 
+                    src={STAGE_METADATA[activeStage].avatar} 
+                    alt={STAGE_METADATA[activeStage].badgeText} 
+                    className="pi-mascot-image"
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+            
+            <div className="pi-mascot-interactive-tip">
+              <span className="pi-tip-icon">✨</span>
+              <span>Click steps above to watch the transformation</span>
+            </div>
+          </div>
+
+        </div>
+
+        {/* CTA Zone */}
+        <div className="pi-cta-action-zone">
+          <button className="pi-primary-cta-btn">
+            <span>Book a Free Live Demo Class</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
+          <span className="pi-cta-subtext">No credit card required · 1-on-1 private session</span>
         </div>
 
       </div>
