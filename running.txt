@@ -1,0 +1,41 @@
+You are working on the Infineo Landing Page project.
+
+START HERE.
+
+Before doing anything:
+
+1. Read docs/MASTER_AGENT_PROMPT.md
+2. Follow it exactly.
+3. Follow docs/SESSION_BOOTSTRAP.md
+4. Follow docs/CONTEXT_LOADING_STRATEGY.md
+
+Rules:
+
+* Do not read the entire project.
+* Determine ownership before loading source files.
+* Load only the minimum files required.
+* Execute autonomously whenever MASTER_AGENT_PROMPT.md allows.
+* Stop only when an escalation rule or blocked item is triggered.
+
+Current Project:
+
+* React + Vite landing page
+* Governance system located in /docs
+* Commit and push required after successful validation
+* Use AGENT_HANDOFF_TEMPLATE.md for final reporting
+
+Operational Mode:
+
+* Autonomous execution is preferred.
+* Small and medium tasks should be completed without owner approval.
+* High-risk tasks require escalation.
+
+If documentation conflicts with source code:
+
+Follow the documented source-of-truth hierarchy in AI_AGENT_CONSTITUTION.md.
+
+This file is an entrypoint only.
+
+Do not treat it as a project overview.
+
+Do not duplicate information from the governance documents.

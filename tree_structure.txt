@@ -1,40 +1,6 @@
 === TREE STRUCTURE ===
 ├── README.md
 ├── context.md
-├── dist
-│   ├── assets
-│   │   ├── Ganesha-C5q21sn-.png
-│   │   ├── Hanuman-w785fx3r.png
-│   │   ├── Krishna-CimNYiwH.png
-│   │   ├── Mahabharata-C-gtePA9.png
-│   │   ├── Ram-D3R5IA17.png
-│   │   ├── Ramayan-DFEH1qJZ.png
-│   │   ├── Shakti-CpBIZVy2.png
-│   │   ├── Shiva-DxFciRvg.png
-│   │   ├── Vishnu-BQHF1r4e.png
-│   │   ├── anxiety-DlV8Of8l.png
-│   │   ├── empathy-_CRJsGn1.png
-│   │   ├── glass-break-sYWZiSAa.mp3
-│   │   ├── index--lSHjkQi.js
-│   │   ├── index-DtKehYuC.css
-│   │   ├── logo_with_text-0QDsm591.png
-│   │   ├── module-bg-CFbng2HG.png
-│   │   ├── module-light-bg-CAQPotZj.png
-│   │   ├── neo-CMDDWPVc.png
-│   │   ├── neo-without-eyes-DnUFUxiy.png
-│   │   ├── neo2-CMUsg145.png
-│   │   ├── neo3-BWuDC3p6.png
-│   │   ├── neo4-C1HYH4G6.png
-│   │   ├── newbg3-CXERdbQP.png
-│   │   ├── newbg3-light-CPlS3nHL.png
-│   │   ├── peer-pressure-DE5odWrb.png
-│   │   ├── screen-addiction-CQWqqLwp.png
-│   │   ├── storytelling-VXHKA-Z2.png
-│   │   ├── transformed-BJuHcrz1.png
-│   │   └── website-neo-CfK8PMHD.png
-│   ├── bg-video2.mp4
-│   ├── hero.mp4
-│   └── index.html
 ├── eslint.config.js
 ├── index.html
 ├── package-lock.json
@@ -92,7 +58,6 @@
 │   │   └── Title.jsx
 │   ├── context
 │   │   └── ThemeContext.jsx
-│   ├── hooks
 │   ├── main.jsx
 │   ├── styles
 │   │   ├── BroadwayText.css
