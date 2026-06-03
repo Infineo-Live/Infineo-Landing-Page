@@ -51,26 +51,14 @@
   #sparkle-portal { display: none !important; }
 }
 
-/* Optional subtle trailing glow using theme variable */
-.cursor-sparkle::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: inherit;
-  opacity: 0.8;
-  filter: blur(6px);
-}
-
 /* Scroll reveal transitions for sections.
-   NOTE: filter/will-change:filter MUST NOT be used here —
-   CSS spec causes any ancestor with filter to create a new
-   containing block, which traps position:fixed children
-   (like floating buttons) relative to that ancestor instead
-   of the viewport, making them invisible or mispositioned. */
+   CRITICAL: will-change:transform creates a new CSS stacking context,
+   which traps position:fixed children (sparkles, floating buttons) inside
+   that element. Only use will-change:opacity — it does NOT create a
+   containing block. See context.md for the full table of triggers. */
 .section-transition {
   transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-  will-change: opacity, transform;
+  will-change: opacity;
 }
 
 .section-blurred {
