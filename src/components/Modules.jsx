@@ -12,14 +12,14 @@ import ramayanaImg from '../assets/gods/Ramayan.png';
 import mahabharataImg from '../assets/gods/Mahabharata.png';
 
 const MODULES = [
-  { id: 1, name: 'Ganesha', subtitle: 'The Remover of Obstacles', image: ganeshaImg, x: 0, y: 20, comingSoon: false },
-  { id: 2, name: 'Hanuman', subtitle: 'The Symbol of Strength', image: hanumanImg, x: 24, y: 50, comingSoon: false },
+  { id: 1, name: 'Ganesha', subtitle: 'The Remover of Obstacles', image: ganeshaImg, x: 0, y: 10, comingSoon: false },
+  { id: 2, name: 'Hanuman', subtitle: 'The Symbol of Strength', image: hanumanImg, x: 20, y: 40, comingSoon: false },
   { id: 3, name: 'Krishna', subtitle: 'The Divine Teacher', image: krishnaImg, x: 50, y: 22, comingSoon: false },
   { id: 4, name: 'Ram', subtitle: 'The Prince of Dharma', image: ramImg, x: 85, y: 32, comingSoon: false },
-  { id: 5, name: 'Shiva', subtitle: 'The Great Protector', image: shivaImg, x: 100, y: 52, comingSoon: false },
-  { id: 6, name: 'Shakti', subtitle: 'The Divine Feminine Power', image: shaktiImg, x: 75, y: 60, comingSoon: false },
+  { id: 5, name: 'Shiva', subtitle: 'The Great Protector', image: shivaImg, x: 101, y: 52, comingSoon: false },
+  { id: 6, name: 'Shakti', subtitle: 'The Divine Feminine Power', image: shaktiImg, x: 78, y: 68, comingSoon: false },
   { id: 7, name: 'Vishnu', subtitle: 'The Preserver of the Universe', image: vishnuImg, x: 44, y: 89, comingSoon: false },
-  { id: 8, name: 'Ramayana', subtitle: "Epic of Lord Ram's Journey", image: ramayanaImg, x: 10, y: 82, comingSoon: true },
+  { id: 8, name: 'Ramayana', subtitle: "Epic of Lord Ram's Journey", image: ramayanaImg, x: 16, y: 82, comingSoon: true },
   { id: 9, name: 'Mahabharata', subtitle: 'The Epic of Duty & Wisdom', image: mahabharataImg, x: -2, y: 80, comingSoon: true },
 ];
 
@@ -65,7 +65,7 @@ export default function Modules() {
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 650px)');
     const handleResize = (e) => setIsMobile(e.matches);
-    
+
     setIsMobile(mediaQuery.matches);
     mediaQuery.addEventListener('change', handleResize);
     return () => mediaQuery.removeEventListener('change', handleResize);
@@ -77,7 +77,7 @@ export default function Modules() {
     if (!section) return;
     const nodes = section.querySelectorAll('.level-node');
     const svg = section.querySelector('.path-svg');
-    
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
@@ -88,7 +88,7 @@ export default function Modules() {
         observer.disconnect();
       });
     }, { threshold: 0.05 });
-    
+
     observer.observe(section);
     return () => observer.disconnect();
   }, []);
@@ -103,55 +103,55 @@ export default function Modules() {
 
       <div className="game-map-wrapper">
         <svg
-  className="path-svg"
-  viewBox="0 0 100 100"
-  preserveAspectRatio="none"
->
-  <defs>
-    {/* Magical glow */}
-    <filter id="path-glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="1.2" result="blur" />
-      <feMerge>
-        <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    </filter>
+          className="path-svg"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            {/* Magical glow */}
+            <filter id="path-glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="1.2" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
 
-    {/* Strong visibility shadow */}
-    <filter id="path-shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow
-        dx="0"
-        dy="2"
-        stdDeviation="1.5"
-        floodColor="var(--path-shadow)"
-        floodOpacity="0.95"
-      />
-    </filter>
-  </defs>
+            {/* Strong visibility shadow */}
+            <filter id="path-shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow
+                dx="0"
+                dy="2"
+                stdDeviation="1.5"
+                floodColor="var(--path-shadow)"
+                floodOpacity="0.95"
+              />
+            </filter>
+          </defs>
 
-  {/* Glow Trail */}
-  <path
-    className="path-line path-glow-line"
-    d={pathD}
-    fill="none"
-    stroke="var(--path-glow)"
-    strokeWidth={isMobile ? "3.2" : "2.2"}
-    strokeLinecap="round"
-    filter="url(#path-glow)"
-  />
+          {/* Glow Trail */}
+          <path
+            className="path-line path-glow-line"
+            d={pathD}
+            fill="none"
+            stroke="var(--path-glow)"
+            strokeWidth={isMobile ? "3.2" : "2.2"}
+            strokeLinecap="round"
+            filter="url(#path-glow)"
+          />
 
-  {/* Main Trail */}
-  <path
-    className="path-line path-core-line"
-    d={pathD}
-    fill="none"
-    stroke="var(--path-core)"
-    strokeWidth={isMobile ? "1.3" : "0.9"}
-    strokeDasharray={isMobile ? "3 2" : "4 2"}
-    strokeLinecap="round"
-    filter="url(#path-shadow)"
-  />
-</svg>
+          {/* Main Trail */}
+          <path
+            className="path-line path-core-line"
+            d={pathD}
+            fill="none"
+            stroke="var(--path-core)"
+            strokeWidth={isMobile ? "1.3" : "0.9"}
+            strokeDasharray={isMobile ? "3 2" : "4 2"}
+            strokeLinecap="round"
+            filter="url(#path-shadow)"
+          />
+        </svg>
         {/* Level Nodes */}
         {MODULES.map((mod, index) => {
           const coords = getCoordinates(mod, index);
@@ -177,12 +177,7 @@ export default function Modules() {
                   {mod.comingSoon ? '\u2728' : '\U0001f64f'}
                 </div>
               )}
-
               <div className="level-badge">{mod.id}</div>
-
-              <div className="level-label">
-                <span className="level-label-name">{mod.name}</span>
-              </div>
             </div>
           );
         })}

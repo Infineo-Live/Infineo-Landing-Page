@@ -16,12 +16,40 @@ import './App.css'
 function App() {
   useEffect(() => {
     const cleanup = initCursorSparkles({
-      minInterval: 60,      // was 30 — fires less often
-      extraChance: 0.12,    // was 0.32 — fewer bonus particles
-      clickBurst: 6,        // was 12 — lighter click burst
+      minInterval: 55,      // ms between trail bursts
+      extraChance: 0.14,    // bonus particle probability
+      clickBurst: 8,        // particles per click
     });
-    return cleanup;
+
+    // Add scroll transition classes
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('section-visible');
+            entry.target.classList.remove('section-blurred');
+          } else {
+            entry.target.classList.add('section-blurred');
+            entry.target.classList.remove('section-visible');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    // Select all major sections
+    const sections = document.querySelectorAll('section');
+    sections.forEach((sec) => {
+      sec.classList.add('section-transition');
+      observer.observe(sec);
+    });
+
+    return () => {
+      cleanup();
+      observer.disconnect();
+    };
   }, []);
+
   return (
     <ThemeProvider>
       <Title />
@@ -32,9 +60,12 @@ function App() {
         <Modules />
         <DemoClass />
         <Pricing />
-        <FloatingChatbot />
-        <FloatingWhatsapp />
       </div>
+      {/* Floating buttons MUST be outside any ancestor with filter/will-change:filter
+          or background-attachment:fixed — those properties create a new containing
+          block that confines position:fixed children to that element, not the viewport */}
+      <FloatingChatbot />
+      <FloatingWhatsapp />
       <Footer />
     </ThemeProvider>
   )

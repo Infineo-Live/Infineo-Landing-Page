@@ -19,7 +19,7 @@ const Title = () => {
     const handleMouseMove = (e) => {
       const rect = nav.getBoundingClientRect();
       droplet.style.left = `${e.clientX - rect.left}px`;
-      droplet.style.top  = `${e.clientY - rect.top}px`;
+      droplet.style.top = `${e.clientY - rect.top}px`;
       droplet.style.opacity = '1';
     };
     const handleMouseLeave = () => { droplet.style.opacity = '0'; };
@@ -33,21 +33,37 @@ const Title = () => {
   }, []);
 
   useEffect(() => {
-  let lastScrollY = window.scrollY;
+    let lastScrollY = window.scrollY;
+    let ticking = false;
 
-  const onScroll = () => {
-    const currentScrollY = window.scrollY;
-    const scrollingUp = currentScrollY < lastScrollY;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
 
-    setScrolled(currentScrollY > 40);
-    setVisible(scrollingUp || currentScrollY < 10);
+      requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
 
-    lastScrollY = currentScrollY;
-  };
+        setScrolled(currentScrollY > 40);
 
-  window.addEventListener('scroll', onScroll);
-  return () => window.removeEventListener('scroll', onScroll);
-}, []);
+        if (currentScrollY < 10) {
+          // at the very top — always show
+          setVisible(true);
+        } else if (currentScrollY < lastScrollY) {
+          // scrolling UP — reveal header
+          setVisible(true);
+        } else if (currentScrollY > lastScrollY && currentScrollY > 40) {
+          // scrolling DOWN past threshold — hide header
+          setVisible(false);
+        }
+
+        lastScrollY = currentScrollY;
+        ticking = false;
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <>
@@ -58,14 +74,14 @@ const Title = () => {
 
         {/* Desktop Nav */}
         <div className="nav-theme-wrapper" >
-        <nav className="title-links" ref={navRef}>
-          <span className="nav-droplet" ref={dropletRef} />
-          <a href="#home">ABOUT</a>
-          <a href="#stories">IMPACT</a>
-          <a href="#how">NOTE TO PARENTS</a>
-          <a href="#curriculum">CURRICULUM</a>
-          <a href="#pricing">PRICING</a>
-          <button className="login-btn">BOOK THE DEMO</button>
+          <nav className="title-links" ref={navRef}>
+            <span className="nav-droplet" ref={dropletRef} />
+            <a href="#home">ABOUT</a>
+            <a href="#stories">IMPACT</a>
+            <a href="#how">NOTE TO PARENTS</a>
+            <a href="#curriculum">CURRICULUM</a>
+            <a href="#pricing">PRICING</a>
+            <button className="login-btn">BOOK THE DEMO</button>
           </nav>
           {/* Theme Toggle — wired to context */}
           <button
@@ -96,10 +112,10 @@ const Title = () => {
               </div>
             </div>
           </button>
-          </div>
+        </div>
 
-          
-        
+
+
 
         {/* Mobile Hamburger */}
         <button
@@ -112,9 +128,9 @@ const Title = () => {
 
         {/* Mobile Drawer */}
         <div className={`mobile-menu ${menuOpen ? 'mobile-menu--open' : ''}`}>
-          <a href="#home"       onClick={() => setMenuOpen(false)}>ABOUT</a>
-          <a href="#stories"    onClick={() => setMenuOpen(false)}>STORIES</a>
-          <a href="#how"        onClick={() => setMenuOpen(false)}>HOW IT WORKS</a>
+          <a href="#home" onClick={() => setMenuOpen(false)}>ABOUT</a>
+          <a href="#stories" onClick={() => setMenuOpen(false)}>STORIES</a>
+          <a href="#how" onClick={() => setMenuOpen(false)}>HOW IT WORKS</a>
           <a href="#curriculum" onClick={() => setMenuOpen(false)}>CURRICULUM</a>
           <button className="login-btn" onClick={() => setMenuOpen(false)}>BOOK THE DEMO</button>
         </div>

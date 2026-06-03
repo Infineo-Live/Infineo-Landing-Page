@@ -85,7 +85,7 @@
   /* All layers hidden by default */
   animation-duration: 4s;
   animation-iteration-count: infinite;
-  animation-timing-function: linear;
+  animation-timing-function: ease-in-out;
 }
 
 /* Mapping unique animation cycles per frame layer */
@@ -105,68 +105,28 @@
   animation-name: frame4-loop;
 }
 
-/* Frame 1: Eyes wide open for 85% of the total 4 seconds */
+/* Frame 1: Eyes wide open */
 @keyframes frame1-loop {
-
-  0%,
-  85%,
-  97%,
-  100% {
-    opacity: 1;
-  }
-
-  86%,
-  96% {
-    opacity: 0;
-  }
+  0%, 84%, 98%, 100% { opacity: 1; }
+  86%, 96% { opacity: 0; }
 }
 
 /* Frame 2: Quick transition down (Half-closed) */
 @keyframes frame2-loop {
-
-  0%,
-  85%,
-  89%,
-  100% {
-    opacity: 0;
-  }
-
-  86%,
-  88% {
-    opacity: 1;
-  }
+  0%, 83%, 90%, 100% { opacity: 0; }
+  85%, 88% { opacity: 1; }
 }
 
 /* Frame 3: Fully Closed Eyes */
 @keyframes frame3-loop {
-
-  0%,
-  88%,
-  94%,
-  100% {
-    opacity: 0;
-  }
-
-  89%,
-  93% {
-    opacity: 1;
-  }
+  0%, 87%, 95%, 100% { opacity: 0; }
+  89%, 93% { opacity: 1; }
 }
 
 /* Frame 4: Quick transition back up (Half-closed) */
 @keyframes frame4-loop {
-
-  0%,
-  93%,
-  97%,
-  100% {
-    opacity: 0;
-  }
-
-  94%,
-  96% {
-    opacity: 1;
-  }
+  0%, 92%, 99%, 100% { opacity: 0; }
+  94%, 97% { opacity: 1; }
 }
 
 /* Content */
@@ -221,6 +181,7 @@
   color: #ffffff;
   letter-spacing: 0.25rem;
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.3);
+  /* based on mode*/
   animation: fadeSlideUp 0.7s ease-out both;
   animation-delay: 0.22s;
 }
@@ -234,6 +195,7 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   filter: drop-shadow(0 2px 12px rgba(190, 140, 74, 0.35));
+  /* based on mode*/
   animation: fadeSlideUp 0.7s ease-out both;
   animation-delay: 0.32s;
 }
@@ -241,8 +203,8 @@
 /* Subtitle */
 .hero-subtitle {
   font-family: var(--font-secondary);
-  font-size: clamp(var(--font-size-sm), 1.5vw, var(--font-size-base));
-  font-weight: 400;
+  font-size: clamp(var(--font-size-base), 1.5vw, var(--font-size-base));
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.88);
   line-height: var(--line-height-normal);
   margin: 0 0 var(--spacing-3xl) 0;

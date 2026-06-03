@@ -87,7 +87,7 @@ export default function Pricing() {
         {/* Header */}
         <div className="pricing-header">
           <h2 className="pricing-title">Flexible Pricing Plans</h2>
-          <p className="pricing-subtitle">Choose what works best for your family</p>
+          <p className="pricing-subtitle">Choose what works best for your kid</p>
 
           {/* Billing Toggle */}
           <div className="billing-toggle">

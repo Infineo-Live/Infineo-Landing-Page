@@ -50,16 +50,35 @@ const SHARD_TRANSFORMS = [
   "translate(22px,18px) rotate(14deg)", "translate(15px,-25px) rotate(-12deg)",
 ];
 
-/* ── Glass break sound via Web Audio API — no external dependency ── */
+/* ── Glass break sound — unlocked on first user gesture ── */
+let audioUnlocked = false;
+const glassAudio = typeof Audio !== 'undefined' ? new Audio(glassSfx) : null;
+if (glassAudio) {
+  glassAudio.preload = 'auto';
+  glassAudio.volume = 0.8;
+}
+
+function unlockAudio() {
+  if (audioUnlocked || !glassAudio) return;
+  // A silent play+pause driven by a user gesture satisfies autoplay policy
+  glassAudio.volume = 0;
+  glassAudio.play().then(() => {
+    glassAudio.pause();
+    glassAudio.currentTime = 0;
+    glassAudio.volume = 0.8;
+    audioUnlocked = true;
+  }).catch(() => { });
+}
+
 function playGlassBreak() {
+  if (!glassAudio) return;
   try {
-    const audio = new Audio(glassSfx);
-    audio.play()
-    audio.volume = 0.8;
-    // Play the sound; ignore any promise rejection (e.g., user gesture required)
-    audio.play().catch(() => { });
+    // Clone so overlapping plays don't cut each other off
+    const clone = glassAudio.cloneNode();
+    clone.volume = 0.8;
+    clone.play().catch(() => { });
   } catch (e) {
-    // Silently fail if audio cannot be played
+    // Silently fail
   }
 }
 
@@ -190,6 +209,12 @@ function GlassBreakCard({ journey, index }) {
 }
 
 export default function Impact() {
+  useEffect(() => {
+    const events = ['click', 'touchstart', 'keydown'];
+    events.forEach(e => document.addEventListener(e, unlockAudio, { once: true }));
+    return () => events.forEach(e => document.removeEventListener(e, unlockAudio));
+  }, []);
+
   return (
     <section className="impact-section" id="stories">
       <div className="impact-section__overlay" />

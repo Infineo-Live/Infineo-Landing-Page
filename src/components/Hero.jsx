@@ -40,15 +40,14 @@ const Hero = () => {
         <img src={neo4} className="neo-frame nf4" alt="Mascot Transition" />
       </div>
 
-      <div className="hero-content">s
+      <div className="hero-content">
         <h1 className="hero-heading">
-          <BroadwayText text="VALUES VIA STORYTELLING" className="hero-heading-line1" tag="span" />
-          <BroadwayText text="FOR KIDS" className="hero-heading-line2" tag="span" />
+          <BroadwayText text="THEY WERE NEVER" className="hero-heading-line1" tag="span" />
+          <BroadwayText text="JUST STORIES." className="hero-heading-line2" tag="span" />
         </h1>
 
         <p className="hero-subtitle">
-          Fun 1-on-1 classes that help kids build confidence, focus, values,
-          and emotional strength through Indian ancient stories.
+          Live. 1-on-1. Where Ganesha teaches focus, Krishna teaches courage, and Rama teaches character — drawing from 5,000 years of wisdom to raise tomorrow's best humans.
         </p>
 
         <div className="hero-actions">
@@ -58,12 +57,12 @@ const Hero = () => {
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </button>
-          <button className="btn-secondary">
+          {/* <button className="btn-secondary">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z" />
             </svg>
             Watch a Story
-          </button>
+          </button> */}
         </div>
 
         {/* Social proof strip */}

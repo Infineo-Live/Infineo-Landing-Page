@@ -20,27 +20,35 @@
   background-image: url('./assets/newbg3-light.png');
 }
 
-/* Cursor sparkle styles */
-.cursor-sparkle {
+/* ── Sparkle portal overlay ───────────────────────────────────
+   A single full-viewport fixed layer that acts as a container
+   for all cursor sparkle particles. Sitting at z-index 999999
+   it is guaranteed to be above ALL section stacking contexts,
+   including those created by will-change, filter, backdrop-filter
+   or transform on any ancestor element.
+   pointer-events: none so it never blocks clicks/hovers.
+──────────────────────────────────────────────────────────────── */
+#sparkle-portal {
   position: fixed;
+  inset: 0;              /* top:0 right:0 bottom:0 left:0 */
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
-  border-radius: 50%;
-  transform: scale(0.2) rotate(0deg);
-  opacity: 0.95;
-  mix-blend-mode: screen;
-  will-change: transform, opacity;
-  transition: transform 0.9s cubic-bezier(.22,.9,.43,1), opacity 0.9s ease-out;
-  z-index: 99999;
+  z-index: 999999;       /* above chatbot (99999) and everything else */
+  overflow: visible;
 }
 
-.cursor-sparkle--animate {
-  transform: scale(1.4) rotate(20deg) translateY(-12px);
-  opacity: 0;
+/* Individual sparkle particles inside the portal */
+.sparkle-particle {
+  position: absolute;    /* absolute inside the portal, not fixed */
+  pointer-events: none;
+  mix-blend-mode: screen; /* blends beautifully on both dark & light bg */
+  will-change: transform, opacity;
 }
 
 @media (hover: none), (pointer: coarse) {
-  /* disable for touch devices */
-  .cursor-sparkle { display: none !important; }
+  /* Disable sparkle trail on touch-only devices */
+  #sparkle-portal { display: none !important; }
 }
 
 /* Optional subtle trailing glow using theme variable */
@@ -54,4 +62,23 @@
   filter: blur(6px);
 }
 
+/* Scroll reveal transitions for sections.
+   NOTE: filter/will-change:filter MUST NOT be used here —
+   CSS spec causes any ancestor with filter to create a new
+   containing block, which traps position:fixed children
+   (like floating buttons) relative to that ancestor instead
+   of the viewport, making them invisible or mispositioned. */
+.section-transition {
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  will-change: opacity, transform;
+}
 
+.section-blurred {
+  opacity: 0.5;
+  transform: translateY(16px);
+}
+
+.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
