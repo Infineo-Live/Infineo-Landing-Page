@@ -91,6 +91,8 @@ def print_tree(root, prefix="", mode="all"):
 
 ROOT_PATH = "/home/manika/Infineo/landing-page-old/Infineo-Landing-Page"
 
+#ROOT_PATH = "F:\\Infineo\\Landing Page"
+
 emit("=== TREE STRUCTURE ===")
 print_tree(ROOT_PATH, mode="all")
 
