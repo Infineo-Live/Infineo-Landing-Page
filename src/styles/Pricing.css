@@ -73,7 +73,7 @@
 }
 
 .pricing-title {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-primary);
   font-size: 48px;
   font-weight: 700;
   color: var(--text-primary);
@@ -190,7 +190,7 @@
   color: var(--text-inverse);
   padding: 8px 16px;
   border-radius: 20px;
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-primary);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -219,7 +219,7 @@
 }
 
 .plan-name {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-primary);
   font-size: 24px;
   font-weight: 700;
   color: var(--text-primary);
@@ -244,7 +244,7 @@
 
 .sessions-number {
   display: block;
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-primary);
   font-size: 36px;
   font-weight: 700;
   color: var(--accent-primary);
@@ -264,7 +264,7 @@
 .plan-price {
   text-align: center;
   margin-bottom: 8px;
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-primary);
 }
 
 .currency {
@@ -303,7 +303,7 @@
   color: var(--text-inverse);
   border: none;
   border-radius: 8px;
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-primary);
   font-size: 20px;
   font-weight: 800;
   cursor: pointer;
@@ -384,7 +384,7 @@
 }
 
 .info-item h4 {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-primary);
   font-size: 16px;
   color: #0F2D3F;
   margin-bottom: 8px;
@@ -409,7 +409,7 @@
 }
 
 .pricing-cta h3 {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-primary);
   font-size: 36px;
   color: #0F2D3F;
   margin-bottom: 10px;
@@ -429,7 +429,7 @@
   color: #0F2D3F;
   border: none;
   border-radius: 8px;
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-primary);
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;

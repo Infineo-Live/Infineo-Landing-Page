@@ -1,6 +1,7 @@
 .broadway-wrap {
-  display: inline-block;
+  display: block;
   white-space: pre-wrap;
+  text-align: left;
 }
 
 .broadway-char {

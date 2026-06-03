@@ -118,7 +118,7 @@
 
 /* Column Title */
 .footer-column-title {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-primary);
   font-size: 14px;
   font-weight: 700;
   color: var(--accent-primary);
@@ -167,7 +167,7 @@
 
 /* Newsletter Section */
 .newsletter-section h3 {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-primary);
   font-size: 18px;
   color: var(--accent-primary);
   margin-bottom: 10px;
@@ -211,7 +211,7 @@
   border: none;
   border-radius: 6px;
   color: var(--text-inverse);
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-primary);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -228,7 +228,7 @@
 
 /* Contact Info */
 .contact-info h3 {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-primary);
   font-size: 18px;
   color: var(--accent-primary);
   margin-bottom: 15px;

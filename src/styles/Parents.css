@@ -1,4 +1,4 @@
-   /* Parents Section */
+/* Parents Section */
 .parents-section {
   position: relative;
   width: 100%;
@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 60px 24px;
+  padding: var(--section-padding-y) clamp(1rem, 4vw, 4rem);
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -25,6 +25,8 @@
   position: absolute;
   inset: 0;
   z-index: 1;
+  background: var(--bg-overlay);
+  pointer-events: none;
 }
 
 /* ── Letter card ── */
@@ -81,7 +83,7 @@
 
 /* Title */
 .letter-title {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-primary);
   font-size: 32px;
   font-weight: 800;
   color: var(--text-primary);
@@ -92,7 +94,7 @@
 
 /* ── Body letter text ── */
 .letter-quote {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 24px;
   line-height: 1;
   color: var(--text-secondary); 
@@ -140,7 +142,7 @@
 }
 
 .founder-name {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-primary);
   font-size: 14px;
   font-weight: 700;
   color: var(--text-primary);

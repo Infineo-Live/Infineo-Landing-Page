@@ -14,18 +14,33 @@ export default function BroadwayText({ text, className = '', tag: Tag = 'span' }
     return () => observer.disconnect();
   }, []);
 
+  // Split text into words and spaces to keep words together
+  const tokens = text.split(/(\s+)/);
+  let charIdx = 0;
+
   return (
     <Tag ref={ref} className={`broadway-wrap ${className}`} aria-label={text}>
-      {text.split('').map((char, i) => (
-        <span
-          key={i}
-          className={`broadway-char ${visible ? 'vis' : ''}`}
-          style={{ animationDelay: `${i * 0.04}s` }}
-          aria-hidden="true"
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </span>
-      ))}
+      {tokens.map((token, idx) => {
+        if (token.trim() === '') {
+          // Render space as non-breaking space
+          return <span key={idx} className="broadway-char" aria-hidden="true">{'\u00A0'}</span>;
+        }
+        // Wrap each word in a container to prevent line breaks within the word
+        return (
+          <span key={idx} className="broadway-word" style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+            {Array.from(token).map((char, i) => (
+              <span
+                key={i}
+                className={`broadway-char ${visible ? 'vis' : ''}`}
+                style={{ animationDelay: `${charIdx++ * 0.04}s` }}
+                aria-hidden="true"
+              >
+                {char}
+              </span>
+            ))}
+          </span>
+        );
+      })}
     </Tag>
   );
 }

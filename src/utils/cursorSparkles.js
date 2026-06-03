@@ -12,7 +12,7 @@ export default function initCursorSparkles({
 
   // palette: gold + pearl + silver shimmer 
   const COLORS = [
-    { fill: '#FFD700', outer: '#FFA500',  spec: 'rgba(255,255,220,0.9)' },  // pure gold
+    { fill: '#6e5e00ff', outer: '#FFA500',  spec: 'rgba(255,255,220,0.9)' },  // pure gold
     { fill: '#FFF4B0', outer: '#FFD700',  spec: 'rgba(255,255,255,0.95)' }, // pale champagne
     { fill: '#FFFFFF', outer: '#FFE878',  spec: 'rgba(255,255,255,1)'    }, // white-gold
     { fill: '#FFE040', outer: '#FF9500',  spec: 'rgba(255,245,180,0.85)' }, // deep amber

@@ -27,7 +27,6 @@ export default function Pricing() {
     {
       id: 1,
       name: 'Starter',
-      icon: '🌱',
       sessions: '4',
       sessionUnit: 'sessions/month',
       price: { monthly: 1999, quarterly: 5499 },
@@ -44,7 +43,6 @@ export default function Pricing() {
     {
       id: 2,
       name: 'Popular',
-      icon: '⭐',
       sessions: '8',
       sessionUnit: 'sessions/month',
       price: { monthly: 3999, quarterly: 10999 },
@@ -63,7 +61,6 @@ export default function Pricing() {
     {
       id: 3,
       name: 'Premium',
-      icon: '👑',
       sessions: '12',
       sessionUnit: 'sessions/month',
       price: { monthly: 5999, quarterly: 16499 },
@@ -121,7 +118,6 @@ export default function Pricing() {
               {plan.id === 2 && <div className="popular-badge">POPULAR</div>}
 
               <div className="card-header">
-                <span className="plan-icon">{plan.icon}</span>
                 <h3 className="plan-name">{plan.name}</h3>
                 <p className="plan-description">{plan.description}</p>
               </div>

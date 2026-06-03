@@ -8,46 +8,60 @@ import imgPeerPressure from '../assets/impact/peer-pressure.png';
 import imgAnxiety from '../assets/impact/anxiety.png';
 import imgEmpathy from '../assets/impact/empathy.png';
 
+import glassSfx from '../assets/audio/glass-break.mp3';
 const JOURNEYS = [
   {
     id: 'focus',
     problem: { label: 'Screen Addiction', caption: 'Endless scrolling destroys focus', image: imgScreenAddiction, color: '#ff6b6b' },
-    result:  { label: 'Deep Focus',       caption: 'Sustained attention & calm reflection', image: imgStoryTelling, color: '#4ade80' },
+    result: { label: 'Deep Focus', caption: 'Sustained attention & calm reflection', image: imgStoryTelling, color: '#4ade80' },
   },
   {
     id: 'values',
-    problem: { label: 'Peer Pressure',    caption: 'Isolation & lost moral compass', image: imgPeerPressure, color: '#ff9f43' },
-    result:  { label: 'Empathy & Kindness', caption: 'Confident cultural identity & values', image: imgEmpathy, color: '#38bdf8' },
+    problem: { label: 'Peer Pressure', caption: 'Isolation & lost moral compass', image: imgPeerPressure, color: '#ff9f43' },
+    result: { label: 'Empathy & Kindness', caption: 'Confident cultural identity & values', image: imgEmpathy, color: '#38bdf8' },
   },
   {
     id: 'resilience',
-    problem: { label: 'Anxiety & Fear',   caption: 'Academic pressure & fear of failure', image: imgAnxiety, color: '#a78bfa' },
-    result:  { label: 'Inner Strength',   caption: 'Courage, resilience & confidence', image: imgTransformed, color: '#f59e0b' },
+    problem: { label: 'Anxiety & Fear', caption: 'Academic pressure & fear of failure', image: imgAnxiety, color: '#a78bfa' },
+    result: { label: 'Inner Strength', caption: 'Courage, resilience & confidence', image: imgTransformed, color: '#f59e0b' },
   },
 ];
 
 /* Unique shard polygon sets per card */
 const SHARD_SETS = [
   [
-    "0,0 45,0 38,60 0,55","45,0 100,0 100,45 52,70","0,55 38,60 30,100 0,100",
-    "38,60 52,70 60,100 30,100","52,70 100,45 100,100 60,100","100,0 100,45 52,70 45,0",
+    "0,0 45,0 38,60 0,55", "45,0 100,0 100,45 52,70", "0,55 38,60 30,100 0,100",
+    "38,60 52,70 60,100 30,100", "52,70 100,45 100,100 60,100", "100,0 100,45 52,70 45,0",
   ],
   [
-    "0,0 50,0 42,55 0,48","50,0 100,0 100,50 58,62","0,48 42,55 35,100 0,100",
-    "42,55 58,62 65,100 35,100","58,62 100,50 100,100 65,100","0,0 42,55 0,48",
+    "0,0 50,0 42,55 0,48", "50,0 100,0 100,50 58,62", "0,48 42,55 35,100 0,100",
+    "42,55 58,62 65,100 35,100", "58,62 100,50 100,100 65,100", "0,0 42,55 0,48",
   ],
   [
-    "0,0 40,0 35,50 0,60","40,0 100,0 100,40 55,65","0,60 35,50 40,100 0,100",
-    "35,50 55,65 62,100 40,100","55,65 100,40 100,100 62,100","40,0 100,0 55,65 35,50",
+    "0,0 40,0 35,50 0,60", "40,0 100,0 100,40 55,65", "0,60 35,50 40,100 0,100",
+    "35,50 55,65 62,100 40,100", "55,65 100,40 100,100 62,100", "40,0 100,0 55,65 35,50",
   ],
 ];
 
 /* Shard fly-out directions */
 const SHARD_TRANSFORMS = [
-  "translate(-18px,-22px) rotate(-15deg)","translate(20px,-18px) rotate(12deg)",
-  "translate(-22px,20px) rotate(-10deg)","translate(5px,25px) rotate(8deg)",
-  "translate(22px,18px) rotate(14deg)","translate(15px,-25px) rotate(-12deg)",
+  "translate(-18px,-22px) rotate(-15deg)", "translate(20px,-18px) rotate(12deg)",
+  "translate(-22px,20px) rotate(-10deg)", "translate(5px,25px) rotate(8deg)",
+  "translate(22px,18px) rotate(14deg)", "translate(15px,-25px) rotate(-12deg)",
 ];
+
+/* ── Glass break sound via Web Audio API — no external dependency ── */
+function playGlassBreak() {
+  try {
+    const audio = new Audio(glassSfx);
+    audio.play()
+    audio.volume = 0.8;
+    // Play the sound; ignore any promise rejection (e.g., user gesture required)
+    audio.play().catch(() => { });
+  } catch (e) {
+    // Silently fail if audio cannot be played
+  }
+}
 
 function GlassBreakCard({ journey, index }) {
   const ref = useRef(null);
@@ -56,20 +70,33 @@ function GlassBreakCard({ journey, index }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && phase === 'hidden') {
-          setPhase('enter');
-          setTimeout(() => setPhase('breaking'), 1200);
-          setTimeout(() => setPhase('broken'),   1900);
-          setTimeout(() => setPhase('reveal'),   2400);
+          /* Stagger each card by 200ms so rapid scroll doesn't fire all at once */
+          const stagger = index * 200;
+
+          setTimeout(() => {
+            setPhase('enter');
+
+            setTimeout(() => {
+              setPhase('breaking');
+              playGlassBreak(); /* 🔊 fire audio exactly when cracks appear */
+            }, 1200);
+
+            setTimeout(() => setPhase('broken'), 1900);
+            setTimeout(() => setPhase('reveal'), 2400);
+          }, stagger);
         }
       },
-      { threshold: 0.45 }
+      /* Lowered from 0.45 → 0.3 so cards trigger earlier while scrolling */
+      { threshold: 0.3 }
     );
+
     obs.observe(el);
     return () => obs.disconnect();
-  }, [phase]);
+  }, [phase, index]);
 
   const shards = SHARD_SETS[index % SHARD_SETS.length];
   const uniqueId = `clip-${journey.id}`;
@@ -79,17 +106,22 @@ function GlassBreakCard({ journey, index }) {
 
       {/* ── PROBLEM CARD with glass-break shards ── */}
       <div className="gb-problem">
-        {/* Base image (always present, hidden behind shards until broken) */}
-        <img src={journey.problem.image} alt={journey.problem.label} className="gb-img gb-img--problem" />
+
+        {/* Base image — stays visible blurred after break instead of disappearing */}
+        <img
+          src={journey.problem.image}
+          alt={journey.problem.label}
+          className="gb-img gb-img--problem"
+        />
 
         {/* Crack overlay — SVG lines */}
         <svg className="gb-cracks" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <line x1="38" y1="0"   x2="30" y2="100" stroke="rgba(255,255,255,0.9)" strokeWidth="0.4"/>
-          <line x1="38" y1="0"   x2="52" y2="70"  stroke="rgba(255,255,255,0.9)" strokeWidth="0.35"/>
-          <line x1="52" y1="70"  x2="100" y2="45" stroke="rgba(255,255,255,0.9)" strokeWidth="0.35"/>
-          <line x1="52" y1="70"  x2="60" y2="100" stroke="rgba(255,255,255,0.9)" strokeWidth="0.3"/>
-          <line x1="0"  y1="55"  x2="38" y2="60"  stroke="rgba(255,255,255,0.7)" strokeWidth="0.3"/>
-          <line x1="38" y1="60"  x2="100" y2="45" stroke="rgba(255,255,255,0.7)" strokeWidth="0.3"/>
+          <line x1="38" y1="0" x2="30" y2="100" stroke="rgba(255,255,255,0.9)" strokeWidth="0.4" />
+          <line x1="38" y1="0" x2="52" y2="70" stroke="rgba(255,255,255,0.9)" strokeWidth="0.35" />
+          <line x1="52" y1="70" x2="100" y2="45" stroke="rgba(255,255,255,0.9)" strokeWidth="0.35" />
+          <line x1="52" y1="70" x2="60" y2="100" stroke="rgba(255,255,255,0.9)" strokeWidth="0.3" />
+          <line x1="0" y1="55" x2="38" y2="60" stroke="rgba(255,255,255,0.7)" strokeWidth="0.3" />
+          <line x1="38" y1="60" x2="100" y2="45" stroke="rgba(255,255,255,0.7)" strokeWidth="0.3" />
         </svg>
 
         {/* Shards — each clips the image to a polygon, then flies away */}
@@ -177,7 +209,7 @@ export default function Impact() {
       </div>
 
       <div className="impact-cta">
-        <button className="impact-cta__btn">
+        <button className="btn-primary impact-cta__btn">
           <span>Start Your Child's Journey</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
             <path d="M5 12h14M12 5l7 7-7 7" />
