@@ -126,7 +126,6 @@ Purpose: First-screen experience. Renders above `journey-background`.
 
 Imports:
 - BroadwayText from `./BroadwayText`
-- Neo mascot frames: `neo.png`, `neo2.png`, `neo3.png`, `neo4.png` from `../assets/neo-version/blink/`
 - `../styles/Hero.css`
 
 Exports: `Hero` (default)
@@ -136,7 +135,6 @@ Owns:
 - Hero subtitle copy
 - Primary `BOOK THE DEMO` CTA button
 - Social proof strip (500+ Happy Kids, 7 Epic Modules, Ages 5–14)
-- Neo mascot blink animation (4-frame CSS sprite)
 - Background video (`/bg-video2.mp4`)
 - Scroll indicator
 - Section visibility IntersectionObserver (adds `visible` class)
@@ -197,6 +195,7 @@ Imports:
 - 6 impact images from `../assets/impact/`
 - `glass-break.mp3` from `../assets/audio/`
 - `../styles/Impact.css`
+- Neo mascot frames: `neo.png`, `neo2.png`, `neo3.png`, `neo4.png` from `../assets/neo-version/`
 
 Exports: `Impact` (default), `GlassBreakCard` (internal, not exported)
 
@@ -206,6 +205,7 @@ Owns:
 - Glass-break animation state machine (hidden → enter → breaking → broken → reveal)
 - Glass-break audio playback and browser autoplay unlock
 - Secondary CTA button ("Start Your Child's Journey")
+- Neo mascot step-end blinking animation (fixed position, left bottom, visible on scroll)
 
 Does Not Own:
 - Navigation

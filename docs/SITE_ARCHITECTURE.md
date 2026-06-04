@@ -74,7 +74,6 @@ Owns:
 - Hero subtitle copy
 - Primary `BOOK THE DEMO` CTA button
 - Social proof strip (500+ Happy Kids, 7 Epic Modules, Ages 5–14)
-- Neo mascot with blinking animation (4-frame sprite)
 - Background video (`/bg-video2.mp4`)
 - Scroll indicator
 
@@ -96,6 +95,7 @@ Owns:
 - Glass-break animation per card
 - Glass-break audio (`glass-break.mp3`)
 - Secondary CTA button ("Start Your Child's Journey")
+- Neo mascot with step-end blinking animation (fixed position, left bottom, visible on scroll)
 
 Does Not Own:
 - Navigation
