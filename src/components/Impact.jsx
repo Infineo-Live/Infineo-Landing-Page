@@ -116,8 +116,11 @@ function GlassBreakCard({ journey, index }) {
           }, stagger);
         }
       },
-      /* Lowered from 0.45 → 0.3 so cards trigger earlier while scrolling */
-      { threshold: 0.3 }
+      /* Trigger exactly when the element reaches the center of the screen */
+      {
+        rootMargin: '-50% 0px -50% 0px',
+        threshold: 0
+      }
     );
 
     obs.observe(el);

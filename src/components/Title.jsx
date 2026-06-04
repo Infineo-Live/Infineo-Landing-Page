@@ -12,6 +12,7 @@ const Title = () => {
   const [visible, setVisible] = useState(true);
   const [heroInView, setHeroInView] = useState(false);
 
+  // Desktop Nav Mouse Interaction
   useEffect(() => {
     const nav = navRef.current;
     const droplet = dropletRef.current;
@@ -44,6 +45,7 @@ const Title = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Scroll logic to hide/show the header based on scroll direction and hero visibility
   useEffect(() => {
     let lastScrollY = window.scrollY;
     let ticking = false;
@@ -54,7 +56,6 @@ const Title = () => {
 
       requestAnimationFrame(() => {
         const currentScrollY = window.scrollY;
-
         setScrolled(currentScrollY > 40);
 
         if (heroInView) {
@@ -98,7 +99,7 @@ const Title = () => {
             <a href="#pricing">PRICING</a>
             <button className="login-btn">BOOK THE DEMO</button>
           </nav>
-          {/* Theme Toggle — wired to context */}
+          {/* Theme Toggle */}
           <button
             className="theme-toggle"
             onClick={toggleTheme}
@@ -128,9 +129,6 @@ const Title = () => {
             </div>
           </button>
         </div>
-
-
-
 
         {/* Mobile Hamburger */}
         <button

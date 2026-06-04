@@ -23,8 +23,8 @@
 /* ─── Floating Button ─────────────────────────────────── */
 .chatbot-floating-btn {
   position: fixed !important;
-  /* Use env() for iOS home-indicator safe area */
-  bottom: calc(5vh + env(safe-area-inset-bottom, 0px)) !important;
+  /* Use env() for iOS home-indicator safe area, stacked above WhatsApp on desktop */
+  bottom: calc(5vh + 75px + env(safe-area-inset-bottom, 0px)) !important;
   right: calc(5vh + env(safe-area-inset-right, 0px)) !important;
   width: 60px !important;
   height: 60px !important;

@@ -491,9 +491,9 @@
   .demo-subtitle {
     font-family: 'Nunito', sans-serif;
     font-size: 24px;
-    color: var(--accent-primary);
+    color: var(--text-secondary);
     margin-bottom: 40px;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .demo-highlights {
