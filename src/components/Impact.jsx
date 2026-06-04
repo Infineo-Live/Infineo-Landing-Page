@@ -9,6 +9,13 @@ import imgAnxiety from '../assets/impact/anxiety.png';
 import imgEmpathy from '../assets/impact/empathy.png';
 
 import glassSfx from '../assets/audio/glass-break.mp3';
+
+// Import mascot frames
+import neo1 from '../assets/neo-version/neo.png'; // Eyes Open
+import neo2 from '../assets/neo-version/blink/neo2.png'; // Half-Closed
+import neo3 from '../assets/neo-version/blink/neo3.png'; // Fully Closed
+import neo4 from '../assets/neo-version/blink/neo4.png'; // Half-Closed
+
 const JOURNEYS = [
   {
     id: 'focus',
@@ -209,6 +216,20 @@ function GlassBreakCard({ journey, index }) {
 }
 
 export default function Impact() {
+  const sectionRef = useRef(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   useEffect(() => {
     const events = ['click', 'touchstart', 'keydown'];
     events.forEach(e => document.addEventListener(e, unlockAudio, { once: true }));
@@ -216,7 +237,7 @@ export default function Impact() {
   }, []);
 
   return (
-    <section className="impact-section" id="stories">
+    <section className="impact-section" id="stories" ref={sectionRef}>
       <div className="impact-section__overlay" />
 
       <div className="impact-heading">
@@ -241,6 +262,14 @@ export default function Impact() {
           </svg>
         </button>
         <span className="impact-cta__note">Free demo class · No credit card</span>
+      </div>
+
+      {/* Mascot at the bottom-left of the impact section */}
+      <div className={`impact-neo-left ${inView ? 'active' : ''}`}>
+        <img src={neo1} className="neo-frame nf1" alt="Mascot Open" />
+        <img src={neo2} className="neo-frame nf2" alt="Mascot Half Closed" />
+        <img src={neo3} className="neo-frame nf3" alt="Mascot Closed" />
+        <img src={neo4} className="neo-frame nf4" alt="Mascot Transition" />
       </div>
     </section>
   );

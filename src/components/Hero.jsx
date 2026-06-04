@@ -2,11 +2,6 @@ import { useRef, useEffect } from 'react';
 import '../styles/Hero.css';
 import BroadwayText from './BroadwayText';
 
-// Import your 4 individual frames
-import neo1 from '../assets/neo-version/neo.png'; // Eyes Open (neo.png)
-import neo2 from '../assets/neo-version/blink/neo2.png'; // Half-Closed
-import neo3 from '../assets/neo-version/blink/neo3.png'; // Fully Closed
-import neo4 from '../assets/neo-version/blink/neo4.png'; // Half-Closed (return transition)
 
 const Hero = () => {
   const heroRef = useRef(null);
@@ -32,13 +27,6 @@ const Hero = () => {
       </video>
       <div className="hero-overlay" />
 
-      {/* Container containing stacked images for the fast blinking loop */}
-      <div className="hero-neo-right">
-        <img src={neo1} className="neo-frame nf1" alt="Mascot Open" />
-        <img src={neo2} className="neo-frame nf2" alt="Mascot Half Closed" />
-        <img src={neo3} className="neo-frame nf3" alt="Mascot Closed" />
-        <img src={neo4} className="neo-frame nf4" alt="Mascot Transition" />
-      </div>
 
       <div className="hero-content">
         <h1 className="hero-heading">
@@ -68,26 +56,20 @@ const Hero = () => {
         {/* Social proof strip */}
         <div className="hero-trust">
           <div className="hero-trust-item">
-            <span className="hero-trust-num">500+</span>
-            <span className="hero-trust-label">Happy Kids</span>
+            <span className="hero-trust-num">1 ON 1</span>
+            <span className="hero-trust-label">INTERACTION</span>
           </div>
           <div className="hero-trust-divider" />
           <div className="hero-trust-item">
-            <span className="hero-trust-num">7</span>
-            <span className="hero-trust-label">Epic Modules</span>
+            <span className="hero-trust-num">9</span>
+            <span className="hero-trust-label">ANCIENT MODULES</span>
           </div>
           <div className="hero-trust-divider" />
           <div className="hero-trust-item">
-            <span className="hero-trust-num">Ages 5–14</span>
-            <span className="hero-trust-label">All Welcome</span>
+            <span className="hero-trust-num">5-12 YRS</span>
+            <span className="hero-trust-label">KIDS WELCOME</span>
           </div>
         </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="hero-scroll">
-        <div className="hero-scroll-line" />
-        <span>Scroll</span>
       </div>
     </section>
   );
