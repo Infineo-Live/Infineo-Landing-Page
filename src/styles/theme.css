@@ -136,6 +136,11 @@
   --accent-soft: #E8B445;
   --accent-dark: #916429;
 
+  /* Eyebrows theme system */
+  --eyebrow-color: var(--accent-dark);
+  --eyebrow-bg: rgba(145, 100, 41, 0.08);
+  --eyebrow-border: rgba(145, 100, 41, 0.25);
+
   /* Inputs */
   --input-bg: #ffffff;
   --input-border: rgba(17, 43, 71, 0.2);
@@ -207,6 +212,11 @@
   --accent-hover: #f0c86a;
   --accent-soft: #f5d078;
   --accent-dark: #7a5028;
+
+  /* Eyebrows theme system */
+  --eyebrow-color: var(--accent-hover);
+  --eyebrow-bg: rgba(244, 208, 120, 0.08);
+  --eyebrow-border: rgba(244, 208, 120, 0.25);
 
   /* Inputs */
   --input-bg: rgba(255, 255, 255, 0.04);

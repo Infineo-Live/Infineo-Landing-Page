@@ -10,6 +10,7 @@ const Title = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [visible, setVisible] = useState(true);
+  const [heroInView, setHeroInView] = useState(false);
 
   useEffect(() => {
     const nav = navRef.current;
@@ -32,6 +33,17 @@ const Title = () => {
     };
   }, []);
 
+  // Observe hero section visibility to keep title always visible within hero
+  useEffect(() => {
+    const heroSection = document.getElementById('home');
+    if (!heroSection) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setHeroInView(entry.isIntersecting);
+    }, { threshold: 0.1 });
+    observer.observe(heroSection);
+    return () => observer.disconnect();
+  }, []);
+
   useEffect(() => {
     let lastScrollY = window.scrollY;
     let ticking = false;
@@ -45,7 +57,10 @@ const Title = () => {
 
         setScrolled(currentScrollY > 40);
 
-        if (currentScrollY < 10) {
+        if (heroInView) {
+          // Hero section visible — keep header shown
+          setVisible(true);
+        } else if (currentScrollY < 10) {
           // at the very top — always show
           setVisible(true);
         } else if (currentScrollY < lastScrollY) {
@@ -63,7 +78,7 @@ const Title = () => {
 
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [heroInView]);
 
   return (
     <>

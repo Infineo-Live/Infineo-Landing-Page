@@ -97,7 +97,7 @@ export default function Modules() {
     <section className="modules-section" id="modules" ref={sectionRef}>
       <div className="modules-header">
         <span className="modules-eyebrow">Our Learning Journey</span>
-        <h2>Explore. Learn. Grow.</h2>
+        <h2>Explore. Learn. <span>Grow.</span></h2>
         <p>A magical path through timeless stories and lessons that shape young hearts.</p>
       </div>
 

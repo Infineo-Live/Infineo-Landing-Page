@@ -2,7 +2,7 @@ import '../styles/FloatingWhatsapp.css';
 
 export default function FloatingWhatsapp() {
   // Configurable phone number (replace with brand's actual WhatsApp number)
-  const phoneNumber = "919999999999"; 
+  const phoneNumber = "917007967357"; 
   const message = encodeURIComponent("Hi Infineo! I'd like to book a free demo class for my child. 🌟");
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 

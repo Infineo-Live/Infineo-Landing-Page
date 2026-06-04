@@ -11,8 +11,7 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     const savedTheme = localStorage.getItem('infineo-theme');
     const savedSparkles = localStorage.getItem('infineo-sparkles');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    const initialTheme = savedTheme || 'dark';
     const initialSparkles = savedSparkles !== null ? savedSparkles === 'true' : true;
     
     setTheme(initialTheme);

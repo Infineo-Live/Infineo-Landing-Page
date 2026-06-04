@@ -32,15 +32,15 @@
 
 .impact-heading__eyebrow {
   display: inline-block;
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.22rem;
   text-transform: uppercase;
-  color: var(--accent-primary);
+  color: var(--eyebrow-color);
   padding: 0.35rem 1.1rem;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(212, 160, 85, 0.22);
-  background: rgba(212, 160, 85, 0.07);
+  border: 1px solid var(--eyebrow-border);
+  background: var(--eyebrow-bg);
   margin-bottom: 1rem;
 }
 
@@ -108,12 +108,12 @@
 }
 
 .gb-img--problem {
-  filter: saturate(0.7) brightness(0.75);
-  transition: filter 0.4s ease, opacity 0.5s ease;
-  /* Always stays in the DOM — we blur it instead of hiding it */
-  opacity: 1;
-  z-index: 1;
-}
+    filter: saturate(0.7) brightness(0.75) blur(4px);
+    transition: filter 0.4s ease, opacity 0.5s ease;
+    /* Always stays in the DOM — we blur it instead of hiding it */
+    opacity: 1;
+    z-index: 1;
+  }
 
 /* ── Crack SVG overlay ── */
 .gb-cracks {
@@ -128,12 +128,9 @@
 }
 
 .gb-scene--breaking .gb-cracks,
-.gb-scene--broken .gb-cracks {
-  opacity: 1;
-}
-
+.gb-scene--broken .gb-cracks,
 .gb-scene--reveal .gb-cracks {
-  opacity: 0;
+  opacity: 1;
 }
 
 /* ── Shards ── */
@@ -179,8 +176,7 @@
     opacity 0.45s ease var(--delay, 0ms);
 }
 
-.gb-scene--reveal .gb-shard,
-.gb-scene--reveal .gb-cracks {
+.gb-scene--reveal .gb-shard {
   display: none;
 }
 
@@ -327,14 +323,14 @@
   effect. The blur deepens progressively through each phase.
 */
 .gb-scene--broken .gb-img--problem {
-  filter: saturate(0.3) brightness(0.5) blur(6px);
+  filter: saturate(0.7) brightness(0.75) blur(6px);
   opacity: 1;
   transition: filter 0.45s ease, opacity 0.45s ease;
 }
 
 .gb-scene--reveal .gb-img--problem {
-  filter: saturate(0.2) brightness(0.4) blur(10px);
-  opacity: 0.55;
+  filter: saturate(0.7) brightness(0.7) blur(8px);
+  opacity: 1;
   transition: filter 0.55s ease 0.1s, opacity 0.55s ease 0.1s;
 }
 

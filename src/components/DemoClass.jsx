@@ -220,13 +220,13 @@ export default function DemoClass() {
       <div className="demo-divider">
         <span className="divider-line" />
         <span className="divider-text">Experience Infineo Firsthand</span>
-        <span className="divider-line" /> 
+        <span className="divider-line" />
       </div>
 
       <div className="demo-container">
         <div className="demo-info">
           <h2 className="demo-title">Book a FREE 30-Minute Demo Class</h2>
-          <p className="demo-subtitle">Tailored to your child's learning journey</p>
+          <p className="demo-subtitle">TAILORED TO YOUR CHILD'S LEARNING JOURNEY</p>
 
           <div className="neo-mascot-wrapper" ref={mascotRef}>
             <div className="neo-eyes-underlay" aria-hidden="true">

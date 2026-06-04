@@ -52,7 +52,6 @@ const Hero = () => {
             Watch a Story
           </button> */}
         </div>
-
         {/* Social proof strip */}
         <div className="hero-trust">
           <div className="hero-trust-item">

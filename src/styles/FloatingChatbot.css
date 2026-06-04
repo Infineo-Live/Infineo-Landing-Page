@@ -24,8 +24,8 @@
 .chatbot-floating-btn {
   position: fixed !important;
   /* Use env() for iOS home-indicator safe area */
-  bottom: calc(105px + env(safe-area-inset-bottom, 0px)) !important;
-  right: calc(30px + env(safe-area-inset-right, 0px)) !important;
+  bottom: calc(5vh + env(safe-area-inset-bottom, 0px)) !important;
+  right: calc(5vh + env(safe-area-inset-right, 0px)) !important;
   width: 60px !important;
   height: 60px !important;
   border-radius: 50% !important;
@@ -40,7 +40,8 @@
   visibility: visible !important;
   box-shadow: var(--gold-glow) !important;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 0.3s ease !important;
+                box-shadow 0.3s ease !important;
+  animation: chatbot-gentle-float 4s ease-in-out infinite;
   font-size: 26px !important;
   /* Accessibility: ensure visible outline for keyboard users */
   outline-offset: 3px !important;

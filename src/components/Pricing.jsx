@@ -27,12 +27,15 @@ export default function Pricing() {
     {
       id: 1,
       name: 'Starter',
-      sessions: '4',
+      sessions: '5',
       sessionUnit: 'sessions/month',
-      price: { monthly: 1999, quarterly: 5499 },
+      price: {
+        monthly: { original: 2500, inaugural: 2250 },
+        quarterly: { original: 7500, inaugural: 6000 }
+      },
       description: 'Perfect for trying out Infineo',
       features: [
-        '4 classes per month',
+        '5 classes per month',
         '30-minute sessions',
         'One module',
         'Progress tracking',
@@ -43,12 +46,15 @@ export default function Pricing() {
     {
       id: 2,
       name: 'Popular',
-      sessions: '8',
+      sessions: '10',
       sessionUnit: 'sessions/month',
-      price: { monthly: 3999, quarterly: 10999 },
+      price: {
+        monthly: { original: 5000, inaugural: 4500 },
+        quarterly: { original: 15000, inaugural: 12000 }
+      },
       description: 'Most loved by our families',
       features: [
-        '8 classes per month',
+        '10 classes per month',
         '30-minute sessions',
         'Multiple modules',
         'Progress tracking',
@@ -61,12 +67,15 @@ export default function Pricing() {
     {
       id: 3,
       name: 'Premium',
-      sessions: '12',
+      sessions: '20',
       sessionUnit: 'sessions/month',
-      price: { monthly: 5999, quarterly: 16499 },
+      price: {
+        monthly: { original: 10000, inaugural: 9000 },
+        quarterly: { original: 30000, inaugural: 24000 }
+      },
       description: 'Maximum learning & engagement',
       features: [
-        '12 classes per month',
+        '20 classes per month',
         '30-minute sessions',
         'All 7 modules',
         'Detailed progress tracking',
@@ -101,7 +110,7 @@ export default function Pricing() {
               className={`toggle-btn ${billingPeriod === 'quarterly' ? 'active' : ''}`}
               onClick={() => setBillingPeriod('quarterly')}
             >
-              Quarterly <span className="save-badge">Save 8%</span>
+              Quarterly <span className="save-badge">Save 11%</span>
             </button>
           </div>
         </div>
@@ -127,17 +136,22 @@ export default function Pricing() {
                 <span className="sessions-text">{plan.sessionUnit}</span>
               </div>
 
-              <div className="plan-price">
-                <span className="currency">₹</span>
-                <span className="price">{plan.price[billingPeriod]}</span>
-                <span className="period">{billingPeriod === 'monthly' ? '/month' : '/quarter'}</span>
+              <div className="plan-price-wrap">
+                <div className="original-price">
+                  Original: <s>₹{plan.price[billingPeriod].original}</s>
+                </div>
+                <div className="plan-price">
+                  <span className="currency">₹</span>
+                  <span className="price">{plan.price[billingPeriod].inaugural}</span>
+                  <span className="period">{billingPeriod === 'monthly' ? '/month' : '/quarter'}</span>
+                </div>
               </div>
 
               <div className="price-note">
                 {billingPeriod === 'monthly' ? (
-                  <p>~₹{Math.round(plan.price.monthly / parseInt(plan.sessions))} per session</p>
+                  <p>~₹{Math.round(plan.price.monthly.inaugural / parseInt(plan.sessions))} per session</p>
                 ) : (
-                  <p>~₹{Math.round(plan.price.quarterly / (parseInt(plan.sessions) * 3))} per session</p>
+                  <p>~₹{Math.round(plan.price.quarterly.inaugural / (parseInt(plan.sessions) * 3))} per session</p>
                 )}
               </div>
 
