@@ -144,12 +144,6 @@ function GlassBreakCard({ journey, index }) {
         setPhase('reveal');
       }, 2400);
       timers.push(t3);
-
-      const t4 = setTimeout(() => {
-        if (!active) return;
-        runSequence();
-      }, 7400);
-      timers.push(t4);
     };
 
     const staggerTimeout = setTimeout(() => {
