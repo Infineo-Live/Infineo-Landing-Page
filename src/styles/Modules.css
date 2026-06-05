@@ -24,13 +24,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid var(--border-primary);
-  border-radius: 50px;
   background: var(--module-bg);
   overflow: hidden;
-  margin: 20px 0px 20px;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 80px, black calc(100% - 80px), transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, black 80px, black calc(100% - 80px), transparent 100%);
+  margin: 0;
+
+  /* 4-Way Soft Edge Blending */
+  -webkit-mask-image: 
+    linear-gradient(to bottom, transparent 0%, black 80px, black calc(100% - 80px), transparent 100%),
+    linear-gradient(to right, transparent 0%, black clamp(4rem, 15vw, 24rem), black calc(100% - clamp(4rem, 15vw, 24rem)), transparent 100%);
+  mask-image: 
+    linear-gradient(to bottom, transparent 0%, black 80px, black calc(100% - 80px), transparent 100%),
+    linear-gradient(to right, transparent 0%, black clamp(4rem, 15vw, 24rem), black calc(100% - clamp(4rem, 15vw, 24rem)), transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
 
 /* Stars pseudo-layer */
