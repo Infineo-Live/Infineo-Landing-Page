@@ -33,27 +33,36 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background:
-    /* left text panel — frosted dark */
+  /* background:
     linear-gradient(105deg,
-      rgba(17, 43, 71, 0.85) 0%,
+      rgba(69, 135, 206, 0.85) 0%,
       transparent 100%),
-    /* subtle warm gold tint overall */
     linear-gradient(180deg,
       rgba(190, 140, 74, 0.08) 0%,
       transparent 60%,
-      rgba(13, 30, 50, 0.45) 100%);
+      rgba(13, 30, 50, 0.45) 100%); */
 }
 
 /* Light mode overlay */
 [data-theme="light"] .hero-overlay {
   background:
     linear-gradient(105deg,
-      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0.447) 0%,
       transparent 100%),
     linear-gradient(180deg,
-      rgba(255, 209, 149, 0.2) 0%,
+      rgba(255, 209, 149, 0.115) 0%,
       transparent 100%);
+}
+
+[data-theme="dark"] .hero-overlay {
+  background:
+    linear-gradient(105deg,
+      rgba(0, 28, 57, 0.85) 0%,
+      transparent 100%),
+    linear-gradient(180deg,
+      rgba(190, 140, 74, 0.08) 0%,
+      transparent 60%,
+      rgba(13, 30, 50, 0.45) 100%);
 }
 
 /* Content */
@@ -232,7 +241,7 @@
   height: 2.25rem;
   background: rgba(255, 255, 255, 0.18);
   border-radius: var(--radius-full);
-} 
+}
 
 [data-theme="light"] .hero-trust-num {
   color: var(--heading-primary);

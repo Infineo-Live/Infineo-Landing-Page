@@ -29,7 +29,7 @@
 }
 
 [data-theme="light"] .title--scrolled {
-  background: rgba(253, 246, 227, 0.85); /* Sunlit parchment light mode */
+  /* background: rgba(253, 246, 227, 0.85); Sunlit parchment light mode */
   box-shadow: 0 1px 0 var(--border-secondary),
     0 8px 32px rgba(17, 43, 71, 0.1);
 }
