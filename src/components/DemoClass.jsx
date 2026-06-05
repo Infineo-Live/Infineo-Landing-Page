@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import emailjs from '@emailjs/browser';
 import '../styles/DemoClass.css';
 import neoMascot from '../assets/neo-version/neo-without-eyes.webp';
 
@@ -30,6 +31,7 @@ export default function DemoClass() {
   const [burst, setBurst] = useState(false);
   const [shaking, setShaking] = useState(false);
   const [cards, setCards] = useState([]);
+  const hasBurst = useRef(false);
 
   const containerRef = useRef(null);
   const mascotRef = useRef(null);
@@ -99,35 +101,8 @@ export default function DemoClass() {
     };
   }, [trackPupil]);
 
-  // ── Gift burst handler ──
-  const handleGiftClick = () => {
-    if (burst) return;
-
-    // 1. Shake
-    setShaking(true);
-    setTimeout(() => setShaking(false), 500);
-
-    // 2. Burst + confetti
-    setTimeout(() => {
-      setBurst(true);
-      spawnConfetti();
-    }, 480);
-
-    // 3. Reveal cards with stagger
-    setTimeout(() => {
-      setCards(REWARDS.map((r, i) => ({ ...r, pos: CARD_POSITIONS[i], visible: false })));
-      REWARDS.forEach((_, i) => {
-        setTimeout(() => {
-          setCards(prev =>
-            prev.map((c, idx) => idx === i ? { ...c, visible: true } : c)
-          );
-        }, i * 110);
-      });
-    }, 560);
-  };
-
   // ── Confetti imperative spawn ──
-  const spawnConfetti = () => {
+  const spawnConfetti = useCallback(() => {
     if (!stageRef.current) return;
     const stage = stageRef.current;
     const cx = stage.offsetWidth / 2;
@@ -159,21 +134,93 @@ export default function DemoClass() {
         setTimeout(() => el.remove(), dur + 100);
       }, delay);
     }
-  };
+  }, []);
+
+  // ── Gift burst handler ──
+  const handleGiftClick = useCallback(() => {
+    if (hasBurst.current) return;
+    hasBurst.current = true;
+
+    // 1. Shake
+    setShaking(true);
+    setTimeout(() => setShaking(false), 500);
+
+    // 2. Burst + confetti
+    setTimeout(() => {
+      setBurst(true);
+      spawnConfetti();
+    }, 480);
+
+    // 3. Reveal cards with stagger
+    setTimeout(() => {
+      setCards(REWARDS.map((r, i) => ({ ...r, pos: CARD_POSITIONS[i], visible: false })));
+      REWARDS.forEach((_, i) => {
+        setTimeout(() => {
+          setCards(prev =>
+            prev.map((c, idx) => idx === i ? { ...c, visible: true } : c)
+          );
+        }, i * 110);
+      });
+    }, 560);
+  }, [spawnConfetti]);
+
+  // ── Scroll Event trigger for Gift Burst ──
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          handleGiftClick();
+        }
+      },
+      { threshold: 0.5 } // Triggers when 50% of the stage is visible
+    );
+    if (stageRef.current) observer.observe(stageRef.current);
+    return () => observer.disconnect();
+  }, [handleGiftClick]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ childName: '', parentName: '', email: '', phone: '', childAge: '', module: '' });
-    }, 3000);
+    try {
+      await emailjs.send(
+        "service_q11sqw8",
+        "template_vipoclo",
+        {child_name: formData.childName,
+        parent_name: formData.parentName,
+        email: formData.email,
+        phone: formData.phone,
+        child_age: formData.childAge,
+        module: formData.module,
+      },
+        "xs8aj8X8ITOMt7KSF"
+      );
+      setIsSubmitted(true); 
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          childName: '',
+          parentName: '',
+          email: '',
+          phone: '',
+          childAge: '',
+          module: '',
+        });
+      }, 3000);
+
+    } catch (error) {
+      console.error("Email sending failed:", error);
+      alert("Failed to send form");
+    }
   };
+
+
+  
+
+  
 
   return (
     <section className="demo-class-section" ref={containerRef}>
@@ -211,11 +258,6 @@ export default function DemoClass() {
             {/* Gift box */}
             <div
               className={`gift-wrap${shaking ? ' shaking' : ''}${burst ? ' burst' : ''}`}
-              onClick={handleGiftClick}
-              role="button"
-              tabIndex={0}
-              aria-label="Tap to reveal your starter kit rewards"
-              onKeyDown={e => e.key === 'Enter' && handleGiftClick()}
             >
               <div className="gift-bow">
                 <div className="bow-loop" />
@@ -226,11 +268,6 @@ export default function DemoClass() {
               </div>
               <div className="gift-body" />
             </div>
-
-            {/* Tap hint */}
-            {!burst && (
-              <p className="gift-tap-hint">✦ tap the gift to reveal ✦</p>
-            )}
 
             {/* Reward cards */}
             {cards.map((card, i) => (
