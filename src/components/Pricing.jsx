@@ -81,7 +81,7 @@ export default function Pricing() {
   ];
 
   return (
-    <section className="pricing-section" ref={containerRef}>
+    <section className="pricing-section" ref={containerRef} id="pricing">
       <div className="pricing-container">
 
         {/* Header */}

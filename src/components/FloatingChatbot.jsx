@@ -79,8 +79,8 @@ export default function FloatingChatbot() {
     const lowerInput = input.toLowerCase();
 
     // Match user input to FAQ answers
-    const matchedFaq = faqs.find(faq => 
-      lowerInput.includes(faq.keyword) || 
+    const matchedFaq = faqs.find(faq =>
+      lowerInput.includes(faq.keyword) ||
       faq.question.toLowerCase().includes(lowerInput)
     );
 
@@ -115,7 +115,7 @@ export default function FloatingChatbot() {
 
   const handleQuickQuestion = (question) => {
     setMessages(prev => [...prev, { type: 'user', text: question, hasTyped: true }]);
-    
+
     setIsTyping(true);
     setTimeout(() => {
       const matchedFaq = faqs.find(faq => faq.question === question);
@@ -154,7 +154,7 @@ export default function FloatingChatbot() {
                 <p className="chatbot-panel-status">Always here to help</p>
               </div>
             </div>
-            <button 
+            <button
               className="chatbot-close-btn"
               onClick={() => setIsOpen(false)}
               title="Close"
@@ -225,7 +225,7 @@ export default function FloatingChatbot() {
               disabled={isTyping}
               aria-label="Chat message input"
             />
-            <button 
+            <button
               onClick={handleSendMessage}
               className="chatbot-send-btn"
               disabled={isTyping || userInput.trim() === ''}

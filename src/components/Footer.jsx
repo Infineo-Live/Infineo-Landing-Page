@@ -7,9 +7,6 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-container">
-
-
-
         {/* Top: Brand + Nav */}
         <div className="footer-top">
           <div className="footer-brand">
@@ -26,8 +23,8 @@ export default function Footer() {
           <nav className="footer-nav">
             <div className="footer-nav-group">
               <span className="footer-nav-label">For Parents</span>
-              <a href="#how">How It Works</a>
-              <a href="#curriculum">Curriculum</a>
+              {/* <a href="#">How It Works</a> */}
+              <a href="#modules">Curriculum</a>
               <a href="#pricing">Pricing</a>
               <a href="#book">Book a Free Class</a>
               <a href="#faq">FAQs</a>
@@ -36,13 +33,13 @@ export default function Footer() {
               <span className="footer-nav-label">Company</span>
               <a href="#home">About</a>
               <a href="#parents">Founder Letter</a>
-              <a href="#">Contact</a>
+              <a href="#contact">Contact</a>
             </div>
           </nav>
         </div>
 
         {/* Bottom: Social + Legal + Copyright */}
-        <div className="footer-bottom">
+        <div className="footer-bottom" id="contact">
           <div className="footer-bottom-left">
             <div className="social-links">
               <a href="https://www.facebook.com/share/1By8zEfJAP/" className="social-link" aria-label="Facebook">

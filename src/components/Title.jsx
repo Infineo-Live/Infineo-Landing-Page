@@ -81,6 +81,16 @@ const Title = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, [heroInView]);
 
+  // Helper function to smooth scroll to element and ensure the CTA button handles navigation correctly
+  const handleCtaClick = (e, targetId) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
       <div id="bubble-container" className="bubble-container" aria-hidden="true" />
@@ -94,10 +104,12 @@ const Title = () => {
             <span className="nav-droplet" ref={dropletRef} />
             <a href="#home">ABOUT</a>
             <a href="#stories">IMPACT</a>
-            <a href="#how">NOTE TO PARENTS</a>
-            <a href="#curriculum">CURRICULUM</a>
+            <a href="#parents">NOTE TO PARENTS</a>
+            <a href="#modules">CURRICULUM</a>
             <a href="#pricing">PRICING</a>
-            <button className="login-btn">BOOK THE DEMO</button>
+            <button className="login-btn" onClick={(e) => handleCtaClick(e, 'book')}>
+              BOOK THE DEMO
+            </button>
           </nav>
           {/* Theme Toggle */}
           <button
@@ -143,9 +155,11 @@ const Title = () => {
         <div className={`mobile-menu ${menuOpen ? 'mobile-menu--open' : ''}`}>
           <a href="#home" onClick={() => setMenuOpen(false)}>ABOUT</a>
           <a href="#stories" onClick={() => setMenuOpen(false)}>STORIES</a>
-          <a href="#how" onClick={() => setMenuOpen(false)}>HOW IT WORKS</a>
-          <a href="#curriculum" onClick={() => setMenuOpen(false)}>CURRICULUM</a>
-          <button className="login-btn" onClick={() => setMenuOpen(false)}>BOOK THE DEMO</button>
+          <a href="#parents" onClick={() => setMenuOpen(false)}>HOW IT WORKS</a>
+          <a href="#modules" onClick={() => setMenuOpen(false)}>CURRICULUM</a>
+          <button className="login-btn" onClick={(e) => handleCtaClick(e, 'book')}>
+            BOOK THE DEMO
+          </button>
         </div>
       </header>
     </>
