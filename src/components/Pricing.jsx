@@ -25,19 +25,17 @@ export default function Pricing() {
   const plans = [
     {
       id: 1,
-      name: 'Trial',
+      name: 'Trial Session',
       sessions: '1',
-      sessionUnit: 'Free Demo Class',
+      sessionUnit: 'Free Demo Session',
       price: {
         original: 0,
         inaugural: 0
       },
-      priceNote: 'Followed by 10 sessions at ₹5,000',
-      description: 'Start Here',
+      priceNote: 'No Credit Card Required',
+      description: 'Discover Infineo',
       features: [
-        '1 Free Demo Class',
-        'Followed by 10 sessions at ₹5,000',
-        'No risk, no credit card required'
+        'Infineo Starter Kit'
       ],
       color: 'starter'
     },
@@ -53,10 +51,10 @@ export default function Pricing() {
       priceNote: '₹450 per session',
       description: 'The Infineo Experience',
       features: [
-        '10 sessions / ₹5,000',
-        '1 module at a time',
-        'Recording + lesson PPT included',
-        'Flexible 1–2x/week schedule'
+        'Everything from Discover Infineo',
+        '10 sessions',
+        '1 module',
+        'Flexible 1-2x/week'
       ],
       color: 'popular'
     },
@@ -69,12 +67,13 @@ export default function Pricing() {
         original: 15000,
         inaugural: 12000
       },
-      priceNote: '₹400 per session — Deepest Value',
+      priceNote: '₹400 per session',
       description: 'Deepest Value',
       features: [
-        '30 sessions / ₹12,000',
-        'All 3 modules planned out',
-        'Priority scheduling',
+        'Everything from Infineo Experience',
+        '30 sessions',
+        '3 modules',
+        'Class recordings',
         'Monthly progress summary'
       ],
       color: 'premium'
