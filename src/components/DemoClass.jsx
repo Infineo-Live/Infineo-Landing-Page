@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import emailjs from '@emailjs/browser';
 import '../styles/DemoClass.css';
 import neoMascot from '../assets/neo-version/neo-without-eyes.webp';
 
@@ -167,44 +166,14 @@ export default function DemoClass() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      await emailjs.send(
-        "service_q11sqw8",
-        "template_vipoclo",
-        {child_name: formData.childName,
-        parent_name: formData.parentName,
-        email: formData.email,
-        phone: formData.phone,
-        child_age: formData.childAge,
-        module: formData.module,
-      },
-        "xs8aj8X8ITOMt7KSF"
-      );
-      setIsSubmitted(true); 
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
-          childName: '',
-          parentName: '',
-          email: '',
-          phone: '',
-          childAge: '',
-          module: '',
-        });
-      }, 3000);
-
-    } catch (error) {
-      console.error("Email sending failed:", error);
-      alert("Failed to send form");
-   }
- };
-
-
-  
-
-  
+    setIsSubmitted(true);
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData({ childName: '', parentName: '', email: '', phone: '', childAge: '', module: '' });
+    }, 3000);
+  };
 
   return (
     <section className="demo-class-section" ref={containerRef}>
