@@ -21,53 +21,23 @@
 }
 
 /* ─── Strong CTA ────────────────────────────────────── */
-.footer-cta {
-  text-align: center;
-  padding: 16px 24px 36px;
-  border-bottom: 1px solid var(--border-primary);
-  margin-bottom: 36px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-.footer-cta-title {
-  font-family: var(--font-primary);
-  font-size: 32px;
-  font-weight: 800;
-  color: var(--text-primary);
-  margin: 0;
-  letter-spacing: -0.5px;
-}
-
-.footer-cta-subtitle {
-  font-family: 'Nunito', sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  max-width: 580px;
-  margin: 0;
-}
-
 .footer-cta-btn {
   display: inline-block;
   background: var(--accent-primary);
   color: #fff;
-  padding: 12px 32px;
+  padding: 10px 24px;
   font-family: var(--font-primary);
   font-weight: 700;
-  font-size: 15px;
+  font-size: 13px;
   text-decoration: none;
   border-radius: 50px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(197, 160, 89, 0.2);
+  margin-top: 16px;
+  transition: all 0.2s ease;
 }
 
 .footer-cta-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
-  opacity: 0.95;
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 .footer-brand {
@@ -113,7 +83,8 @@
 
 .footer-nav-label {
   font-family: var(--font-primary);
-  font-size: 14px; /* ~20% increase from 11px */
+  font-size: 14px;
+  /* ~20% increase from 11px */
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.2px;

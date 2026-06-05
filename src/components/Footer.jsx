@@ -8,14 +8,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-container">
 
-        {/* Strong CTA */}
-        <div className="footer-cta">
-          <h2 className="footer-cta-title">Ready to Begin?</h2>
-          <p className="footer-cta-subtitle">
-            Give your child a free class and discover how timeless stories can shape modern life skills.
-          </p>
-          <a href="#book" className="footer-cta-btn">Book Free Class</a>
-        </div>
+
 
         {/* Top: Brand + Nav */}
         <div className="footer-top">
@@ -27,6 +20,7 @@ export default function Footer() {
             <p className="footer-subtagline">
               For children aged 5–12 • Live 1-on-1 sessions • Free trial class
             </p>
+            <a href="#book" className="footer-cta-btn">Book Free Class</a>
           </div>
 
           <nav className="footer-nav">
