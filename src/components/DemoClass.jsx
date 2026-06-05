@@ -28,6 +28,7 @@ export default function DemoClass() {
     phone: '', childAge: '', language: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errors, setErrors] = useState({ email: '', phone: '' });
   const [burst, setBurst] = useState(false);
   const [shaking, setShaking] = useState(false);
   const [cards, setCards] = useState([]);
@@ -193,10 +194,21 @@ export default function DemoClass() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    if (name === 'email' || name === 'phone')
+      setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const newErrors = { email: '', phone: '' };
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+      newErrors.email = 'Please enter a valid email address.';
+    if (!/^\d{10}$/.test(formData.phone))
+      newErrors.phone = 'Phone number must be exactly 10 digits.';
+    if (newErrors.email || newErrors.phone) {
+      setErrors(newErrors);
+      return;
+    }
     try {
       await emailjs.send(
         "service_q11sqw8",
@@ -346,11 +358,13 @@ export default function DemoClass() {
                 <label htmlFor="email">Email *</label>
                 <input type="email" id="email" name="email" value={formData.email}
                   onChange={handleChange} placeholder="your@email.com" required />
+                {errors.email && <span className="form-error">{errors.email}</span>}
               </div>
               <div className="form-group">
                 <label htmlFor="phone">Phone Number *</label>
                 <input type="tel" id="phone" name="phone" value={formData.phone}
                   onChange={handleChange} placeholder="+91 98765 43210" required />
+                {errors.phone && <span className="form-error">{errors.phone}</span>}
               </div>
             </div>
             <div className="form-row">
