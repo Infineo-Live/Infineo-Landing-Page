@@ -139,19 +139,19 @@ function GlassBreakCard({ journey, index }) {
         if (!active) return;
         setPhase('breaking');
         playGlassBreak();
-      }, 1200);
+      }, 300);
       timers.push(t1);
 
       const t2 = setTimeout(() => {
         if (!active) return;
         setPhase('broken');
-      }, 1900);
+      }, 600);
       timers.push(t2);
 
       const t3 = setTimeout(() => {
         if (!active) return;
         setPhase('reveal');
-      }, 2400);
+      }, 900);
       timers.push(t3);
     };
 
