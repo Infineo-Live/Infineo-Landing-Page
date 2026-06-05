@@ -132,8 +132,8 @@
   font-weight: 900;
   letter-spacing: 0.15rem;
   background: var(--button-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* -webkit-background-clip: text; */
+  /* -webkit-text-fill-color: transparent; */
   background-clip: text;
   filter: drop-shadow(0 2px 12px rgba(190, 140, 74, 0.35));
   /* based on mode*/
