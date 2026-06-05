@@ -29,10 +29,10 @@
   margin: 0;
 
   /* 4-Way Soft Edge Blending */
-  -webkit-mask-image: 
+  -webkit-mask-image:
     linear-gradient(to bottom, transparent 0%, black 80px, black calc(100% - 80px), transparent 100%),
     linear-gradient(to right, transparent 0%, black clamp(4rem, 15vw, 24rem), black calc(100% - clamp(4rem, 15vw, 24rem)), transparent 100%);
-  mask-image: 
+  mask-image:
     linear-gradient(to bottom, transparent 0%, black 80px, black calc(100% - 80px), transparent 100%),
     linear-gradient(to right, transparent 0%, black clamp(4rem, 15vw, 24rem), black calc(100% - clamp(4rem, 15vw, 24rem)), transparent 100%);
   -webkit-mask-composite: source-in;
@@ -126,6 +126,7 @@
   height: 100%;
   pointer-events: none;
   z-index: 1;
+  overflow: visible;
 }
 
 /*  Level Node  */
