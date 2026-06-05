@@ -287,6 +287,11 @@
   font-family: var(--font-primary);
 }
 
+.pricing-card.starter .plan-price {
+  margin-top: 24px; 
+}
+
+
 .currency {
   font-size: 18px;
   color: var(--accent-primary);
