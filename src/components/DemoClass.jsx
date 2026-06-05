@@ -50,7 +50,19 @@ export default function DemoClass() {
     if (containerRef.current) observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, []);
-
+  // ── Open from navbar / pricing ──
+  useEffect(() => {
+    const handler = (e) => {
+      // Scroll the form into view
+      document.getElementById('book')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Pre-fill module if a plan was passed
+      if (e.detail?.module) {
+        setFormData(prev => ({ ...prev, module: e.detail.module }));
+      }
+    };
+    window.addEventListener('open-demo-modal', handler);
+    return () => window.removeEventListener('open-demo-modal', handler);
+  }, []);
   // ── Scroll animation for mascot ──
   useEffect(() => {
     const onScroll = () => {
