@@ -237,7 +237,7 @@ function GlassBreakCard({ journey, index }) {
         </div>
       </div>
 
-      {/* ── TRANSFORMATION ARROW ── */}
+      {/* ── TRANSFORMATION ARROW ==== */}
       <div className="gb-arrow" aria-hidden="true">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -295,7 +295,6 @@ export default function Impact() {
         <h2 className="impact-heading__title">
           What Infineo <span className="impact-heading__highlight">Addresses</span>
         </h2>
-        <p className="impact-heading__sub">Scroll to watch ancient wisdom shatter modern struggles</p>
       </div>
 
       <div className="impact-column-headers">
@@ -316,7 +315,7 @@ export default function Impact() {
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </button>
-        <span className="impact-cta__note">Free demo class · No credit card</span>
+        <span className="impact-cta__note">No payment. No commitment. Just a story worth starting.</span>
       </div>
 
       {/* Mascot at the bottom-left of the impact section wrapped in sticky container */}

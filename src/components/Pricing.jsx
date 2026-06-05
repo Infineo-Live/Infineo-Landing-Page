@@ -45,10 +45,10 @@ export default function Pricing() {
       sessions: '10',
       sessionUnit: 'sessions',
       price: {
-        original: 5000,
-        inaugural: 4500
+        original: 6000,
+        inaugural: 5000
       },
-      priceNote: '₹450 per session',
+      priceNote: '₹500/- session',
       description: 'The Infineo Experience',
       features: [
         'Everything from Discover Infineo',
@@ -64,10 +64,10 @@ export default function Pricing() {
       sessions: '30',
       sessionUnit: 'sessions',
       price: {
-        original: 15000,
-        inaugural: 12000
+        original: 18000,
+        inaugural: 13500
       },
-      priceNote: '₹400 per session',
+      priceNote: '₹450/- session',
       description: 'Deepest Value',
       features: [
         'Everything from Infineo Experience',
@@ -76,7 +76,7 @@ export default function Pricing() {
         'Class recordings',
         'Monthly progress summary'
       ],
-      color: 'premium'
+      color: 'premium'  
     }
   ];
 
