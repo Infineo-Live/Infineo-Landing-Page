@@ -1,4 +1,5 @@
 import '../styles/Footer.css';
+import logoWithText from '../assets/logo_with_text.png';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -10,7 +11,7 @@ export default function Footer() {
         {/* Top: Brand + Nav */}
         <div className="footer-top">
           <div className="footer-brand">
-            <img src="/src/assets/logo_with_text.png" alt="Infineo Logo" className="footer-logo" />
+            <img src={logoWithText} alt="Infineo Logo" className="footer-logo" />
             <p className="footer-tagline">
               Timeless wisdom through Indian mythology, one story at a time.
             </p>
