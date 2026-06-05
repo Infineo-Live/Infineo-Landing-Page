@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { useTheme } from '../context/ThemeContext.jsx';
-import Logo from '../assets/logo_with_text.png';
+import Logo from '../assets/logo_with_text.webp';
 import '../styles/Title.css';
 
 const Title = () => {

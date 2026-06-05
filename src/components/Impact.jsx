@@ -1,20 +1,20 @@
 import { useRef, useEffect, useState } from 'react';
 import '../styles/Impact.css';
 
-import imgScreenAddiction from '../assets/impact/screen-addiction.png';
-import imgStoryTelling from '../assets/impact/storytelling.png';
-import imgTransformed from '../assets/impact/transformed.png';
-import imgPeerPressure from '../assets/impact/peer-pressure.png';
-import imgAnxiety from '../assets/impact/anxiety.png';
-import imgEmpathy from '../assets/impact/empathy.png';
+import imgScreenAddiction from '../assets/impact/screen-addiction.webp';
+import imgStoryTelling from '../assets/impact/storytelling.webp';
+import imgTransformed from '../assets/impact/transformed.webp';
+import imgPeerPressure from '../assets/impact/peer-pressure.webp';
+import imgAnxiety from '../assets/impact/anxiety.webp';
+import imgEmpathy from '../assets/impact/empathy.webp';
 
 import glassSfx from '../assets/audio/glass-break.mp3';
 
 // Import mascot frames
-import neo1 from '../assets/neo-version/neo.png'; // Eyes Open
-import neo2 from '../assets/neo-version/blink/neo2.png'; // Half-Closed
-import neo3 from '../assets/neo-version/blink/neo3.png'; // Fully Closed
-import neo4 from '../assets/neo-version/blink/neo4.png'; // Half-Closed
+import neo1 from '../assets/neo-version/neo.webp'; // Eyes Open
+import neo2 from '../assets/neo-version/blink/neo2.webp'; // Half-Closed
+import neo3 from '../assets/neo-version/blink/neo3.webp'; // Fully Closed
+import neo4 from '../assets/neo-version/blink/neo4.webp'; // Half-Closed
 
 const JOURNEYS = [
   {

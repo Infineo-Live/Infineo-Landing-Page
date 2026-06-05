@@ -1,5 +1,5 @@
 import '../styles/Footer.css';
-import logoWithText from '../assets/logo_with_text.png';
+import logoWithText from '../assets/logo_with_text.webp';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();

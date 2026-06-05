@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import '../styles/Modules.css';
 
-import ganeshaImg from '../assets/gods/Ganesha.png';
-import hanumanImg from '../assets/gods/Hanuman.png';
-import krishnaImg from '../assets/gods/Krishna.png';
-import shivaImg from '../assets/gods/Shiva.png';
-import ramImg from '../assets/gods/Ram.png';
-import shaktiImg from '../assets/gods/Shakti.png';
-import vishnuImg from '../assets/gods/Vishnu.png';
-import ramayanaImg from '../assets/gods/Ramayan.png';
-import mahabharataImg from '../assets/gods/Mahabharata.png';
+import ganeshaImg from '../assets/gods/Ganesha.webp';
+import hanumanImg from '../assets/gods/Hanuman.webp';
+import krishnaImg from '../assets/gods/Krishna.webp';
+import shivaImg from '../assets/gods/Shiva.webp';
+import ramImg from '../assets/gods/Ram.webp';
+import shaktiImg from '../assets/gods/Shakti.webp';
+import vishnuImg from '../assets/gods/Vishnu.webp';
+import ramayanaImg from '../assets/gods/Ramayan.webp';
+import mahabharataImg from '../assets/gods/Mahabharata.webp';
 
 const MODULES = [
   { id: 1, name: 'Ganesha', subtitle: 'Focus & New Beginnings', image: ganeshaImg, x: 0, y: 10, comingSoon: false },

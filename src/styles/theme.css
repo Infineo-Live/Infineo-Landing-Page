@@ -171,7 +171,7 @@
   --warning: #b06010;
   --info: #1C3E63;
 
-  --module-bg: url('../assets/module/Landmass-light.png') no-repeat center center / cover;
+  --module-bg: url('../assets/module/Landmass-light.webp') no-repeat center center / cover;
 
   /* ── Magical extras ─────────────────────────────── */
   --star-color: rgba(201, 148, 78, 0.30);
@@ -241,7 +241,7 @@
     0 0 32px rgba(244, 208, 120, 0.25),
     0 0 72px rgba(244, 208, 120, 0.10);
 
-  --module-bg: url('../assets/module/Landmass.png') no-repeat center center / cover;
+  --module-bg: url('../assets/module/Landmass.webp') no-repeat center center / cover;
 
 }
 

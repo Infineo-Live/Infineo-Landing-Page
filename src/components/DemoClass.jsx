@@ -1,25 +1,25 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import '../styles/DemoClass.css';
-import neoMascot from '../assets/neo-version/neo-without-eyes.png';
+import neoMascot from '../assets/neo-version/neo-without-eyes.webp';
 
 const REWARDS = [
-  { icon: '✏️', label: 'Cartoon Art Prints',     color: '#5B8DEF' },
-  { icon: '🏆', label: 'Certificate',             color: '#E7B860' },
-  { icon: '🎨', label: 'Colouring Story Sheet',   color: '#E05A8A' },
-  { icon: '🧩', label: 'Maze Master Worksheet',   color: '#9B6FE8' },
+  { icon: '✏️', label: 'Cartoon Art Prints', color: '#5B8DEF' },
+  { icon: '🏆', label: 'Certificate', color: '#E7B860' },
+  { icon: '🎨', label: 'Colouring Story Sheet', color: '#E05A8A' },
+  { icon: '🧩', label: 'Maze Master Worksheet', color: '#9B6FE8' },
   { icon: '🎮', label: 'Mini Games & Activities', color: '#3DC47E' },
 ];
 
 // Final resting positions for each card (% of stage width/height)
 const CARD_POSITIONS = [
-  { x: 10,  y: 22 },
-  { x: 68,  y: 10 },
-  { x: 6,   y: 62 },
-  { x: 62,  y: 60 },
-  { x: 36,  y: 78 },
+  { x: 10, y: 22 },
+  { x: 68, y: 10 },
+  { x: 6, y: 62 },
+  { x: 62, y: 60 },
+  { x: 36, y: 78 },
 ];
 
-const CONFETTI_COLORS = ['#e7b860','#e05a8a','#5B8DEF','#9B6FE8','#3DC47E','#ffffff'];
+const CONFETTI_COLORS = ['#e7b860', '#e05a8a', '#5B8DEF', '#9B6FE8', '#3DC47E', '#ffffff'];
 
 export default function DemoClass() {
   const [formData, setFormData] = useState({
@@ -145,11 +145,11 @@ export default function DemoClass() {
 
       const angle = (Math.random() * 360) * Math.PI / 180;
       const speed = 80 + Math.random() * 190;
-      const tx    = Math.cos(angle) * speed;
-      const ty    = Math.sin(angle) * speed - 70;
-      const rot   = Math.random() * 540 - 270;
+      const tx = Math.cos(angle) * speed;
+      const ty = Math.sin(angle) * speed - 70;
+      const rot = Math.random() * 540 - 270;
       const delay = Math.random() * 150;
-      const dur   = 600 + Math.random() * 400;
+      const dur = 600 + Math.random() * 400;
 
       setTimeout(() => {
         el.style.transition = `transform ${dur}ms cubic-bezier(0.2,1,0.3,1), opacity ${dur * 0.6}ms ease ${dur * 0.4}ms`;

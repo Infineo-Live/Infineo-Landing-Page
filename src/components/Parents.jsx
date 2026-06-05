@@ -1,5 +1,5 @@
 import '../styles/Parents.css';
-import neoMascot from '../assets/website-neo.png';
+import neoMascot from '../assets/website-neo.webp';
 
 const Parents = () => {
   return (
