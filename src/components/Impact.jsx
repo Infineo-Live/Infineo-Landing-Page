@@ -101,11 +101,20 @@ function GlassBreakCard({ journey, index }) {
 
     const obs = new IntersectionObserver(
       ([entry]) => {
-        setIsIntersecting(entry.isIntersecting);
+        const cardCenter = entry.boundingClientRect.top + entry.boundingClientRect.height / 2;
+        const viewportCenter = window.innerHeight / 2;
+
+        if (cardCenter < viewportCenter) {
+          // Upper half of viewport: keep active/visible
+          setIsIntersecting(true);
+        } else {
+          // Lower half of viewport: trigger active status based on the 50% threshold
+          setIsIntersecting(entry.intersectionRatio >= 0.5);
+        }
       },
       {
-        rootMargin: '-50% 0px -50% 0px',
-        threshold: 0
+        rootMargin: '0px',
+        threshold: [0, 0.5]
       }
     );
 
