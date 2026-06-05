@@ -46,15 +46,11 @@ const Parents = () => {
             When I think back to my childhood, I remember stories.
           </p>
           <p>
-            Stories of Hanuman's courage, Krishna's wisdom, and Ram's righteousness. At the time, they were simply stories I loved. Later, I realized they were quietly teaching me how to think, choose, and grow.
-          </p>
+            Stories of Hanuman's courage, Krishna's wisdom, and Ram's righteousness. At the time, they were simply stories I loved. Later, I realized they were quietly teaching me how to think, choose, and grow.</p>
           <p>
-            Today, children have access to more information than ever before, but fewer opportunities to pause, reflect, and explore life's deeper questions.
-            That's why I started Infineo.
-          </p>
+            Today, children have access to more information than ever before, but fewer opportunities to pause, reflect, and explore life's deeper questions. That's why I started Infineo.</p>
           <p>
-            Our goal isn't to help children memorize stories. It's to help them connect with them — to ask questions, think deeply, and discover values that stay with them long after childhood.
-            Thank you for trusting us to be a small part of your child's journey.
+            I wanted to create a space where children could engage with these stories in a deeper way — asking questions, thinking critically, and discovering values that stay with them long after childhood. Thank you for trusting us to be a small part of your child's journey."
           </p>
           <p>With love and purpose,"</p>
         </blockquote>
@@ -70,10 +66,10 @@ const Parents = () => {
         </div>
 
         <div className="letter-founder">
-          <div className="founder-avatar">
+          {/* <div className="founder-avatar">
             <img src="https://i.pravatar.cc/80?img=12" alt="Founder, INFINEO" />
-          </div>
-          <span className="founder-name">Ananya Sharma</span>
+          </div> */}
+          <span className="founder-name">Shreya Agarwal</span>
           <span className="founder-label">Founder, INFINEO</span>
         </div>
       </div>

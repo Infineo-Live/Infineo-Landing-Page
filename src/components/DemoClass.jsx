@@ -50,12 +50,11 @@ export default function DemoClass() {
     if (containerRef.current) observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, []);
+
   // ── Open from navbar / pricing ──
   useEffect(() => {
     const handler = (e) => {
-      // Scroll the form into view
       document.getElementById('book')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      // Pre-fill module if a plan was passed
       if (e.detail?.module) {
         setFormData(prev => ({ ...prev, module: e.detail.module }));
       }
@@ -63,6 +62,7 @@ export default function DemoClass() {
     window.addEventListener('open-demo-modal', handler);
     return () => window.removeEventListener('open-demo-modal', handler);
   }, []);
+
   // ── Scroll animation for mascot ──
   useEffect(() => {
     const onScroll = () => {
@@ -153,17 +153,14 @@ export default function DemoClass() {
     if (hasBurst.current) return;
     hasBurst.current = true;
 
-    // 1. Shake
     setShaking(true);
     setTimeout(() => setShaking(false), 1000);
 
-    // 2. Burst + confetti
     setTimeout(() => {
       setBurst(true);
       spawnConfetti();
     }, 960);
 
-    // 3. Reveal cards with stagger
     setTimeout(() => {
       setCards(REWARDS.map((r, i) => ({ ...r, pos: CARD_POSITIONS[i], visible: false })));
       REWARDS.forEach((_, i) => {
@@ -179,12 +176,8 @@ export default function DemoClass() {
   // ── Scroll Event trigger for Gift Burst ──
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          handleGiftClick();
-        }
-      },
-      { threshold: 0.5 } // Triggers when 50% of the stage is visible
+      ([entry]) => { if (entry.isIntersecting) handleGiftClick(); },
+      { threshold: 0.5 }
     );
     if (stageRef.current) observer.observe(stageRef.current);
     return () => observer.disconnect();
@@ -195,44 +188,40 @@ export default function DemoClass() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleCtaScroll = (e) => {
+    e.preventDefault();
+    document.getElementById('book')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await emailjs.send(
         "service_q11sqw8",
         "template_vipoclo",
-        {child_name: formData.childName,
-        parent_name: formData.parentName,
-        email: formData.email,
-        phone: formData.phone,
-        child_age: formData.childAge,
-        language: formData.module,
-      },
+        {
+          child_name: formData.childName,
+          parent_name: formData.parentName,
+          email: formData.email,
+          phone: formData.phone,
+          child_age: formData.childAge,
+          language: formData.language,
+        },
         "xs8aj8X8ITOMt7KSF"
       );
-      setIsSubmitted(true); 
+      setIsSubmitted(true);
       setTimeout(() => {
         setIsSubmitted(false);
         setFormData({
-          childName: '',
-          parentName: '',
-          email: '',
-          phone: '',
-          childAge: '',
-          module: '',
+          childName: '', parentName: '', email: '',
+          phone: '', childAge: '', language: '',
         });
       }, 3000);
-
     } catch (error) {
       console.error("Email sending failed:", error);
       alert("Failed to send form");
     }
   };
-
-
-  
-
-  
 
   return (
     <section className="demo-class-section" ref={containerRef}>
@@ -250,46 +239,33 @@ export default function DemoClass() {
           <p className="demo-body">
             Unlock your Infineo <span className="demo-highlight">Starter Kit</span> after the session.
           </p>
-          <a href="#book" className="demo-cta">
+          <a href="#book" onClick={handleCtaScroll} className="demo-cta">
             Book Free Trial <span className="cta-arrow">→</span>
           </a>
         </div>
 
         <div className="reward-right">
           <div className="demo-ambient-right" />
-
-          {/* Stage */}
           <div className="gift-stage" ref={stageRef}>
-
-            {/* Pulse rings */}
             {!burst && <>
               <div className="gift-ring" />
               <div className="gift-ring" style={{ animationDelay: '0.7s' }} />
             </>}
 
-            {/* Gift box */}
-            <div
-              className={`gift-wrap${shaking ? ' shaking' : ''}${burst ? ' burst' : ''}`}
-            >
+            <div className={`gift-wrap${shaking ? ' shaking' : ''}${burst ? ' burst' : ''}`}>
               <div className="gift-bow">
                 <div className="bow-loop" />
                 <div className="bow-loop" />
               </div>
-              <div className="gift-lid">
-                <div className="gift-shine" />
-              </div>
+              <div className="gift-lid"><div className="gift-shine" /></div>
               <div className="gift-body" />
             </div>
 
-            {/* Reward cards */}
-            {cards.map((card, i) => (
+            {cards.map((card) => (
               <div
                 key={card.label}
                 className={`reward-card-burst${card.visible ? ' visible' : ''}`}
-                style={{
-                  left: `${card.pos.x}%`,
-                  top: `${card.pos.y}%`,
-                }}
+                style={{ left: `${card.pos.x}%`, top: `${card.pos.y}%` }}
               >
                 <span className="reward-icon-burst">{card.icon}</span>
                 <div className="reward-info-burst">
@@ -322,7 +298,7 @@ export default function DemoClass() {
                 <div className="neo-pupil" ref={rightPupilRef} />
               </div>
             </div>
-            <img src={neoMascot} alt="Neo, the Infineo mascot" className="neo-demo-image" />
+            <img src={neoMascot} alt="Neo, the mascot" className="neo-demo-image" />
             <div className="neo-blush neo-left-blush" aria-hidden="true" />
             <div className="neo-blush neo-right-blush" aria-hidden="true" />
           </div>
