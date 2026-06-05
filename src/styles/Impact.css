@@ -7,7 +7,7 @@
   width: 100%;
   padding: clamp(4rem, 8vw, 8rem) clamp(1rem, 4vw, 4rem);
   font-family: var(--font-secondary);
-  overflow: hidden;
+  overflow: clip;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -108,12 +108,12 @@
 }
 
 .gb-img--problem {
-    filter: saturate(0.7) brightness(0.75) blur(4px);
-    transition: filter 0.4s ease, opacity 0.5s ease;
-    /* Always stays in the DOM — we blur it instead of hiding it */
-    opacity: 1;
-    z-index: 1;
-  }
+  filter: saturate(0.7) brightness(0.75) blur(4px);
+  transition: filter 0.4s ease, opacity 0.5s ease;
+  /* Always stays in the DOM — we blur it instead of hiding it */
+  opacity: 1;
+  z-index: 1;
+}
 
 /* ── Crack SVG overlay ── */
 .gb-cracks {
@@ -421,10 +421,21 @@
   }
 }
 
+/* Mascot Sticky Container spanning the full height of the section */
+.impact-neo-sticky-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 99;
+}
+
 /* Neo Mascot in Impact Section (Bottom Left) */
 .impact-neo-left {
-  position: fixed;
-  bottom: 2%;
+  position: sticky;
+  top: calc(100vh - 25rem);
   left: 2%;
   height: 25rem;
   width: 25rem;
@@ -433,7 +444,7 @@
   pointer-events: none;
   transform: translateX(-60px) scaleX(1);
   transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
-              transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
 }
 
@@ -476,30 +487,78 @@
 
 /* Frame 1: Eyes wide open */
 @keyframes impact-frame1-loop {
-  0%, 85% { opacity: 1; }
-  85%, 95% { opacity: 0; }
-  95%, 100% { opacity: 1; }
+
+  0%,
+  85% {
+    opacity: 1;
+  }
+
+  85%,
+  95% {
+    opacity: 0;
+  }
+
+  95%,
+  100% {
+    opacity: 1;
+  }
 }
 
 /* Frame 2: Quick transition down (Half-closed) */
 @keyframes impact-frame2-loop {
-  0%, 85% { opacity: 0; }
-  85%, 88% { opacity: 1; }
-  88%, 100% { opacity: 0; }
+
+  0%,
+  85% {
+    opacity: 0;
+  }
+
+  85%,
+  88% {
+    opacity: 1;
+  }
+
+  88%,
+  100% {
+    opacity: 0;
+  }
 }
 
 /* Frame 3: Fully Closed Eyes */
 @keyframes impact-frame3-loop {
-  0%, 88% { opacity: 0; }
-  88%, 92% { opacity: 1; }
-  92%, 100% { opacity: 0; }
+
+  0%,
+  88% {
+    opacity: 0;
+  }
+
+  88%,
+  92% {
+    opacity: 1;
+  }
+
+  92%,
+  100% {
+    opacity: 0;
+  }
 }
 
 /* Frame 4: Quick transition back up (Half-closed) */
 @keyframes impact-frame4-loop {
-  0%, 92% { opacity: 0; }
-  92%, 95% { opacity: 1; }
-  95%, 100% { opacity: 0; }
+
+  0%,
+  92% {
+    opacity: 0;
+  }
+
+  92%,
+  95% {
+    opacity: 1;
+  }
+
+  95%,
+  100% {
+    opacity: 0;
+  }
 }
 
 @media (max-width: 48rem) {

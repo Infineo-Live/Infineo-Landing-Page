@@ -267,12 +267,14 @@ export default function Impact() {
         <span className="impact-cta__note">Free demo class · No credit card</span>
       </div>
 
-      {/* Mascot at the bottom-left of the impact section */}
-      <div className={`impact-neo-left ${inView ? 'active' : ''}`}>
-        <img src={neo1} className="neo-frame nf1" alt="Mascot Open" />
-        <img src={neo2} className="neo-frame nf2" alt="Mascot Half Closed" />
-        <img src={neo3} className="neo-frame nf3" alt="Mascot Closed" />
-        <img src={neo4} className="neo-frame nf4" alt="Mascot Transition" />
+      {/* Mascot at the bottom-left of the impact section wrapped in sticky container */}
+      <div className="impact-neo-sticky-container">
+        <div className={`impact-neo-left ${inView ? 'active' : ''}`}>
+          <img src={neo1} className="neo-frame nf1" alt="Mascot Open" />
+          <img src={neo2} className="neo-frame nf2" alt="Mascot Half Closed" />
+          <img src={neo3} className="neo-frame nf3" alt="Mascot Closed" />
+          <img src={neo4} className="neo-frame nf4" alt="Mascot Transition" />
+        </div>
       </div>
     </section>
   );
