@@ -544,10 +544,10 @@
 /* Neo Mascot in Impact Section (Bottom Left) */
 .impact-neo-left {
   position: sticky;
-  top: calc(100vh - 25rem);
-  left: 2%;
-  height: 25rem;
-  width: 25rem;
+  top: calc(100vh - 18rem);
+  left: 1%;
+  height: 15rem;
+  width: 15rem;
   z-index: 99;
   opacity: 0;
   pointer-events: none;

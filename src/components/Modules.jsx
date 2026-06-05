@@ -12,15 +12,16 @@ import ramayanaImg from '../assets/gods/Ramayan.webp';
 import mahabharataImg from '../assets/gods/Mahabharata.webp';
 
 const MODULES = [
-  { id: 1, name: 'Ganesha', subtitle: 'Focus & New Beginnings', image: ganeshaImg, x: 0, y: 10, comingSoon: false },
-  { id: 2, name: 'Hanuman', subtitle: 'Courage & Devotion', image: hanumanImg, x: 20, y: 40, comingSoon: false },
-  { id: 3, name: 'Krishna', subtitle: 'Wisdom & Play', image: krishnaImg, x: 50, y: 22, comingSoon: false },
-  { id: 4, name: 'Ram', subtitle: 'Duty & Integrity', image: ramImg, x: 85, y: 32, comingSoon: false },
-  { id: 5, name: 'Shiva', subtitle: 'Stillness & Power', image: shivaImg, x: 101, y: 52, comingSoon: false },
-  { id: 6, name: 'Shakti', subtitle: 'Strength & Grace', image: shaktiImg, x: 78, y: 68, comingSoon: false },
-  { id: 7, name: 'Vishnu', subtitle: 'Leadership & Legacy', image: vishnuImg, x: 44, y: 89, comingSoon: false },
-  { id: 8, name: 'Ramayana', subtitle: "Epic of Lord Ram's Journey", image: ramayanaImg, x: 16, y: 82, comingSoon: true },
-  { id: 9, name: 'Mahabharata', subtitle: 'The Epic of Duty & Wisdom', image: mahabharataImg, x: -2, y: 80, comingSoon: true },
+  { id: 1, name: 'Ganesha', subtitle: 'Focus & New Beginnings', image: ganeshaImg, x: 8, y: 16, comingSoon: false },
+  { id: 2, name: 'Hanuman', subtitle: 'Courage & Devotion', image: hanumanImg, x: 22, y: -16, comingSoon: false },
+  { id: 'cp-2-3', isControlPoint: true, x: 38, y: 5 },
+  { id: 3, name: 'Krishna', subtitle: 'Wisdom & Play', image: krishnaImg, x: 53, y: 3, comingSoon: false },
+  { id: 4, name: 'Ram', subtitle: 'Duty & Integrity', image: ramImg, x: 80, y: -8, comingSoon: false },
+  { id: 5, name: 'Shiva', subtitle: 'Stillness & Power', image: shivaImg, x: 93, y: 40, comingSoon: false },
+  { id: 6, name: 'Shakti', subtitle: 'Strength & Grace', image: shaktiImg, x: 43, y: 28, comingSoon: false },
+  { id: 7, name: 'Vishnu', subtitle: 'Leadership & Legacy', image: vishnuImg, x: 8, y: 68, comingSoon: false },
+  { id: 8, name: 'Ramayana', subtitle: "Epic of Lord Ram's Journey", image: ramayanaImg, x: 52, y: 68, comingSoon: true },
+  { id: 9, name: 'Mahabharata', subtitle: 'The Epic of Duty & Wisdom', image: mahabharataImg, x: 80, y: 80, comingSoon: true },
 ];
 
 export default function Modules() {
@@ -42,12 +43,14 @@ export default function Modules() {
   // Re-build path strings whenever sizing conditions mutate
   useEffect(() => {
     let dString = '';
-    MODULES.forEach((mod, i) => {
+    const activeNodes = isMobile ? MODULES.filter(m => !m.isControlPoint) : MODULES;
+
+    activeNodes.forEach((mod, i) => {
       const curr = getCoordinates(mod, i);
       if (i === 0) {
         dString += `M ${curr.x} ${curr.y}`;
       } else {
-        const prev = getCoordinates(MODULES[i - 1], i - 1);
+        const prev = getCoordinates(activeNodes[i - 1], i - 1);
         if (!isMobile) {
           const mx = (prev.x + curr.x) / 2;
           dString += ` C ${mx} ${prev.y}, ${mx} ${curr.y}, ${curr.x} ${curr.y}`;
@@ -153,7 +156,7 @@ export default function Modules() {
           />
         </svg>
         {/* Level Nodes */}
-        {MODULES.map((mod, index) => {
+        {MODULES.filter(m => !m.isControlPoint).map((mod, index) => {
           const coords = getCoordinates(mod, index);
           return (
             <div

@@ -849,4 +849,241 @@
   .demo-form {
     padding: 24px 16px;
   }
+<<<<<<< HEAD
 }
+=======
+
+  @keyframes slideInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--button-gradient);
+    color: var(--text-inverse);
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-primary);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 10px;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(190, 140, 74, 0.3);
+    background: linear-gradient(135deg, #e7b860, #be8c4a);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .form-note {
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 15px;
+    opacity: 0.7;
+  }
+
+  .form-error {
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    color: var(--error, #e05a5a);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ── Responsive Rules ── */
+  @media (max-width: 1024px) {
+
+    .reward-section,
+    .demo-container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .reward-right {
+      height: 400px;
+      max-width: 520px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .demo-title {
+      font-size: 40px;
+    }
+
+    .demo-subtitle {
+      font-size: 20px;
+    }
+
+    .demo-form {
+      max-width: 720px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .demo-class-section {
+      padding: 70px 24px;
+      gap: 60px;
+    }
+
+    .reward-right {
+      height: 340px;
+    }
+
+    .gift-card {
+      width: 130px;
+      height: 130px;
+      border-radius: 22px;
+    }
+
+    .gift-icon {
+      font-size: 36px;
+    }
+
+    .demo-title {
+      font-size: 32px;
+    }
+
+    .demo-subtitle {
+      font-size: 18px;
+    }
+
+    .demo-highlights {
+      gap: 20px;
+      padding: 20px 0;
+    }
+
+    .highlight-number {
+      font-size: 32px;
+    }
+
+    .highlight-text {
+      font-size: 12px;
+    }
+
+    .demo-form {
+      padding: 30px;
+      max-width: 100%;
+    }
+
+    .demo-form h3 {
+      font-size: 24px;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .neo-mascot-wrapper {
+      width: 200px;
+      margin: 20px auto;
+    }
+
+    .neo-eye {
+      width: 17px;
+      height: 17px;
+    }
+
+    /* Proportional smaller mobile eyes */
+    .neo-pupil {
+      width: 11px;
+      height: 11px;
+    }
+
+    .neo-pupil::after {
+      width: 3px;
+      height: 3px;
+      top: 1px;
+      left: 6px;
+      box-shadow: -2px 2px 0 -0.5px rgba(255, 255, 255, 0.6);
+    }
+
+    .neo-blush {
+      width: 14px;
+      height: 7px;
+      filter: blur(2px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .demo-class-section {
+      padding: 50px 16px;
+      gap: 48px;
+    }
+
+    .reward-right {
+      height: 300px;
+    }
+
+    .reward-card {
+      padding: 9px 12px;
+    }
+
+    .reward-icon {
+      font-size: 18px;
+    }
+
+    .reward-label {
+      font-size: 9px;
+    }
+
+    .demo-title {
+      font-size: 24px;
+    }
+
+    .demo-subtitle {
+      font-size: 16px;
+    }
+
+    .demo-highlights {
+      gap: 15px;
+      padding: 15px 0;
+    }
+
+    .highlight-number {
+      font-size: 28px;
+    }
+
+    .demo-form {
+      padding: 20px;
+    }
+
+    .demo-form h3 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 10px 12px;
+      font-size: 13px;
+    }
+
+    .submit-btn {
+      padding: 14px;
+      font-size: 14px;
+    }
+  }
+>>>>>>> eb48c2750f0cef3bd74a271840487d2e980c1f26
