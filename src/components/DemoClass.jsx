@@ -143,13 +143,13 @@ export default function DemoClass() {
 
     // 1. Shake
     setShaking(true);
-    setTimeout(() => setShaking(false), 500);
+    setTimeout(() => setShaking(false), 1000);
 
     // 2. Burst + confetti
     setTimeout(() => {
       setBurst(true);
       spawnConfetti();
-    }, 480);
+    }, 960);
 
     // 3. Reveal cards with stagger
     setTimeout(() => {
@@ -159,9 +159,9 @@ export default function DemoClass() {
           setCards(prev =>
             prev.map((c, idx) => idx === i ? { ...c, visible: true } : c)
           );
-        }, i * 110);
+        }, i * 220);
       });
-    }, 560);
+    }, 1120);
   }, [spawnConfetti]);
 
   // ── Scroll Event trigger for Gift Burst ──

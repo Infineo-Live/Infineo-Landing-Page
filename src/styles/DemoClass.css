@@ -188,7 +188,7 @@
 
 /* ── Shake ── */
 .gift-wrap.shaking {
-  animation: giftShake 0.5s ease;
+  animation: giftShake 1.0s ease;
 }
 @keyframes giftShake {
   0%,100% { transform: translateX(-50%) rotate(0deg); }
@@ -201,7 +201,7 @@
 
 /* ── Burst ── */
 .gift-wrap.burst .gift-bow {
-  animation: bowPop 0.38s 0.08s cubic-bezier(0.3,2.2,0.4,1) forwards;
+  animation: bowPop 0.76s 0.16s cubic-bezier(0.3,2.2,0.4,1) forwards;
 }
 @keyframes bowPop {
   0%   { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
@@ -209,7 +209,7 @@
 }
 
 .gift-wrap.burst .gift-lid {
-  animation: lidPop 0.48s 0.12s cubic-bezier(0.2,1.8,0.4,1) forwards;
+  animation: lidPop 0.96s 0.24s cubic-bezier(0.2,1.8,0.4,1) forwards;
 }
 @keyframes lidPop {
   0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
@@ -218,7 +218,7 @@
 }
 
 .gift-wrap.burst .gift-body {
-  animation: bodySquish 0.42s 0.28s ease both;
+  animation: bodySquish 0.84s 0.56s ease both;
 }
 @keyframes bodySquish {
   0%   { transform: scaleY(1) scaleX(1); }
