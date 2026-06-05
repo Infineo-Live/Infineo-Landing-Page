@@ -256,13 +256,6 @@ export default function DemoClass() {
         </div>
       </div>
 
-      {/* ── DIVIDER ── */}
-      <div className="demo-divider">
-        <span className="divider-line" />
-        <span className="divider-text">Experience Infineo Firsthand</span>
-        <span className="divider-line" />
-      </div>
-
       {/* ── BOOKING FORM SECTION ── */}
       <div className="demo-container">
         <div className="demo-info">
