@@ -13,11 +13,11 @@ const REWARDS = [
 
 // Final resting positions for each card (% of stage width/height)
 const CARD_POSITIONS = [
-  { x: 10, y: 22 },
-  { x: 68, y: 10 },
-  { x: 6, y: 62 },
-  { x: 62, y: 60 },
-  { x: 36, y: 78 },
+  { x: 28, y: 22 },
+  { x: 70, y: 10 },
+  { x: 24, y: 42 },
+  { x: 70, y: 32 },
+  { x: 60, y: 55 },
 ];
 
 const CONFETTI_COLORS = ['#e7b860', '#e05a8a', '#5B8DEF', '#9B6FE8', '#3DC47E', '#ffffff'];
