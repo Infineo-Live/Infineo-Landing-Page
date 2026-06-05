@@ -25,7 +25,7 @@ const CONFETTI_COLORS = ['#e7b860', '#e05a8a', '#5B8DEF', '#9B6FE8', '#3DC47E', 
 export default function DemoClass() {
   const [formData, setFormData] = useState({
     childName: '', parentName: '', email: '',
-    phone: '', childAge: '', module: '',
+    phone: '', childAge: '', language: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [burst, setBurst] = useState(false);
@@ -194,7 +194,7 @@ export default function DemoClass() {
         email: formData.email,
         phone: formData.phone,
         child_age: formData.childAge,
-        module: formData.module,
+        language: formData.module,
       },
         "xs8aj8X8ITOMt7KSF"
       );
@@ -353,16 +353,11 @@ export default function DemoClass() {
                 </select>
               </div>
               <div className="form-group">
-                <label htmlFor="module">Preferred Module *</label>
-                <select id="module" name="module" value={formData.module} onChange={handleChange} required>
-                  <option value="">Select module</option>
-                  <option value="ganesha">Ganesha</option>
-                  <option value="hanuman">Hanuman</option>
-                  <option value="krishna">Krishna</option>
-                  <option value="shiva">Shiva</option>
-                  <option value="shakti">Shakti</option>
-                  <option value="ramayana">Ramayana</option>
-                  <option value="mahabharata">Mahabharata</option>
+                <label htmlFor="language">Preferred Language *</label>
+                <select id="language" name="language" value={formData.language} onChange={handleChange} required>
+                  <option value="">Select language</option>
+                  <option value="english">English</option>
+                  <option value="hindi">Hindi</option>
                 </select>
               </div>
             </div>
