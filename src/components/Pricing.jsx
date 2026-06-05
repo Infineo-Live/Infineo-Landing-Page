@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import '../styles/Pricing.css';
 
 export default function Pricing() {
-  const [billingPeriod, setBillingPeriod] = useState('monthly');
   const [selectedPlan, setSelectedPlan] = useState(2);
   const containerRef = useRef(null);
 
@@ -26,64 +25,57 @@ export default function Pricing() {
   const plans = [
     {
       id: 1,
-      name: 'Starter',
-      sessions: '5',
-      sessionUnit: 'sessions/month',
+      name: 'Trial',
+      sessions: '1',
+      sessionUnit: 'Free Demo Class',
       price: {
-        monthly: { original: 2500, inaugural: 2250 },
-        quarterly: { original: 7500, inaugural: 6000 }
+        original: 0,
+        inaugural: 0
       },
-      description: 'Perfect for trying out Infineo',
+      priceNote: 'Followed by 10 sessions at ₹5,000',
+      description: 'Start Here',
       features: [
-        '5 classes per month',
-        '30-minute sessions',
-        'One module',
-        'Progress tracking',
-        'Email support'
+        '1 Free Demo Class',
+        'Followed by 10 sessions at ₹5,000',
+        'No risk, no credit card required'
       ],
       color: 'starter'
     },
     {
       id: 2,
-      name: 'Popular',
+      name: 'Foundation',
       sessions: '10',
-      sessionUnit: 'sessions/month',
+      sessionUnit: 'sessions',
       price: {
-        monthly: { original: 5000, inaugural: 4500 },
-        quarterly: { original: 15000, inaugural: 12000 }
+        original: 5000,
+        inaugural: 4500
       },
-      description: 'Most loved by our families',
+      priceNote: '₹450 per session',
+      description: 'The Infineo Experience',
       features: [
-        '10 classes per month',
-        '30-minute sessions',
-        'Multiple modules',
-        'Progress tracking',
-        'Priority email support',
-        'Monthly progress report',
-        'Parent webinar access'
+        '10 sessions / ₹5,000',
+        '1 module at a time',
+        'Recording + lesson PPT included',
+        'Flexible 1–2x/week schedule'
       ],
       color: 'popular'
     },
     {
       id: 3,
-      name: 'Premium',
-      sessions: '20',
-      sessionUnit: 'sessions/month',
+      name: 'Committed Learner',
+      sessions: '30',
+      sessionUnit: 'sessions',
       price: {
-        monthly: { original: 10000, inaugural: 9000 },
-        quarterly: { original: 30000, inaugural: 24000 }
+        original: 15000,
+        inaugural: 12000
       },
-      description: 'Maximum learning & engagement',
+      priceNote: '₹400 per session — Deepest Value',
+      description: 'Deepest Value',
       features: [
-        '20 classes per month',
-        '30-minute sessions',
-        'All 7 modules',
-        'Detailed progress tracking',
-        'Priority phone support',
-        'Weekly progress report',
-        'Exclusive parent webinars',
-        'Custom learning plan',
-        'Festival celebrations'
+        '30 sessions / ₹12,000',
+        'All 3 modules planned out',
+        'Priority scheduling',
+        'Monthly progress summary'
       ],
       color: 'premium'
     }
@@ -96,23 +88,9 @@ export default function Pricing() {
         {/* Header */}
         <div className="pricing-header">
           <h2 className="pricing-title">Flexible Pricing Plans</h2>
-          <p className="pricing-subtitle">Choose what works best for your kid</p>
-
-          {/* Billing Toggle */}
-          <div className="billing-toggle">
-            <button
-              className={`toggle-btn ${billingPeriod === 'monthly' ? 'active' : ''}`}
-              onClick={() => setBillingPeriod('monthly')}
-            >
-              Monthly
-            </button>
-            <button
-              className={`toggle-btn ${billingPeriod === 'quarterly' ? 'active' : ''}`}
-              onClick={() => setBillingPeriod('quarterly')}
-            >
-              Quarterly <span className="save-badge">Save 11%</span>
-            </button>
-          </div>
+          <p className="pricing-subtitle">
+            Choose what works best for your kid
+          </p>
         </div>
 
         {/* Pricing Cards */}
@@ -120,51 +98,79 @@ export default function Pricing() {
           {plans.map((plan, index) => (
             <div
               key={plan.id}
-              className={`pricing-card ${selectedPlan === plan.id ? 'highlighted' : ''} ${plan.color}`}
+              className={`pricing-card ${selectedPlan === plan.id ? 'highlighted' : ''
+                } ${plan.color}`}
               style={{ animationDelay: `${index * 0.15}s` }}
               onClick={() => setSelectedPlan(plan.id)}
             >
-              {plan.id === 2 && <div className="popular-badge">POPULAR</div>}
+              {plan.id === 2 && (
+                <div className="popular-badge">MOST POPULAR</div>
+              )}
 
               <div className="card-header">
                 <h3 className="plan-name">{plan.name}</h3>
-                <p className="plan-description">{plan.description}</p>
+                <p className="plan-description">
+                  {plan.description}
+                </p>
               </div>
 
               <div className="plan-sessions">
-                <span className="sessions-number">{plan.sessions}</span>
-                <span className="sessions-text">{plan.sessionUnit}</span>
+                <span className="sessions-number">
+                  {plan.sessions}
+                </span>
+                <span className="sessions-text">
+                  {plan.sessionUnit}
+                </span>
               </div>
 
               <div className="plan-price-wrap">
-                <div className="original-price">
-                  Original: <s>₹{plan.price[billingPeriod].original}</s>
-                </div>
+                {plan.price.original > 0 && (
+                  <div className="original-price">
+                    Original: <s>₹{plan.price.original}</s>
+                  </div>
+                )}
+
                 <div className="plan-price">
-                  <span className="currency">₹</span>
-                  <span className="price">{plan.price[billingPeriod].inaugural}</span>
-                  <span className="period">{billingPeriod === 'monthly' ? '/month' : '/quarter'}</span>
+                  {plan.price.inaugural === 0 ? (
+                    <span className="price">FREE</span>
+                  ) : (
+                    <>
+                      <span className="currency">₹</span>
+                      <span className="price">
+                        {plan.price.inaugural}
+                      </span>
+                    </>
+                  )}
                 </div>
               </div>
 
               <div className="price-note">
-                {billingPeriod === 'monthly' ? (
-                  <p>~₹{Math.round(plan.price.monthly.inaugural / parseInt(plan.sessions))} per session</p>
-                ) : (
-                  <p>~₹{Math.round(plan.price.quarterly.inaugural / (parseInt(plan.sessions) * 3))} per session</p>
-                )}
+                <p>{plan.priceNote}</p>
               </div>
 
-              <button className="cta-btn" onClick={(e) => e.stopPropagation()}>
+              <button
+                className="cta-btn"
+                onClick={(e) => e.stopPropagation()}
+              >
                 Get Started
               </button>
 
               <div className="features-list">
-                <p className="features-title">What's Included:</p>
+                <p className="features-title">
+                  What's Included:
+                </p>
+
                 {plan.features.map((feature, idx) => (
-                  <div key={idx} className="feature-item">
-                    <span className="feature-check">✓</span>
-                    <span className="feature-text">{feature}</span>
+                  <div
+                    key={idx}
+                    className="feature-item"
+                  >
+                    <span className="feature-check">
+                      ✓
+                    </span>
+                    <span className="feature-text">
+                      {feature}
+                    </span>
                   </div>
                 ))}
               </div>

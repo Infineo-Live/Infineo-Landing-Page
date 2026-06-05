@@ -43,24 +43,18 @@ const Parents = () => {
         <blockquote className="letter-quote">
           <p>"Dear Parent,</p>
           <p>
-            In a world moving at the speed of light, we often forget the roots that keep us
-            grounded. At INFINEO, we believe the greatest gift you can give your child is not
-            just knowledge — but a soul enriched with values.
+            When I think back to my childhood, I remember stories.
           </p>
           <p>
-            Our stories aren't just myths; they are ethical roadmaps. Through the magic of
-            ancient Indian legends, your child learns what it means to be brave like Rama,
-            focused like Arjuna, and kind like Krishna — one 30-minute session at a time,
-            perfectly sized for young minds.
+            Stories of Hanuman's courage, Krishna's wisdom, and Ram's righteousness. At the time, they were simply stories I loved. Later, I realized they were quietly teaching me how to think, choose, and grow.
           </p>
           <p>
-            Every class is personal. No crowded rooms, no falling behind. Just one expert
-            storyteller, one child, and one conversation that builds courage, sharpens thinking,
-            and grows a moral compass that lasts a lifetime.
+            Today, children have access to more information than ever before, but fewer opportunities to pause, reflect, and explore life's deeper questions.
+            That's why I started Infineo.
           </p>
           <p>
-            We are not just telling stories. We are raising the next generation of thinkers,
-            leaders, and human beings.
+            Our goal isn't to help children memorize stories. It's to help them connect with them — to ask questions, think deeply, and discover values that stay with them long after childhood.
+            Thank you for trusting us to be a small part of your child's journey.
           </p>
           <p>With love and purpose,"</p>
         </blockquote>

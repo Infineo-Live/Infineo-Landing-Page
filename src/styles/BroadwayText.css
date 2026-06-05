@@ -1,6 +1,8 @@
 .broadway-wrap {
-  display: block;
-  white-space: pre-wrap;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0; /* spacing handled by the space-char spans */
   text-align: left;
 }
 

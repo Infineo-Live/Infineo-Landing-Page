@@ -3,15 +3,23 @@ import '../styles/DemoClass.css';
 import neoMascot from '../assets/neo-version/neo-without-eyes.png';
 
 const REWARDS = [
-  { icon: '✏️', label: 'Drawing Sheet', color: '#5B8DEF' },
-  { icon: '🏆', label: 'Certificate', color: '#E7B860' },
-  { icon: '🎨', label: 'Coloring Sheet', color: '#E05A8A' },
-  { icon: '🧩', label: 'Mind Games', color: '#9B6FE8' },
-  { icon: '🎮', label: 'Maze Master', color: '#3DC47E' },
+  { icon: '✏️', label: 'Cartoon Art Prints',     color: '#5B8DEF' },
+  { icon: '🏆', label: 'Certificate',             color: '#E7B860' },
+  { icon: '🎨', label: 'Colouring Story Sheet',   color: '#E05A8A' },
+  { icon: '🧩', label: 'Maze Master Worksheet',   color: '#9B6FE8' },
+  { icon: '🎮', label: 'Mini Games & Activities', color: '#3DC47E' },
 ];
 
-const ORBIT_RADIUS = 240; // px from center gift card
-const SPARKLE_CHARS = ['✦', '✧', '★', '✶', '✸'];
+// Final resting positions for each card (% of stage width/height)
+const CARD_POSITIONS = [
+  { x: 10,  y: 22 },
+  { x: 68,  y: 10 },
+  { x: 6,   y: 62 },
+  { x: 62,  y: 60 },
+  { x: 36,  y: 78 },
+];
+
+const CONFETTI_COLORS = ['#e7b860','#e05a8a','#5B8DEF','#9B6FE8','#3DC47E','#ffffff'];
 
 export default function DemoClass() {
   const [formData, setFormData] = useState({
@@ -19,8 +27,9 @@ export default function DemoClass() {
     phone: '', childAge: '', module: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [sparkles, setSparkles] = useState([]);
-  const [angle, setAngle] = useState(0);
+  const [burst, setBurst] = useState(false);
+  const [shaking, setShaking] = useState(false);
+  const [cards, setCards] = useState([]);
 
   const containerRef = useRef(null);
   const mascotRef = useRef(null);
@@ -28,9 +37,7 @@ export default function DemoClass() {
   const rightEyeRef = useRef(null);
   const leftPupilRef = useRef(null);
   const rightPupilRef = useRef(null);
-  const rafRef = useRef(null);
-  const angleRef = useRef(0);
-  const sparkleIdRef = useRef(0);
+  const stageRef = useRef(null);
 
   // ── IntersectionObserver ──
   useEffect(() => {
@@ -40,20 +47,6 @@ export default function DemoClass() {
     );
     if (containerRef.current) observer.observe(containerRef.current);
     return () => observer.disconnect();
-  }, []);
-
-  // ── Orbit animation loop ──
-  useEffect(() => {
-    let last = performance.now();
-    const tick = (now) => {
-      const delta = now - last;
-      last = now;
-      angleRef.current = (angleRef.current + delta * 0.004) % 360;
-      setAngle(angleRef.current);
-      rafRef.current = requestAnimationFrame(tick);
-    };
-    rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
   }, []);
 
   // ── Scroll animation for mascot ──
@@ -106,22 +99,66 @@ export default function DemoClass() {
     };
   }, [trackPupil]);
 
-  // ── Sparkle burst on card hover ──
-  const handleCardHover = (e, index) => {
-    const newSparkles = Array.from({ length: 8 }, (_, i) => ({
-      id: ++sparkleIdRef.current,
-      cardIndex: index,
-      // spread in a circle around the card center (0, 0)
-      x: Math.cos((i / 8) * Math.PI * 2) * (50 + Math.random() * 30),
-      y: Math.sin((i / 8) * Math.PI * 2) * (30 + Math.random() * 20),
-      char: SPARKLE_CHARS[i % SPARKLE_CHARS.length],
-      scale: 0.6 + Math.random() * 0.8,
-    }));
+  // ── Gift burst handler ──
+  const handleGiftClick = () => {
+    if (burst) return;
 
-    setSparkles(prev => [...prev, ...newSparkles]);
+    // 1. Shake
+    setShaking(true);
+    setTimeout(() => setShaking(false), 500);
+
+    // 2. Burst + confetti
     setTimeout(() => {
-      setSparkles(prev => prev.filter(s => !newSparkles.find(n => n.id === s.id)));
-    }, 720);
+      setBurst(true);
+      spawnConfetti();
+    }, 480);
+
+    // 3. Reveal cards with stagger
+    setTimeout(() => {
+      setCards(REWARDS.map((r, i) => ({ ...r, pos: CARD_POSITIONS[i], visible: false })));
+      REWARDS.forEach((_, i) => {
+        setTimeout(() => {
+          setCards(prev =>
+            prev.map((c, idx) => idx === i ? { ...c, visible: true } : c)
+          );
+        }, i * 110);
+      });
+    }, 560);
+  };
+
+  // ── Confetti imperative spawn ──
+  const spawnConfetti = () => {
+    if (!stageRef.current) return;
+    const stage = stageRef.current;
+    const cx = stage.offsetWidth / 2;
+    const cy = stage.offsetHeight * 0.65;
+
+    for (let i = 0; i < 48; i++) {
+      const el = document.createElement('div');
+      el.className = 'gift-confetti';
+      el.style.cssText = `
+        position:absolute; width:7px; height:7px; border-radius:${Math.random() > 0.4 ? '50%' : '1px'};
+        background:${CONFETTI_COLORS[i % CONFETTI_COLORS.length]};
+        left:${cx}px; top:${cy}px; opacity:0; pointer-events:none; z-index:20;
+      `;
+      stage.appendChild(el);
+
+      const angle = (Math.random() * 360) * Math.PI / 180;
+      const speed = 80 + Math.random() * 190;
+      const tx    = Math.cos(angle) * speed;
+      const ty    = Math.sin(angle) * speed - 70;
+      const rot   = Math.random() * 540 - 270;
+      const delay = Math.random() * 150;
+      const dur   = 600 + Math.random() * 400;
+
+      setTimeout(() => {
+        el.style.transition = `transform ${dur}ms cubic-bezier(0.2,1,0.3,1), opacity ${dur * 0.6}ms ease ${dur * 0.4}ms`;
+        el.style.opacity = '1';
+        el.style.transform = `translate(${tx}px,${ty}px) rotate(${rot}deg)`;
+        setTimeout(() => { el.style.opacity = '0'; }, dur * 0.55);
+        setTimeout(() => el.remove(), dur + 100);
+      }, delay);
+    }
   };
 
   const handleChange = (e) => {
@@ -142,15 +179,17 @@ export default function DemoClass() {
     <section className="demo-class-section" ref={containerRef}>
       <div className="demo-ambient" />
 
+      {/* ── STARTER KIT / REWARD SECTION ── */}
       <div className="reward-section">
         <div className="reward-left">
           <span className="demo-badge">
             <span className="badge-star">★</span> Trial Completion Reward
           </span>
-          <h2 className="demo-headline">The Journey<br />Awaits!</h2>
+          <h2 className="demo-headline">
+            The Journey Awaits — Starting With One Free Demo Class
+          </h2>
           <p className="demo-body">
-            Book your 1:1 session today. Once finished, we'll unlock your{' '}
-            <span className="demo-highlight">Success Kit</span> containing all the digital goodies below!
+            Unlock your Infineo <span className="demo-highlight">Starter Kit</span> after the session.
           </p>
           <a href="#book" className="demo-cta">
             Book Free Trial <span className="cta-arrow">→</span>
@@ -160,73 +199,77 @@ export default function DemoClass() {
         <div className="reward-right">
           <div className="demo-ambient-right" />
 
-          {/* Central gift card */}
-          <div className="gift-card">
-            <div className="gift-sparkles"><span>✦</span><span>✦</span><span>✦</span></div>
-            <div className="gift-icon">🎁</div>
-            <p className="gift-label">YOUR GIFT</p>
-            <span className="gift-tag">POST-TRIAL</span>
-          </div>
+          {/* Stage */}
+          <div className="gift-stage" ref={stageRef}>
 
-          {/* Orbiting reward cards — single wrapper anchored to center */}
-          <div className="reward-orbit">
-            {REWARDS.map((r, i) => {
-              const deg = angle + (i / REWARDS.length) * 360;
-              const rad = (deg * Math.PI) / 180;
-              const x = Math.cos(rad) * ORBIT_RADIUS;
-              const y = Math.sin(rad) * ORBIT_RADIUS * 0.55; // flatten to ellipse
-              return (
-                <div
-                  key={r.label}
-                  className="reward-card"
-                  style={{
-                    left: x,
-                    top: y,
-                    animationDelay: `${0.3 + i * 0.1}s`,
-                  }}
-                  onMouseEnter={(e) => handleCardHover(e, i)}
-                >
-                  <span className="reward-icon" style={{ color: r.color }}>{r.icon}</span>
-                  <div className="reward-info">
-                    <span className="reward-label">{r.label}</span>
-                    <span className="reward-locked">LOCKED</span>
-                  </div>
+            {/* Pulse rings */}
+            {!burst && <>
+              <div className="gift-ring" />
+              <div className="gift-ring" style={{ animationDelay: '0.7s' }} />
+            </>}
 
-                  {/* Sparkles nested inside the card, absolute positioned */}
-                  {sparkles
-                    .filter(s => s.cardIndex === i)
-                    .map(s => (
-                      <span
-                        key={s.id}
-                        className="sparkle-particle"
-                        style={{
-                          left: `calc(50% + ${s.x}px)`,
-                          top: `calc(50% + ${s.y}px)`,
-                          transform: `translate(-50%, -50%) scale(${s.scale})`,
-                        }}
-                      >
-                        {s.char}
-                      </span>
-                    ))
-                  }
+            {/* Gift box */}
+            <div
+              className={`gift-wrap${shaking ? ' shaking' : ''}${burst ? ' burst' : ''}`}
+              onClick={handleGiftClick}
+              role="button"
+              tabIndex={0}
+              aria-label="Tap to reveal your starter kit rewards"
+              onKeyDown={e => e.key === 'Enter' && handleGiftClick()}
+            >
+              <div className="gift-bow">
+                <div className="bow-loop" />
+                <div className="bow-loop" />
+              </div>
+              <div className="gift-lid">
+                <div className="gift-shine" />
+              </div>
+              <div className="gift-body" />
+            </div>
+
+            {/* Tap hint */}
+            {!burst && (
+              <p className="gift-tap-hint">✦ tap the gift to reveal ✦</p>
+            )}
+
+            {/* Reward cards */}
+            {cards.map((card, i) => (
+              <div
+                key={card.label}
+                className={`reward-card-burst${card.visible ? ' visible' : ''}`}
+                style={{
+                  left: `${card.pos.x}%`,
+                  top: `${card.pos.y}%`,
+                }}
+              >
+                <span className="reward-icon-burst">{card.icon}</span>
+                <div className="reward-info-burst">
+                  <span className="reward-label-burst">{card.label}</span>
+                  <span className="reward-unlocked">
+                    <span className="reward-dot" style={{ background: card.color }} />
+                    UNLOCKED
+                  </span>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* ── rest of JSX unchanged from here ── */}
+      {/* ── DIVIDER ── */}
       <div className="demo-divider">
         <span className="divider-line" />
         <span className="divider-text">Experience Infineo Firsthand</span>
         <span className="divider-line" />
       </div>
 
+      {/* ── BOOKING FORM SECTION ── */}
       <div className="demo-container">
         <div className="demo-info">
-          <h2 className="demo-title">Book a FREE 30-Minute Demo Class</h2>
-          <p className="demo-subtitle">TAILORED TO YOUR CHILD'S LEARNING JOURNEY</p>
+          <h2 className="demo-title">Book a Free 30-Minute Demo Class</h2>
+          <p className="demo-subtitle">
+            Tailored to your child's age and interests — experience the Infineo difference firsthand.
+          </p>
 
           <div className="neo-mascot-wrapper" ref={mascotRef}>
             <div className="neo-eyes-underlay" aria-hidden="true">
@@ -241,17 +284,6 @@ export default function DemoClass() {
             <div className="neo-blush neo-left-blush" aria-hidden="true" />
             <div className="neo-blush neo-right-blush" aria-hidden="true" />
           </div>
-
-          <div className="demo-highlights">
-            <div className="highlight">
-              <span className="highlight-number">30</span>
-              <span className="highlight-text">Minutes</span>
-            </div>
-            <div className="highlight">
-              <span className="highlight-number">1-on-1</span>
-              <span className="highlight-text">Personal</span>
-            </div>
-          </div>
         </div>
 
         <div className="demo-form-container" id="book">
@@ -259,20 +291,24 @@ export default function DemoClass() {
             <h3>Book Your Demo Class</h3>
             <div className="form-group">
               <label htmlFor="childName">Child's Name *</label>
-              <input type="text" id="childName" name="childName" value={formData.childName} onChange={handleChange} placeholder="Enter child's name" required />
+              <input type="text" id="childName" name="childName" value={formData.childName}
+                onChange={handleChange} placeholder="Enter child's name" required />
             </div>
             <div className="form-group">
               <label htmlFor="parentName">Parent/Guardian Name *</label>
-              <input type="text" id="parentName" name="parentName" value={formData.parentName} onChange={handleChange} placeholder="Enter parent/guardian name" required />
+              <input type="text" id="parentName" name="parentName" value={formData.parentName}
+                onChange={handleChange} placeholder="Enter parent/guardian name" required />
             </div>
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="email">Email *</label>
-                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="your@email.com" required />
+                <input type="email" id="email" name="email" value={formData.email}
+                  onChange={handleChange} placeholder="your@email.com" required />
               </div>
               <div className="form-group">
                 <label htmlFor="phone">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210" required />
+                <input type="tel" id="phone" name="phone" value={formData.phone}
+                  onChange={handleChange} placeholder="+91 98765 43210" required />
               </div>
             </div>
             <div className="form-row">

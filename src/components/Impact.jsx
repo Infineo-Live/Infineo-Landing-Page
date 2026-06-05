@@ -20,7 +20,7 @@ const JOURNEYS = [
   {
     id: 'focus',
     problem: { label: 'Screen Addiction', caption: 'Endless scrolling destroys focus', image: imgScreenAddiction, color: '#ff6b6b' },
-    result: { label: 'Deep Focus', caption: 'Sustained attention & calm reflection', image: imgStoryTelling, color: '#4ade80' },
+    result: { label: 'Deep Focus', caption: 'Sustained attention & inner calm', image: imgStoryTelling, color: '#4ade80' },
   },
   {
     id: 'values',
@@ -30,7 +30,7 @@ const JOURNEYS = [
   {
     id: 'resilience',
     problem: { label: 'Anxiety & Fear', caption: 'Academic pressure & fear of failure', image: imgAnxiety, color: '#a78bfa' },
-    result: { label: 'Inner Strength', caption: 'Courage, resilience & confidence', image: imgTransformed, color: '#f59e0b' },
+    result: { label: 'Inner Strength', caption: 'Courage, resilience & a fear-free mindset', image: imgTransformed, color: '#f59e0b' },
   },
 ];
 
@@ -93,30 +93,16 @@ function GlassBreakCard({ journey, index }) {
   const ref = useRef(null);
   const [phase, setPhase] = useState('hidden'); // hidden → enter → breaking → broken → reveal
 
+  const [isIntersecting, setIsIntersecting] = useState(false);
+
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
     const obs = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && phase === 'hidden') {
-          /* Stagger each card by 200ms so rapid scroll doesn't fire all at once */
-          const stagger = index * 200;
-
-          setTimeout(() => {
-            setPhase('enter');
-
-            setTimeout(() => {
-              setPhase('breaking');
-              playGlassBreak(); /* 🔊 fire audio exactly when cracks appear */
-            }, 1200);
-
-            setTimeout(() => setPhase('broken'), 1900);
-            setTimeout(() => setPhase('reveal'), 2400);
-          }, stagger);
-        }
+        setIsIntersecting(entry.isIntersecting);
       },
-      /* Trigger exactly when the element reaches the center of the screen */
       {
         rootMargin: '-50% 0px -50% 0px',
         threshold: 0
@@ -125,7 +111,57 @@ function GlassBreakCard({ journey, index }) {
 
     obs.observe(el);
     return () => obs.disconnect();
-  }, [phase, index]);
+  }, []);
+
+  useEffect(() => {
+    if (!isIntersecting) {
+      setPhase('hidden');
+      return;
+    }
+
+    let active = true;
+    let timers = [];
+
+    const runSequence = () => {
+      if (!active) return;
+      setPhase('enter');
+
+      const t1 = setTimeout(() => {
+        if (!active) return;
+        setPhase('breaking');
+        playGlassBreak();
+      }, 1200);
+      timers.push(t1);
+
+      const t2 = setTimeout(() => {
+        if (!active) return;
+        setPhase('broken');
+      }, 1900);
+      timers.push(t2);
+
+      const t3 = setTimeout(() => {
+        if (!active) return;
+        setPhase('reveal');
+      }, 2400);
+      timers.push(t3);
+
+      const t4 = setTimeout(() => {
+        if (!active) return;
+        runSequence();
+      }, 7400);
+      timers.push(t4);
+    };
+
+    const staggerTimeout = setTimeout(() => {
+      runSequence();
+    }, index * 200);
+    timers.push(staggerTimeout);
+
+    return () => {
+      active = false;
+      timers.forEach(clearTimeout);
+    };
+  }, [isIntersecting, index]);
 
   const shards = SHARD_SETS[index % SHARD_SETS.length];
   const uniqueId = `clip-${journey.id}`;
@@ -198,6 +234,14 @@ function GlassBreakCard({ journey, index }) {
         </div>
       </div>
 
+      {/* ── TRANSFORMATION ARROW ── */}
+      <div className="gb-arrow" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </div>
+
       {/* ── RESULT CARD ── */}
       <div className="gb-result">
         <img src={journey.result.image} alt={journey.result.label} className="gb-img gb-img--result" />
@@ -246,9 +290,14 @@ export default function Impact() {
       <div className="impact-heading">
         <span className="impact-heading__eyebrow">The Infineo Journey</span>
         <h2 className="impact-heading__title">
-          Every Child's <span className="impact-heading__highlight">Transformation</span>
+          What Infineo <span className="impact-heading__highlight">Addresses</span>
         </h2>
         <p className="impact-heading__sub">Scroll to watch ancient wisdom shatter modern struggles</p>
+      </div>
+
+      <div className="impact-column-headers">
+        <h3 className="impact-column-header header-problems">PROBLEMS</h3>
+        <h3 className="impact-column-header header-transformation">TRANSFORMATION</h3>
       </div>
 
       <div className="impact-journeys">

@@ -30,12 +30,12 @@ const Hero = () => {
 
       <div className="hero-content">
         <h1 className="hero-heading">
-          <BroadwayText text="THEY WERE NEVER" className="hero-heading-line1" tag="span" />
-          <BroadwayText text="JUST STORIES." className="hero-heading-line2" tag="span" />
+          <BroadwayText text="SOME STORIES DON'T TEACH HISTORY." className="hero-heading-line1" tag="span" />
+          <BroadwayText text="THEY TEACH LIFE." className="hero-heading-line2" tag="span" />
         </h1>
 
         <p className="hero-subtitle">
-          Live. 1-on-1. Where Ganesha teaches focus, Krishna teaches courage, and Rama teaches character — drawing from 5,000 years of wisdom to raise tomorrow's best humans.
+          Discover timeless stories that nurture confidence, empathy and resilience.
         </p>
 
         <div className="hero-actions">
@@ -56,12 +56,12 @@ const Hero = () => {
         <div className="hero-trust">
           <div className="hero-trust-item">
             <span className="hero-trust-num">1 ON 1</span>
-            <span className="hero-trust-label">INTERACTION</span>
+            <span className="hero-trust-label">MEETING</span>
           </div>
           <div className="hero-trust-divider" />
           <div className="hero-trust-item">
-            <span className="hero-trust-num">9</span>
-            <span className="hero-trust-label">ANCIENT MODULES</span>
+            <span className="hero-trust-num">30 MINUTES</span>
+            <span className="hero-trust-label">SESSION</span>
           </div>
           <div className="hero-trust-divider" />
           <div className="hero-trust-item">

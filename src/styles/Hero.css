@@ -70,8 +70,8 @@
   position: relative;
   z-index: 2;
   padding: 0 6vw;
-  max-width: 41.25rem;
-  /* 660px */
+  max-width: min(70vw, 68.75rem);
+  /* allow heading to span at least half the screen */
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -112,10 +112,10 @@
 }
 
 .hero-heading-line1 {
-  font-size: clamp(2.25rem, 5.5vw, 4.25rem);
+  font-size: clamp(2.25rem, 4.5vw, 4.5rem);
   font-weight: 900;
   color: #ffffff;
-  letter-spacing: 0.25rem;
+  letter-spacing: 0.15rem;
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.3);
   /* based on mode*/
   animation: fadeSlideUp 0.7s ease-out both;
@@ -128,9 +128,9 @@
 }
 
 .hero-heading-line2 {
-  font-size: clamp(2.25rem, 5.5vw, 4.25rem);
+  font-size: clamp(2.25rem, 4.5vw, 4.5rem);
   font-weight: 900;
-  letter-spacing: 0.25rem;
+  letter-spacing: 0.15rem;
   background: var(--button-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -147,9 +147,9 @@
 
 /* Subtitle */
 .hero-subtitle {
-  font-family: var(--font-secondary);
-  font-size: clamp(var(--font-size-base), 1.5vw, var(--font-size-base));
-  font-weight: 700;
+  font-family: var(--font-supporting);
+  font-size: clamp(var(--font-size-xl), 2.5vw, var(--font-size-xl));
+  font-weight: 500;
   color: var(--text-primary);
   line-height: var(--line-height-normal);
   margin: 0 0 var(--spacing-3xl) 0;
@@ -339,8 +339,8 @@
 
   .hero-heading-line1,
   .hero-heading-line2 {
-    font-size: clamp(2rem, 9vw, 3rem);
-    letter-spacing: 0.125rem;
+    font-size: clamp(1.9rem, 8vw, 3rem);
+    letter-spacing: 0.08rem;
   }
 
   .hero-actions {
@@ -373,8 +373,8 @@
 
   .hero-heading-line1,
   .hero-heading-line2 {
-    font-size: clamp(1.75rem, 10vw, 2.5rem);
-    letter-spacing: 0.09375rem;
+    font-size: clamp(1.6rem, 9.5vw, 2.5rem);
+    letter-spacing: 0.05rem;
   }
 
   .hero-subtitle {

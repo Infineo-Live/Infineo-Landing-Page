@@ -9,7 +9,7 @@
   /* Brand Colors */
   --color-infineo-black: #0d1b2e;
   --color-infineo-gold: #c9944e;
-  --color-infineo-blue: #3a6ea8;
+  --color-infineo-blue: #073389;
   --color-infineo-gold-light: #f0c86a;
   --color-infineo-gold-vibrant: #e8b445;
   --color-infineo-cream: #fef0d0;
@@ -29,9 +29,9 @@
   /* Typography Scale */
   --font-size-xs: 14px;
   --font-size-sm: 16px;
-  --font-size-base: 18px;
-  --font-size-lg: 20px;
-  --font-size-xl: 24px;
+  --font-size-base: 20px;
+  --font-size-lg: 22px;
+  --font-size-xl: 26px;
   --font-size-2xl: 32px;
   --font-size-3xl: 40px;
   --font-size-4xl: 56px;
@@ -171,7 +171,7 @@
   --warning: #b06010;
   --info: #1C3E63;
 
-  --module-bg: url('../assets/module-light-bg.png') no-repeat center center / cover;
+  --module-bg: url('../assets/module/Landmass-light.png') no-repeat center center / cover;
 
   /* ── Magical extras ─────────────────────────────── */
   --star-color: rgba(201, 148, 78, 0.30);
@@ -203,8 +203,8 @@
   --heading-primary: #F0D08A;
   --heading-secondary: #D4A055;
   --text-primary: #F0D08A;
-  --text-secondary: #E6E2D9;
-  --text-muted: #AFA79A;
+  --text-secondary: #a8976f;
+  --text-muted: #D1BC91;
   --text-inverse: #0d1830;
 
   /* Accent — celestial gold */
@@ -241,7 +241,7 @@
     0 0 32px rgba(244, 208, 120, 0.25),
     0 0 72px rgba(244, 208, 120, 0.10);
 
-  --module-bg: url('../assets/module-bg.png') no-repeat center center / cover;
+  --module-bg: url('../assets/module/Landmass.png') no-repeat center center / cover;
 
 }
 

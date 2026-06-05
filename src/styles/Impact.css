@@ -68,6 +68,38 @@
   line-height: 1.6;
 }
 
+/* ── Column Headers ── */
+.impact-column-headers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+  max-width: 56rem;
+  margin-bottom: 2rem;
+}
+
+.impact-column-header {
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  font-weight: 900;
+  letter-spacing: 0.2rem;
+  text-align: center;
+  margin: 0;
+  padding-bottom: 0.75rem;
+}
+
+.header-problems {
+  color: #ff6b6b;
+  border-bottom: 2px solid rgba(255, 107, 107, 0.25);
+  text-shadow: 0 0 10px rgba(255, 107, 107, 0.15);
+}
+
+.header-transformation {
+  color: #4ade80;
+  border-bottom: 2px solid rgba(74, 222, 128, 0.25);
+  text-shadow: 0 0 10px rgba(74, 222, 128, 0.15);
+}
+
 /* ── Journey list ── */
 .impact-journeys {
   width: 100%;
@@ -89,6 +121,56 @@
   align-items: center;
 }
 
+/* ── Transformation Arrow ── */
+.gb-arrow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.6);
+  width: 3.5rem;
+  height: 3.5rem;
+  background: rgba(13, 27, 46, 0.95);
+  border: 2px solid var(--color-infineo-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-infineo-gold-light);
+  box-shadow: 0 0 15px rgba(201, 148, 78, 0.3);
+  z-index: 10;
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.gb-scene--enter .gb-arrow,
+.gb-scene--breaking .gb-arrow {
+  opacity: 0.5;
+  transform: translate(-50%, -50%) scale(0.85);
+}
+
+.gb-scene--broken .gb-arrow,
+.gb-scene--reveal .gb-arrow {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  border-color: #4ade80;
+  color: #4ade80;
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
+}
+
+.gb-arrow svg {
+  animation: arrowPulse 2s infinite ease-in-out;
+}
+
+@keyframes arrowPulse {
+  0%, 100% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
 /* ── Problem Card ── */
 .gb-problem {
   position: relative;
@@ -108,7 +190,7 @@
 }
 
 .gb-img--problem {
-  filter: saturate(0.7) brightness(0.75) blur(4px);
+  filter: saturate(0.95) brightness(0.9) blur(0px);
   transition: filter 0.4s ease, opacity 0.5s ease;
   /* Always stays in the DOM — we blur it instead of hiding it */
   opacity: 1;
@@ -395,9 +477,36 @@
 
 /* ── Responsive ── */
 @media (max-width: 48rem) {
+  .impact-column-headers {
+    display: none;
+  }
+
+  .gb-arrow {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(90deg) scale(0.6);
+  }
+
+  .gb-scene--hidden .gb-arrow {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(90deg) scale(0.6);
+  }
+
+  .gb-scene--enter .gb-arrow,
+  .gb-scene--breaking .gb-arrow {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) rotate(90deg) scale(0.85);
+  }
+
+  .gb-scene--broken .gb-arrow,
+  .gb-scene--reveal .gb-arrow {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(90deg) scale(1);
+  }
+
   .gb-scene {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 2.5rem; /* slightly larger gap to accommodate the arrow nicely */
   }
 
   .gb-result {

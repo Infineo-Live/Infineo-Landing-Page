@@ -12,13 +12,13 @@ import ramayanaImg from '../assets/gods/Ramayan.png';
 import mahabharataImg from '../assets/gods/Mahabharata.png';
 
 const MODULES = [
-  { id: 1, name: 'Ganesha', subtitle: 'The Remover of Obstacles', image: ganeshaImg, x: 0, y: 10, comingSoon: false },
-  { id: 2, name: 'Hanuman', subtitle: 'The Symbol of Strength', image: hanumanImg, x: 20, y: 40, comingSoon: false },
-  { id: 3, name: 'Krishna', subtitle: 'The Divine Teacher', image: krishnaImg, x: 50, y: 22, comingSoon: false },
-  { id: 4, name: 'Ram', subtitle: 'The Prince of Dharma', image: ramImg, x: 85, y: 32, comingSoon: false },
-  { id: 5, name: 'Shiva', subtitle: 'The Great Protector', image: shivaImg, x: 101, y: 52, comingSoon: false },
-  { id: 6, name: 'Shakti', subtitle: 'The Divine Feminine Power', image: shaktiImg, x: 78, y: 68, comingSoon: false },
-  { id: 7, name: 'Vishnu', subtitle: 'The Preserver of the Universe', image: vishnuImg, x: 44, y: 89, comingSoon: false },
+  { id: 1, name: 'Ganesha', subtitle: 'Focus & New Beginnings', image: ganeshaImg, x: 0, y: 10, comingSoon: false },
+  { id: 2, name: 'Hanuman', subtitle: 'Courage & Devotion', image: hanumanImg, x: 20, y: 40, comingSoon: false },
+  { id: 3, name: 'Krishna', subtitle: 'Wisdom & Play', image: krishnaImg, x: 50, y: 22, comingSoon: false },
+  { id: 4, name: 'Ram', subtitle: 'Duty & Integrity', image: ramImg, x: 85, y: 32, comingSoon: false },
+  { id: 5, name: 'Shiva', subtitle: 'Stillness & Power', image: shivaImg, x: 101, y: 52, comingSoon: false },
+  { id: 6, name: 'Shakti', subtitle: 'Strength & Grace', image: shaktiImg, x: 78, y: 68, comingSoon: false },
+  { id: 7, name: 'Vishnu', subtitle: 'Leadership & Legacy', image: vishnuImg, x: 44, y: 89, comingSoon: false },
   { id: 8, name: 'Ramayana', subtitle: "Epic of Lord Ram's Journey", image: ramayanaImg, x: 16, y: 82, comingSoon: true },
   { id: 9, name: 'Mahabharata', subtitle: 'The Epic of Duty & Wisdom', image: mahabharataImg, x: -2, y: 80, comingSoon: true },
 ];
@@ -96,9 +96,9 @@ export default function Modules() {
   return (
     <section className="modules-section" id="modules" ref={sectionRef}>
       <div className="modules-header">
-        <span className="modules-eyebrow">Our Learning Journey</span>
+        <span className="modules-eyebrow">A Journey Designed for Growing Minds</span>
         <h2>Explore. Learn. <span>Grow.</span></h2>
-        <p>A magical path through timeless stories and lessons that shape young hearts.</p>
+        <p>Every step reveals a story. Every story reveals a life lesson.</p>
       </div>
 
       <div className="game-map-wrapper">
