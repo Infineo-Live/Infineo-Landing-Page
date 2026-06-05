@@ -149,7 +149,10 @@ export default function Pricing() {
 
               <button
                 className="cta-btn"
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.dispatchEvent(new CustomEvent('open-demo-modal'));
+                }}
               >
                 Get Started
               </button>
