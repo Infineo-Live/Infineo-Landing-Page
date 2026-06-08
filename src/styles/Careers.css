@@ -1,0 +1,195 @@
+.careers-page {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.careers-hero {
+  padding: 160px 24px 80px;
+  text-align: center;
+  position: relative;
+  background: radial-gradient(circle at 50% 30%, var(--accent-light, rgba(99, 102, 241, 0.05)) 0%, transparent 60%);
+}
+
+.careers-hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-primary, #6366f1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.careers-hero p {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  color: var(--text-secondary);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.careers-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 120px;
+  width: 100%;
+}
+
+.careers-section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: center;
+  position: relative;
+}
+
+.careers-section-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 4px;
+  background: var(--accent-primary, #6366f1);
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+
+/* Values Grid */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-bottom: 96px;
+}
+
+.value-card {
+  background: var(--card-bg, rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));
+  border-radius: 20px;
+  padding: 40px 32px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-primary, #6366f1);
+}
+
+.value-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.value-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Open Positions */
+.jobs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 80px;
+}
+
+.job-card {
+  background: var(--glass-bg, rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.05));
+  border-radius: 24px;
+  padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.job-card:hover {
+  border-color: var(--accent-primary, #6366f1);
+  transform: scale(1.01);
+}
+
+.job-details h3 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.job-meta {
+  display: flex;
+  gap: 16px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.job-meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.apply-btn {
+  background: var(--accent-primary, #6366f1);
+  color: #ffffff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.apply-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+}
+
+/* Contact CTA */
+.careers-cta {
+  text-align: center;
+  background: var(--glass-bg, rgba(255, 255, 255, 0.01));
+  border: 1px dashed var(--border-color, rgba(255, 255, 255, 0.1));
+  padding: 48px;
+  border-radius: 24px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.careers-cta h3 {
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+}
+
+.careers-cta p {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.careers-email {
+  font-weight: 700;
+  color: var(--accent-primary, #6366f1) !important;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .job-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .apply-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
