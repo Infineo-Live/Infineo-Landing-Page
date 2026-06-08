@@ -700,6 +700,13 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+  width: 100%;
+  min-width: 0;
+}
+
+.form-row .form-group {
+  min-width: 0;
+  overflow: hidden;
 }
 
 .success-message {
@@ -1084,3 +1091,65 @@
       font-size: 14px;
     }
   }
+.phone-input-wrapper {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.country-code-select {
+  flex-shrink: 0;
+  width: 100px;
+  padding: 10px 6px;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  appearance: none;
+  text-align: center;
+  box-sizing: border-box;
+}
+.phone-input-wrapper input[type="tel"] {
+  flex: 1;
+  min-width: 0;
+  width:0;
+  border: none;
+  background: transparent;
+  outline: none;
+  box-sizing: border-box;
+}
+.country-code-select:focus {
+  outline: none;
+  border-color: #e7b860;
+}
+.form-error {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #e05a8a;
+  font-weight: 600;
+  animation: errorShake 0.4s ease;
+}
+.form-success {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #3DC47E;
+  font-weight: 600;
+}
+@keyframes errorShake {
+  0%   { transform: translateX(0);   }
+  20%  { transform: translateX(-5px);}
+  40%  { transform: translateX(5px); }
+  60%  { transform: translateX(-4px);}
+  80%  { transform: translateX(4px); }
+  100% { transform: translateX(0);   }
+}
