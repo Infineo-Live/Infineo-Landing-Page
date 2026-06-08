@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { useTheme } from '../context/ThemeContext.jsx';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import Logo from '../assets/logo_with_text.webp';
 import '../styles/Title.css';
 
@@ -103,10 +103,10 @@ const Title = () => {
       <div id="bubble-container" className="bubble-container" aria-hidden="true" />
 
       <header className={`title ${scrolled ? 'title--scrolled' : ''} ${visible ? 'title--visible' : 'title--hidden'}`}>
-        <img 
-          src={Logo} 
-          alt="Infineo Logo" 
-          className="logo" 
+        <img
+          src={Logo}
+          alt="Infineo Logo"
+          className="logo"
           style={{ cursor: 'pointer' }}
           onClick={() => {
             if (location.pathname === '/') {
@@ -126,6 +126,7 @@ const Title = () => {
             <a href="#parents" onClick={(e) => handleLinkClick(e, 'parents')}>NOTE TO PARENTS</a>
             <a href="#modules" onClick={(e) => handleLinkClick(e, 'modules')}>CURRICULUM</a>
             <a href="#pricing" onClick={(e) => handleLinkClick(e, 'pricing')}>PRICING</a>
+            {/* <Link to="/careers">CAREERS</Link> */}
             <button className="login-btn" onClick={(e) => handleLinkClick(e, 'book')}>
               BOOK THE DEMO
             </button>
@@ -176,6 +177,7 @@ const Title = () => {
           <a href="#stories" onClick={(e) => handleLinkClick(e, 'stories')}>STORIES</a>
           <a href="#parents" onClick={(e) => handleLinkClick(e, 'parents')}>HOW IT WORKS</a>
           <a href="#modules" onClick={(e) => handleLinkClick(e, 'modules')}>CURRICULUM</a>
+          <Link to="/careers" onClick={() => setMenuOpen(false)}>CAREERS</Link>
           <button className="login-btn" onClick={(e) => handleLinkClick(e, 'book')}>
             BOOK THE DEMO
           </button>
