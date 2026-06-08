@@ -1,0 +1,56 @@
+[
+  {
+    "name": "India",
+    "flag": "🇮🇳",
+    "dialCode": "+91",
+    "code": "IN",
+    "digits": 10,
+    "startsWith": ["6", "7", "8", "9"],
+    "example": "98765 43210"
+  },
+  {
+    "name": "UAE (Dubai)",
+    "flag": "🇦🇪",
+    "dialCode": "+971",
+    "code": "AE",
+    "digits": 9,
+    "startsWith": ["5"],
+    "example": "50 123 4567"
+  },
+  {
+    "name": "Australia",
+    "flag": "🇦🇺",
+    "dialCode": "+61",
+    "code": "AU",
+    "digits": 9,
+    "startsWith": ["4"],
+    "example": "412 345 678"
+  },
+  {
+    "name": "Thailand",
+    "flag": "🇹🇭",
+    "dialCode": "+66",
+    "code": "TH",
+    "digits": 9,
+    "startsWith": ["6", "8", "9"],
+    "example": "81 234 5678"
+  },
+  {
+    "name": "Singapore",
+    "flag": "🇸🇬",
+    "dialCode": "+65",
+    "code": "SG",
+    "digits": 8,
+    "startsWith": ["8", "9"],
+    "example": "8123 4567"
+  },
+  {
+    "name": "Malaysia",
+    "flag": "🇲🇾",
+    "dialCode": "+60",
+    "code": "MY",
+    "digits": 10,
+    "startsWith": ["1"],
+    "example": "12 345 6789"
+  }
+]
