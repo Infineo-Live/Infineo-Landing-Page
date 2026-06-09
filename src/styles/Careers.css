@@ -59,6 +59,15 @@
   height: 60vh;
 }
 
+.careers-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: -1;
+}
+
+
 .careers-hero h1 {
   font-family: var(--font-primary);
   font-size: clamp(2.5rem, 5vw, 4rem);
@@ -66,23 +75,25 @@
   line-height: 1.2;
   margin-bottom: 20px;
   letter-spacing: var(--letter-spacing-widest);
-  color: var(--color-infineo-black);
-  -webkit-text-fill-color: var(--color-infineo-black);
+  color: #ffffff; /* white for better contrast */
+  -webkit-text-fill-color: #ffffff;
   background: none;
   text-shadow:
-    0 2px 4px rgba(255, 255, 255, 0.8),
-    0 0 20px rgba(255, 255, 255, 0.5);
+    0 2px 6px rgba(0, 0, 0, 0.7),
+    0 0 12px rgba(0, 0, 0, 0.5);
 }
+ 
 
 .careers-hero p {
   font-family: var(--font-supporting);
   font-size: clamp(1rem, 2vw, 1.2rem);
-  color: var(--color-infineo-gold);
+  color: #f5f5f5; /* light gray for readability */
   max-width: 700px;
   margin: 0 auto;
   line-height: var(--line-height-relaxed);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
 }
+
 
 .careers-content {
   max-width: 1100px;

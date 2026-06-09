@@ -9,8 +9,8 @@ import "../styles/Careers.css";
 import "../App.css";
 
 // Replace with actual form links
-const TEACHER_FORM_URL = "#";
-const INTERN_FORM_URL = "#";
+const TEACHER_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSesbOKwUw1fnQb3G5CLOnBgwTaZ8100cFBiAzGOQNB30O56Kw/viewform?usp=header";
+const INTERN_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfoZRb85d_mB5EFSnMNV59FTBGmjQdAKclEj5KqdT1ynS-dQg/viewform?usp=publish-editor";
 
 export default function Careers() {
   useEffect(() => {
@@ -107,8 +107,6 @@ export default function Careers() {
           Help children build values, confidence, and life skills through
           mythology and storytelling.
         </p>
-
-
         {/* CTA Buttons */}
         <div
           className="primary-cta"
@@ -184,7 +182,6 @@ export default function Careers() {
             </div>
           </div>
         </section>
-
         {/* Storytelling Teacher */}
         <section>
           <h2 className="careers-section-title">Storytelling Teacher</h2>
@@ -195,7 +192,6 @@ export default function Careers() {
               and strong values through engaging storytelling, mythology, and
               interactive learning experiences.
             </p>
-
             <ul style={{ marginTop: "20px", lineHeight: "1.8" }}>
               <li>🎓 Graduates preferred</li>
               <li>📍 Remote opportunity across India</li>
@@ -206,7 +202,6 @@ export default function Careers() {
               <li>📅 Fixed recurring student schedules</li>
               <li>💰 Compensation on a per-class basis</li>
             </ul>
-
             <div style={{ marginTop: "28px" }}>
               <a
                 href={TEACHER_FORM_URL}
@@ -253,18 +248,15 @@ export default function Careers() {
             ))}
           </div>
         </section>
-
         {/* Internship Program */}
         <section>
           <h2 className="careers-section-title">Internship Program</h2>
-
           <div className="magic-card" style={{ padding: "32px" }}>
             <p>
               Our internship program is designed for ambitious college students
               who want hands-on experience while contributing to meaningful
               projects.
             </p>
-
             <ul style={{ marginTop: "20px", lineHeight: "1.8" }}>
               <li>📅 Duration: 3 Months</li>
               <li>🧪 Initial Probation Period: 10 Days</li>
@@ -278,24 +270,20 @@ export default function Careers() {
             </ul>
           </div>
         </section>
-
         {/* Open Positions */}
         <section>
           <h2 className="careers-section-title">Open Internship Roles</h2>
-
           <div className="jobs-list">
             {openPositions.map((job, idx) => (
               <div key={idx} className="job-card">
                 <div className="job-details">
                   <h3>{job.title}</h3>
-
                   <div className="job-meta">
                     <span>📍 {job.location}</span>
                     <span>💼 {job.type}</span>
                     <span>⏳ {job.duration}</span>
                   </div>
                 </div>
-
                 <button
                   className="apply-btn"
                   onClick={() =>
@@ -332,7 +320,6 @@ export default function Careers() {
           </a>
         </section>
       </main>
-
       <FloatingChatbot />
       <FloatingWhatsapp />
       <Footer />
