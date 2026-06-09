@@ -1,5 +1,6 @@
 import '../styles/Footer.css';
 import logoWithText from '../assets/logo_with_text.webp';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -19,7 +20,6 @@ export default function Footer() {
             </p>
             <a href="#book" className="footer-cta-btn">Book Free Class</a>
           </div>
-
           <nav className="footer-nav">
             <div className="footer-nav-group">
               <span className="footer-nav-label">For Parents</span>
@@ -34,6 +34,7 @@ export default function Footer() {
               <a href="#home">About</a>
               <a href="#parents">Founder Letter</a>
               <a href="#contact">Contact</a>
+              <Link to="/careers">Careers</Link>
             </div>
           </nav>
         </div>

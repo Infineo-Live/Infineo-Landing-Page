@@ -18,16 +18,13 @@ const Hero = () => {
     if (heroRef.current) observer.observe(heroRef.current);
     return () => observer.disconnect();
   }, []);
-
   return (
     <section className="hero" id="home" ref={heroRef}>
       <video className="hero-video" autoPlay muted loop playsInline>
         <source src="/bg-video2.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="hero-overlay" />
-
-
+      <div className="hero-overlay"/>
       <div className="hero-content">
         <h1 className="hero-heading">
           <BroadwayText text="SOME STORIES DON'T TEACH HISTORY." className="hero-heading-line1" tag="span" />

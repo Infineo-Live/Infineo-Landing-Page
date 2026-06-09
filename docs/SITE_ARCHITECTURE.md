@@ -22,10 +22,11 @@ Read before:
 
 ---
 
-# Approved Page Flow
+# Approved Page Flow & Routing
 
-Determined from `src/App.jsx`. Render order is exact.
+The application uses client-side routing via React Router with the following routes:
 
+## Home Page (`/`)
 1. Title *(sticky header — renders outside the journey-background wrapper)*
 2. Hero
 3. Impact *(inside `div.journey-background`)*
@@ -34,6 +35,11 @@ Determined from `src/App.jsx`. Render order is exact.
 6. DemoClass *(inside `div.journey-background`)*
 7. Pricing *(inside `div.journey-background`)*
 8. Footer
+
+## Careers Page (`/careers`)
+1. Title *(sticky header)*
+2. Careers Hero & Info Section
+3. Footer
 
 Floating elements (rendered outside all section wrappers, after Pricing, before Footer):
 - FloatingChatbot
