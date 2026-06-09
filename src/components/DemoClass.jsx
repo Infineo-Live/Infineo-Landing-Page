@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import emailjs from '@emailjs/browser';
 import '../styles/DemoClass.css';
 import neoMascot from '../assets/neo-version/neo-without-eyes.webp';
-
+import COUNTRIES from '../assets/countries.json';
 const REWARDS = [
   { icon: '✏️', label: 'Cartoon Art Prints', color: '#5B8DEF' },
   { icon: '🏆', label: 'Certificate', color: '#E7B860' },
@@ -29,6 +29,8 @@ export default function DemoClass() {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({ email: '', phone: '' });
+  const [touched, setTouched] = useState({ email: false, phone: false });
+  const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
   const [burst, setBurst] = useState(false);
   const [shaking, setShaking] = useState(false);
   const [cards, setCards] = useState([]);
@@ -184,11 +186,43 @@ export default function DemoClass() {
     return () => observer.disconnect();
   }, [handleGiftClick]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (name === 'email' || name === 'phone')
-      setErrors(prev => ({ ...prev, [name]: '' }));
+  const validateField = useCallback((name, value) => { 
+    if (name === 'email') { 
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()) 
+        ? '' 
+        : 'Invalid email — must look like name@example.com'; 
+    } 
+    if (name === 'phone') { 
+      const digits = value.replace(/[\s\-]/g, ''); 
+      if (digits.length !== selectedCountry.digits) 
+        return `${selectedCountry.name} numbers must be ${selectedCountry.digits} digits (e.g. ${selectedCountry.example})`; 
+      if (!selectedCountry.startsWith.includes(digits[0])) 
+        return `${selectedCountry.name} numbers start with ${selectedCountry.startsWith.join(' or ')}`; 
+      return ''; 
+    } 
+    return ''; 
+  }, [selectedCountry]); 
+ 
+  const handleBlur = (e) => { 
+    const { name, value } = e.target; 
+    setTouched(prev => ({ ...prev, [name]: true })); 
+    setErrors(prev => ({ ...prev, [name]: validateField(name, value) })); 
+  }; 
+  
+  const handleChange = (e) => { 
+    const { name, value } = e.target; 
+    setFormData(prev => ({ ...prev, [name]: value })); 
+    if (touched[name]) { 
+      setErrors(prev => ({ ...prev, [name]: validateField(name, value) })); 
+    } 
+  }; 
+  
+  const handleCountryChange = (e) => { 
+    const country = COUNTRIES.find(c => c.code === e.target.value); 
+    setSelectedCountry(country); 
+    setFormData(prev => ({ ...prev, phone: '' })); 
+    setErrors(prev => ({ ...prev, phone: '' })); 
+    setTouched(prev => ({ ...prev, phone: false })); 
   };
 
   const handleCtaScroll = (e) => {
@@ -198,15 +232,11 @@ export default function DemoClass() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newErrors = { email: '', phone: '' };
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
-      newErrors.email = 'Please enter a valid email address.';
-    if (!/^\d{10}$/.test(formData.phone))
-      newErrors.phone = 'Phone number must be exactly 10 digits.';
-    if (newErrors.email || newErrors.phone) {
-      setErrors(newErrors);
-      return;
-    }
+    setTouched({ email: true, phone: true });
+    const emailError = validateField('email', formData.email);
+    const phoneError = validateField('phone', formData.phone);
+    setErrors({ email: emailError, phone: phoneError });
+    if (emailError || phoneError) return; 
     try {
       await emailjs.send(
         "service_q11sqw8",
@@ -215,7 +245,7 @@ export default function DemoClass() {
           child_name: formData.childName,
           parent_name: formData.parentName,
           email: formData.email,
-          phone: formData.phone,
+          phone: `${selectedCountry.dialCode} ${formData.phone}`,
           child_age: formData.childAge,
           language: formData.language,
         },
@@ -332,16 +362,62 @@ export default function DemoClass() {
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="email">Email *</label>
-                <input type="email" id="email" name="email" value={formData.email}
-                  onChange={handleChange} placeholder="your@email.com" required />
-                {errors.email && <span className="form-error">{errors.email}</span>}
+                <input
+                  type="email" id="email" name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="your@email.com"
+                  required
+                  style={
+                    touched.email && errors.email  ? { borderColor: '#e05a8a', background: 'rgba(224,90,138,0.06)' } :
+                    touched.email && !errors.email ? { borderColor: '#3DC47E', background: 'rgba(61,196,126,0.05)' } :
+                    {}
+                  }
+                />
+                {touched.email && errors.email && (
+                  <span className="form-error" role="alert">{errors.email}</span>
+                )}
+                {touched.email && !errors.email && formData.email && (
+                  <span className="form-success" role="status">✓ Looks good!</span>
+                )}
               </div>
               <div className="form-group">
-                <label htmlFor="phone">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" value={formData.phone}
-                  onChange={handleChange} placeholder="+91 98765 43210" required />
-                {errors.phone && <span className="form-error">{errors.phone}</span>}
+              <label htmlFor="phone">Phone Number *</label>
+              <div className="phone-input-wrapper">
+                <select
+                  className="country-code-select"
+                  value={selectedCountry.code}
+                  onChange={handleCountryChange}
+                  aria-label="Select country code"
+                >
+                  {COUNTRIES.map(c => (
+                    <option key={c.code} value={c.code}>
+                      {c.flag} {c.dialCode}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="tel" id="phone" name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder={selectedCountry.example}
+                  required
+                  style={
+                    touched.phone && errors.phone  ? { borderColor: '#e05a8a', background: 'rgba(224,90,138,0.06)' } :
+                    touched.phone && !errors.phone ? { borderColor: '#3DC47E', background: 'rgba(61,196,126,0.05)' } :
+                    {}
+                  }
+                />
               </div>
+              {touched.phone && errors.phone && (
+                <span className="form-error" role="alert">{errors.phone}</span>
+              )}
+              {touched.phone && !errors.phone && formData.phone && (
+                <span className="form-success" role="status">✓ Looks good!</span>
+              )}
+            </div>
             </div>
             <div className="form-row">
               <div className="form-group">
