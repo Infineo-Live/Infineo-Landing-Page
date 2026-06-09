@@ -14,33 +14,12 @@
   transform: none;
 }
 
-/* Enhance text visibility */
-.careers-hero h1 {
-  text-shadow:
-    0 2px 4px rgba(255, 255, 255, 0.9),
-    0 0 12px rgba(255, 255, 255, 0.6);
-}
-
-.careers-hero p {
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
-}
-
-/* Card hover shimmer already defined, ensure transition smooth */
 .value-card,
 .job-card {
   will-change: transform, opacity;
 }
 
-/* background-color: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
-} */
-
+/* ─── Hero Section ────────────────────────── */
 .careers-hero {
   padding: 160px 24px 80px;
   text-align: center;
@@ -57,44 +36,77 @@
   background-repeat: no-repeat;
   width: 100%;
   height: 60vh;
+  /* Creates a new stacking context so z-index works correctly */
+  isolation: isolate;
 }
 
+/* Gradient overlay — z-index: 0 sits ON TOP of bg image
+   but below hero children which get z-index: 1 */
 .careers-hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.55);
-  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.68) 0%,
+    rgba(0, 0, 0, 0.28) 55%,
+    rgba(0, 0, 0, 0.52) 100%
+  );
+  z-index: 0;
 }
 
+/* All direct children sit above the overlay */
+.careers-hero > * {
+  position: relative;
+  z-index: 1;
+}
 
+/* ─── Hero H1 ─────────────────────────────── */
+/* Override global h1 { color: var(--heading-primary) } from App.css.
+   --color-infineo-white is #ffffff in both light and dark mode — safe hardcode anchor.
+   We still reset background/clip in case any global .text-shimmer or gradient
+   text utility bleeds in. */
 .careers-hero h1 {
   font-family: var(--font-primary);
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 900;
-  line-height: 1.2;
-  margin-bottom: 20px;
-  letter-spacing: var(--letter-spacing-widest);
-  color: #ffffff; /* white for better contrast */
-  -webkit-text-fill-color: #ffffff;
+  color: var(--color-infineo-white);
+  -webkit-text-fill-color: var(--color-infineo-white);
   background: none;
+  background-clip: unset;
+  -webkit-background-clip: unset;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: var(--font-weight-black);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--spacing-lg);
+  letter-spacing: var(--letter-spacing-widest);
+  max-width: 900px;
   text-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.7),
-    0 0 12px rgba(0, 0, 0, 0.5);
+    0 2px 8px rgba(0, 0, 0, 0.85),
+    0 0 32px rgba(0, 0, 0, 0.65);
 }
- 
 
+/* ─── Hero Paragraph ──────────────────────── */
+/* --color-infineo-cream (#fef0d0) is warm off-white readable on dark overlays */
 .careers-hero p {
   font-family: var(--font-supporting);
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  color: #f5f5f5; /* light gray for readability */
+  font-size: clamp(1rem, 2vw, var(--font-size-lg));
+  font-weight: var(--font-weight-normal);
+  color: var(--color-infineo-cream);
   max-width: 700px;
   margin: 0 auto;
   line-height: var(--line-height-relaxed);
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.80);
 }
 
+/* ─── Hero CTA buttons ────────────────────── */
+/* Semi-transparent white border ensures visibility over any bg region */
+.careers-hero .btn-primary {
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  font-size: var(--font-size-base);
+  padding: 14px 32px;
+}
 
+/* ─── Content ─────────────────────────────── */
 .careers-content {
   max-width: 1100px;
   margin: 0 auto;
@@ -104,10 +116,10 @@
 
 .careers-section-title {
   font-family: var(--font-primary);
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
   color: var(--heading-primary);
-  margin-bottom: 40px;
+  margin-bottom: var(--spacing-3xl);
   text-align: center;
   position: relative;
   letter-spacing: var(--letter-spacing-wider);
@@ -123,27 +135,27 @@
   border-radius: var(--radius-full);
 }
 
-.careers-content>section {
+.careers-content > section {
   margin-bottom: clamp(4rem, 8vw, 7rem);
 }
 
-.careers-content>section:last-child {
+.careers-content > section:last-child {
   margin-bottom: 0;
 }
 
-/* ─── Values Grid ─────────────────────────────────── */
+/* ─── Values Grid ─────────────────────────── */
 .values-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 28px;
-  margin-top: 8px;
+  gap: var(--spacing-2xl);
+  margin-top: var(--spacing-sm);
 }
 
 .value-card {
   background: var(--bg-card);
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-xl);
-  padding: 36px 28px;
+  padding: 36px var(--spacing-2xl);
   box-shadow: var(--card-shadow);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -177,9 +189,9 @@
 
 .value-card h3 {
   font-family: var(--font-primary);
-  font-size: 1.15rem;
-  font-weight: 700;
-  margin-bottom: 12px;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-md);
   color: var(--heading-secondary);
   letter-spacing: var(--letter-spacing-wide);
 }
@@ -191,25 +203,25 @@
   font-size: var(--font-size-sm);
 }
 
-/* ─── Jobs List ───────────────────────────────────── */
+/* ─── Jobs List ───────────────────────────── */
 .jobs-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--spacing-lg);
 }
 
 .job-card {
   background: var(--bg-card);
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-xl);
-  padding: 28px 32px;
+  padding: var(--spacing-2xl) var(--spacing-2xl);
   box-shadow: var(--card-shadow);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 24px;
+  gap: var(--spacing-xl);
   flex-wrap: wrap;
   transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
 }
@@ -222,9 +234,9 @@
 
 .job-details h3 {
   font-family: var(--font-primary);
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-sm);
   color: var(--heading-secondary);
   letter-spacing: var(--letter-spacing-wide);
 }
@@ -241,14 +253,14 @@
 .job-meta span {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--spacing-xs);
 }
 
 .apply-btn {
   background: var(--button-gradient);
   color: var(--color-infineo-black);
   border: none;
-  padding: 12px 28px;
+  padding: var(--spacing-md) var(--spacing-2xl);
   border-radius: var(--radius-full);
   font-family: var(--font-secondary);
   font-weight: var(--font-weight-semibold);
@@ -265,13 +277,16 @@
   box-shadow: 0 6px 20px rgba(201, 148, 78, 0.45);
 }
 
-/* ─── CTA Section ─────────────────────────────────── */
+/* ─── CTA Section ─────────────────────────── */
 .careers-cta {
   text-align: center;
-  background: linear-gradient(135deg, rgba(201, 148, 78, 0.07), rgba(201, 148, 78, 0.02));
+  background: linear-gradient(135deg,
+    rgba(201, 148, 78, 0.07),
+    rgba(201, 148, 78, 0.02)
+  );
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-xl);
-  padding: 56px 48px;
+  padding: var(--spacing-4xl) var(--spacing-3xl);
   box-shadow: var(--card-shadow);
   max-width: 700px;
   margin: 0 auto;
@@ -281,17 +296,17 @@
 
 .careers-cta h3 {
   font-family: var(--font-primary);
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
   color: var(--heading-primary);
-  margin-bottom: 14px;
+  margin-bottom: var(--spacing-md);
   letter-spacing: var(--letter-spacing-wide);
 }
 
 .careers-cta p {
   font-family: var(--font-supporting);
   color: var(--text-secondary);
-  margin-bottom: 28px;
+  margin-bottom: var(--spacing-2xl);
   font-size: var(--font-size-base);
   line-height: var(--line-height-relaxed);
 }
@@ -299,7 +314,7 @@
 .careers-email {
   font-weight: var(--font-weight-bold);
   color: var(--accent-primary) !important;
-  font-size: 1.2rem;
+  font-size: var(--font-size-lg);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
@@ -308,11 +323,11 @@
   color: var(--accent-hover) !important;
 }
 
-/* ─── Responsive ──────────────────────────────────── */
+/* ─── Responsive ──────────────────────────── */
 @media (max-width: 768px) {
   .careers-hero {
     height: auto;
-    padding: 120px 20px 60px;
+    padding: 120px var(--spacing-lg) 60px;
   }
 
   .careers-hero h1 {
@@ -321,14 +336,14 @@
 
   .values-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: var(--spacing-lg);
   }
 
   .job-card {
     flex-direction: column;
     align-items: flex-start;
-    gap: 20px;
-    padding: 24px;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-xl);
   }
 
   .apply-btn {
@@ -338,10 +353,10 @@
   }
 
   .careers-cta {
-    padding: 36px 24px;
+    padding: var(--spacing-2xl) var(--spacing-xl);
   }
 
   .careers-content {
-    padding: 48px 16px 80px;
+    padding: var(--spacing-3xl) var(--spacing-lg) 80px;
   }
 }
