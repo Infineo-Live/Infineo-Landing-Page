@@ -195,7 +195,7 @@ export default function DemoClass() {
         : 'Invalid email — must look like name@example.com'; 
     } 
     if (name === 'phone') { 
-      const digits = value.replace(/[\s-]/g, ''); 
+      const digits = value.replace(/[\s\-().+]/g, ''); 
       if (digits.length !== selectedCountry.digits) 
         return `${selectedCountry.name} numbers must be ${selectedCountry.digits} digits (e.g. ${selectedCountry.example})`; 
       if (!selectedCountry.startsWith.includes(digits[0])) 
@@ -402,16 +402,13 @@ export default function DemoClass() {
               required
               className={
                 touched.email && errors.email  ? 'input-error':
-                touched.email && !errors.email && formData.email ? 'input-success' :
                 ''
             }
           />
           {touched.email && errors.email && (
             <span className="form-error" role="alert">{errors.email}</span>
           )}
-          {touched.email && !errors.email && formData.email && (
-            <span className="form-success" role="status">✓ Looks good!</span>
-          )}
+          
         </div>
 
         <div className="form-group">
@@ -446,9 +443,7 @@ export default function DemoClass() {
               {touched.phone && errors.phone && (
                 <span className="form-error" role="alert">{errors.phone}</span>
               )}
-              {touched.phone && !errors.phone && formData.phone && (
-                <span className="form-success" role="status">✓ Looks good!</span>
-              )}
+              
             </div>
             <div className="form-row">
               <div className="form-group">

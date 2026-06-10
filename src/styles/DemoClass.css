@@ -1094,10 +1094,10 @@
 .phone-input-wrapper {
   display: flex;
   align-items: stretch;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--border-primary);
   border-radius: 8px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-card);
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
@@ -1167,12 +1167,6 @@
 }
 /* ── Email input enhanced valid/invalid states ── */
 
-/* Red glow when invalid */
-.form-group input[type="email"].input-error {
-  border-color: #ff6b6b !important;
-  background: rgba(255, 107, 107, 0.07) !important;
-  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2) !important;
-}
 
 /* Green glow when valid */
 .form-group input[type="email"].input-success {
