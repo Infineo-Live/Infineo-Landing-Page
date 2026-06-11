@@ -13,7 +13,7 @@ const TEACHER_FORM_URL =
 const INTERN_FORM_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLSfoZRb85d_mB5EFSnMNV59FTBGmjQdAKclEj5KqdT1ynS-dQg/viewform?usp=publish-editor";
 
-/* ── All Open Roles (unified) ─────────────────────────────── */
+/*  All Open Roles (unified)  */
 const allRoles = [
   {
     title: "Storytelling Teacher",
@@ -42,7 +42,7 @@ const allRoles = [
     location: "Remote",
     badge: "⏳ 3 Months",
     featured: false,
-    jdUrl: null,
+    jdUrl: "https://docs.google.com/document/d/1zfdPQt5itM1OqIDDp_IAkA9NkaZ5Mb4q",
     applyUrl: INTERN_FORM_URL,
     highlights: [],
   },
@@ -55,7 +55,7 @@ const allRoles = [
     location: "Remote",
     badge: "⏳ 3 Months",
     featured: false,
-    jdUrl: null,
+    jdUrl: "https://docs.google.com/document/d/10GeoAE5vmWAV0Lks3bBEMvnY6ooz0snW",
     applyUrl: INTERN_FORM_URL,
     highlights: [],
   },
@@ -68,7 +68,7 @@ const allRoles = [
     location: "Remote",
     badge: "⏳ 3 Months",
     featured: false,
-    jdUrl: null,
+    jdUrl: "https://docs.google.com/document/d/1BV18zOMHWohTKLhcdAeJ9Po1FbBLkiTs",
     applyUrl: INTERN_FORM_URL,
     highlights: [],
   },
@@ -81,7 +81,7 @@ const allRoles = [
     location: "Remote",
     badge: "⏳ 3 Months",
     featured: false,
-    jdUrl: null,
+    jdUrl: "https://docs.google.com/document/d/1plaMx0GZoO1rKNhl5qix0tXZFz_by4AV",
     applyUrl: INTERN_FORM_URL,
     highlights: [],
   },
@@ -94,7 +94,7 @@ const allRoles = [
     location: "Remote",
     badge: "⏳ 3 Months",
     featured: false,
-    jdUrl: null,
+    jdUrl: "https://docs.google.com/document/d/1mQOut3mCE46y3ZsoVog4dofBinZIG66v/",
     applyUrl: INTERN_FORM_URL,
     highlights: [],
   },
@@ -107,7 +107,7 @@ const allRoles = [
     location: "Remote",
     badge: "⏳ 3 Months",
     featured: false,
-    jdUrl: null,
+    jdUrl: "https://docs.google.com/document/d/1uVtW7uKc5StROsFTVTa5UtFmgQ5m8dDf",
     applyUrl: INTERN_FORM_URL,
     highlights: [],
   },
@@ -120,10 +120,36 @@ const allRoles = [
     location: "Remote",
     badge: "⏳ 3 Months",
     featured: false,
-    jdUrl: null,
+    jdUrl: "https://docs.google.com/document/d/1lWZFwwLaSCPUxliHcydwBRF1UHimbjzz",
     applyUrl: INTERN_FORM_URL,
     highlights: [],
   },
+  {
+  title: "Curriculum Development Intern",
+  icon: "📚",
+  desc: "Design lesson experiences that help children think, feel, and grow through Indian mythology.",
+  category: "Internship",
+  type: "Internship · 3 Months",
+  location: "Remote",
+  badge: "⏳ 3 Months",
+  featured: false,
+  jdUrl: "https://docs.google.com/document/d/14vGvbK_FBI2XxIGT9rUUNCpiMCOU0-eL",
+  applyUrl: INTERN_FORM_URL,
+  highlights: [],
+},
+{
+  title: "Graphic Design Intern",
+  icon: "🎨",
+  desc: "Turn curriculum into visuals that make children want to learn.",
+  category: "Internship",
+  type: "Internship · 3 Months",
+  location: "Remote",
+  badge: "⏳ 3 Months",
+  featured: false,
+  jdUrl: "https://docs.google.com/document/d/1quZF-Q0QZODZf-Vfuvs4yPHryaWeG70-",
+  applyUrl: INTERN_FORM_URL,
+  highlights: [],
+},  
 ];
 
 const qualities = [
@@ -300,7 +326,7 @@ export default function Careers() {
           </div>
           <div className="hero-stat-divider" aria-hidden="true" />
           <div className="hero-stat">
-            <span className="hero-stat__number">7</span>
+            <span className="hero-stat__number">9</span>
             <span className="hero-stat__label">Internships</span>
           </div>
           <div className="hero-stat-divider" aria-hidden="true" />
@@ -340,27 +366,7 @@ export default function Careers() {
             ))}
           </div>
         </section>
-
-        {/* ── Internship Program Details ── */}
-        <section className="fade-in">
-          <h2 className="careers-section-title">Internship Program</h2>
-          <div className="magic-card program-card">
-            <p>
-              Our internship program is built for ambitious college students who
-              want real, hands-on experience working on meaningful projects —
-              not just busy work.
-            </p>
-            <ul className="program-list">
-              <li>📅 Duration: 3 months</li>
-              <li>🧪 Initial probation period: 10 days</li>
-              <li>📍 Fully remote</li>
-              <li>
-                🎓 Top performers may receive a Letter of Recommendation (LOR)
-              </li>
-              <li>🚀 Outstanding interns may be offered a permanent role</li>
-            </ul>
-          </div>
-        </section>
+      
 
         {/* ── All Open Roles (combined) ── */}
         <section className="fade-in">
