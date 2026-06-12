@@ -1503,3 +1503,94 @@
     padding: var(--spacing-2xl) var(--spacing-lg);
   }
 }
+
+/* ═══════════════════════════════════════════════════
+   LIGHT MODE READABILITY & VISIBILITY OVERRIDES
+   ═══════════════════════════════════════════════════ */
+[data-theme="light"] .job-desc {
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .job-category-tag--gold {
+  color: var(--accent-dark);
+  background: rgba(201, 148, 78, 0.08);
+  border-color: rgba(201, 148, 78, 0.25);
+}
+
+[data-theme="light"] .filter-tab__count {
+  background: rgba(17, 43, 71, 0.06);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .filter-tab.active .filter-tab__count {
+  background: rgba(0, 0, 0, 0.12);
+  color: var(--color-infineo-black);
+}
+
+[data-theme="light"] .jd-meta-info {
+  background: rgba(7, 51, 137, 0.04);
+  border-color: rgba(7, 51, 137, 0.15);
+}
+
+[data-theme="light"] .jd-meta-info span {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+[data-theme="light"] .jd-close-btn {
+  background: rgba(17, 43, 71, 0.03);
+  border-color: rgba(17, 43, 71, 0.1);
+  color: var(--text-muted);
+}
+
+[data-theme="light"] .jd-close-btn:hover {
+  background: rgba(17, 43, 71, 0.08);
+  border-color: rgba(17, 43, 71, 0.25);
+  color: var(--heading-primary);
+}
+
+[data-theme="light"] .jd-section {
+  background: rgba(17, 43, 71, 0.02);
+  border: 1px solid rgba(17, 43, 71, 0.08);
+  box-shadow: 0 4px 12px rgba(17, 43, 71, 0.03);
+}
+
+[data-theme="light"] .jd-section:hover {
+  background: rgba(17, 43, 71, 0.04);
+  border-color: rgba(7, 51, 137, 0.18);
+}
+
+[data-theme="light"] .jd-details-item {
+  background: rgba(7, 51, 137, 0.02);
+  border: 1px solid rgba(7, 51, 137, 0.1);
+  box-shadow: inset 0 0 8px rgba(7, 51, 137, 0.04);
+}
+
+[data-theme="light"] .jd-details-item:hover {
+  background: rgba(7, 51, 137, 0.04);
+  border-color: var(--color-accent);
+}
+
+[data-theme="light"] .jd-text {
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .jd-section li {
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .jd-note-card {
+  background: rgba(201, 148, 78, 0.06);
+  border-color: rgba(201, 148, 78, 0.25);
+  box-shadow: 0 4px 12px rgba(17, 43, 71, 0.06);
+}
+
+[data-theme="light"] .jd-footer-actions {
+  background: linear-gradient(135deg, rgba(201, 148, 78, 0.06) 0%, rgba(201, 148, 78, 0.02) 100%);
+  border-color: rgba(201, 148, 78, 0.25);
+  box-shadow: 0 4px 12px rgba(17, 43, 71, 0.06);
+}
+
+[data-theme="light"] .jd-apply-info {
+  color: var(--text-secondary);
+}
