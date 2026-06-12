@@ -71,7 +71,7 @@ const allRoles = [
     icon: "",
     desc: "Build interactive mythology-based games that teach children life skills.",
     category: "Internship",
-    type: "Internship · 3 Months",
+    type: "Internship",
     location: "Remote",
     badge: "3 Months",
     featured: false,
@@ -123,7 +123,7 @@ const allRoles = [
     icon: "",
     desc: "Build INFINEO's voice—one piece of content at a time",
     category: "Internship",
-    type: "Internship · 3 Months",
+    type: "Internship",
     location: "Remote",
     badge: "3 Months",
     featured: false,
@@ -186,7 +186,7 @@ const allRoles = [
     icon: "",
     desc: "Write, structure, and shape the stories that make INFINEO come alive",
     category: "Internship",
-    type: "Internship · 3 Months",
+    type: "Internship",
     location: "Remote",
     badge: "3 Months",
     featured: false,
@@ -250,7 +250,7 @@ const allRoles = [
     icon: "",
     desc: "Build animated story worlds using AI—one scene at a time",
     category: "Internship",
-    type: "Internship · 3 Months",
+    type: "Internship",
     location: "Remote",
     badge: "3 Months",
     featured: false,
@@ -314,7 +314,7 @@ const allRoles = [
     icon: "",
     desc: "Help us find the right people and keep things running smoothly",
     category: "Internship",
-    type: "Internship · 3 Months",
+    type: "Internship",
     location: "Remote",
     badge: "3 Months",
     featured: false,
@@ -377,7 +377,7 @@ const allRoles = [
     icon: "",
     desc: "Drive outreach, build partnerships, and grow INFINEO's reach",
     category: "Internship",
-    type: "Internship · 3 Months",
+    type: "Internship",
     location: "Remote",
     badge: "3 Months",
     featured: false,
@@ -443,7 +443,7 @@ const allRoles = [
     icon: "",
     desc: "Build real digital products that students and parents actually use",
     category: "Internship",
-    type: "Internship · 3 Months",
+    type: "Internship",
     location: "Remote",
     badge: "3 Months",
     featured: false,
@@ -507,7 +507,7 @@ const allRoles = [
     icon: "",
     desc: "Design lesson experiences that help children think, feel, and grow",
     category: "Internship",
-    type: "Internship · 3 Months",
+    type: "Internship",
     location: "Remote",
     badge: "3 Months",
     featured: false,
@@ -570,7 +570,7 @@ const allRoles = [
     icon: "",
     desc: "Turn curriculum into visuals that make children want to learn",
     category: "Internship",
-    type: "Internship · 3 Months",
+    type: "Internship",
     location: "Remote",
     badge: "3 Months",
     featured: false,
@@ -651,7 +651,6 @@ const qualities = [
 
 export default function Careers() {
   const [selectedJob, setSelectedJob] = useState(null);
-  const [expandedIdx, setExpandedIdx] = useState(null);
   const [activeFilter, setActiveFilter] = useState("All");
 
   const filters = ["All", "Teaching", "Internship"];
@@ -861,7 +860,6 @@ export default function Careers() {
                 onClick={() => {
                   setActiveFilter(f);
                   setSelectedJob(null);
-                  setExpandedIdx(null);
                 }}
                 aria-pressed={activeFilter === f}
               >
@@ -878,11 +876,10 @@ export default function Careers() {
           <div className="jobs-list">
             {filteredRoles.map((job, idx) => {
               const isSelected = selectedJob?.title === job.title;
-              const isExpanded = expandedIdx === idx;
               return (
                 <div
                   key={job.title}
-                  className={`job-card ${isSelected ? "selected" : ""} ${isExpanded ? "expanded" : ""} ${job.featured ? "job-card--featured" : ""}`}
+                  className={`job-card ${isSelected ? "selected" : ""} ${job.featured ? "job-card--featured" : ""}`}
                   style={{ animationDelay: `${idx * 0.06}s` }}
                 >
                   {job.featured && (
@@ -891,20 +888,7 @@ export default function Careers() {
                     </div>
                   )}
 
-                  <div
-                    className="job-card-header"
-                    onClick={() => setExpandedIdx(isExpanded ? null : idx)}
-                    role="button"
-                    tabIndex={0}
-                    aria-expanded={isExpanded}
-                    aria-label={`${job.title} — click to ${isExpanded ? "collapse" : "expand"} details`}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        setExpandedIdx(isExpanded ? null : idx);
-                      }
-                    }}
-                  >
+                  <div className="job-card-inner">
                     <div className="job-details">
                       <div className="job-card__meta-row">
                         <span className="job-category-tag">{job.category}</span>
@@ -914,9 +898,7 @@ export default function Careers() {
                           </span>
                         )}
                       </div>
-                      <h3>
-                        {job.title}
-                      </h3>
+                      <h3>{job.title}</h3>
                       <p className="job-desc">{job.desc}</p>
                       <div className="job-meta">
                         <span>{job.location}</span>
@@ -924,33 +906,25 @@ export default function Careers() {
                         <span>{job.badge}</span>
                       </div>
                     </div>
-                    <span className="job-chevron" aria-hidden="true">
-                      {isExpanded ? "▲" : "▼"}
-                    </span>
-                  </div>
 
-                  {/* Expandable details */}
-                  {isExpanded && (
-                    <div className="job-card-body">
-                      <div className="job-actions">
-                        <button
-                          className="btn-outline"
-                          onClick={() => setSelectedJob(job)}
-                        >
-                          View Job Description
-                        </button>
-                        <a
-                          href={job.applyUrl}
-                          className="apply-btn"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`Apply now for ${job.title}`}
-                        >
-                          Apply Now
-                        </a>
-                      </div>
+                    <div className="job-actions">
+                      <button
+                        className="btn-outline"
+                        onClick={() => setSelectedJob(job)}
+                      >
+                        View Job Description
+                      </button>
+                      <a
+                        href={job.applyUrl}
+                        className="apply-btn"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Apply now for ${job.title}`}
+                      >
+                        Apply Now
+                      </a>
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}
@@ -1028,14 +1002,6 @@ export default function Careers() {
                 </ul>
               </div>
             )}
-
-            {/* About Infineo */}
-            <div className="jd-section">
-              <h3>About INFINEO</h3>
-              <p className="jd-text">
-                INFINEO is an EdTech company that builds structured learning experiences for children aged 5–12 using Indian mythology as a framework. Our curriculum connects timeless stories with modern challenges—helping children develop values, confidence, focus, and emotional resilience through live 1-on-1 sessions with dedicated instructors.
-              </p>
-            </div>
 
             {/* Key Responsibilities */}
             {selectedJob.responsibilities && selectedJob.responsibilities.length > 0 && (
