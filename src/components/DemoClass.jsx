@@ -3,6 +3,8 @@ import emailjs from '@emailjs/browser';
 import '../styles/DemoClass.css';
 import neoMascot from '../assets/neo-version/neo-without-eyes.webp';
 import COUNTRIES from '../assets/countries.json';
+import { verifyPhone } from '../utils/verifyPhone.js';
+const SHEET_URL='https://script.google.com/macros/s/AKfycbwGpPWzbg7CgOy1Z-0OhlmY-e-Ug7JM-gmuxtnJPhZ_gkevRpWYv3HgQQ0jjfeIpUol8w/exec';
 const REWARDS = [
   { icon: '✏️', label: 'Cartoon Art Prints', color: '#5B8DEF' },
   { icon: '🏆', label: 'Certificate', color: '#E7B860' },
@@ -193,7 +195,7 @@ export default function DemoClass() {
         : 'Invalid email — must look like name@example.com'; 
     } 
     if (name === 'phone') { 
-      const digits = value.replace(/[\s\-]/g, ''); 
+      const digits = value.replace(/[\s\-().+]/g, ''); 
       if (digits.length !== selectedCountry.digits) 
         return `${selectedCountry.name} numbers must be ${selectedCountry.digits} digits (e.g. ${selectedCountry.example})`; 
       if (!selectedCountry.startsWith.includes(digits[0])) 
@@ -229,7 +231,6 @@ export default function DemoClass() {
     e.preventDefault();
     document.getElementById('book')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setTouched({ email: true, phone: true });
@@ -237,20 +238,48 @@ export default function DemoClass() {
     const phoneError = validateField('phone', formData.phone);
     setErrors({ email: emailError, phone: phoneError });
     if (emailError || phoneError) return; 
+    const result = verifyPhone(selectedCountry.dialCode, formData.phone);
+    if (!result.valid) {
+      setErrors(prev => ({ ...prev, phone: 'This number is invalid for ' + selectedCountry.name + '. Please check and try again.' }));
+      return;
+    }
     try {
+      const fullPhone = `${selectedCountry.dialCode} ${formData.phone}`;
+
+      // Send email notification via EmailJS
       await emailjs.send(
         "service_q11sqw8",
         "template_vipoclo",
         {
-          child_name: formData.childName,
+          child_name:  formData.childName,
           parent_name: formData.parentName,
-          email: formData.email,
-          phone: `${selectedCountry.dialCode} ${formData.phone}`,
-          child_age: formData.childAge,
-          language: formData.language,
+          email:       formData.email,
+          phone:       fullPhone,
+          child_age:   formData.childAge,
+          language:    formData.language,
         },
         "xs8aj8X8ITOMt7KSF"
       );
+
+      // Save to Google Sheets simultaneously
+      fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type':'text/plain' },
+
+        body: JSON.stringify({
+          childName:  formData.childName,
+          parentName: formData.parentName,
+          email:      formData.email,
+          phone:      fullPhone,
+          childAge:   formData.childAge,
+          language:   formData.language,
+        }),
+      })
+      .then(() => console.log('Sheet save successful'))
+      .catch(err => console.error('Sheet save failed:', err));
+      // Note: we don't await this — if sheet fails, form still submits fine
+
       setIsSubmitted(true);
       setTimeout(() => {
         setIsSubmitted(false);
@@ -258,6 +287,8 @@ export default function DemoClass() {
           childName: '', parentName: '', email: '',
           phone: '', childAge: '', language: '',
         });
+        setTouched({ email: false, phone: false });
+        setErrors({ email: '', phone: '' });
       }, 3000);
     } catch (error) {
       console.error("Email sending failed:", error);
@@ -359,54 +390,52 @@ export default function DemoClass() {
               <input type="text" id="parentName" name="parentName" value={formData.parentName}
                 onChange={handleChange} placeholder="Enter parent/guardian name" required />
             </div>
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="email">Email *</label>
-                <input
-                  type="email" id="email" name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="your@email.com"
-                  required
-                  style={
-                    touched.email && errors.email  ? { borderColor: '#e05a8a', background: 'rgba(224,90,138,0.06)' } :
-                    touched.email && !errors.email ? { borderColor: '#3DC47E', background: 'rgba(61,196,126,0.05)' } :
-                    {}
-                  }
-                />
-                {touched.email && errors.email && (
-                  <span className="form-error" role="alert">{errors.email}</span>
-                )}
-                {touched.email && !errors.email && formData.email && (
-                  <span className="form-success" role="status">✓ Looks good!</span>
-                )}
-              </div>
-              <div className="form-group">
-              <label htmlFor="phone">Phone Number *</label>
-              <div className="phone-input-wrapper">
-                <select
-                  className="country-code-select"
-                  value={selectedCountry.code}
-                  onChange={handleCountryChange}
-                  aria-label="Select country code"
-                >
-                  {COUNTRIES.map(c => (
-                    <option key={c.code} value={c.code}>
-                      {c.flag} {c.dialCode}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  type="tel" id="phone" name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder={selectedCountry.example}
-                  required
-                  style={
-                    touched.phone && errors.phone  ? { borderColor: '#e05a8a', background: 'rgba(224,90,138,0.06)' } :
-                    touched.phone && !errors.phone ? { borderColor: '#3DC47E', background: 'rgba(61,196,126,0.05)' } :
+            
+            <div className="form-group">
+            <label htmlFor="email">Email *</label>
+            <input
+              type="email" id="email" name="email"
+              value={formData.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder="your@email.com"
+              required
+              className={
+                touched.email && errors.email  ? 'input-error':
+                ''
+            }
+          />
+          {touched.email && errors.email && (
+            <span className="form-error" role="alert">{errors.email}</span>
+          )}
+          
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="phone">Phone Number *</label>
+          <div className="phone-input-wrapper">
+            <select
+              className="country-code-select"
+          value={selectedCountry.code}
+          onChange={handleCountryChange}
+          aria-label="Select country code"
+        >
+          {COUNTRIES.map(c => (
+            <option key={c.code} value={c.code}>
+              {c.flag} {c.dialCode}
+            </option>
+          ))}
+              </select>
+              <input
+                type="tel" id="phone" name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder={selectedCountry.example}
+                required
+                style={
+                  touched.phone && errors.phone  ? { borderColor: '#ff6b6b' } :
+                  touched.phone && !errors.phone ? { borderColor: '#3DC47E' } :
                     {}
                   }
                 />
@@ -414,10 +443,7 @@ export default function DemoClass() {
               {touched.phone && errors.phone && (
                 <span className="form-error" role="alert">{errors.phone}</span>
               )}
-              {touched.phone && !errors.phone && formData.phone && (
-                <span className="form-success" role="status">✓ Looks good!</span>
-              )}
-            </div>
+              
             </div>
             <div className="form-row">
               <div className="form-group">
@@ -441,10 +467,12 @@ export default function DemoClass() {
             </div>
             {isSubmitted && (
               <div className="success-message">
-                ✓ Thank you! We'll contact you soon to schedule your demo class.
+                Thank you! We'll contact you soon to schedule your demo class.
               </div>
             )}
-            <button type="submit" className="submit-btn">Book Your Free Demo Class</button>
+           <button type="submit" className="submit-btn">
+              Book Your Free Demo Class
+            </button>
             <p className="form-note">We respect your privacy. No spam, just valuable learning opportunities.</p>
           </form>
         </div>

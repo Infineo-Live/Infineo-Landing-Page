@@ -1094,10 +1094,10 @@
 .phone-input-wrapper {
   display: flex;
   align-items: stretch;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--border-primary);
   border-radius: 8px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-card);
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
@@ -1105,26 +1105,34 @@
 
 .country-code-select {
   flex-shrink: 0;
-  width: 100px;
-  padding: 10px 6px;
+  width: 110px;
+  padding: 10px 8px;
   border: none;
   border-right: 1px solid rgba(255, 255, 255, 0.15);
   background: transparent;
-  color: #fff;
-  font-size: 13px;
+  color: var(--text-primary);
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
   appearance: none;
   text-align: center;
   box-sizing: border-box;
+  line-height: 1.4;
 }
 .phone-input-wrapper input[type="tel"] {
   flex: 1;
   min-width: 0;
-  width:0;
+  width: 100%;
+  padding: 10px 12px;
   border: none;
   background: transparent;
   outline: none;
+  box-shadow: none ;
   box-sizing: border-box;
+  color: var(--text-primary);
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
 }
 .country-code-select:focus {
   outline: none;
@@ -1132,10 +1140,14 @@
 }
 .form-error {
   display: block;
-  margin-top: 5px;
+  margin-top: 6px;
   font-size: 12px;
-  color: #e05a8a;
-  font-weight: 600;
+  color: #ff6b6b;
+  font-weight: 700;
+  background: rgba(255, 107, 107, 0.12);
+  border-left: 3px solid #ff6b6b;
+  padding: 5px 10px;
+  border-radius: 4px;
   animation: errorShake 0.4s ease;
 }
 .form-success {
@@ -1152,4 +1164,13 @@
   60%  { transform: translateX(-4px);}
   80%  { transform: translateX(4px); }
   100% { transform: translateX(0);   }
+}
+/* ── Email input enhanced valid/invalid states ── */
+
+
+/* Green glow when valid */
+.form-group input[type="email"].input-success {
+  border-color: #3DC47E !important;
+  background: rgba(61, 196, 126, 0.07) !important;
+  box-shadow: 0 0 0 3px rgba(61, 196, 126, 0.2) !important;
 }
