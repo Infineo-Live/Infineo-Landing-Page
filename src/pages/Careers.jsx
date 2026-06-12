@@ -653,30 +653,45 @@ export default function Careers() {
       : allRoles.filter((r) => r.category === activeFilter);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    const cleanup = initCursorSparkles({
-      minInterval: 55,
-      extraChance: 0.14,
-      clickBurst: 8,
-    });
-    return () => cleanup();
-  }, []);
+  window.scrollTo(0, 0);
+  const cleanup = initCursorSparkles({ minInterval: 55, extraChance: 0.14, clickBurst: 8 });
+  return () => cleanup?.();
+}, []);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.08 }
-    );
-    document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+useEffect(() => {
+  const elements = document.querySelectorAll(".fade-in");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08, rootMargin: "0px 0px -20px 0px" }
+  );
+
+  elements.forEach((el) => observer.observe(el));
+
+  const raf = requestAnimationFrame(() => {
+    elements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) el.classList.add("visible");
+    });
+  });
+
+  const fallback = setTimeout(() => {
+    elements.forEach((el) => el.classList.add("visible"));
+  }, 800);
+
+  return () => {
+    observer.disconnect();
+    cancelAnimationFrame(raf);
+    clearTimeout(fallback);
+  };
+}, []);
 
   return (
     <div className={`careers-page ${selectedJob ? "drawer-open" : ""}`}>
