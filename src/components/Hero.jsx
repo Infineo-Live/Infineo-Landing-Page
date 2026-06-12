@@ -27,8 +27,8 @@ const Hero = () => {
       <div className="hero-overlay"/>
       <div className="hero-content">
         <h1 className="hero-heading">
-          <BroadwayText text="SOME STORIES DON'T TEACH HISTORY." className="hero-heading-line1" tag="span" />
-          <BroadwayText text="THEY TEACH LIFE." className="hero-heading-line2" tag="span" />
+          <BroadwayText text="Some stories don't teach history." className="hero-heading-line1" tag="span" />
+          <BroadwayText text="They teach life." className="hero-heading-line2" tag="span" startDelay={1.32} />
         </h1>
 
         <p className="hero-subtitle">
