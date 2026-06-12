@@ -302,6 +302,11 @@ export default function DemoClass() {
 
       {/* ── STARTER KIT / REWARD SECTION ── */}
       <div className="reward-section">
+        <div className="decor-star star-1">★</div>
+        <div className="decor-star star-2">✦</div>
+        <div className="decor-star star-3">★</div>
+        <div className="decor-star star-4">✦</div>
+
         <div className="reward-left">
           <span className="demo-badge">
             <span className="badge-star">★</span> Trial Completion Reward
