@@ -85,19 +85,12 @@
 
 [data-theme="light"] .careers-hero::before {
   background:
-    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(201, 148, 78, 0.05), transparent 75%),
-    linear-gradient(
-      to right,
-      rgba(253, 246, 227, 0.35) 0%,
-      rgba(253, 246, 227, 0.15) 45%,
-      rgba(253, 246, 227, 0.02) 75%,
-      rgba(253, 246, 227, 0.15) 100%
-    ),
-    linear-gradient(
-      to bottom,
-      transparent 70%,
-      rgba(253, 246, 227, 0.65) 100%
-    );
+    linear-gradient(105deg,
+      rgba(255, 255, 255, 0.447) 0%,
+      transparent 100%),
+    linear-gradient(180deg,
+      rgba(255, 209, 149, 0.115) 0%,
+      transparent 100%);
 }
 
 /* Bottom fade into page background */
@@ -1621,7 +1614,7 @@
 }
 
 [data-theme="light"] .careers-hero p {
-  color: var(--text-secondary);
+  color: var(--text-primary);
   text-shadow: none;
   font-weight: 500;
 }
@@ -1650,19 +1643,22 @@
 }
 
 [data-theme="light"] .hero-stats {
-  background: rgba(255, 255, 255, 0.65);
-  border-color: rgba(201, 148, 78, 0.25);
-  box-shadow: var(--card-shadow);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: var(--spacing-sm) 0;
+  gap: var(--spacing-2xl);
 }
 
 [data-theme="light"] .hero-stat__number {
-  color: var(--accent-primary);
+  color: var(--color-infineo-blue);
+  font-weight: 700;
 }
 
 [data-theme="light"] .hero-stat__label {
-  color: var(--text-secondary);
+  color: var(--heading-primary);
 }
 
 [data-theme="light"] .hero-stat-divider {
-  background: rgba(201, 148, 78, 0.2);
+  background: rgba(201, 148, 78, 0.45);
 }
