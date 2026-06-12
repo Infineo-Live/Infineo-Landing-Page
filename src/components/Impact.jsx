@@ -34,27 +34,18 @@ const JOURNEYS = [
   },
 ];
 
-/* Unique shard polygon sets per card */
-const SHARD_SETS = [
-  [
-    "0,0 45,0 38,60 0,55", "45,0 100,0 100,45 52,70", "0,55 38,60 30,100 0,100",
-    "38,60 52,70 60,100 30,100", "52,70 100,45 100,100 60,100", "100,0 100,45 52,70 45,0",
-  ],
-  [
-    "0,0 50,0 42,55 0,48", "50,0 100,0 100,50 58,62", "0,48 42,55 35,100 0,100",
-    "42,55 58,62 65,100 35,100", "58,62 100,50 100,100 65,100", "0,0 42,55 0,48",
-  ],
-  [
-    "0,0 40,0 35,50 0,60", "40,0 100,0 100,40 55,65", "0,60 35,50 40,100 0,100",
-    "35,50 55,65 62,100 40,100", "55,65 100,40 100,100 62,100", "40,0 100,0 55,65 35,50",
-  ],
+/* Three large shards separated by the two visible structural cracks. */
+const SHARDS = [
+  "0,0 64,0 58,14 61,27 51,40 54,53 43,66 46,81 36,100 0,100",
+  "64,0 100,0 100,48 88,45 77,51 64,47 54,53 51,40 61,27 58,14",
+  "54,53 64,47 77,51 88,45 100,48 100,100 36,100 46,81 43,66",
 ];
 
 /* Shard fly-out directions */
 const SHARD_TRANSFORMS = [
-  "translate(-18px,-22px) rotate(-15deg)", "translate(20px,-18px) rotate(12deg)",
-  "translate(-22px,20px) rotate(-10deg)", "translate(5px,25px) rotate(8deg)",
-  "translate(22px,18px) rotate(14deg)", "translate(15px,-25px) rotate(-12deg)",
+  "translate(-22px,-10px) rotate(-4deg)",
+  "translate(24px,-14px) rotate(4deg)",
+  "translate(12px,24px) rotate(-3deg)",
 ];
 
 /* ── Glass break sound — unlocked on first user gesture ── */
@@ -166,7 +157,7 @@ function GlassBreakCard({ journey, index }) {
     };
   }, [isIntersecting, index]);
 
-  const shards = SHARD_SETS[index % SHARD_SETS.length];
+  const shards = SHARDS;
   const uniqueId = `clip-${journey.id}`;
 
   return (
@@ -184,12 +175,8 @@ function GlassBreakCard({ journey, index }) {
 
         {/* Crack overlay — SVG lines */}
         <svg className="gb-cracks" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <line x1="38" y1="0" x2="30" y2="100" stroke="rgba(255,255,255,0.9)" strokeWidth="0.4" />
-          <line x1="38" y1="0" x2="52" y2="70" stroke="rgba(255,255,255,0.9)" strokeWidth="0.35" />
-          <line x1="52" y1="70" x2="100" y2="45" stroke="rgba(255,255,255,0.9)" strokeWidth="0.35" />
-          <line x1="52" y1="70" x2="60" y2="100" stroke="rgba(255,255,255,0.9)" strokeWidth="0.3" />
-          <line x1="0" y1="55" x2="38" y2="60" stroke="rgba(255,255,255,0.7)" strokeWidth="0.3" />
-          <line x1="38" y1="60" x2="100" y2="45" stroke="rgba(255,255,255,0.7)" strokeWidth="0.3" />
+          <path className="gb-crack gb-crack--main" d="M64 0 L58 14 L61 27 L51 40 L54 53 L43 66 L46 81 L36 100" />
+          <path className="gb-crack gb-crack--main" d="M100 48 L88 45 L77 51 L64 47 L54 53" />
         </svg>
 
         {/* Shards — each clips the image to a polygon, then flies away */}
@@ -293,7 +280,7 @@ export default function Impact() {
       <div className="impact-heading">
         <span className="impact-heading__eyebrow">The Infineo Journey</span>
         <h2 className="impact-heading__title">
-          What Infineo <span className="impact-heading__highlight">Addresses</span>
+          Igniting Curious <span className="impact-heading__highlight">Minds</span>
         </h2>
       </div>
 
