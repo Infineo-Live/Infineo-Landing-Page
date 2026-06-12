@@ -30,12 +30,13 @@
   position: relative;
   z-index: 2;
   max-width: 1200px;
+  min-height: 560px;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 40px;
   align-items: center;
-  padding: 3.5rem 2.5rem;
+  padding: 2.75rem 2.5rem;
   border-radius: 28px;
   background: linear-gradient(180deg, rgba(12, 24, 50, 0.45) 0%, rgba(8, 15, 30, 0.65) 100%);
   backdrop-filter: blur(16px);
@@ -45,8 +46,8 @@
   overflow: hidden;
 
   /* Gift Box Color Constants */
-  --gift-box-bg: linear-gradient(135deg, #e7b860, #c9922a);
-  --gift-bow-bg: #e05a8a;
+  --gift-box-bg: linear-gradient(135deg, #f3d184 0%, #e7b860 42%, #c98f24 100%);
+  --gift-bow-bg: linear-gradient(135deg, #f184aa 0%, #e05a8a 55%, #b93869 100%);
   --gift-ribbon-bg: var(--gift-bow-bg);
 }
 
@@ -73,12 +74,14 @@
 .star-1 { top: 10%; left: 8%; animation: twinkle 3s ease-in-out infinite; }
 .star-2 { top: 85%; left: 15%; animation: twinkle 4s ease-in-out infinite 1s; font-size: 16px; }
 .star-3 { top: 15%; right: 12%; animation: twinkle 3.5s ease-in-out infinite 0.5s; font-size: 18px; }
-.star-4 { top: 80%; right: 8%; animation: twinkle 4.5s ease-in-out infinite 1.5s; }
+.star-4 { display: none; }
 
 .reward-left {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
+  align-items: flex-start;
+  max-width: 650px;
   opacity: 0;
   transform: translateX(-40px);
   transition: opacity 0.7s ease, transform 0.7s ease;
@@ -116,7 +119,7 @@
 
 .demo-headline {
   font-family: var(--font-primary, 'Cinzel', serif);
-  font-size: 38px;
+  font-size: 48px;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.3;
@@ -138,10 +141,12 @@
 .demo-cta {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   background: var(--button-gradient, linear-gradient(135deg, #be8c4a, #e7b860));
   color: var(--text-inverse, #ffffff);
-  padding: 14px 28px;
+  padding: 15px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   font-family: var(--font-primary, 'Cinzel', serif);
   font-size: 14px;
@@ -150,13 +155,19 @@
   letter-spacing: 1px;
   text-decoration: none;
   width: fit-content;
+  min-width: 285px;
+  min-height: 60px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 14px rgba(231, 184, 96, 0.2);
+  box-shadow:
+    0 8px 20px rgba(201, 148, 78, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
 
 .demo-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(231, 184, 96, 0.35);
+  box-shadow:
+    0 12px 28px rgba(231, 184, 96, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
 }
 
 .reward-right {
@@ -186,14 +197,32 @@
   inset: 0;
 }
 
+.gift-stage::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  width: 190px;
+  height: 32px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(5, 10, 20, 0.55) 0%, transparent 72%);
+  filter: blur(5px);
+  pointer-events: none;
+}
+
+[data-theme="light"] .gift-stage::after {
+  background: radial-gradient(ellipse, rgba(145, 100, 41, 0.24) 0%, transparent 72%);
+}
+
 /* ── Pulse rings ── */
 .gift-ring {
   position: absolute;
   bottom: 22%;
   left: 50%;
   transform: translateX(-50%);
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   border: 2px solid rgba(231, 184, 96, 0.45);
   animation: ringPulse 2.2s ease-out infinite;
@@ -226,6 +255,7 @@
   user-select: none;
   cursor: pointer;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 18px 18px rgba(0, 0, 0, 0.24));
 }
 
 .gift-wrap:not(.burst) {
@@ -243,13 +273,26 @@
 
 /* Lid */
 .gift-lid {
-  width: 150px;
-  height: 44px;
+  width: 128px;
+  height: 38px;
   background: var(--gift-box-bg);
+  border: 1px solid rgba(255, 244, 205, 0.48);
   border-radius: 8px 8px 0 0;
   position: relative;
-  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.12);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.24),
+    inset 0 -5px 0 rgba(105, 65, 8, 0.17),
+    0 5px 8px rgba(0, 0, 0, 0.16);
   z-index: 2;
+}
+
+.gift-lid::before {
+  content: '';
+  position: absolute;
+  inset: 5px 8px auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.62), transparent);
+  z-index: 4;
 }
 
 .gift-lid::after {
@@ -262,15 +305,18 @@
   width: 22px;
   background: var(--gift-ribbon-bg);
   border-radius: 4px;
+  box-shadow:
+    inset 2px 0 0 rgba(255, 255, 255, 0.18),
+    inset -2px 0 0 rgba(95, 22, 49, 0.14);
   z-index: 3;
 }
 
 .gift-shine {
   position: absolute;
-  top: 8px;
-  right: 18px;
-  width: 14px;
-  height: 14px;
+  top: 7px;
+  right: 15px;
+  width: 12px;
+  height: 12px;
   background: rgba(255, 255, 255, 0.38);
   border-radius: 50%;
   filter: blur(2px);
@@ -280,21 +326,25 @@
 /* Bow */
 .gift-bow {
   position: absolute;
-  top: -28px;
+  top: -24px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80px;
-  height: 36px;
+  width: 68px;
+  height: 31px;
   z-index: 2;
 }
 
 .bow-loop {
   position: absolute;
-  width: 44px;
-  height: 36px;
+  width: 38px;
+  height: 31px;
   background: var(--gift-bow-bg);
+  border: 1px solid rgba(255, 214, 228, 0.32);
   border-radius: 50%;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    inset 4px 3px 5px rgba(255, 255, 255, 0.16),
+    inset -4px -3px 5px rgba(91, 19, 46, 0.2),
+    0 4px 8px rgba(0, 0, 0, 0.18);
 }
 
 .bow-loop:first-child {
@@ -307,13 +357,29 @@
 
 /* Body */
 .gift-body {
-  width: 140px;
-  height: 100px;
+  width: 120px;
+  height: 86px;
   background: var(--gift-box-bg);
+  border: 1px solid rgba(255, 244, 205, 0.42);
+  border-top: 0;
   border-radius: 0 0 12px 12px;
   position: relative;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    inset 8px 0 12px rgba(255, 255, 255, 0.08),
+    inset -10px -8px 16px rgba(105, 65, 8, 0.16),
+    0 16px 32px rgba(0, 0, 0, 0.3);
   z-index: 1;
+}
+
+.gift-body::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 11px;
+  width: 2px;
+  height: 52px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.52), transparent);
 }
 
 .gift-body::after {
@@ -326,6 +392,9 @@
   width: 20px;
   background: var(--gift-ribbon-bg);
   border-radius: 2px;
+  box-shadow:
+    inset 2px 0 0 rgba(255, 255, 255, 0.16),
+    inset -2px 0 0 rgba(95, 22, 49, 0.14);
   z-index: 3;
 }
 
@@ -425,13 +494,13 @@
   position: absolute;
   display: flex;
   align-items: center;
-  gap: 14px;
-  background: rgba(13, 27, 46, 0.82);
+  gap: 10px;
+  background: rgba(13, 27, 46, 0.74);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1.5px solid rgba(231, 184, 96, 0.35);
-  border-radius: 16px;
-  padding: 12px 18px;
+  border-radius: 14px;
+  padding: 11px 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
   white-space: nowrap;
   opacity: 0;
@@ -441,7 +510,7 @@
 }
 
 [data-theme="light"] .reward-card-burst {
-  background: rgba(255, 254, 249, 0.88);
+  background: rgba(255, 254, 249, 0.80);
   border: 1.5px solid rgba(190, 140, 74, 0.35);
   box-shadow: 0 10px 25px rgba(190, 140, 74, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.6);
 }
@@ -459,7 +528,7 @@
 }
 
 .reward-icon-burst {
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1;
 }
 
@@ -471,7 +540,7 @@
 
 .reward-label-burst {
   font-family: 'Nunito', sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 800;
   color: var(--text-primary);
   letter-spacing: 0.2px;
@@ -823,6 +892,10 @@
     grid-template-columns: 1fr;
     gap: 48px;
     padding: 2.5rem 1.5rem;
+  }
+
+  .reward-section {
+    min-height: auto;
   }
 
   .reward-right {
