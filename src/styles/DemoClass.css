@@ -285,13 +285,12 @@
   transform: translateX(-50%);
   width: 80px;
   height: 36px;
-  display: flex;
-  gap: 6px;
   z-index: 2;
 }
 
 .bow-loop {
-  width: 37px;
+  position: absolute;
+  width: 44px;
   height: 36px;
   background: var(--gift-bow-bg);
   border-radius: 50%;
@@ -299,11 +298,11 @@
 }
 
 .bow-loop:first-child {
-  transform: rotate(-20deg) translateX(3px);
+  left: 0;
 }
 
 .bow-loop:last-child {
-  transform: rotate(20deg) translateX(-3px);
+  right: 0;
 }
 
 /* Body */
