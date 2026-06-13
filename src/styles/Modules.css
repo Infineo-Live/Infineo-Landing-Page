@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Nunito:wght@400;600;700;800&display=swap');
 
+:root {
+  /* Light Theme */
+  --path-core: #4b3300;
+  --path-glow: rgba(155, 107, 0, 0.55);
+  --path-shadow: #6e4b00;
+}
+
+[data-theme="dark"] {
+  /* Dark Theme */
+  --path-core: #564003;
+  --path-glow: rgba(255, 215, 0, 0.6);
+  --path-shadow: #fff9dd;
+}
+
 /* ─── Section ────────────────────────────────────────────── */
 .modules-section {
   position: relative;
@@ -50,7 +64,6 @@
   position: relative;
   z-index: 2;
   margin-bottom: clamp(2rem, 4vw, 3.5rem);
-  transform: translateY(-32px);
 }
 
 .modules-eyebrow {
@@ -102,11 +115,11 @@
   max-width: 1444px;
   aspect-ratio: 16 / 7;
   z-index: 2;
-  margin: 48px auto 0;
+  margin: 0 auto;
 }
 
-/*  Separate curved sea routes connect each neighboring island.  */
-.journey-route {
+/*  Path SVG  */
+.path-svg {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -114,44 +127,6 @@
   pointer-events: none;
   z-index: 1;
   overflow: visible;
-}
-
-.route-segment {
-  opacity: 0;
-  transition: opacity 0.65s ease;
-}
-
-.route-wave-glow,
-.route-wave {
-  fill: none;
-  stroke-linecap: round;
-  vector-effect: non-scaling-stroke;
-}
-
-.route-wave-glow {
-  stroke: rgba(255, 207, 73, 0.34);
-  stroke-width: 7;
-  filter: blur(2px);
-}
-
-.route-wave {
-  stroke: rgba(255, 239, 175, 0.98);
-  stroke-width: 2.4;
-  stroke-dasharray: 4 8;
-  filter: drop-shadow(0 1px 2px rgba(44, 24, 0, 0.8));
-}
-
-.route-waypoint-ring {
-  fill: rgba(255, 225, 112, 0.22);
-  stroke: rgba(255, 244, 201, 0.98);
-  stroke-width: 1.8;
-  vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 0 4px rgba(255, 211, 72, 0.85));
-}
-
-.route-waypoint-dot {
-  fill: #fff5c7;
-  filter: drop-shadow(0 0 3px rgba(255, 221, 103, 0.95));
 }
 
 /*  Level Node  */
@@ -173,9 +148,9 @@
 
 /*  God Image (large, centered, above badge)  */
 .level-god-img {
-  width: clamp(135px, 12vw, 250px);
-  height: clamp(135px, 12vw, 250px);
-  object-fit: contain;
+  width: clamp(102px, 9vw, 178px);
+  height: clamp(102px, 9vw, 178px);
+  object-fit: cover;
   object-position: top center;
   border-radius: 12px;
   border: none;
@@ -192,69 +167,6 @@
 .level-node:hover .level-god-img {
   transform: translateY(-6px) scale(1.08);
   border-color: #FFE87C;
-}
-
-.level-node-coming-soon .level-god-img {
-  opacity: 0.72;
-}
-
-.level-node-coming-soon .level-badge {
-  opacity: 0.8;
-}
-
-.level-node-2 .level-god-img {
-  left: 24px;
-  top: 34px;
-}
-
-.level-node-2 .level-tooltip {
-  margin-left: 24px;
-  margin-bottom: -34px;
-}
-
-.level-node-2 .level-badge {
-  left: 24px;
-  top: 0;
-}
-
-.level-node-1 .level-god-img {
-  left: 18px;
-}
-
-.level-node-1 .level-tooltip {
-  margin-left: 18px;
-}
-
-.level-node-1 .level-badge {
-  left: 18px;
-  top: -14px;
-}
-
-.level-node-5 .level-god-img {
-  left: -44px;
-}
-
-.level-node-5 .level-tooltip {
-  margin-left: -44px;
-}
-
-.level-node-5 .level-badge {
-  left: -44px;
-}
-
-.level-node-7 .level-god-img {
-  left: 32px;
-  top: -18px;
-}
-
-.level-node-7 .level-tooltip {
-  margin-left: 32px;
-  margin-bottom: 18px;
-}
-
-.level-node-7 .level-badge {
-  left: 32px;
-  top: -18px;
 }
 
 /* Placeholder circle when no god image */
@@ -282,19 +194,16 @@
 .level-badge {
   position: relative;
   z-index: 3;
-  flex: 0 0 auto;
-  box-sizing: border-box;
-  width: clamp(32px, 3.5vw, 46px);
-  min-width: clamp(32px, 3.5vw, 46px);
-  height: clamp(32px, 3.5vw, 46px);
+  width: clamp(38px, 4.2vw, 54px);
+  height: clamp(38px, 4.2vw, 54px);
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #FFE87C, #C8991A);
-  border: 2px solid #FFE87C;
+  border: 3px solid #FFE87C;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-primary);
-  font-size: clamp(11px, 1.35vw, 17px);
+  font-size: clamp(13px, 1.6vw, 20px);
   font-weight: 900;
   color: #3a2000;
   box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2), 0 4px 16px rgba(0, 0, 0, 0.5);
@@ -407,14 +316,6 @@
   z-index: 4;
 }
 
-[data-theme="light"] .level-coming-next {
-  color: #082f57;
-  font-weight: 900;
-  text-shadow:
-    0 1px 1px rgba(255, 255, 255, 0.95),
-    0 0 5px rgba(255, 255, 255, 0.85);
-}
-
 /*  Journey End marker  */
 .journey-end {
   position: absolute;
@@ -509,10 +410,12 @@
   transform: translate(-50%, -50%) scale(0.95) !important;
 }
 
-.journey-route.is-visible .route-segment {
-  opacity: 0.92;
+/* Path draws in on scroll */
+.path-svg .path-line {
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 1.8s ease 0.2s;
 }
 
-.journey-route.is-visible .route-segment:nth-child(2n) {
-  transition-delay: 0.12s;
+.path-svg.is-visible .path-line {
+  stroke-dashoffset: 0;
 }

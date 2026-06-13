@@ -128,7 +128,7 @@ export default function FloatingChatbot() {
 
   // theme-aware avatar and button icon
   const avatarIcon = theme === 'dark' ? '🌟' : '🌞';
-  const floatingIcon = '💬';
+  const floatingIcon = theme === 'dark' ? '💬' : '🗨️';
 
   return (
     <>

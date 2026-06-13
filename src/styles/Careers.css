@@ -61,16 +61,6 @@
   overflow: hidden;
 }
 
-/* Keep the floating assistant identical to its dark-mode appearance. */
-.careers-page .chatbot-floating-btn,
-[data-theme="light"] .careers-page .chatbot-floating-btn {
-  background: linear-gradient(135deg, #c9944e 0%, #f5d078 50%, #e8b445 100%) !important;
-  box-shadow:
-    0 0 12px rgba(244, 208, 120, 0.50),
-    0 0 32px rgba(244, 208, 120, 0.25),
-    0 0 72px rgba(244, 208, 120, 0.10) !important;
-}
-
 /* Dark overlay for readability (navy blue in dark mode, parchment in light mode) */
 .careers-hero::before {
   content: "";

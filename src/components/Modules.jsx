@@ -12,21 +12,22 @@ import ramayanaImg from '../assets/gods/Ramayan.webp';
 import mahabharataImg from '../assets/gods/Mahabharata.webp';
 
 const MODULES = [
-  { id: 1, name: 'Ganesha', subtitle: 'Focus & New Beginnings', image: ganeshaImg, x: 14, y: 12, comingSoon: false },
-  { id: 2, name: 'Hanuman', subtitle: 'Courage & Devotion', image: hanumanImg, x: 42, y: 5, comingSoon: false },
-  { id: 'cp-2-3', isControlPoint: true, x: 57, y: 8 },
-  { id: 3, name: 'Krishna', subtitle: 'Wisdom & Play', image: krishnaImg, x: 72, y: 14, comingSoon: false },
-  { id: 4, name: 'Ram', subtitle: 'Duty & Integrity', image: ramImg, x: 84, y: 42, comingSoon: false },
-  { id: 5, name: 'Shiva', subtitle: 'Stillness & Power', image: shivaImg, x: 58, y: 43, comingSoon: false },
-  { id: 6, name: 'Shakti', subtitle: 'Strength & Grace', image: shaktiImg, x: 29, y: 39, comingSoon: false },
-  { id: 7, name: 'Vishnu', subtitle: 'Leadership & Legacy', image: vishnuImg, x: 14, y: 74, comingSoon: false },
-  { id: 8, name: 'Ramayana', subtitle: "Epic of Lord Ram's Journey", image: ramayanaImg, x: 45, y: 76, comingSoon: true },
-  { id: 9, name: 'Mahabharata', subtitle: 'The Epic of Duty & Wisdom', image: mahabharataImg, x: 76, y: 78, comingSoon: true },
+  { id: 1, name: 'Ganesha', subtitle: 'Focus & New Beginnings', image: ganeshaImg, x: 8, y: 16, comingSoon: false },
+  { id: 2, name: 'Hanuman', subtitle: 'Courage & Devotion', image: hanumanImg, x: 22, y: -16, comingSoon: false },
+  { id: 'cp-2-3', isControlPoint: true, x: 38, y: 5 },
+  { id: 3, name: 'Krishna', subtitle: 'Wisdom & Play', image: krishnaImg, x: 53, y: 3, comingSoon: false },
+  { id: 4, name: 'Ram', subtitle: 'Duty & Integrity', image: ramImg, x: 80, y: -8, comingSoon: false },
+  { id: 5, name: 'Shiva', subtitle: 'Stillness & Power', image: shivaImg, x: 93, y: 40, comingSoon: false },
+  { id: 6, name: 'Shakti', subtitle: 'Strength & Grace', image: shaktiImg, x: 43, y: 28, comingSoon: false },
+  { id: 7, name: 'Vishnu', subtitle: 'Leadership & Legacy', image: vishnuImg, x: 8, y: 68, comingSoon: false },
+  { id: 8, name: 'Ramayana', subtitle: "Epic of Lord Ram's Journey", image: ramayanaImg, x: 52, y: 68, comingSoon: true },
+  { id: 9, name: 'Mahabharata', subtitle: 'The Epic of Duty & Wisdom', image: mahabharataImg, x: 80, y: 80, comingSoon: true },
 ];
 
 export default function Modules() {
   const sectionRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [pathD, setPathD] = useState('');
 
   // Generates dynamic vectors mapping to active viewport aspect ratio constraints
   const getCoordinates = useCallback((mod, index) => {
@@ -38,6 +39,30 @@ export default function Modules() {
     const y = 8 + index * 10.5; // Distribute nicely down 100% height bounds
     return { x, y };
   }, [isMobile]);
+
+  // Re-build path strings whenever sizing conditions mutate
+  useEffect(() => {
+    let dString = '';
+    const activeNodes = isMobile ? MODULES.filter(m => !m.isControlPoint) : MODULES;
+
+    activeNodes.forEach((mod, i) => {
+      const curr = getCoordinates(mod, i);
+      if (i === 0) {
+        dString += `M ${curr.x} ${curr.y}`;
+      } else {
+        const prev = getCoordinates(activeNodes[i - 1], i - 1);
+        if (!isMobile) {
+          const mx = (prev.x + curr.x) / 2;
+          dString += ` C ${mx} ${prev.y}, ${mx} ${curr.y}, ${curr.x} ${curr.y}`;
+        } else {
+          // Clean vertical S-curves for screens under 650px
+          const my = (prev.y + curr.y) / 2;
+          dString += ` C ${prev.x} ${my}, ${curr.x} ${my}, ${curr.x} ${curr.y}`;
+        }
+      }
+    });
+    setPathD(dString);
+  }, [isMobile, getCoordinates]);
 
   // Breakpoint Media Listener
   useEffect(() => {
@@ -54,12 +79,12 @@ export default function Modules() {
     const section = sectionRef.current;
     if (!section) return;
     const nodes = section.querySelectorAll('.level-node');
-    const route = section.querySelector('.journey-route');
+    const svg = section.querySelector('.path-svg');
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        if (route) route.classList.add('is-visible');
+        if (svg) svg.classList.add('is-visible');
         nodes.forEach((node, i) => {
           setTimeout(() => node.classList.add('is-visible'), i * 120);
         });
@@ -81,38 +106,54 @@ export default function Modules() {
 
       <div className="game-map-wrapper">
         <svg
-          className="journey-route"
+          className="path-svg"
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
-          aria-hidden="true"
         >
-          {MODULES.filter(m => !m.isControlPoint).slice(0, -1).map((mod, index) => {
-            const start = getCoordinates(mod, index);
-            const next = getCoordinates(MODULES.filter(m => !m.isControlPoint)[index + 1], index + 1);
-            const midpoint = {
-              x: (start.x + next.x) / 2,
-              y: (start.y + next.y) / 2,
-            };
-            const bend = index % 2 === 0 ? -5 : 5;
+          <defs>
+            {/* Magical glow */}
+            <filter id="path-glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="1.2" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
 
-            return (
-              <g
-                key={`${mod.id}-${index}`}
-                className="route-segment"
-              >
-                <path
-                  className="route-wave-glow"
-                  d={`M ${start.x} ${start.y} Q ${midpoint.x} ${midpoint.y + bend} ${next.x} ${next.y}`}
-                />
-                <path
-                  className="route-wave"
-                  d={`M ${start.x} ${start.y} Q ${midpoint.x} ${midpoint.y + bend} ${next.x} ${next.y}`}
-                />
-                <circle className="route-waypoint-ring" cx={next.x} cy={next.y} r="1.2" />
-                <circle className="route-waypoint-dot" cx={next.x} cy={next.y} r="0.38" />
-              </g>
-            );
-          })}
+            {/* Strong visibility shadow */}
+            <filter id="path-shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow
+                dx="0"
+                dy="2"
+                stdDeviation="1.5"
+                floodColor="var(--path-shadow)"
+                floodOpacity="0.95"
+              />
+            </filter>
+          </defs>
+
+          {/* Glow Trail */}
+          <path
+            className="path-line path-glow-line"
+            d={pathD}
+            fill="none"
+            stroke="var(--path-glow)"
+            strokeWidth={isMobile ? "3.2" : "2.2"}
+            strokeLinecap="round"
+            filter="url(#path-glow)"
+          />
+
+          {/* Main Trail */}
+          <path
+            className="path-line path-core-line"
+            d={pathD}
+            fill="none"
+            stroke="var(--path-core)"
+            strokeWidth={isMobile ? "1.3" : "0.9"}
+            strokeDasharray={isMobile ? "3 2" : "4 2"}
+            strokeLinecap="round"
+            filter="url(#path-shadow)"
+          />
         </svg>
         {/* Level Nodes */}
         {MODULES.filter(m => !m.isControlPoint).map((mod, index) => {
@@ -120,7 +161,7 @@ export default function Modules() {
           return (
             <div
               key={mod.id}
-              className={`level-node level-node-${mod.id}${mod.comingSoon ? ' level-node-coming-soon' : ''}`}
+              className="level-node"
               style={{ left: `${coords.x}%`, top: `${coords.y}%` }}
             >
               <div className="level-tooltip">
@@ -129,7 +170,7 @@ export default function Modules() {
               </div>
 
               {mod.comingSoon && (
-                <div className="level-coming-next">Coming Soon</div>
+                <div className="level-coming-next">Coming Next</div>
               )}
 
               {mod.image ? (
