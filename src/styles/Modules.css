@@ -1,19 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Nunito:wght@400;600;700;800&display=swap');
 
-:root {
-  /* Light Theme */
-  --path-core: #4b3300;
-  --path-glow: rgba(155, 107, 0, 0.55);
-  --path-shadow: #6e4b00;
-}
-
-[data-theme="dark"] {
-  /* Dark Theme */
-  --path-core: #564003;
-  --path-glow: rgba(255, 215, 0, 0.6);
-  --path-shadow: #fff9dd;
-}
-
 /* ─── Section ────────────────────────────────────────────── */
 .modules-section {
   position: relative;
@@ -119,8 +105,8 @@
   margin: 48px auto 0;
 }
 
-/*  Path SVG  */
-.path-svg {
+/*  Separate curved sea routes connect each neighboring island.  */
+.journey-route {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -128,6 +114,44 @@
   pointer-events: none;
   z-index: 1;
   overflow: visible;
+}
+
+.route-segment {
+  opacity: 0;
+  transition: opacity 0.65s ease;
+}
+
+.route-wave-glow,
+.route-wave {
+  fill: none;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.route-wave-glow {
+  stroke: rgba(255, 207, 73, 0.34);
+  stroke-width: 7;
+  filter: blur(2px);
+}
+
+.route-wave {
+  stroke: rgba(255, 239, 175, 0.98);
+  stroke-width: 2.4;
+  stroke-dasharray: 4 8;
+  filter: drop-shadow(0 1px 2px rgba(44, 24, 0, 0.8));
+}
+
+.route-waypoint-ring {
+  fill: rgba(255, 225, 112, 0.22);
+  stroke: rgba(255, 244, 201, 0.98);
+  stroke-width: 1.8;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 4px rgba(255, 211, 72, 0.85));
+}
+
+.route-waypoint-dot {
+  fill: #fff5c7;
+  filter: drop-shadow(0 0 3px rgba(255, 221, 103, 0.95));
 }
 
 /*  Level Node  */
@@ -485,12 +509,10 @@
   transform: translate(-50%, -50%) scale(0.95) !important;
 }
 
-/* Path draws in on scroll */
-.path-svg .path-line {
-  stroke-dashoffset: 1000;
-  transition: stroke-dashoffset 1.8s ease 0.2s;
+.journey-route.is-visible .route-segment {
+  opacity: 0.92;
 }
 
-.path-svg.is-visible .path-line {
-  stroke-dashoffset: 0;
+.journey-route.is-visible .route-segment:nth-child(2n) {
+  transition-delay: 0.12s;
 }
