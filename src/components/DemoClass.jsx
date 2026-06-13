@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser';
 import '../styles/DemoClass.css';
 import neoMascot from '../assets/neo-version/neo-without-eyes.webp';
 import COUNTRIES from '../assets/countries.json';
-import { verifyPhone } from '../utils/verifyPhone.js';
+import { verifyPhone } from '../utils/verifyPhone';
 const SHEET_URL='https://script.google.com/macros/s/AKfycbwGpPWzbg7CgOy1Z-0OhlmY-e-Ug7JM-gmuxtnJPhZ_gkevRpWYv3HgQQ0jjfeIpUol8w/exec';
 const REWARDS = [
   { icon: '✏️', label: 'Cartoon Art Prints', color: '#5B8DEF' },
