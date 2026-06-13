@@ -1237,22 +1237,79 @@
   box-sizing: border-box;
 }
 
-.country-code-select {
+.country-code-wrapper {
+  position: relative;
   flex-shrink: 0;
-  width: 110px;
-  padding: 10px 8px;
-  border: none;
+  width: 116px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
   border-right: 1px solid rgba(255, 255, 255, 0.15);
-  background: transparent;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.country-code-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid var(--text-secondary);
+  border-bottom: 2px solid var(--text-secondary);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.selected-country-flag {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  width: 22px;
+  height: 16px;
+  object-fit: cover;
+  border-radius: 3px;
+  transform: translateY(-50%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.selected-dial-code {
+  position: absolute;
+  top: 50%;
+  left: 42px;
   color: var(--text-primary);
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.country-code-select {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  min-height: 44px;
+  padding: 10px 28px 10px 42px;
+  border: none;
+  background: transparent;
+  color: transparent;
+  opacity: 0;
   font-family: 'Nunito', sans-serif;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   appearance: none;
-  text-align: center;
+  text-align: left;
   box-sizing: border-box;
-  line-height: 1.4;
+  line-height: 24px;
 }
 .phone-input-wrapper input[type="tel"] {
   flex: 1;
@@ -1271,6 +1328,40 @@
 .country-code-select:focus {
   outline: none;
   border-color: #e7b860;
+}
+
+.country-code-select option {
+  color: #1f2937;
+}
+
+.form-select-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 44px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.form-select-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid var(--text-secondary);
+  border-bottom: 2px solid var(--text-secondary);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+
+.form-group .form-select-wrapper select {
+  width: 100%;
+  min-height: 44px;
+  padding-right: 38px;
+  border-radius: 8px;
+  appearance: none;
+  cursor: pointer;
 }
 .form-error {
   display: block;
@@ -1307,4 +1398,81 @@
   border-color: #3DC47E !important;
   background: rgba(61, 196, 126, 0.07) !important;
   box-shadow: 0 0 0 3px rgba(61, 196, 126, 0.2) !important;
+}
+
+/* Country picker with flags in the option menu */
+.phone-input-wrapper {
+  position: relative;
+  z-index: 5;
+  overflow: visible;
+}
+
+.country-code-wrapper {
+  z-index: 6;
+  overflow: visible;
+}
+
+.country-code-trigger {
+  position: relative;
+  width: 100%;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.country-code-trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(231, 184, 96, 0.2);
+}
+
+.country-options {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 260px;
+  max-height: 260px;
+  overflow-y: auto;
+  padding: 6px;
+  border: 1px solid var(--border-primary);
+  border-radius: 10px;
+  background: var(--bg-card);
+  box-shadow: var(--card-shadow);
+  z-index: 20;
+}
+
+.country-option {
+  display: grid;
+  grid-template-columns: 24px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.country-option:hover,
+.country-option.selected {
+  background: rgba(231, 184, 96, 0.14);
+}
+
+.country-option img {
+  width: 22px;
+  height: 16px;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+.country-option-code {
+  color: var(--text-secondary);
+  font-weight: 700;
 }
