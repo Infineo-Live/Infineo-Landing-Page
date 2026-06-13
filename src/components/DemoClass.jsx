@@ -33,6 +33,7 @@ export default function DemoClass() {
   const [errors, setErrors] = useState({ email: '', phone: '' });
   const [touched, setTouched] = useState({ email: false, phone: false });
   const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
+  const [isCountryMenuOpen, setIsCountryMenuOpen] = useState(false);
   const [burst, setBurst] = useState(false);
   const [shaking, setShaking] = useState(false);
   const [cards, setCards] = useState([]);
@@ -45,6 +46,22 @@ export default function DemoClass() {
   const leftPupilRef = useRef(null);
   const rightPupilRef = useRef(null);
   const stageRef = useRef(null);
+  const countryMenuRef = useRef(null);
+
+  useEffect(() => {
+    const closeCountryMenu = (e) => {
+      if (!countryMenuRef.current?.contains(e.target)) setIsCountryMenuOpen(false);
+    };
+    const closeCountryMenuOnEscape = (e) => {
+      if (e.key === 'Escape') setIsCountryMenuOpen(false);
+    };
+    document.addEventListener('mousedown', closeCountryMenu);
+    document.addEventListener('keydown', closeCountryMenuOnEscape);
+    return () => {
+      document.removeEventListener('mousedown', closeCountryMenu);
+      document.removeEventListener('keydown', closeCountryMenuOnEscape);
+    };
+  }, []);
 
   // ── IntersectionObserver ──
   useEffect(() => {
@@ -219,9 +236,9 @@ export default function DemoClass() {
     } 
   }; 
   
-  const handleCountryChange = (e) => { 
-    const country = COUNTRIES.find(c => c.code === e.target.value); 
+  const handleCountryChange = (country) => {
     setSelectedCountry(country); 
+    setIsCountryMenuOpen(false);
     setFormData(prev => ({ ...prev, phone: '' })); 
     setErrors(prev => ({ ...prev, phone: '' })); 
     setTouched(prev => ({ ...prev, phone: false })); 
@@ -302,6 +319,11 @@ export default function DemoClass() {
 
       {/* ── STARTER KIT / REWARD SECTION ── */}
       <div className="reward-section">
+        <div className="decor-star star-1">★</div>
+        <div className="decor-star star-2">✦</div>
+        <div className="decor-star star-3">★</div>
+        <div className="decor-star star-4">✦</div>
+
         <div className="reward-left">
           <span className="demo-badge">
             <span className="badge-star">★</span> Trial Completion Reward
@@ -414,18 +436,45 @@ export default function DemoClass() {
         <div className="form-group">
           <label htmlFor="phone">Phone Number *</label>
           <div className="phone-input-wrapper">
-            <select
-              className="country-code-select"
-          value={selectedCountry.code}
-          onChange={handleCountryChange}
-          aria-label="Select country code"
-        >
-          {COUNTRIES.map(c => (
-            <option key={c.code} value={c.code}>
-              {c.flag} {c.dialCode}
-            </option>
-          ))}
-              </select>
+            <div className="country-code-wrapper" ref={countryMenuRef}>
+              <button
+                type="button"
+                className="country-code-trigger"
+                aria-label="Select country code"
+                aria-haspopup="listbox"
+                aria-expanded={isCountryMenuOpen}
+                onClick={() => setIsCountryMenuOpen(open => !open)}
+              >
+                <img
+                  className="selected-country-flag"
+                  src={`https://flagcdn.com/w40/${selectedCountry.code.toLowerCase()}.png`}
+                  alt={`${selectedCountry.name} flag`}
+                />
+                <span className="selected-dial-code">{selectedCountry.dialCode}</span>
+              </button>
+              {isCountryMenuOpen && (
+                <div className="country-options" role="listbox" aria-label="Country codes">
+                  {COUNTRIES.map(country => (
+                    <button
+                      type="button"
+                      role="option"
+                      aria-selected={country.code === selectedCountry.code}
+                      className={`country-option${country.code === selectedCountry.code ? ' selected' : ''}`}
+                      key={country.code}
+                      onClick={() => handleCountryChange(country)}
+                    >
+                      <img
+                        src={`https://flagcdn.com/w40/${country.code.toLowerCase()}.png`}
+                        alt=""
+                        aria-hidden="true"
+                      />
+                      <span className="country-option-name">{country.name}</span>
+                      <span className="country-option-code">{country.dialCode}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
               <input
                 type="tel" id="phone" name="phone"
                 value={formData.phone}
@@ -448,21 +497,25 @@ export default function DemoClass() {
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="childAge">Child's Age *</label>
-                <select id="childAge" name="childAge" value={formData.childAge} onChange={handleChange} required>
-                  <option value="">Select age</option>
-                  <option value="5-7">5-7 years</option>
-                  <option value="8-10">8-10 years</option>
-                  <option value="11-13">11-13 years</option>
-                  <option value="14">14 years</option>
-                </select>
+                <div className="form-select-wrapper">
+                  <select id="childAge" name="childAge" value={formData.childAge} onChange={handleChange} required>
+                    <option value="">Select age</option>
+                    <option value="5-7">5-7 years</option>
+                    <option value="8-10">8-10 years</option>
+                    <option value="11-13">11-13 years</option>
+                    <option value="14">14 years</option>
+                  </select>
+                </div>
               </div>
               <div className="form-group">
                 <label htmlFor="language">Preferred Language *</label>
-                <select id="language" name="language" value={formData.language} onChange={handleChange} required>
-                  <option value="">Select language</option>
-                  <option value="english">English</option>
-                  <option value="hindi">Hindi</option>
-                </select>
+                <div className="form-select-wrapper">
+                  <select id="language" name="language" value={formData.language} onChange={handleChange} required>
+                    <option value="">Select language</option>
+                    <option value="english">English</option>
+                    <option value="hindi">Hindi</option>
+                  </select>
+                </div>
               </div>
             </div>
             {isSubmitted && (
