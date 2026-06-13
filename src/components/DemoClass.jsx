@@ -4,7 +4,8 @@ import '../styles/DemoClass.css';
 import neoMascot from '../assets/neo-version/neo-without-eyes.webp';
 import COUNTRIES from '../assets/countries.json';
 import { verifyPhone } from '../utils/verifyPhone';
-const SHEET_URL='https://script.google.com/macros/s/AKfycbwGpPWzbg7CgOy1Z-0OhlmY-e-Ug7JM-gmuxtnJPhZ_gkevRpWYv3HgQQ0jjfeIpUol8w/exec';
+const SUPABASE_URL = 'https://aqizizxsmqpfmojkqnbv.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_ijzRJ_latM8NFyrDDaQS8Q_7zZHmr81';
 const REWARDS = [
   { icon: '✏️', label: 'Cartoon Art Prints', color: '#5B8DEF' },
   { icon: '🏆', label: 'Certificate', color: '#E7B860' },
@@ -260,25 +261,28 @@ export default function DemoClass() {
         },
         "xs8aj8X8ITOMt7KSF"
       );
-
-      // Save to Google Sheets simultaneously
-      fetch(SHEET_URL, {
+      fetch(`${SUPABASE_URL}/rest/v1/demo_bookings`, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type':'text/plain' },
-
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Prefer': 'return=minimal',
+        },
         body: JSON.stringify({
-          childName:  formData.childName,
-          parentName: formData.parentName,
-          email:      formData.email,
-          phone:      fullPhone,
-          childAge:   formData.childAge,
-          language:   formData.language,
+          child_name:  formData.childName,
+          parent_name: formData.parentName,
+          email:       formData.email,
+          phone:       fullPhone,
+          child_age:   formData.childAge,
+          language:    formData.language,
         }),
       })
-      .then(() => console.log('Sheet save successful'))
-      .catch(err => console.error('Sheet save failed:', err));
-      // Note: we don't await this — if sheet fails, form still submits fine
+        .then(res => {
+          if (!res.ok) throw new Error('Supabase error: ' + res.status);
+          console.log('Saved to Supabase');
+        })
+        .catch(err => console.error('Supabase save failed:', err));
 
       setIsSubmitted(true);
       setTimeout(() => {
