@@ -209,6 +209,27 @@
   transition: opacity 0.25s ease;
 }
 
+.gb-crack {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.gb-crack--main {
+  stroke: rgba(255, 255, 255, 0.88);
+  stroke-width: 0.4;
+}
+
+.gb-crack--branch {
+  stroke: rgba(255, 255, 255, 0.68);
+  stroke-width: 0.28;
+}
+
+.gb-crack--hairline {
+  stroke: rgba(255, 255, 255, 0.48);
+  stroke-width: 0.2;
+}
+
 .gb-scene--breaking .gb-cracks,
 .gb-scene--broken .gb-cracks,
 .gb-scene--reveal .gb-cracks {
@@ -405,13 +426,13 @@
   effect. The blur deepens progressively through each phase.
 */
 .gb-scene--broken .gb-img--problem {
-  filter: saturate(0.7) brightness(0.75) blur(6px);
+  filter: saturate(0.85) brightness(0.88) blur(1.5px);
   opacity: 1;
   transition: filter 0.45s ease, opacity 0.45s ease;
 }
 
 .gb-scene--reveal .gb-img--problem {
-  filter: saturate(0.7) brightness(0.7) blur(8px);
+  filter: saturate(0.8) brightness(0.82) blur(2.5px);
   opacity: 1;
   transition: filter 0.55s ease 0.1s, opacity 0.55s ease 0.1s;
 }

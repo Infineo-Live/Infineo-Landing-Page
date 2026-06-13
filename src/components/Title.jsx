@@ -1,10 +1,13 @@
 import { useRef, useEffect, useState } from 'react';
 import { useTheme } from '../context/ThemeContext.jsx';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import Logo from '../assets/logo_with_text.webp';
 import '../styles/Title.css';
 
 const Title = () => {
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
+  const navigate = useNavigate();
   const navRef = useRef(null);
   const dropletRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
@@ -81,13 +84,17 @@ const Title = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, [heroInView]);
 
-  // Helper function to smooth scroll to element and ensure the CTA button handles navigation correctly
-  const handleCtaClick = (e, targetId) => {
+  // Helper function to smooth scroll to element or navigate back to home with hash
+  const handleLinkClick = (e, targetId) => {
     e.preventDefault();
     setMenuOpen(false);
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' });
+    if (location.pathname === '/') {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      navigate(`/#${targetId}`);
     }
   };
 
@@ -96,18 +103,31 @@ const Title = () => {
       <div id="bubble-container" className="bubble-container" aria-hidden="true" />
 
       <header className={`title ${scrolled ? 'title--scrolled' : ''} ${visible ? 'title--visible' : 'title--hidden'}`}>
-        <img src={Logo} alt="Infineo Logo" className="logo" />
+        <img
+          src={Logo}
+          alt="Infineo Logo"
+          className="logo"
+          style={{ cursor: 'pointer' }}
+          onClick={() => {
+            if (location.pathname === '/') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+              navigate('/');
+            }
+          }}
+        />
 
         {/* Desktop Nav */}
         <div className="nav-theme-wrapper" >
           <nav className="title-links" ref={navRef}>
             <span className="nav-droplet" ref={dropletRef} />
-            <a href="#home">ABOUT</a>
-            <a href="#stories">IMPACT</a>
-            <a href="#parents">NOTE TO PARENTS</a>
-            <a href="#modules">CURRICULUM</a>
-            <a href="#pricing">PRICING</a>
-            <button className="login-btn" onClick={(e) => handleCtaClick(e, 'book')}>
+            <a href="#home" onClick={(e) => handleLinkClick(e, 'home')}>ABOUT</a>
+            <a href="#stories" onClick={(e) => handleLinkClick(e, 'stories')}>IMPACT</a>
+            <a href="#parents" onClick={(e) => handleLinkClick(e, 'parents')}>NOTE TO PARENTS</a>
+            <a href="#modules" onClick={(e) => handleLinkClick(e, 'modules')}>CURRICULUM</a>
+            <a href="#pricing" onClick={(e) => handleLinkClick(e, 'pricing')}>PRICING</a>
+            {/* <Link to="/careers">CAREERS</Link> */}
+            <button className="login-btn" onClick={(e) => handleLinkClick(e, 'book')}>
               BOOK THE DEMO
             </button>
           </nav>
@@ -153,11 +173,12 @@ const Title = () => {
 
         {/* Mobile Drawer */}
         <div className={`mobile-menu ${menuOpen ? 'mobile-menu--open' : ''}`}>
-          <a href="#home" onClick={() => setMenuOpen(false)}>ABOUT</a>
-          <a href="#stories" onClick={() => setMenuOpen(false)}>STORIES</a>
-          <a href="#parents" onClick={() => setMenuOpen(false)}>HOW IT WORKS</a>
-          <a href="#modules" onClick={() => setMenuOpen(false)}>CURRICULUM</a>
-          <button className="login-btn" onClick={(e) => handleCtaClick(e, 'book')}>
+          <a href="#home" onClick={(e) => handleLinkClick(e, 'home')}>ABOUT</a>
+          <a href="#stories" onClick={(e) => handleLinkClick(e, 'stories')}>STORIES</a>
+          <a href="#parents" onClick={(e) => handleLinkClick(e, 'parents')}>HOW IT WORKS</a>
+          <a href="#modules" onClick={(e) => handleLinkClick(e, 'modules')}>CURRICULUM</a>
+          <Link to="/careers" onClick={() => setMenuOpen(false)}>CAREERS</Link>
+          <button className="login-btn" onClick={(e) => handleLinkClick(e, 'book')}>
             BOOK THE DEMO
           </button>
         </div>

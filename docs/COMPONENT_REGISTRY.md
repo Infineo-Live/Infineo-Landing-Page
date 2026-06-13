@@ -40,6 +40,9 @@ Read before:
 | Footer | `src/components/Footer.jsx` | Low |
 | ThemeContext | `src/context/ThemeContext.jsx` | High |
 | cursorSparkles | `src/utils/cursorSparkles.js` | Medium |
+| Home | `src/pages/Home.jsx` | Medium |
+| Careers | `src/pages/Careers.jsx` | Medium |
+| Careers.css | `src/styles/Careers.css` | Low |
 | theme.css | `src/styles/theme.css` | High |
 | tokens.css | `src/styles/tokens.css` | High |
 | App.css | `src/App.css` | High |

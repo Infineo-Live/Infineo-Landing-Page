@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import '../styles/BroadwayText.css';
 
-export default function BroadwayText({ text, className = '', tag: Tag = 'span' }) {
+export default function BroadwayText({ text, className = '', tag: Tag = 'span', startDelay = 0 }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
@@ -32,7 +32,7 @@ export default function BroadwayText({ text, className = '', tag: Tag = 'span' }
               <span
                 key={i}
                 className={`broadway-char ${visible ? 'vis' : ''}`}
-                style={{ animationDelay: `${charIdx++ * 0.04}s` }}
+                style={{ animationDelay: `${startDelay + charIdx++ * 0.04}s` }}
                 aria-hidden="true"
               >
                 {char}
