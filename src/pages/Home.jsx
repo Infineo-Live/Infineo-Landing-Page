@@ -63,7 +63,7 @@ function Home() {
     });
 
     return () => {
-      cleanup();
+      cleanup?.();
       observer.disconnect();
     };
   }, []);
