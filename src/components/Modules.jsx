@@ -161,7 +161,7 @@ export default function Modules() {
           return (
             <div
               key={mod.id}
-              className="level-node"
+              className={`level-node level-node-${mod.id}`}
               style={{ left: `${coords.x}%`, top: `${coords.y}%` }}
             >
               <div className="level-tooltip">
