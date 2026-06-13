@@ -116,7 +116,7 @@
   max-width: 1444px;
   aspect-ratio: 16 / 7;
   z-index: 2;
-  margin: 0 auto;
+  margin: 48px auto 0;
 }
 
 /*  Path SVG  */
@@ -171,15 +171,26 @@
 }
 
 .level-node-2 .level-god-img {
-  top: 44px;
+  left: 24px;
+  top: 34px;
+}
+
+.level-node-2 .level-tooltip {
+  margin-left: 24px;
+  margin-bottom: -34px;
 }
 
 .level-node-2 .level-badge {
-  top: 10px;
+  left: 24px;
+  top: 0;
 }
 
 .level-node-1 .level-god-img {
   left: 18px;
+}
+
+.level-node-1 .level-tooltip {
+  margin-left: 18px;
 }
 
 .level-node-1 .level-badge {
@@ -191,6 +202,10 @@
   left: -44px;
 }
 
+.level-node-5 .level-tooltip {
+  margin-left: -44px;
+}
+
 .level-node-5 .level-badge {
   left: -44px;
 }
@@ -198,6 +213,11 @@
 .level-node-7 .level-god-img {
   left: 32px;
   top: -18px;
+}
+
+.level-node-7 .level-tooltip {
+  margin-left: 32px;
+  margin-bottom: 18px;
 }
 
 .level-node-7 .level-badge {
