@@ -667,7 +667,7 @@ export default function Careers() {
       extraChance: 0.14,
       clickBurst: 8,
     });
-    return () => cleanup();
+    return () => cleanup?.();
   }, []);
 
   useEffect(() => {
