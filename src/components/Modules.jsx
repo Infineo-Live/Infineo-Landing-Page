@@ -161,7 +161,7 @@ export default function Modules() {
           return (
             <div
               key={mod.id}
-              className={`level-node level-node-${mod.id}`}
+              className={`level-node level-node-${mod.id}${mod.comingSoon ? ' level-node-coming-soon' : ''}`}
               style={{ left: `${coords.x}%`, top: `${coords.y}%` }}
             >
               <div className="level-tooltip">
@@ -170,7 +170,7 @@ export default function Modules() {
               </div>
 
               {mod.comingSoon && (
-                <div className="level-coming-next">Coming Next</div>
+                <div className="level-coming-next">Coming Soon</div>
               )}
 
               {mod.image ? (

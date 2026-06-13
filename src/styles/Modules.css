@@ -170,6 +170,14 @@
   border-color: #FFE87C;
 }
 
+.level-node-coming-soon .level-god-img {
+  opacity: 0.72;
+}
+
+.level-node-coming-soon .level-badge {
+  opacity: 0.8;
+}
+
 .level-node-2 .level-god-img {
   left: 24px;
   top: 34px;
@@ -373,6 +381,14 @@
   letter-spacing: 1px;
   white-space: nowrap;
   z-index: 4;
+}
+
+[data-theme="light"] .level-coming-next {
+  color: #082f57;
+  font-weight: 900;
+  text-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.95),
+    0 0 5px rgba(255, 255, 255, 0.85);
 }
 
 /*  Journey End marker  */
